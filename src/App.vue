@@ -40,17 +40,13 @@
       :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-4"
-        >میزکار خدمات رایانه ای</v-toolbar-title
-      >
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down">میزکار خدمات رایانه ای</v-toolbar-title>
       <v-text-field
-              flat
-              solo-inverted
-              hide-details
-              prepend-inner-icon="mdi-magnify"
-              label="جستجو"
-              class="hidden-sm-and-down"
-              v-on="on"
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="جستجو"
       />
       <v-spacer />
       <v-btn icon>
@@ -60,14 +56,9 @@
     <v-content>
       <v-container class="fill-height" fluid> </v-container>
     </v-content>
-    <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn bottom color="pink" dark fab fixed left v-on="on">
-          <v-icon>mdi-plus</v-icon>
-        </v-btn>
-      </template>
-      <span>ثبت درخواست کار جدید</span>
-    </v-tooltip>
+    <v-btn bottom color="pink" dark fab fixed left v-on="on">
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
   </v-app>
 </template>
 
@@ -84,6 +75,8 @@ export default {
       { text: "کارتابل", icon: "mdi-account-convert" },
       { text: "رهگیری درخواست", icon: "mdi-eye-check" },
       { text: "مدیریت اموال", icon: "mdi-desktop-classic" },
+      { text: "گزارشات", icon: "mdi-file-chart" },
+      { text: "منابع", icon: "mdi-account-supervisor" },
       { text: "تنظیمات", icon: "mdi-cogs" }
     ]
   })
