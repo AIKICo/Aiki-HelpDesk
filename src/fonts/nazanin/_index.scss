@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Nazanin';
+    src: url('normal/nazanin-normal.woff2') format('woff2'),
+    url('normal/nazanin-normal.woff') format('woff'),
+    url('normal/nazanin-normal.ttf') format('truetype'),
+    url('normal/nazanin-normal.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Nazanin';
+    src: url('bold/nazanin-bold.woff2') format('woff2'),
+    url('bold/nazanin-bold.woff') format('woff'),
+    url('bold/nazanin-bold.ttf') format('truetype'),
+    url('bold/nazanin-bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
