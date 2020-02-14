@@ -14,5 +14,4 @@ jobs:
     - uses: actions/setup-node@v1
     - name: Build dist
       run: |
-        npm install,
-        npm publish
+        npm install
