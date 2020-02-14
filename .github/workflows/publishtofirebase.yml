@@ -16,7 +16,7 @@ jobs:
         with:
           version: 10.x
       - name: Install Dependencies
-        run: npm install
+        run: npm install -g
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
