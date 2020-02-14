@@ -3,15 +3,21 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  firebase-deploy:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: '13.x'
     - name: Build dist
       run: |
         npm install
+        npm run build:prod
+    - uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+    env:
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
