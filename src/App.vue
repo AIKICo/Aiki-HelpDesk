@@ -40,7 +40,9 @@
       :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down">میزکار خدمات رایانه ای</v-toolbar-title>
+      <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down"
+        >میزکار خدمات رایانه ای</v-toolbar-title
+      >
       <v-text-field
         flat
         solo-inverted
@@ -55,7 +57,8 @@
     </v-app-bar>
     <v-content>
       <v-container fluid>
-      <Tickets></Tickets>
+        <Tickets v-if="!IsMobile"></Tickets>
+        <TicketsMobileView v-if="IsMobile"></TicketsMobileView>
       </v-container>
     </v-content>
     <v-btn bottom color="pink" dark fab fixed left @click="newTicket">
@@ -65,13 +68,17 @@
 </template>
 
 <script>
-  import Tickets from "./components/Tickets";
+import Tickets from "./components/Tickets";
+import isMobile from "mobile-device-detect";
+import TicketsMobileView from "./components/TicketsMobileView";
+
 export default {
   name: "App",
-  components: {Tickets},
+  components: { TicketsMobileView, Tickets },
   data: () => ({
     drawer: null,
     mini: false,
+    IsMobile: isMobile.isMobileOnly,
     item: 1,
     items: [
       { text: "داشبورد", icon: "mdi-monitor-dashboard" },
@@ -83,17 +90,18 @@ export default {
       { text: "تنظیمات", icon: "mdi-cogs" }
     ]
   }),
-  methods:{
-    newTicket(){
-      alert('add new ticket');
+  methods: {
+    newTicket() {
+      alert("add new ticket");
     }
   }
 };
 </script>
 <style scoped>
-@import "css/font-face.scss";
+@import "css/fontiran.css";
+
 * {
-  font-family: "Iran Sans", sans-serif !important;
+  font-family: "IRANSans", sans-serif !important;
 }
 html {
   margin: 0;
