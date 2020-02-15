@@ -54,18 +54,21 @@
       </v-btn>
     </v-app-bar>
     <v-content>
-      <v-container class="fill-height" fluid> </v-container>
+      <v-container fluid>
+      <Tickets></Tickets>
+      </v-container>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed left v-on="on">
+    <v-btn bottom color="pink" dark fab fixed left @click="newTicket">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
   </v-app>
 </template>
 
 <script>
+  import Tickets from "./components/Tickets";
 export default {
   name: "App",
-  components: {},
+  components: {Tickets},
   data: () => ({
     drawer: null,
     mini: false,
@@ -79,7 +82,12 @@ export default {
       { text: "منابع", icon: "mdi-account-supervisor" },
       { text: "تنظیمات", icon: "mdi-cogs" }
     ]
-  })
+  }),
+  methods:{
+    newTicket(){
+      alert('add new ticket');
+    }
+  }
 };
 </script>
 <style scoped>
