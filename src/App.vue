@@ -22,7 +22,7 @@
       <v-divider />
       <v-list shaped dense>
         <v-list-item-group v-model="activeItem" color="primary">
-          <v-list-item v-for="(item, i) in this.$store.state.menuItems" :key="i">
+          <v-list-item v-for="(item, i) in this.$store.state.MenuService.menuItems" :key="i">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -73,7 +73,10 @@ import TicketsMobileView from "./components/TicketsMobileView";
 
 export default {
   name: "App",
-  components: { TicketsMobileView, Tickets },
+  components: {
+    TicketsMobileView,
+    Tickets
+  },
   data: () => ({
     drawer: null,
     mini: false,
