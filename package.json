@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "es6-promise": "^4.2.8",
     "mobile-device-detect": "^0.3.3",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",

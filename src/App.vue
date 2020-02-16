@@ -21,8 +21,8 @@
       </template>
       <v-divider />
       <v-list shaped dense>
-        <v-list-item-group v-model="item" color="primary">
-          <v-list-item v-for="(item, i) in items" :key="i">
+        <v-list-item-group v-model="activeItem" color="primary">
+          <v-list-item v-for="(item, i) in this.$store.state.menuItems" :key="i">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -57,11 +57,11 @@
     </v-app-bar>
     <v-content>
       <v-container fluid>
-        <Tickets v-if="!IsMobile"></Tickets>
-        <TicketsMobileView v-if="IsMobile"></TicketsMobileView>
+        <Tickets v-if="!this.$store.state.IsMobile"></Tickets>
+        <TicketsMobileView v-if="this.$store.state.IsMobile"></TicketsMobileView>
       </v-container>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed left @click="newTicket">
+    <v-btn bottom color="pink" dark fab fixed left @click="$store.commit('newTicket')">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
   </v-app>
@@ -69,7 +69,6 @@
 
 <script>
 import Tickets from "./components/Tickets";
-import isMobile from "mobile-device-detect";
 import TicketsMobileView from "./components/TicketsMobileView";
 
 export default {
@@ -78,22 +77,9 @@ export default {
   data: () => ({
     drawer: null,
     mini: false,
-    IsMobile: isMobile.isMobileOnly,
-    item: 1,
-    items: [
-      { text: "داشبورد", icon: "mdi-monitor-dashboard" },
-      { text: "کارتابل", icon: "mdi-account-convert" },
-      { text: "رهگیری درخواست", icon: "mdi-eye-check" },
-      { text: "مدیریت اموال", icon: "mdi-desktop-classic" },
-      { text: "گزارشات", icon: "mdi-file-chart" },
-      { text: "منابع", icon: "mdi-account-supervisor" },
-      { text: "تنظیمات", icon: "mdi-cogs" }
-    ]
+    activeItem: 1,
   }),
   methods: {
-    newTicket() {
-      alert("add new ticket");
-    }
   }
 };
 </script>

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.2b7a676dffe2c799526f808f44104c24.js"
+  "/precache-manifest.6c83765663a0caa4ee17fbc6ce586fe2.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "aiki-helpdesk"});
