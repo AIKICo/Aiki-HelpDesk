@@ -51,9 +51,14 @@
         label="جستجو"
       />
       <v-spacer />
-      <v-btn icon>
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+      <v-badge
+              bordered
+              color="red"
+              content="6"
+              overlap
+      >
+        <v-icon large>mdi-bell</v-icon>
+      </v-badge>
     </v-app-bar>
     <v-content>
       <v-container fluid>

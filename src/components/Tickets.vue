@@ -11,10 +11,16 @@
           :single-expand="singleExpand"
         >
           <template v-slot:item="{ item, expand, isExpanded }">
-            <tr :key="item.Wono"
-                @mouseover="selectItem(item)"
-                @mouseleave="unSelectItem()">
-              <td style="text-align: center"><v-icon class="ml-1" @click="expand(!isExpanded)">mdi-chevron-down</v-icon>{{ item.Wono }}</td>
+            <tr
+              :key="item.Wono"
+              @mouseover="selectItem(item)"
+              @mouseleave="unSelectItem()"
+            >
+              <td style="text-align: center">
+                <v-icon class="ml-1" @click="expand(!isExpanded)"
+                  >mdi-chevron-down</v-icon
+                >{{ item.Wono }}
+              </td>
               <td>{{ item.NeedDescription }}</td>
               <td style="text-align: center">{{ item.AR }}</td>
               <td>
@@ -50,8 +56,8 @@ export default {
         value: "Wono",
         width: "120px"
       },
-      { text: "شرح", value: "NeedDescription", align: "center"},
-      { text: "شماره اموال", value: "AR", align: "center"},
+      { text: "شرح", value: "NeedDescription", align: "center" },
+      { text: "شماره اموال", value: "AR", align: "center" },
       {
         text: "",
         value: "actions",

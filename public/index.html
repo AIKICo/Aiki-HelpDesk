@@ -28,13 +28,14 @@
     <!-- built files will be auto injected -->
     <script>
       if ('serviceWorker' in navigator){
-        window.addEventListener('load',function(){
-          navigator.serviceWorker.register('/sw.js').
-          then(function (registration) {
+        window.addEventListener('load',function() {
+          navigator.serviceWorker.register('/sw.js').then(function (registration) {
             console.log('SW registered.');
           }, function (err) {
             console.log('Something bad happend :(', err);
           })
+        });
+      };
     </script>
   </body>
 </html>

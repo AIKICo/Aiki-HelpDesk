@@ -9,6 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     IsMobile: isMobile.isMobileOnly,
+    accessToken:  localStorage.getItem('access_token') ||  '',
+    currentUser : {}
   },
   mutations: {
   },
