@@ -57,11 +57,11 @@
     </v-app-bar>
     <v-content>
       <v-container fluid>
-        <Tickets v-if="!this.$store.state.IsMobile"></Tickets>
-        <TicketsMobileView v-if="this.$store.state.IsMobile"></TicketsMobileView>
+        <Tickets v-if="!$store.state.IsMobile"></Tickets>
+        <TicketsMobileView v-if="$store.state.IsMobile"></TicketsMobileView>
       </v-container>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed left @click="$store.commit('newTicket')">
+    <v-btn bottom color="pink" dark fab fixed left @click="$store.dispatch('addNewTicket')">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
   </v-app>

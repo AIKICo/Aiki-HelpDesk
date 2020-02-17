@@ -24,11 +24,15 @@ const WorkOrder={
         ]
     },
     mutations:{
-        newTicket() {
-            alert("add new ticket");
+        NEW_TICKET() {
+            alert('add a ne wticket');
         }
     },
-    actions:{},
+    actions:{
+        addNewTicket({commit}){
+            commit('NEW_TICKET');
+        }
+    },
     getters:{
         getTickets: state => state.tickets,
         getTicketByID: (state) => (wono) =>  state.tickets.find(workOrder => workOrder.Wono === wono)
