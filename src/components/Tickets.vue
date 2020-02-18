@@ -85,7 +85,7 @@ export default {
     singleExpand: true,
     selectedItem: false,
     headers: [
-      { text: "کد رهگیری", align: "center", value: "woNo", width: "143px" },
+      { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
       { text: "ساعت ثبت", value: "woTime", align: "center" },
       { text: "تاریخ ثبت", value: "woDate", align: "center" },
       {
