@@ -89,7 +89,7 @@ export default {
   },
   created() {
     this.$Progress.start();
-    
+
   }
 };
 </script>
