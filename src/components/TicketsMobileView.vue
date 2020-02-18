@@ -1,10 +1,10 @@
 <template>
     <v-row>
-        <v-col cols="12" v-for="item in $store.getters.getTickets" :key="item.Wono">
+        <v-col cols="12" v-for="item in this.$store.state.WorkOrderService.tickets" :key="item.Wono">
             <v-card raised>
-                <v-card-title class="justify-center">{{item.Wono}}</v-card-title>
-                <v-card-subtitle>{{item.AR}}</v-card-subtitle>
-                <v-card-text class="ml-3">{{item.NeedDescription}}</v-card-text>
+                <v-card-title class="justify-center">{{item.woNo}}</v-card-title>
+                <v-card-subtitle>{{item.amval}}</v-card-subtitle>
+                <v-card-text class="ml-3">{{item.needDescription}}</v-card-text>
                 <v-card-actions>
                     <v-btn text>
                         <v-icon>mdi-delete</v-icon>

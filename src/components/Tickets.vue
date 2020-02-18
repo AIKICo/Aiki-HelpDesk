@@ -4,25 +4,28 @@
       <v-col>
         <v-data-table
           :headers="headers"
-          :items="$store.getters.getTickets"
-          item-key="Wono"
+          :items="this.$store.state.WorkOrderService.tickets"
+          item-key="woNo"
           class="elevation-1"
           :expanded.sync="expanded"
           :single-expand="singleExpand"
         >
           <template v-slot:item="{ item, expand, isExpanded }">
             <tr
-              :key="item.Wono"
+              :key="item.woNo"
               @mouseover="selectItem(item)"
               @mouseleave="unSelectItem()"
             >
               <td style="text-align: center">
                 <v-icon class="ml-1" @click="expand(!isExpanded)"
                   >mdi-chevron-down</v-icon
-                >{{ item.Wono }}
+                >{{ item.woNo }}
               </td>
-              <td>{{ item.NeedDescription }}</td>
-              <td style="text-align: center">{{ item.AR }}</td>
+              <td>{{ item.woTime }}</td>
+              <td>{{ item.woDate }}</td>
+              <td>{{ item.askerCode }}</td>
+              <td>{{ item.lastStatus }}</td>
+              <td style="text-align: center">{{ item.amval }}</td>
               <td>
                 <div v-if="item === selectedItem">
                   <v-btn icon>
@@ -34,7 +37,7 @@
           </template>
 
           <template v-slot:expanded-item="{ headers, item }">
-            <td :colspan="headers.length">{{ item.NeedDescription }}</td>
+            <td :colspan="headers.length">{{ item.needDescription }}</td>
           </template>
         </v-data-table>
       </v-col>
@@ -50,22 +53,15 @@ export default {
     singleExpand: true,
     selectedItem: false,
     headers: [
-      {
-        text: "کد رهگیری",
-        align: "center",
-        value: "Wono",
-        width: "120px"
-      },
-      { text: "شرح", value: "NeedDescription", align: "center" },
-      { text: "شماره اموال", value: "AR", align: "center" },
-      {
-        text: "",
-        value: "actions",
-        align: "center",
-        sortable: false,
-        width: "100px"
-      }
-    ]
+      {text: "کد رهگیری", align: "center", value: "woNo", width: "120px"},
+      { text: "ساعت ثبت", value: "woTime", align: "center" },
+      { text: "تاریخ ثبت", value: "woDate", align: "center" },
+      { text: "انجام دهنده", value: "askerCode", align: "center" },
+      { text: "آخرین اقدام", value: "lastStatus", align: "center" },
+      { text: "شماره اموال", value: "amval", align: "center" },
+      { text: "", value: "actions", align: "center" ,sortable: false, width: "200px" }
+    ],
+    records:[]
   }),
   methods: {
     selectItem(item) {

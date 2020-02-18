@@ -21,8 +21,8 @@
       </template>
       <v-divider />
       <v-list shaped dense>
-        <v-list-item-group v-model="activeItem" color="primary">
-          <v-list-item v-for="(item, i) in this.$store.state.MenuService.menuItems" :key="i">
+        <v-list-item-group color="primary">
+          <v-list-item v-for="(item, i) in this.$store.state.MenuService.menuItems" :key="i" :to="item.to">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -62,32 +62,44 @@
     </v-app-bar>
     <v-content>
       <v-container fluid>
-        <Tickets v-if="!$store.state.IsMobile"></Tickets>
-        <TicketsMobileView v-if="$store.state.IsMobile"></TicketsMobileView>
+        <router-view></router-view>
+
       </v-container>
     </v-content>
     <v-btn bottom color="pink" dark fab fixed left @click="$store.dispatch('addNewTicket')">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
+    <vue-progress-bar></vue-progress-bar>
   </v-app>
 </template>
 
 <script>
-import Tickets from "./components/Tickets";
-import TicketsMobileView from "./components/TicketsMobileView";
-
 export default {
   name: "App",
   components: {
-    TicketsMobileView,
-    Tickets
   },
   data: () => ({
     drawer: null,
     mini: false,
-    activeItem: 1,
   }),
   methods: {
+  },
+  mounted() {
+    this.$Progress.finish();
+  },
+  created() {
+    this.$Progress.start();
+    this.$router.beforeEach((to, from, next) => {
+      if (to.meta.progress !== undefined) {
+        let meta = to.meta.progress
+        this.$Progress.parseMeta(meta)
+      }
+      this.$Progress.start()
+      next()
+    })
+    this.$router.afterEach(() => {
+      this.$Progress.finish()
+    })
   }
 };
 </script>
@@ -101,8 +113,5 @@ html {
   margin: 0;
   padding: 0;
 }
-.navigation-drawer__border {
-  width: 10px !important;
-  background-color: red !important;
-}
+
 </style>
