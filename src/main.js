@@ -48,11 +48,15 @@ new Vue({
     Axios.interceptors.request.use(config => {
       this.$Progress.start();
       return config;
+    }, function () {
+      this.$Progress.fail();
     });
 
     Axios.interceptors.response.use(response => {
       this.$Progress.finish();
       return response;
+    }, function () {
+      this.$Progress.fail();
     });
   },
   render: h => h(App)
