@@ -20,36 +20,39 @@
             >
               <td class="text-center">
                 <v-icon class="ml-1" @click="expand(!isExpanded)"
-                  >mdi-chevron-down</v-icon
-                ><v-chip color="indigo lighten-5" text-color="indigo">
+                  >mdi-chevron-down</v-icon><v-chip color="indigo lighten-5" text-color="indigo">
                   {{ item.woNo }}
                 </v-chip>
               </td>
               <td class="text-center">{{ item.woTime }}</td>
               <td class="text-center">{{ item.woDate }}</td>
               <td>
-                <v-chip color="indigo" outlined>
-                  <v-icon left>mdi-account-outline</v-icon>
-                  {{ item.askerCode }}
-                </v-chip>
+                {{ item.askerCode }}
               </td>
               <td>
-                <v-chip
-                  v-if="item.oprCode != 'انجام دهنده تعيين نشده'"
-                  color="blue"
-                  text-color="blue"
-                  outlined
-                  pill
-                >
-                  <v-icon left>mdi-account-outline</v-icon>
+                <p v-if="item.oprCode != 'انجام دهنده تعيين نشده'">
                   {{ item.oprCode }}
-                </v-chip>
+                </p>
               </td>
-              <td class="text-center"><b>{{ item.amval }}</b></td>
+              <td class="text-center">
+                <b>{{ item.amval }}</b>
+              </td>
               <td>
                 <div v-if="item === selectedItem">
-                  <v-btn icon>
-                    <v-icon>mdi-delete</v-icon>
+                  <v-btn icon color="indigo">
+                    <v-icon>mdi-history</v-icon>
+                  </v-btn>
+                  <v-btn icon color="indigo">
+                    <v-icon>mdi-check-circle</v-icon>
+                  </v-btn>
+                  <v-btn icon color="indigo">
+                    <v-icon>mdi-close-circle</v-icon>
+                  </v-btn>
+                  <v-btn icon color="indigo">
+                    <v-icon>mdi-star</v-icon>
+                  </v-btn>
+                  <v-btn icon color="indigo">
+                    <v-icon>mdi-cancel</v-icon>
                   </v-btn>
                 </div>
               </td>
@@ -58,13 +61,18 @@
 
           <template v-slot:expanded-item="{ headers, item }">
             <td :colspan="headers.length">
+              <v-alert
+                      text
+                      dense
+                      color="indigo"
+                      icon="mdi-clock-fast"
+                      border="left"
+                      class="mt-3"
+              >
+                {{ item.needDescription }}
+              </v-alert>
               <p>
-                <v-alert color="indigo" outlined text>
-                  {{ item.needDescription }}
-                </v-alert>
-              </p>
-              <p>
-                <v-chip  color="indigo darken-3" outlined>
+                <v-chip color="indigo darken-3" outlined>
                   <v-icon left>mdi-fire</v-icon>
                   {{ item.lastStatus }}
                 </v-chip>
@@ -106,7 +114,7 @@ export default {
         value: "actions",
         align: "center",
         sortable: false,
-        width: "200px"
+        width: "250px"
       }
     ],
     records: []
