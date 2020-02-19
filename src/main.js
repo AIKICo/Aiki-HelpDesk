@@ -8,6 +8,7 @@ import Axios from 'axios'
 import VueRouter from 'vue-router'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
+import UUID from 'vue-uuid'
 //import VueSignalR from '@latelier/vue-signalr'
 
 const progressOptions = {
@@ -38,6 +39,23 @@ if (accessToken) {
 //Vue.use(VueSignalR,'http://localhost:2025')
 Vue.use(VueRouter)
 Vue.use(VueProgressBar, progressOptions)
+Vue.use(UUID)
+
+Vue.directive('DynamicEvents',{
+  bind: function (el, binding, vnode) {
+    const allEvents = binding.value;
+    allEvents.forEach((event) => {
+      // register handler in the dynamic component
+      vnode.componentInstance.$on(event, (eventData) => {
+        // when the event is fired, the proxyEvent function is going to be called
+        vnode.context.proxyEvent(event, eventData);
+      });
+    });
+  },
+  unbind: function (el, binding, vnode) {
+    vnode.componentInstance.$off();
+  },
+});
 
 new Vue({
   vuetify,

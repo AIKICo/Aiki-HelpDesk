@@ -54,9 +54,9 @@
       <v-badge
               bordered
               color="red"
-              content="6"
               overlap
       >
+        <span slot="badge">{{this.$store.getters.getTickets.length}}</span>
         <v-icon large>mdi-bell</v-icon>
       </v-badge>
     </v-app-bar>
