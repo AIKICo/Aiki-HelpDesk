@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    themeName:"indigo",
     IsMobile: isMobile.isMobileOnly,
     accessToken: localStorage.getItem("access_token") || "",
     currentUser: {},

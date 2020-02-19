@@ -1,19 +1,18 @@
 <template>
   <v-card>
-    <v-card-title>ارزیابی ناظر</v-card-title>
-    <div class="text-center">
-      <v-rating v-model="rating" color="indigo"></v-rating>
-    </div>
-    <v-card-text> </v-card-text>
+    <v-card-title class="indigo white--text">ارزیابی ناظر</v-card-title>
+    <v-card-text class="text-center">
+      <v-rating v-model="workorder.manageRate" color="indigo"></v-rating>
+    </v-card-text>
 
     <v-card-actions>
       <v-spacer></v-spacer>
 
-      <v-btn color="green darken-1" text @click="closeDialog(false)">
+      <v-btn color="indigo darken-1" text @click="save()">
         تایید
       </v-btn>
 
-      <v-btn color="green darken-1" text @click="closeDialog(false)">
+      <v-btn color="indigo darken-1" text @click="closeDialog()">
         انصراف
       </v-btn>
     </v-card-actions>
@@ -23,15 +22,16 @@
 <script>
 export default {
   name: "rateTicket",
-  props:['workorder'],
+  props: ["workorder"],
   data: () => ({
-    rating: 1,
   }),
   methods: {
-      closeDialog(dialog){
-          console.log(this.workorder);
-          this.$emit('close-Dialog', dialog);
-      }
+    closeDialog() {
+      this.$emit("close-Dialog", false);
+    },
+    save() {
+      this.$emit("close-Dialog", false);
+    }
   }
 };
 </script>

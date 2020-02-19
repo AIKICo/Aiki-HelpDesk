@@ -134,7 +134,7 @@ export default {
     editedItem: [],
     knownEvents: ["close-Dialog"],
     dynamicProps: {
-      workorder: null,
+      workorder: null
     },
     headers: [
       { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
@@ -176,20 +176,17 @@ export default {
       this.dialogType = ty;
       this.editedIndex = this.$store.getters.getTickets.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      if (this.dialogType === "rateTicket") {
-        this.dialog = true;
-      }
+      this.dialog = true;
     },
     proxyEvent(eventName, eventData) {
-      if (eventName==='close-Dialog')
-      {
+      if (eventName === "close-Dialog") {
         this.dialog = eventData;
       }
     }
   },
-  watch:{
-    editedItem:function(newEditItem){
-      this.dynamicProps.workorder=newEditItem;
+  watch: {
+    editedItem: function(newEditItem) {
+      this.dynamicProps.workorder = newEditItem;
     }
   }
 };
