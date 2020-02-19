@@ -23,11 +23,13 @@
 <script>
 export default {
   name: "rateTicket",
+  props:['workorder'],
   data: () => ({
     rating: 1,
   }),
   methods: {
       closeDialog(dialog){
+          console.log(this.workorder);
           this.$emit('close-Dialog', dialog);
       }
   }

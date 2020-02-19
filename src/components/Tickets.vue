@@ -16,6 +16,7 @@
             <v-dialog v-model="dialog" max-width="290">
               <component
                 :is="dialogType"
+                v-bind="dynamicProps"
                 v-dynamic-events="knownEvents"
               ></component>
             </v-dialog>
@@ -132,6 +133,9 @@ export default {
     editedIndex: -1,
     editedItem: [],
     knownEvents: ["close-Dialog"],
+    dynamicProps: {
+      workorder: null,
+    },
     headers: [
       { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
       { text: "ساعت ثبت", value: "woTime", align: "center" },
@@ -181,6 +185,11 @@ export default {
       {
         this.dialog = eventData;
       }
+    }
+  },
+  watch:{
+    editedItem:function(newEditItem){
+      this.dynamicProps.workorder=newEditItem;
     }
   }
 };
