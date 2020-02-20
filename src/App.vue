@@ -63,7 +63,6 @@
     <v-content>
       <v-container fluid>
         <router-view></router-view>
-
       </v-container>
     </v-content>
     <v-btn bottom color="pink" dark fab fixed left @click="$store.dispatch('addNewTicket')">
@@ -89,7 +88,6 @@ export default {
   },
   created() {
     this.$Progress.start();
-
   }
 };
 </script>

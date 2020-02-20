@@ -2,7 +2,7 @@ import Axios from "axios";
 
 const WorkOrder = {
   state: {
-    tickets: []
+    tickets: [],
   },
   mutations: {
     NEW_TICKET() {
@@ -10,7 +10,7 @@ const WorkOrder = {
     },
     GET_TICKETS(state, payload) {
       state.tickets = payload;
-    }
+    },
   },
   actions: {
     addNewTicket(context) {
@@ -19,12 +19,16 @@ const WorkOrder = {
     async getTickets(context) {
       var response = await Axios.get("/WorkOrder/GetNotEndWorkOrder");
       context.commit("GET_TICKETS", response.data);
+    },
+    async getTicketReports(context, payload){
+      var response = await Axios.get("/WorkOrder/GetWorkOrderReport/" + payload.wono);
+      return response;
     }
   },
   getters: {
     getTickets: state => state.tickets.sort((a, b) => b.woNo - a.woNo),
     getTicketByID: state => wono =>
-      state.tickets.find(workOrder => workOrder.Wono === wono)
+      state.tickets.find(workOrder => workOrder.Wono === wono),
   }
 };
 

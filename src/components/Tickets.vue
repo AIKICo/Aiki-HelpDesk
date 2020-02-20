@@ -12,15 +12,6 @@
           :disable-pagination="true"
           :hide-default-footer="true"
         >
-          <template v-slot:top>
-            <v-dialog v-model="dialog" max-width="290">
-              <component
-                :is="dialogType"
-                v-bind="dynamicProps"
-                v-dynamic-events="knownEvents"
-              ></component>
-            </v-dialog>
-          </template>
           <template v-slot:item="{ item, expand, isExpanded }">
             <tr
               :key="item.woNo"
@@ -53,65 +44,28 @@
                 <b>{{ item.amval }}</b>
               </td>
               <td>
-                <div v-if="item === selectedItem">
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'historyTicket')"
-                  >
-                    <v-icon>mdi-history</v-icon>
-                  </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'waitingAcceptUser')"
-                  >
-                    <v-icon>mdi-check-circle</v-icon>
-                  </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'closeTicket')"
-                  >
-                    <v-icon>mdi-close-circle</v-icon>
-                  </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'rateTicket')"
-                  >
-                    <v-icon>mdi-star</v-icon>
-                  </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'cancelTicket')"
-                  >
-                    <v-icon>mdi-cancel</v-icon>
-                  </v-btn>
+                <div v-if="item === selectedItem || item.ManageRate>0">
+                  <v-rating v-model="item.ManageRate" color="indigo"></v-rating>
                 </div>
               </td>
             </tr>
           </template>
-
           <template v-slot:expanded-item="{ headers, item }">
             <td :colspan="headers.length">
               <v-alert
                 text
                 dense
                 color="indigo"
-                icon="mdi-clock-fast"
+                icon="mdi-fire"
                 border="left"
-                class="mt-3"
+                class="mt-1"
               >
                 {{ item.needDescription }}
               </v-alert>
-              <p>
-                <v-chip color="indigo darken-3" outlined>
-                  <v-icon left>mdi-fire</v-icon>
-                  {{ item.lastStatus }}
-                </v-chip>
-              </p>
+              <v-btn rounded outlined color="indigo" class="mb-2">
+                <v-icon left>mdi-clock-fast</v-icon>
+                {{ item.lastStatus }}
+              </v-btn>
             </td>
           </template>
         </v-data-table>
@@ -121,21 +75,15 @@
 </template>
 
 <script>
-import rateTicket from "./rateTicket";
+
 export default {
   name: "Tickets",
   data: () => ({
     expanded: [],
     singleExpand: true,
     selectedItem: false,
-    dialog: false,
-    dialogType: "",
     editedIndex: -1,
     editedItem: [],
-    knownEvents: ["close-Dialog"],
-    dynamicProps: {
-      workorder: null
-    },
     headers: [
       { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
       { text: "ساعت ثبت", value: "woTime", align: "center" },
@@ -163,7 +111,6 @@ export default {
     ]
   }),
   components: {
-    rateTicket
   },
   methods: {
     selectItem(item) {
@@ -172,23 +119,9 @@ export default {
     unSelectItem() {
       this.selectedItem = false;
     },
-    showDialog(item, ty) {
-      this.dialogType = ty;
-      this.editedIndex = this.$store.getters.getTickets.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    proxyEvent(eventName, eventData) {
-      if (eventName === "close-Dialog") {
-        this.dialog = eventData;
-      }
-    }
   },
   watch: {
-    editedItem: function(newEditItem) {
-      this.dynamicProps.workorder = newEditItem;
-    }
-  }
+  },
 };
 </script>
 
