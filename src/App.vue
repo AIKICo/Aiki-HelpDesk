@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import AppBar from "./components/AppBar";
-  import AppDrawer from "./components/AppDrawer";
+import AppBar from "./components/AppBar";
+import AppDrawer from "./components/AppDrawer";
 export default {
   name: "App",
   components: {

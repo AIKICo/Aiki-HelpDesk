@@ -11,15 +11,9 @@ export default new Vuex.Store({
     IsMobile: isMobile.isMobileOnly,
     accessToken: localStorage.getItem("access_token") || "",
     currentUser: {},
-    cartablContextMenu: [
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me 2" }
-    ],
     defaultColor:"indigo",
     defaultTextColor:"indigo--text",
-    defaultHeaderTextColor:"indigo--text",
+    defaultHeaderTextColor:"white--text",
     defaultBadgeColor:"red"
   },
   mutations: {},
