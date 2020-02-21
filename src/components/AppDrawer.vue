@@ -40,7 +40,6 @@
 
 <script>
 export default {
-  name: "drawerMenu",
   data: () => ({
     drawer: null,
     mini: false
