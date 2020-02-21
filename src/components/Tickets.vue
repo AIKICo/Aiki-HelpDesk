@@ -12,6 +12,13 @@
           :disable-pagination="true"
           :hide-default-footer="true"
         >
+          <template v-slot:top>
+            <component
+              :is="activeComponent"
+              v-bind="activeComponentProperty"
+              @close-sheet="closeSheet"
+            ></component>
+          </template>
           <template v-slot:item="{ item, expand, isExpanded }">
             <tr
               :key="item.woNo"
@@ -44,8 +51,42 @@
                 <b>{{ item.amval }}</b>
               </td>
               <td>
-                <div v-if="item === selectedItem || item.ManageRate>0">
-                  <v-rating v-model="item.ManageRate" color="indigo"></v-rating>
+                <div v-if="item === selectedItem">
+                  <v-btn
+                    icon
+                    color="indigo"
+                    @click="showHistorySheet(item)"
+                  >
+                    <v-icon>mdi-history</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="indigo"
+                    @click="showDialog(item, 'waitingAcceptUser')"
+                  >
+                    <v-icon>mdi-check-circle</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="indigo"
+                    @click="showDialog(item, 'closeTicket')"
+                  >
+                    <v-icon>mdi-close-circle</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="indigo"
+                    @click="showStarsheet(item, 'rateTicket')"
+                  >
+                    <v-icon>mdi-star</v-icon>
+                  </v-btn>
+                  <v-btn
+                    icon
+                    color="indigo"
+                    @click="showDialog(item, 'cancelTicket')"
+                  >
+                    <v-icon>mdi-cancel</v-icon>
+                  </v-btn>
                 </div>
               </td>
             </tr>
@@ -62,10 +103,15 @@
               >
                 {{ item.needDescription }}
               </v-alert>
-              <v-btn rounded outlined color="indigo" class="mb-2">
+              <v-chip
+                rounded
+                outlined
+                color="indigo"
+                class="mb-2"
+              >
                 <v-icon left>mdi-clock-fast</v-icon>
                 {{ item.lastStatus }}
-              </v-btn>
+              </v-chip>
             </td>
           </template>
         </v-data-table>
@@ -75,7 +121,8 @@
 </template>
 
 <script>
-
+import WorkorderTimeline from "./workorderTimeline";
+import rateTicket from "./rateTicket";
 export default {
   name: "Tickets",
   data: () => ({
@@ -84,6 +131,10 @@ export default {
     selectedItem: false,
     editedIndex: -1,
     editedItem: [],
+    sheet: false,
+    selectedWorkOrder:{},
+    activeComponent:'',
+    activeComponentProperty:{},
     headers: [
       { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
       { text: "ساعت ثبت", value: "woTime", align: "center" },
@@ -111,6 +162,8 @@ export default {
     ]
   }),
   components: {
+    WorkorderTimeline,
+    rateTicket
   },
   methods: {
     selectItem(item) {
@@ -119,9 +172,38 @@ export default {
     unSelectItem() {
       this.selectedItem = false;
     },
+    showHistorySheet(workorder) {
+      this.activeComponent='workorderTimeline';
+      this.selectedWorkOrder = workorder;
+      this.$store
+        .dispatch("getTicketReports", { wono: workorder.woNo })
+        .then(response => {
+          this.sheet = !this.sheet;
+          this.activeComponentProperty={
+            sheet: this.sheet,
+            wonoReports: response.data,
+            workorder:this.selectedWorkOrder
+          }
+        });
+    },
+    showStarsheet(workorder){
+      this.activeComponent='rateTicket';
+      this.sheet = !this.sheet;
+      this.selectedWorkOrder = workorder;
+      this.activeComponentProperty={
+        sheet: this.sheet,
+        workorder: workorder,
+      }
+    },
+    closeSheet(e) {
+      this.sheet = e.sheet;
+      this.activeComponentProperty={
+        sheet: this.sheet,
+        workorder:this.selectedWorkOrder
+      }
+    }
   },
-  watch: {
-  },
+  watch: {}
 };
 </script>
 

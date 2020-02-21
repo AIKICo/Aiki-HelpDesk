@@ -1,0 +1,57 @@
+<template>
+  <v-bottom-sheet v-model="sheet" inset scrollable persistent>
+    <v-sheet class="text-center">
+      <v-card>
+        <v-card-title class="indigo white--text">تاریخچه</v-card-title>
+        <v-card-text class="text-center" style="overflow-y: scroll;max-height: 600px;">
+          <v-btn
+                  class="mt-6"
+                  icon
+                  color="indigo"
+                  @click="$emit('close-sheet', {'sheet':false})"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-timeline class="mx-10" reverse >
+            <v-timeline-item
+                    v-for="item in wonoReports"
+                    :key="item.reportID"
+                    color="indigo lighten-2"
+                    large
+            >
+              <template v-slot:opposite>
+                <v-chip color="indigo" outlined pill>
+                  <v-icon right class="ml-1">mdi-account-outline</v-icon>
+                  {{
+                  item.memberName === null
+                  ? "سامانه مدیریت درخواست"
+                  : item.memberName
+                  }}
+                </v-chip>
+              </template>
+              <v-card class="elevation-2">
+                <v-card-title class="indigo--text">{{
+                  item.reportDate
+                  }}</v-card-title>
+                <v-card-text class="text-right">
+                  {{ item.reportComment }}
+                </v-card-text>
+              </v-card>
+            </v-timeline-item>
+          </v-timeline>
+        </v-card-text>
+
+      </v-card>
+
+    </v-sheet>
+  </v-bottom-sheet>
+</template>
+
+<script>
+export default {
+  name: "workorderTimeline",
+  props: ["sheet", "wonoReports","workorder"],
+};
+</script>
+
+<style scoped></style>
