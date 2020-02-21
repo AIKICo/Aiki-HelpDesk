@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router'
-import cartabl from './components/cartabl'
+import cartabl from './components/tickets/cartabl'
 const routes= [
     {name:'cartabl', path:'/cartabl', component: cartabl}
 ]

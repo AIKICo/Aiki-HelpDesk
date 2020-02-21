@@ -28,12 +28,12 @@
               <td class="text-center">
                 <v-icon
                   class="ml-1"
-                  color="indigo"
+                  :color="$store.state.defaultColor"
                   @click="expand(!isExpanded)"
                 >
                   {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
                 </v-icon>
-                <v-chip color="indigo lighten-5" text-color="indigo">
+                <v-chip :color="$store.state.defaultColor + ' lighten-5'" :text-color="$store.state.defaultColor">
                   {{ item.woNo }}
                 </v-chip>
               </td>
@@ -52,27 +52,27 @@
               </td>
               <td>
                 <div v-if="item === selectedItem">
-                  <v-btn icon color="indigo" @click="showHistorySheet(item)">
+                  <v-btn icon :color="$store.state.defaultColor" @click="showHistorySheet(item)">
                     <v-icon>mdi-history</v-icon>
                   </v-btn>
                   <v-btn
                     icon
-                    color="indigo"
+                    :color="$store.state.defaultColor"
                     @click="nextStageTicket(item)"
                   >
                     <v-icon>mdi-check-circle</v-icon>
                   </v-btn>
-                  <v-btn icon color="indigo" @click="closeTicket(item)">
+                  <v-btn icon :color="$store.state.defaultColor" @click="closeTicket(item)">
                     <v-icon>mdi-close-circle</v-icon>
                   </v-btn>
                   <v-btn
                     icon
-                    color="indigo"
+                    :color="$store.state.defaultColor"
                     @click="showStarsheet(item, 'rateTicket')"
                   >
                     <v-icon>mdi-star</v-icon>
                   </v-btn>
-                  <v-btn icon color="indigo" @click="rejectWorkOrder(item)">
+                  <v-btn icon :color="$store.state.defaultColor" @click="rejectWorkOrder(item)">
                     <v-icon>mdi-cancel</v-icon>
                   </v-btn>
                 </div>
@@ -87,7 +87,7 @@
               <v-alert
                 text
                 dense
-                color="indigo"
+                :color="$store.state.defaultColor"
                 icon="mdi-fire"
                 border="left"
                 class="mt-1"

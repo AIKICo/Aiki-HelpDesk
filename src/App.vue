@@ -1,41 +1,9 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      app
-      :clipped="$vuetify.breakpoint.lgAndUp"
-      :mini-variant.sync="mini"
-      right
-      v-model="drawer"
-    >
-      <template v-slot:prepend>
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/81.jpg" />
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>محمد مهرنیا</v-list-item-title>
-            <v-list-item-subtitle>مدیریت</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
-      <v-divider />
-      <v-list shaped dense>
-        <v-list-item-group color="primary">
-          <v-list-item v-for="(item, i) in this.$store.state.MenuService.menuItems" :key="i" :to="item.to">
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
+    <drawer-menu></drawer-menu>
     <v-app-bar
       app
-      color="indigo"
+      :color="$store.state.defaultColor"
       dark
       :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
@@ -53,7 +21,7 @@
       <v-spacer />
       <v-badge
               bordered
-              color="red"
+              :color="$store.state.defaultBadgeColor"
               overlap
       >
         <span slot="badge">{{this.$store.getters.getTickets.length}}</span>
@@ -65,7 +33,7 @@
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed left @click="$store.dispatch('addNewTicket')">
+    <v-btn bottom :color="$store.state.defaultColor" dark fab fixed left @click="$store.dispatch('addNewTicket')">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     <vue-progress-bar></vue-progress-bar>
@@ -73,13 +41,14 @@
 </template>
 
 <script>
+import DrawerMenu from "./components/drawerMenu";
 export default {
   name: "App",
   components: {
+    DrawerMenu
   },
   data: () => ({
-    drawer: null,
-    mini: false,
+    dark:false,
   }),
   methods: {
   },
@@ -88,6 +57,11 @@ export default {
   },
   created() {
     this.$Progress.start();
+  },
+  watch:{
+    dark: function(val){
+      this.$vuetify.theme.dark=val;
+    }
   }
 };
 </script>

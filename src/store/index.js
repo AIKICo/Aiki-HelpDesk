@@ -8,7 +8,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    themeName:"indigo",
     IsMobile: isMobile.isMobileOnly,
     accessToken: localStorage.getItem("access_token") || "",
     currentUser: {},
@@ -17,7 +16,11 @@ export default new Vuex.Store({
       { title: "Click Me" },
       { title: "Click Me" },
       { title: "Click Me 2" }
-    ]
+    ],
+    defaultColor:"indigo",
+    defaultTextColor:"indigo--text",
+    defaultHeaderTextColor:"indigo--text",
+    defaultBadgeColor:"red"
   },
   mutations: {},
   actions: {},

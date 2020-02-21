@@ -13,5 +13,8 @@ export default new Vuetify({
     lang: {
         locales: {fa},
         current: fa
+    },
+    theme:{
+        dark:false
     }
 });

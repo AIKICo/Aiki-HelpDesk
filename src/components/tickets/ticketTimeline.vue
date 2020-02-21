@@ -2,12 +2,12 @@
   <v-bottom-sheet v-model="sheet" inset scrollable persistent>
     <v-sheet class="text-center">
       <v-card>
-        <v-card-title class="indigo white--text">تاریخچه</v-card-title>
+        <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تاریخچه</v-card-title>
         <v-card-text class="text-center" style="overflow-y: scroll;max-height: 600px;">
           <v-btn
                   class="mt-6"
                   icon
-                  color="indigo"
+                  :color="$store.state.defaultColor"
                   @click="$emit('close-sheet', {'sheet':false})"
           >
             <v-icon>mdi-close</v-icon>
@@ -16,11 +16,11 @@
             <v-timeline-item
                     v-for="item in wonoReports"
                     :key="item.reportID"
-                    color="indigo lighten-2"
+                    :color="$store.state.defaultColor+  ' lighten-2'"
                     large
             >
               <template v-slot:opposite>
-                <v-chip color="indigo" outlined pill>
+                <v-chip :color="$store.state.defaultColor" outlined pill>
                   <v-icon right class="ml-1">mdi-account-outline</v-icon>
                   {{
                   item.memberName === null
@@ -30,7 +30,7 @@
                 </v-chip>
               </template>
               <v-card class="elevation-2">
-                <v-card-title class="indigo--text">{{
+                <v-card-title :class="$store.state.defaultTextColor">{{
                   item.reportDate
                   }}</v-card-title>
                 <v-card-text class="text-right">

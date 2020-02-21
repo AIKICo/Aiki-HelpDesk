@@ -2,7 +2,7 @@
     <v-bottom-sheet v-model="sheet" inset max-width="500px">
         <v-sheet class="text-center">
             <v-card>
-                <v-card-title class="indigo white--text">تغییر وضعیت درخواست</v-card-title>
+                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت درخواست</v-card-title>
                 <v-card-text class="text-center">
                     <v-form class="mt-3">
                         <v-textarea
@@ -14,22 +14,21 @@
                                 auto-grow
                                 autofocus
                                 :disabled="endWorkOrder"
-                                color="indigo"
+                                :color="$store.state.defaultColor"
                         ></v-textarea>
                         <v-checkbox
                                 v-model="endWorkOrder"
                                 label="اعلان پایان کار درخواست"
-                                class="indigo--text"
-                                color="indigo"
+                                :color="$store.state.defaultColor"
                         ></v-checkbox>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="indigo darken-1" text @click="closeDialog">
+                    <v-btn :color="$store.state.defaultColor +  ' darken-1'" text @click="closeDialog">
                         تایید
                     </v-btn>
-                    <v-btn color="indigo darken-1" text @click="closeDialog">
+                    <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog">
                         انصراف
                     </v-btn>
                 </v-card-actions>

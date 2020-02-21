@@ -2,7 +2,7 @@
   <v-bottom-sheet v-model="sheet" inset max-width="400px">
     <v-sheet class="text-center">
       <v-card>
-        <v-card-title class="indigo white--text">بستن درخواست</v-card-title>
+        <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">بستن درخواست</v-card-title>
         <v-card-text class="text-center">
           <v-form class="mt-3">
             <v-text-field
@@ -11,7 +11,6 @@
               label="نفر ساعت مصرفی"
               outlined
               shaped
-              class="indigo--text"
             ></v-text-field>
             <v-select
               :items="commentItems"
@@ -19,17 +18,16 @@
               item-value="consCommentCode"
               outlined
               shaped
-              class="indigo--text"
               label="گروه درخواست"
             ></v-select>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="indigo darken-1" text @click="closeDialog">
+          <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog">
             تایید
           </v-btn>
-          <v-btn color="indigo darken-1" text @click="closeDialog">
+          <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog">
             انصراف
           </v-btn>
         </v-card-actions>
