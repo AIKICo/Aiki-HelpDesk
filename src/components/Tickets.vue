@@ -31,7 +31,7 @@
                   color="indigo"
                   @click="expand(!isExpanded)"
                 >
-                  mdi-chevron-down
+                  {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
                 </v-icon>
                 <v-chip color="indigo lighten-5" text-color="indigo">
                   {{ item.woNo }}
@@ -52,25 +52,17 @@
               </td>
               <td>
                 <div v-if="item === selectedItem">
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showHistorySheet(item)"
-                  >
+                  <v-btn icon color="indigo" @click="showHistorySheet(item)">
                     <v-icon>mdi-history</v-icon>
                   </v-btn>
                   <v-btn
                     icon
                     color="indigo"
-                    @click="showDialog(item, 'waitingAcceptUser')"
+                    @click="nextStageTicket(item)"
                   >
                     <v-icon>mdi-check-circle</v-icon>
                   </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'closeTicket')"
-                  >
+                  <v-btn icon color="indigo" @click="closeTicket(item)">
                     <v-icon>mdi-close-circle</v-icon>
                   </v-btn>
                   <v-btn
@@ -80,13 +72,12 @@
                   >
                     <v-icon>mdi-star</v-icon>
                   </v-btn>
-                  <v-btn
-                    icon
-                    color="indigo"
-                    @click="showDialog(item, 'cancelTicket')"
-                  >
+                  <v-btn icon color="indigo" @click="rejectWorkOrder(item)">
                     <v-icon>mdi-cancel</v-icon>
                   </v-btn>
+                </div>
+                <div v-if="item!=selectedItem">
+                  {{ item.lastStatus }}
                 </div>
               </td>
             </tr>
@@ -103,15 +94,6 @@
               >
                 {{ item.needDescription }}
               </v-alert>
-              <v-chip
-                rounded
-                outlined
-                color="indigo"
-                class="mb-2"
-              >
-                <v-icon left>mdi-clock-fast</v-icon>
-                {{ item.lastStatus }}
-              </v-chip>
             </td>
           </template>
         </v-data-table>
@@ -121,8 +103,10 @@
 </template>
 
 <script>
-import WorkorderTimeline from "./workorderTimeline";
+import WorkorderTimeline from "./ticketTimeline";
 import rateTicket from "./rateTicket";
+import closeTicket from "./closeTicket";
+import nextStageTicket from "./nextStageTicket";
 export default {
   name: "Tickets",
   data: () => ({
@@ -132,9 +116,9 @@ export default {
     editedIndex: -1,
     editedItem: [],
     sheet: false,
-    selectedWorkOrder:{},
-    activeComponent:'',
-    activeComponentProperty:{},
+    selectedWorkOrder: {},
+    activeComponent: "",
+    activeComponentProperty: {},
     headers: [
       { text: "کد رهگیری", align: "center", value: "woNo", width: "150px" },
       { text: "ساعت ثبت", value: "woTime", align: "center" },
@@ -163,7 +147,9 @@ export default {
   }),
   components: {
     WorkorderTimeline,
-    rateTicket
+    rateTicket,
+    closeTicket,
+    nextStageTicket
   },
   methods: {
     selectItem(item) {
@@ -173,33 +159,63 @@ export default {
       this.selectedItem = false;
     },
     showHistorySheet(workorder) {
-      this.activeComponent='workorderTimeline';
+      this.activeComponent = "workorderTimeline";
       this.selectedWorkOrder = workorder;
       this.$store
         .dispatch("getTicketReports", { wono: workorder.woNo })
         .then(response => {
           this.sheet = !this.sheet;
-          this.activeComponentProperty={
+          this.activeComponentProperty = {
             sheet: this.sheet,
             wonoReports: response.data,
-            workorder:this.selectedWorkOrder
-          }
+            workorder: this.selectedWorkOrder
+          };
         });
     },
-    showStarsheet(workorder){
-      this.activeComponent='rateTicket';
+    showStarsheet(workorder) {
+      this.activeComponent = "rateTicket";
       this.sheet = !this.sheet;
       this.selectedWorkOrder = workorder;
-      this.activeComponentProperty={
+      this.activeComponentProperty = {
+        sheet: this.sheet,
+        workorder: workorder
+      };
+    },
+    rejectWorkOrder(workorder) {
+      this.selectedWorkOrder = workorder;
+    },
+    closeTicket(workorder) {
+      this.activeComponent = "closeTicket";
+      this.sheet = !this.sheet;
+      this.selectedWorkOrder = workorder;
+      this.activeComponentProperty = {
         sheet: this.sheet,
         workorder: workorder,
-      }
+        commentItems: [
+          { consCommentCode: 25, consCommentText: "نصب سیستم عامل" },
+          { consCommentCode: 26, consCommentText: "رفع ایراد سخت افزاری" },
+          { consCommentCode: 27, consCommentText: "تعویض تونر" },
+          { consCommentCode: 28, consCommentText: "نصب و راه اندازی سیستم عامل" }
+        ]
+      };
+    },
+    nextStageTicket(workorder){
+      this.activeComponent = "nextStageTicket";
+      this.sheet = !this.sheet;
+      this.selectedWorkOrder = workorder;
+      this.activeComponentProperty = {
+        sheet: this.sheet,
+        workorder: workorder
+      };
     },
     closeSheet(e) {
       this.sheet = e.sheet;
-      this.activeComponentProperty={
+      this.activeComponentProperty = {
         sheet: this.sheet,
-        workorder:this.selectedWorkOrder
+        workorder: this.selectedWorkOrder
+      };
+      if ("workorder" in e) {
+        console.log(e.workorder);
       }
     }
   },

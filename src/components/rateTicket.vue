@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="sheet" inset>
+  <v-bottom-sheet v-model="sheet" inset :max-width="300">
     <v-sheet class="text-center">
       <v-card>
         <v-card-title class="indigo white--text">ارزیابی ناظر</v-card-title>
@@ -13,7 +13,6 @@
           <v-btn color="indigo darken-1" text @click="closeDialog">
             تایید
           </v-btn>
-
           <v-btn color="indigo darken-1" text @click="closeDialog">
             انصراف
           </v-btn>

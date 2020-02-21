@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: "workorderTimeline",
+  name: "ticketTimeline",
   props: ["sheet", "wonoReports","workorder"],
 };
 </script>
