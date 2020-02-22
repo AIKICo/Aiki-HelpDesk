@@ -1,4 +1,4 @@
-<template>
+<template >
   <v-container fluid fill-height>
     <v-layout row wrap align-center>
       <v-row justify="center" align="center">
