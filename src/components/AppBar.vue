@@ -5,7 +5,7 @@
             dark
             :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer" />
         <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down"
         >میزکار خدمات رایانه ای</v-toolbar-title
         >

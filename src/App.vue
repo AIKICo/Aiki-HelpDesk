@@ -1,11 +1,9 @@
 <template>
   <v-app>
-    <app-drawer></app-drawer>
-    <app-bar></app-bar>
+    <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
+    <app-bar v-if="$store.state.isLoggedIn"></app-bar>
     <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-content>
     <v-btn
       bottom
@@ -15,6 +13,7 @@
       fixed
       left
       @click="$store.dispatch('addNewTicket')"
+      v-if="$store.state.isLoggedIn"
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>

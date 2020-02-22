@@ -2,7 +2,7 @@
   <v-bottom-sheet v-model="sheet" inset :max-width="300">
     <v-sheet class="text-center">
       <v-card>
-        <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">ارزیابی ناظر</v-card-title>
+        <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">ارزیابی ناظر درخواست {{workorder.woNo}}</v-card-title>
         <v-card-text class="text-center">
           <v-rating v-model="workorder.manageRate" :color="$store.state.defaultColor"></v-rating>
         </v-card-text>

@@ -4,7 +4,7 @@
     :clipped="$vuetify.breakpoint.lgAndUp"
     :mini-variant.sync="mini"
     right
-    v-model="drawer"
+    v-model="$store.state.drawer"
   >
     <template v-slot:prepend>
       <v-list-item two-line>
@@ -41,7 +41,6 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
     mini: false
   })
 };

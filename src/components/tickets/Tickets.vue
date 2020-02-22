@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
       <v-col>
         <v-data-table
@@ -43,9 +43,7 @@
                 {{ item.askerCode }}
               </td>
               <td>
-                <p v-if="item.oprCode != 'انجام دهنده تعيين نشده'">
-                  {{ item.oprCode }}
-                </p>
+                {{item.oprCode != 'انجام دهنده تعيين نشده'? item.oprCode:'' }}
               </td>
               <td class="text-center">
                 <b>{{ item.amval }}</b>
@@ -141,7 +139,7 @@ export default {
         value: "actions",
         align: "center",
         sortable: false,
-        width: "250px"
+        width: "350px"
       }
     ]
   }),

@@ -2,7 +2,7 @@
     <v-bottom-sheet v-model="sheet" inset max-width="500px">
         <v-sheet class="text-center">
             <v-card>
-                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت درخواست</v-card-title>
+                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت درخواست {{workorder.woNo}}</v-card-title>
                 <v-card-text class="text-center">
                     <v-form class="mt-3">
                         <v-textarea
