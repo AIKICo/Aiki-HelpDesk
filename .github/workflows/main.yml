@@ -23,7 +23,7 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Download Artifact
+    - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
           name: dist
