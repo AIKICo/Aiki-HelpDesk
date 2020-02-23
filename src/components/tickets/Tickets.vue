@@ -194,7 +194,8 @@ export default {
           { consCommentCode: 25, consCommentText: "نصب سیستم عامل" },
           { consCommentCode: 26, consCommentText: "رفع ایراد سخت افزاری" },
           { consCommentCode: 27, consCommentText: "تعویض تونر" },
-          { consCommentCode: 28, consCommentText: "نصب و راه اندازی سیستم عامل" }
+          { consCommentCode: 28, consCommentText: "نصب و راه اندازی سیستم عامل" },
+          { consCommentCode: 29, consCommentText: "نصب و راه اندازی سیستم عامل" }
         ]
       };
     },
