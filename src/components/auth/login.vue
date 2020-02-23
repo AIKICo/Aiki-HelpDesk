@@ -8,7 +8,7 @@
               <v-card class="mx-auto" outlined>
                 <v-card-title :class="$store.state.defaultColor + ' white--text'">
                   <v-icon large color="white">mdi-handshake</v-icon>
-                  میزکار خدمات رایانه ای
+                  میزکار خدمات رایانه ای AiKi
                 </v-card-title>
                 <v-card-text class="mt-5">
                   <ValidationProvider

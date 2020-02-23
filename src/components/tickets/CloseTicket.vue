@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="sheet" inset max-width="500px">
+  <v-bottom-sheet v-model="sheet" inset max-width="600px">
     <v-sheet class="text-center">
       <v-card>
         <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">بستن درخواست {{workorder.woNo}}</v-card-title>
