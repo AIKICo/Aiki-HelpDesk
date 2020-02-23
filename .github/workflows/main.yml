@@ -20,8 +20,8 @@ jobs:
     - run: npm install -g @vue/cli@latest
     - working-directory: "./Aiki-HelpDesk"
     - name: Build App
-    - working-directory: "./AiKi-HelpDesk"
     - run: npm install
+    - working-directory: "./AiKi-HelpDesk"
     - run: npm run build
       env:
         CI: true
