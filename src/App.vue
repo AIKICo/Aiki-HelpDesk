@@ -3,7 +3,9 @@
     <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
     <app-bar v-if="$store.state.isLoggedIn"></app-bar>
     <v-content>
-      <router-view></router-view>
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </v-content>
     <v-btn
       bottom
@@ -56,5 +58,24 @@ export default {
 html {
   margin: 0;
   padding: 0;
+}
+.router-link-active {
+  color: red;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: opacity 2s ease;
+}
+
+.fade-leave {
+}
+
+.fade-leave-active {
+  transition: opacity 2s ease;
+  opacity: 0;
 }
 </style>

@@ -10,7 +10,11 @@ const Login = {
         password: payload.passwd
       });
       return response;
-    }
+    },
+    logout(){
+      console.log('logout');
+      localStorage.clear()
+    },
   },
   getters: {}
 };

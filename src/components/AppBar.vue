@@ -17,6 +17,9 @@
                 label="جستجو"
         />
         <v-spacer />
+        <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
+            <v-icon large>mdi-logout</v-icon>
+        </v-btn>
         <v-badge
                 bordered
                 :color="$store.state.defaultBadgeColor"
@@ -30,6 +33,13 @@
 
 <script>
     export default {
+        methods:{
+            logout(){
+                this.$store.dispatch('logout').then(()=>{
+                    this.$router.go("/login")
+                })
+            }
+        }
     }
 </script>
 

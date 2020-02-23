@@ -9,7 +9,8 @@ import VueRouter from 'vue-router'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
 import UUID from 'vue-uuid'
-import Vuelidate from 'vuelidate'
+import { ValidationProvider } from 'vee-validate';
+
 //import VueSignalR from '@latelier/vue-signalr'
 
 const progressOptions = {
@@ -41,7 +42,6 @@ if (accessToken) {
 Vue.use(VueRouter)
 Vue.use(VueProgressBar, progressOptions)
 Vue.use(UUID)
-Vue.use(Vuelidate)
 
 Vue.directive('DynamicEvents',{
   bind: function (el, binding, vnode) {
@@ -58,6 +58,8 @@ Vue.directive('DynamicEvents',{
     vnode.componentInstance.$off();
   },
 });
+
+Vue.component('ValidationProvider', ValidationProvider);
 
 new Vue({
   vuetify,

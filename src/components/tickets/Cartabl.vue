@@ -10,7 +10,7 @@
     import Tickets from "./Tickets";
 
     export default {
-        name: "cartabl",
+        name: "Cartabl",
         components:{
             TicketsMobileView,
             Tickets

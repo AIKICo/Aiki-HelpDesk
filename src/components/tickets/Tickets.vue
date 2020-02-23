@@ -101,10 +101,10 @@
 </template>
 
 <script>
-import WorkorderTimeline from "./ticketTimeline";
-import rateTicket from "./rateTicket";
-import closeTicket from "./closeTicket";
-import nextStageTicket from "./nextStageTicket";
+import WorkorderTimeline from "./TicketTimeline";
+import RateTicket from "./RateTicket";
+import CloseTicket from "./CloseTicket";
+import NextStageTicket from "./NextStageTicket";
 export default {
   name: "Tickets",
   data: () => ({
@@ -145,9 +145,9 @@ export default {
   }),
   components: {
     WorkorderTimeline,
-    rateTicket,
-    closeTicket,
-    nextStageTicket
+    RateTicket,
+    CloseTicket,
+    NextStageTicket
   },
   methods: {
     selectItem(item) {

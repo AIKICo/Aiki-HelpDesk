@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "closeTicket",
+  name: "CloseTicket",
   props: ["sheet", "workorder", "commentItems"],
   data: () => ({}),
   methods: {

@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
-import cartabl from "./components/tickets/cartabl";
-import login from "./components/members/login";
+import cartabl from "./components/tickets/Cartabl";
+import login from "./components/auth/login";
 
 const routes = [
   {

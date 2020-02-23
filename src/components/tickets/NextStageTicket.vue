@@ -39,7 +39,7 @@
 
 <script>
     export default {
-        name: "nextStageTicket",
+        name: "NextStageTicket",
         data:()=>{
             return {
                 comment:'',

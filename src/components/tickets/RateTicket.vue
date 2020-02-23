@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "rateTicket",
+  name: "RateTicket",
   props: ["sheet","workorder"],
   data: () => ({
   }),
