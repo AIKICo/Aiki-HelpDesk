@@ -1,8 +1,8 @@
 <template>
   <v-container fluid fill-height style="background-color: #0d47a1">
-    <v-layout row wrap align-center>
-      <v-row justify="center" align="center">
-        <v-col cols="5">
+    <v-layout align-center >
+      <v-row justify="center" align="center" no-gutters>
+        <v-col cols="12" md="5" lg="5" >
           <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
             <form @submit.prevent="handleSubmit(onSubmit)">
               <v-card class="mx-auto" outlined>
