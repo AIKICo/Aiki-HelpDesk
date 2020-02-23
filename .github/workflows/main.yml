@@ -1,4 +1,4 @@
-name: Node.js CI
+name: ticket app CI
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [13.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run build --if-present
-    - run: npm test
-      env:
-        CI: true
+    - run: npm install -g @vue/cli@latest
+    - name: Build App
+      working-directory: .
+      run: |
+        npm install
+        npm run build
