@@ -101,7 +101,7 @@
 </template>
 
 <script>
-import WorkorderTimeline from "./TicketTimeline";
+import TicketTimeline from "./TicketTimeline";
 import RateTicket from "./RateTicket";
 import CloseTicket from "./CloseTicket";
 import NextStageTicket from "./NextStageTicket";
@@ -144,7 +144,7 @@ export default {
     ]
   }),
   components: {
-    WorkorderTimeline,
+    TicketTimeline,
     RateTicket,
     CloseTicket,
     NextStageTicket
@@ -157,10 +157,10 @@ export default {
       this.selectedItem = false;
     },
     showHistorySheet(workorder) {
-      this.activeComponent = "workorderTimeline";
+      this.activeComponent = "ticket-timeline";
       this.selectedWorkOrder = workorder;
       this.$store
-        .dispatch("getTicketReports", { wono: workorder.woNo })
+        .dispatch("getTicketReports", { wono: this.selectedWorkOrder.woNo })
         .then(response => {
           this.sheet = !this.sheet;
           this.activeComponentProperty = {
@@ -171,7 +171,7 @@ export default {
         });
     },
     showStarsheet(workorder) {
-      this.activeComponent = "rateTicket";
+      this.activeComponent = "RateTicket";
       this.sheet = !this.sheet;
       this.selectedWorkOrder = workorder;
       this.activeComponentProperty = {
@@ -183,7 +183,7 @@ export default {
       this.selectedWorkOrder = workorder;
     },
     closeTicket(workorder) {
-      this.activeComponent = "closeTicket";
+      this.activeComponent = "CloseTicket";
       this.sheet = !this.sheet;
       this.selectedWorkOrder = workorder;
       this.activeComponentProperty = {
@@ -198,7 +198,7 @@ export default {
       };
     },
     nextStageTicket(workorder){
-      this.activeComponent = "nextStageTicket";
+      this.activeComponent = "NextStageTicket";
       this.sheet = !this.sheet;
       this.selectedWorkOrder = workorder;
       this.activeComponentProperty = {

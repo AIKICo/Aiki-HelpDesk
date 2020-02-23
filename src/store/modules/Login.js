@@ -12,7 +12,6 @@ const Login = {
       return response;
     },
     logout(){
-      console.log('logout');
       localStorage.clear()
     },
   },
