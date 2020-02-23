@@ -18,9 +18,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g @vue/cli@latest
-    - working-directory: "./AiKi-HelpDesl"
+    - working-directory: "./Aiki-HelpDesk"
     - name: Build App
-    - working-directory: "./AiKi-HelpDesl"
+    - working-directory: "./AiKi-HelpDesk"
     - run: npm install
     - run: npm run build
       env:
