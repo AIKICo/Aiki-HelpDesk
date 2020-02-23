@@ -1,4 +1,4 @@
-name: tickert app CI
+name: ticket app CI
 
 on: [push]
 
@@ -17,9 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: npm install -g @vue/cli@latest
     - name: Build App
       working-directory: ./Aiki-HelpDesk
       run: |
-        npm install -g @vue/cli@latest
         npm install
         npm run build
