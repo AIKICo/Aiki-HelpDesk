@@ -33,7 +33,8 @@ jobs:
       with:
           args: deploy --only hosting
       env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID:   "aiki-helpdesk-v1"
     - name: Send Notification To Slack
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
