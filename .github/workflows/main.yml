@@ -24,9 +24,10 @@ jobs:
         npm install
         npm run build
     - name: Download Artifact
-      uses: actions/download-artifact@master
+      uses: actions/upload-artifact@master
       with:
           name: dist
+          path: dist
     - name: Deploy On Firebase
       uses: w9jds/firebase-action@master
       with:
