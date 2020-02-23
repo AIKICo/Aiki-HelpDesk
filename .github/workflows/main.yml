@@ -23,16 +23,18 @@ jobs:
       run: |
         npm install
         npm run build
-    - name: Download Artifact
-      uses: actions/download-artifact@master
+    - name: Upload Artifact
+      uses: actions/upload-artifact@master
       with:
           name: dist
+          path: dist
     - name: Deploy On Firebase
       uses: w9jds/firebase-action@master
       with:
           args: deploy --only hosting
       env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID:   "aiki-helpdesk-v1"
     - name: Send Notification To Slack
       uses: rtCamp/action-slack-notify@v2.0.0
       env:
