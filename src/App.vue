@@ -3,6 +3,22 @@
     <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
     <app-bar v-if="$store.state.isLoggedIn"></app-bar>
     <v-content>
+      <v-snackbar
+        v-model="snackWithButtons"
+        :timeout="timeout"
+        bottom
+        right
+        class="snack"
+      >
+        {{ snackWithBtnText }}
+        <v-spacer />
+        <v-btn dark text color="#00f500" @click.native="refreshApp">
+          {{ snackBtnText }}
+        </v-btn>
+        <v-btn icon @click="snackWithButtons = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-snackbar>
       <transition name="fade" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -33,14 +49,38 @@ export default {
     AppDrawer
   },
   data: () => ({
-    dark: false
+    dark: false,
+    refreshing: false,
+    registration: null,
+    snackBtnText: '',
+    snackWithBtnText: '',
+    snackWithButtons: false,
+    timeout: 0,
   }),
-  methods: {},
+  methods: {
+    showRefreshUI(e) {
+      this.registration = e.detail;
+      this.snackBtnText = 'بروز رسانی';
+      this.snackWithBtnText = 'نسخه جدید در دسترس است!';
+      this.snackWithButtons = true;
+    },
+    refreshApp() {
+      this.snackWithButtons = false;
+      if (!this.registration || !this.registration.waiting) { return; }
+      this.registration.waiting.postMessage('skipWaiting');
+    }
+  },
   mounted() {
     this.$Progress.finish();
   },
   created() {
     this.$Progress.start();
+    document.addEventListener('swUpdated', this.showRefreshUI, { once: true });
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (this.refreshing) return;
+      this.refreshing = true;
+      window.location.reload();
+    });
   },
   watch: {
     dark: function(val) {
@@ -68,14 +108,17 @@ html {
 }
 
 .fade-enter-active {
-  transition: opacity 2s ease;
+  transition: opacity 1s ease;
 }
 
 .fade-leave {
 }
 
 .fade-leave-active {
-  transition: opacity 2s ease;
+  transition: opacity 1s ease;
   opacity: 0;
+}
+.snack >>> .v-snack__content {
+  padding-right: 16px;
 }
 </style>

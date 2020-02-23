@@ -166,7 +166,8 @@ export default {
           this.activeComponentProperty = {
             sheet: this.sheet,
             wonoReports: response.data,
-            workorder: this.selectedWorkOrder
+            workorder: workorder,
+            wono: workorder.woNo
           };
         });
     },
