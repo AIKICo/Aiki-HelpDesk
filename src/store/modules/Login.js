@@ -1,10 +1,21 @@
 import Axios from "axios";
+import User from "../orm/User"
 
 const Login = {
   state: {},
   mutations: {},
   actions: {
     async login(context, payload) {
+      const user=[
+        {
+          id:1,
+          name:'mohammad mehrnia',
+          email:'qermezkon@gmail.com'
+        }
+      ]
+      User.insert({data:user});
+      console.log(User.all());
+
       var response = await Axios.post("users/authenticate", {
         username: payload.userName,
         password: payload.passwd
