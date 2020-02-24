@@ -79,7 +79,7 @@ export default {
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (this.refreshing) return;
       this.refreshing = true;
-      window.location.reload(this.refreshing);
+      window.location.href = window.location;
     });
   },
   watch: {
