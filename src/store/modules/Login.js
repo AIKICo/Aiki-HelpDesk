@@ -1,5 +1,5 @@
 import Axios from "axios";
-import User from "../orm/User"
+import User from "../models/User"
 
 const Login = {
   state: {},
@@ -8,6 +8,7 @@ const Login = {
     async login(context, payload) {
       const user=[
         {
+          id:this.uuid(),
           name:'mohammad mehrnia',
           email:'qermezkon@gmail.com'
         }

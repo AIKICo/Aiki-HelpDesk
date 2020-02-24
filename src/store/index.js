@@ -8,7 +8,7 @@ import WorkOrder from "./modules/WorkOrder";
 import Menu from "./modules/Menu";
 import Login from "./modules/Login";
 
-import User from "./orm/User";
+import User from "./models/User";
 
 VuexORM.use(VuexORMAxios, {
   Axios,
