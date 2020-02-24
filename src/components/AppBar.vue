@@ -24,9 +24,13 @@
                 bordered
                 :color="$store.state.defaultBadgeColor"
                 overlap
+                offset-y="17"
+                offset-x="17"
         >
             <span slot="badge">{{this.$store.getters.getTickets.length}}</span>
-            <v-icon large>mdi-bell</v-icon>
+            <v-btn icon>
+                <v-icon large>mdi-bell</v-icon>
+            </v-btn>
         </v-badge>
     </v-app-bar>
 </template>
