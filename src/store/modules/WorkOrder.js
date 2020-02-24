@@ -4,7 +4,7 @@ const WorkOrder = {
   state: {
     tickets: [],
   },
-  mutations: {
+    mutations: {
     NEW_TICKET() {
       alert("add a new ticket");
     },
