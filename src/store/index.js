@@ -5,8 +5,7 @@ import VuexORM from "@vuex-orm/core";
 import VuexORMAxios from "@vuex-orm/plugin-axios";
 import isMobile from "mobile-device-detect";
 import WorkOrder from "./modules/WorkOrder";
-import Menu from "./modules/Menu";
-import Login from "./modules/Login";
+import menuService from "./modules/menuService";
 import userService from "./modules/userService";
 
 import User from "./models/User";
@@ -19,6 +18,7 @@ database.register(User);
 
 export default new Vuex.Store({
   plugins: [VuexORM.install(database)],
+  namespace: true,
   state: {
     IsMobile: isMobile.isMobileOnly,
     accessToken: localStorage.getItem("access_token") || "",
@@ -34,8 +34,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     WorkOrderService: WorkOrder,
-    MenuService: Menu,
-    LoginService: Login,
+    MenuService: menuService,
     UserService: userService
   },
   getters: {}

@@ -30,12 +30,11 @@ const progressOptions = {
 const  accessToken  =  localStorage.getItem('access_token')
 
 Vue.config.productionTip  =  false
-Vue.prototype.$http  =  axois;
-axois.defaults.baseURL = 'https://aiki-ticket-app.herokuapp.com/api';
-axois.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axois.defaults.baseURL = 'https://aiki-co-helpdesk-webapi.herokuapp.com/'
+axois.defaults.headers.post['Content-Type'] = 'application/json';
 
 if (accessToken) {
-  Vue.prototype.$http.defaults.headers.common['Authorization'] =  accessToken
+  axois.defaults.headers.post['Authorization'] =  accessToken
 }
 
 //Vue.use(VueSignalR,'http://localhost:2025')

@@ -91,21 +91,15 @@ export default {
   },
   methods: {
     loginUser: function() {
-      const authUser = {};
-      var app = this;
       this.$store
-        .dispatch("login", {
+        .dispatch("UserService/authenticate", {
           userName: this.loginDetails.userName,
           passwd: this.loginDetails.password
         })
         .then(response => {
           if (response.status === 200) {
-            authUser.data = response.data;
-            authUser.token = response.data.token;
-            app.$store.state.isLoggedIn = true;
-            window.localStorage.setItem("userInfo", JSON.stringify(authUser));
-            window.localStorage.setItem("access_token", authUser.token);
-            app.$router.push("/cartabl");
+            this.$store.state.isLoggedIn = true;
+            this.$router.push("/cartabl");
           }
         })
         .catch(function(err) {

@@ -1,4 +1,4 @@
-const Menu = {
+const menuService = {
   state: {
       menuItems: [
           { text: "داشبورد", icon: "mdi-monitor-dashboard", to:'/dashboard' },
@@ -13,4 +13,4 @@ const Menu = {
   }
 };
 
-export default Menu;
+export default menuService;
