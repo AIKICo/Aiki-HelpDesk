@@ -5,7 +5,7 @@ const userService = {
   mutations: {},
   actions: {},
   getters: {
-    getUsers: () => User.all(),
+    getUsers: () => User.api().get("/users/GetAll"),
     getUsersById: id => User.find(id)
   }
 };

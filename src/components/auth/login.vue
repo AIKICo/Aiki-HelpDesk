@@ -109,7 +109,7 @@ export default {
           }
         })
         .catch(function(err) {
-          console.log(err.data);
+          console.log(err);
         });
     },
     onSubmit() {
