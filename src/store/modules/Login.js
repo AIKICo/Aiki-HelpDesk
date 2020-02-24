@@ -8,7 +8,6 @@ const Login = {
     async login(context, payload) {
       const user=[
         {
-          id:1,
           name:'mohammad mehrnia',
           email:'qermezkon@gmail.com'
         }
