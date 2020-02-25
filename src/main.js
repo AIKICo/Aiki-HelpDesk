@@ -11,6 +11,7 @@ import VueProgressBar from 'vue-progressbar'
 import UUID from 'vue-uuid'
 import { ValidationProvider } from 'vee-validate';
 import * as firebase from 'firebase/app'
+import 'firebase/analytics'
 import VueMeta from 'vue-meta'
 //import VueSignalR from '@latelier/vue-signalr'
 
@@ -19,7 +20,7 @@ const progressOptions = {
   failedColor: '#874b4b',
   thickness: '5px',
   transition: {
-    speed: '0.6s',
+    speed: '0.5s',
     opacity: '0.6s',
     termination: 600
   },

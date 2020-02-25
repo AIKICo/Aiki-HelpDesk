@@ -90,31 +90,22 @@ export default {
     ValidationObserver
   },
   methods: {
-    loginUser: function() {
-      const authUser = {};
-      var app = this;
+    onSubmit: function () {
       this.$store
-        .dispatch("login", {
-          userName: this.loginDetails.userName,
-          passwd: this.loginDetails.password
-        })
-        .then(response => {
-          if (response.status === 200) {
-            authUser.data = response.data;
-            authUser.token = response.data.token;
-            app.$store.state.isLoggedIn = true;
-            window.localStorage.setItem("userInfo", JSON.stringify(authUser));
-            window.localStorage.setItem("access_token", authUser.token);
-            app.$router.push("/cartabl");
-          }
-        })
-        .catch(function(err) {
-          console.log(err.data);
-        });
+              .dispatch("UserService/authenticate", {
+                userName: this.loginDetails.userName,
+                passwd: this.loginDetails.password
+              })
+              .then(response => {
+                if (response.status === 200) {
+                  this.$store.state.isLoggedIn = true;
+                  this.$router.push("/cartabl");
+                }
+              })
+              .catch(function (err) {
+                console.log(err);
+              });
     },
-    onSubmit() {
-      this.loginUser();
-    }
   },
   metaInfo: {
     title: 'ورو به سامانه'
