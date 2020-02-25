@@ -18,6 +18,9 @@
         created() {
             this.$store.dispatch('getTickets');
         },
+        metaInfo: {
+            title: 'کارتابل'
+        }
     }
 </script>
 

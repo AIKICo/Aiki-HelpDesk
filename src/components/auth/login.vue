@@ -115,6 +115,9 @@ export default {
     onSubmit() {
       this.loginUser();
     }
+  },
+  metaInfo: {
+    title: 'ورو به سامانه'
   }
 };
 </script>
