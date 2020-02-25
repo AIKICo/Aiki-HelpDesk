@@ -9,8 +9,8 @@ export default class User extends Model {
     // for the generic field type. The argument is the default value.
     static fields () {
         return {
-            id: this.uid(),
-            companyid:null,
+            id: this.attr(''),
+            companyid:this.attr(''),
             membername: this.attr(''),
             username:this.attr(''),
             password:this.attr(''),

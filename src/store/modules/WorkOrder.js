@@ -1,4 +1,9 @@
-import Axios from "axios";
+import axios from "axios";
+
+var axiosInstance = axios.create({
+  baseURL: 'https://aiki-ticket-app.herokuapp.com/api',
+  /* other custom settings */
+});
 
 const WorkOrder = {
   state: {
@@ -17,11 +22,11 @@ const WorkOrder = {
       context.commit("NEW_TICKET");
     },
     async getTickets(context) {
-      var response = await Axios.get("/WorkOrder/GetNotEndWorkOrder");
+      var response = await axiosInstance.get("/WorkOrder/GetNotEndWorkOrder");
       context.commit("GET_TICKETS", response.data);
     },
     async getTicketReports(context, payload){
-      var response = await Axios.get("/WorkOrder/GetWorkOrderReport/" + payload.wono);
+      var response = await axiosInstance.get("/WorkOrder/GetWorkOrderReport/" + payload.wono);
       return response;
     }
   },
