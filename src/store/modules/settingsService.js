@@ -1,4 +1,4 @@
-const settingsControlPanelService = {
+const settingsService = {
   namespace: true,
   state: {
     controlPanelItems: [
@@ -14,4 +14,4 @@ const settingsControlPanelService = {
   actions: {},
   getters: {}
 };
-export default settingsControlPanelService;
+export default settingsService;

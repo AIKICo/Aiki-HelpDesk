@@ -7,7 +7,7 @@ import isMobile from "mobile-device-detect";
 import WorkOrder from "./modules/WorkOrder";
 import menuService from "./modules/menuService";
 import userService from "./modules/userService";
-import settingsControlPanelService from "./modules/settingsControlPanel";
+import settingsService from "./modules/settingsService";
 
 import User from "./models/User";
 
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     WorkOrderService: WorkOrder,
     MenuService: menuService,
     UserService: userService,
-    SettingsControlPanelSertvice: settingsControlPanelService
+    SettingsService: settingsService
   },
   getters: {}
 });
