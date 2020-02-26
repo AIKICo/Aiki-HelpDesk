@@ -2,6 +2,7 @@ import VueRouter from "vue-router";
 import cartabl from "./components/tickets/Cartabl";
 import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
+import Company from "./components/settings/generalSettings/company/Company";
 
 const routes = [
   {
@@ -25,6 +26,14 @@ const routes = [
     name: "settingsControlPanel",
     path: "/SettingsControlPanel",
     component: settingsControlPanel,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Company",
+    path: "/Company",
+    component: Company,
     meta: {
       requiresAuth: true
     }
