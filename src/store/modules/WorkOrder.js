@@ -5,6 +5,9 @@ var axiosInstance = axios.create({
   /* other custom settings */
 });
 
+axiosInstance.defaults.headers.common['Authorization'] =  localStorage.getItem('access_token');
+axiosInstance.defaults.headers.common['CompanyID'] =  localStorage.getItem('companyid');
+
 const WorkOrder = {
   state: {
     tickets: [],

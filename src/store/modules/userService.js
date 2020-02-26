@@ -12,7 +12,8 @@ const userService = {
             })
             if (result.response.status === 200) {
                 window.localStorage.setItem("userInfo", JSON.stringify(result.response.data));
-                window.localStorage.setItem("access_token", result.response.data.token);
+                window.localStorage.setItem("companyid", result.response.data.companyid.toString());
+                window.localStorage.setItem("access_token", result.response.data.token.toString());
             }
             return result.response;
         },
@@ -21,8 +22,8 @@ const userService = {
         },
     },
     getters: {
-        getUsers: () => User.api().get("/users/GetAll"),
-        getUsersById: id => User.find(id)
+        getUsers: () => User.api().get("/users"),
+        getUsersById: id => User.api().get(`/users/${id}`)
     }
 };
 

@@ -29,13 +29,15 @@ const progressOptions = {
   inverse: false
 }
 const  accessToken  =  localStorage.getItem('access_token')
+const companyid = localStorage.getItem('companyid');
 
 Vue.config.productionTip  =  false
 axois.defaults.baseURL = 'https://aiki-co-helpdesk-webapi.herokuapp.com/'
-axois.defaults.headers.post['Content-Type'] = 'application/json';
+axois.defaults.headers.common['Content-Type'] = 'application/json';
 
 if (accessToken) {
-  axois.defaults.headers.post['Authorization'] =  accessToken
+  axois.defaults.headers.common['Authorization'] =  accessToken;
+  axois.defaults.headers.common['CompanyID'] =  companyid;
 }
 
 //Vue.use(VueSignalR,'http://localhost:2025')
