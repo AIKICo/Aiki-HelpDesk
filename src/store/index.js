@@ -4,18 +4,22 @@ import Vuex from "vuex";
 import VuexORM from "@vuex-orm/core";
 import VuexORMAxios from "@vuex-orm/plugin-axios";
 import isMobile from "mobile-device-detect";
+
 import WorkOrder from "./modules/WorkOrder";
 import menuService from "./modules/menuService";
 import userService from "./modules/userService";
 import settingsService from "./modules/settingsService";
+import companyservice from "./modules/companyService";
 
 import User from "./models/User";
+import Company from "./models/Company";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, { axios });
 
 const database = new VuexORM.Database();
 database.register(User);
+database.register(Company);
 
 export default new Vuex.Store({
   plugins: [VuexORM.install(database)],
@@ -37,7 +41,8 @@ export default new Vuex.Store({
     WorkOrderService: WorkOrder,
     MenuService: menuService,
     UserService: userService,
-    SettingsService: settingsService
+    SettingsService: settingsService,
+    CompanyService:companyservice
   },
   getters: {}
 });
