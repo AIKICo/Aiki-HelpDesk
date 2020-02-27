@@ -1,5 +1,5 @@
 const settingsService = {
-  namespace: true,
+  namespaced: true,
   state: {
     controlPanelItems: [
       {

@@ -1,5 +1,5 @@
 const customerService={
-    namespace:true,
+    namespaced:true,
     state:{},
     mutations:{},
     actions:{},

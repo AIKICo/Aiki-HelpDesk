@@ -1,5 +1,5 @@
 const companyservice={
-    namespace:true,
+    namespaced:true,
     state:{},
     mutations:{},
     actions:{},

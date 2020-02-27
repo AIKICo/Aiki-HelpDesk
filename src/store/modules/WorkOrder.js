@@ -9,6 +9,7 @@ axiosInstance.defaults.headers.common['Authorization'] =  localStorage.getItem('
 axiosInstance.defaults.headers.common['CompanyID'] =  localStorage.getItem('companyid');
 
 const WorkOrder = {
+  namespaced:true,
   state: {
     tickets: [],
   },
