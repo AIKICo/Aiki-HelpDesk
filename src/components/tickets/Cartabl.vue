@@ -16,7 +16,7 @@
             Tickets
         },
         created() {
-            this.$store.dispatch('getTickets');
+            this.$store.dispatch('WorkOrderService/getTickets');
         },
         metaInfo: {
             title: 'کارتابل'

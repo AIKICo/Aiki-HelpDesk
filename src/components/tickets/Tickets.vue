@@ -4,7 +4,7 @@
       <v-col>
         <v-data-table
           :headers="headers"
-          :items="this.$store.getters.getTickets"
+          :items="this.$store.getters['WorkOrderService/getTickets']"
           item-key="woNo"
           class="elevation-1"
           :expanded.sync="expanded"
@@ -160,7 +160,7 @@ export default {
       this.activeComponent = "ticket-timeline";
       this.selectedWorkOrder = workorder;
       this.$store
-        .dispatch("getTicketReports", { wono: this.selectedWorkOrder.woNo })
+        .dispatch("WorkOrderService/getTicketReports", { wono: this.selectedWorkOrder.woNo })
         .then(response => {
           this.sheet = !this.sheet;
           this.activeComponentProperty = {

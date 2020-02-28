@@ -35,8 +35,8 @@ const WorkOrder = {
     }
   },
   getters: {
-    getTickets: state => state.tickets.sort((a, b) => b.woNo - a.woNo),
-    getTicketByID: state => wono =>
+    getTickets: (state) => state.tickets.sort((a, b) => b.woNo - a.woNo),
+    getTicketByID: (state) => (wono) =>
       state.tickets.find(workOrder => workOrder.woNo === wono),
   }
 };

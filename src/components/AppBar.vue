@@ -27,7 +27,7 @@
                 offset-y="17"
                 offset-x="17"
         >
-            <span slot="badge">{{this.$store.getters.getTickets.length}}</span>
+            <span slot="badge">{{this.$store.getters['WorkOrderService/getTickets'].length}}</span>
             <v-btn icon>
                 <v-icon large>mdi-bell</v-icon>
             </v-btn>

@@ -26,7 +26,6 @@ database.register(Customer);
 
 export default new Vuex.Store({
   plugins: [VuexORM.install(database)],
-  namespace: true,
   state: {
     IsMobile: isMobile.isMobileOnly,
     accessToken: localStorage.getItem("access_token") || "",
