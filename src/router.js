@@ -3,6 +3,7 @@ import cartabl from "./components/tickets/Cartabl";
 import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
 import CompanyList from "./components/settings/generalSettings/company/CompanyList";
+import Company from "./store/models/Company";
 
 const routes = [
   {
@@ -31,9 +32,18 @@ const routes = [
     }
   },
   {
-    name: "Company",
-    path: "/Company",
+    name: "CompanyList",
+    path: "/CompanyList",
     component: CompanyList,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Company",
+    path: "/Company/:id",
+    component: Company,
+    props: true,
     meta: {
       requiresAuth: true
     }

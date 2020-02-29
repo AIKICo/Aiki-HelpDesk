@@ -6,16 +6,16 @@ const userService = {
     mutations: {},
     actions: {
         async authenticate(context, payload) {
-            var result = await User.api().post("/users/authenticate", {
+            var result = (await User.api().post("/users/authenticate", {
                 Username: payload.userName,
                 Password: payload.passwd
-            })
-            if (result.response.status === 200) {
-                window.localStorage.setItem("userInfo", JSON.stringify(result.response.data));
-                window.localStorage.setItem("companyid", result.response.data.companyid.toString());
-                window.localStorage.setItem("access_token", result.response.data.token.toString());
+            })).response
+            if (result.status === 200) {
+                window.localStorage.setItem("userInfo", JSON.stringify(result.data));
+                window.localStorage.setItem("companyid", result.data.companyid.toString());
+                window.localStorage.setItem("access_token", result.data.token.toString());
             }
-            return result.response;
+            return result;
         },
         logout() {
             localStorage.clear()

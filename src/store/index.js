@@ -9,7 +9,7 @@ import WorkOrder from "./modules/WorkOrder";
 import menuService from "./modules/menuService";
 import userService from "./modules/userService";
 import settingsService from "./modules/settingsService";
-import companyservice from "./modules/companyService";
+import companyService from "./modules/companyService";
 import customerService from "./modules/customerService";
 
 import User from "./models/User";
@@ -44,7 +44,7 @@ export default new Vuex.Store({
     MenuService: menuService,
     UserService: userService,
     SettingsService: settingsService,
-    CompanyService:companyservice,
+    CompanyService:companyService,
     CustomerService:customerService
   },
   getters: {}

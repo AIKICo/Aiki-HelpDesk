@@ -6,7 +6,12 @@ export default class Customer extends Model {
 
     static fields(){
         return {
-            title: this.attr('')
+            id: this.uid(()=> this.$uuid.v4()),
+            companyid: this.attr(null),
+            title: this.attr(''),
+            description: this.attr(null),
+            domains: this.attr(null),
+            schema: this.attr(null)
         }
     }
 }
