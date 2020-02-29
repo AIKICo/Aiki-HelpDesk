@@ -2,7 +2,7 @@ import VueRouter from "vue-router";
 import cartabl from "./components/tickets/Cartabl";
 import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
-import Company from "./components/settings/generalSettings/company/Company";
+import CompanyList from "./components/settings/generalSettings/company/CompanyList";
 
 const routes = [
   {
@@ -33,7 +33,7 @@ const routes = [
   {
     name: "Company",
     path: "/Company",
-    component: Company,
+    component: CompanyList,
     meta: {
       requiresAuth: true
     }
