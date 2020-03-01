@@ -1,5 +1,4 @@
 import Customer from "../models/Customer";
-import { error } from "vue-i18n/src/util";
 
 const customerService = {
   namespaced: true,
@@ -29,6 +28,8 @@ const customerService = {
       let response = (await Customer.api().get("/Customers")).response;
       if (response.status === 200) {
         await context.commit("GET_CUSTOMERS", response.data);
+      }else if (response.data.error) {
+        throw new Error('Something is wrong.')
       }
     },
     async addCustomer(context, payload) {
@@ -36,6 +37,8 @@ const customerService = {
         .response;
       if (response.status === 200) {
         await context.commit("ADD_CUSTOMER", response.data);
+      }else if (response.data.error) {
+        throw new Error('Something is wrong.')
       }
     },
     async editCustomet(context, payload) {
@@ -44,13 +47,18 @@ const customerService = {
       ).response;
       if (response.status === 200) {
         context.commit("DELETE_CUSTOMER", payload);
+      }else if (response.data.error) {
+        throw new Error('Something is wrong.')
       }
     },
     async deleteCustomer(context, payload) {
-      let response = (await Customer.api().delete("/customers/" + payload.id))
-        .response;
+      let response = (
+        await Customer.api().delete("/customers/" + payload.id, { delete: 42 })
+      ).response;
       if (response.status === 200) {
         context.commit("DELETE_CUSTOMER", payload);
+      }else if (response.data.error) {
+        throw new Error('Something is wrong.')
       }
     }
   },
@@ -59,7 +67,8 @@ const customerService = {
     getCustomer: (state) => (customerId) =>
       state.find(item => item.id === customerId),
     getCustomersCount: (state) => state.customers.length,
-    getDisabledCustomersCount: (state) => state.customers.filter(el=> el.disabled===true).length
+    getDisabledCustomersCount: (state) =>
+      state.customers.filter(el => el.disabled === true).length
   }
 };
 

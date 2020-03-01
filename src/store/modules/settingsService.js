@@ -13,7 +13,7 @@ const settingsService = {
           { name: "Groups",label:"گروه ها", path: "/Groups", icon: "" },
           { name: "Agents",label:"اپراتورها", path: "/Agents", icon: "" },
           { name: "Users",label:"کاربران", path: "/Users", icon: "" },
-          { name: "Compnay",label:"مشتریان", path: "/CompanyList", icon: "" }
+          { name: "Compnay",label:"مشتریان", path: "/CustomerList", icon: "" }
         ]
       },
       {

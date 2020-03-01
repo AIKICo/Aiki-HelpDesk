@@ -2,9 +2,8 @@ import VueRouter from "vue-router";
 import cartabl from "./components/tickets/Cartabl";
 import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
-import CompanyList from "./components/settings/generalSettings/company/CompanyList";
-import Company from "./store/models/Company";
-
+import CustomerList from "./components/settings/generalSettings/customers/CustomerList";
+import Customer from "./components/settings/generalSettings/customers/Customer";
 const routes = [
   {
     name: "cartabl",
@@ -32,22 +31,22 @@ const routes = [
     }
   },
   {
-    name: "CompanyList",
-    path: "/CompanyList",
-    component: CompanyList,
+    name: "CustomerList",
+    path: "/CustomerList",
+    component: CustomerList,
     meta: {
       requiresAuth: true
     }
   },
   {
-    name: "Company",
-    path: "/Company/:id",
-    component: Company,
-    props: true,
+    name: "Customer",
+    path: "/Customer/Edit/:id",
+    component: Customer,
+    props:true,
     meta: {
       requiresAuth: true
     }
-  }
+  },
 ];
 
 const router = new VueRouter({
