@@ -45,7 +45,7 @@ const customerService = {
   },
   getters: {
     getCustomers: () => Customer.all(),
-    getCustomer: customerId => Customer.fetchById(customerId),
+    getCustomer: customerId => Customer.find(customerId),
     getCustomersCount: () => Customer.all().length,
     getDisabledCustomersCount: () =>
       Customer.query()
