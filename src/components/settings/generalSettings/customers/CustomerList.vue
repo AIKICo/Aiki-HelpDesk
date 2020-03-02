@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="3">
-        <CustomersInfo :customer-counts="this.customerCounts" :customer-disabled-counts="this.customerDisabledCounts"></CustomersInfo>
+        <component :is="CustomerComponentName" v-bind="this.CustomersInfoData" :key="CustomerComponentName"></component>
       </v-col>
       <v-col cols="9">
         <customer-row v-for="item in this.customers" :customer="item" :key="item.id"></customer-row>
@@ -18,7 +18,16 @@ export default {
   name: "CustomerList",
   components: {
     CustomersInfo,
-    CustomerRow
+    CustomerRow,
+  },
+  data:()=>{
+    return {
+      CustomerComponentName:"",
+      CustomersInfoData:{
+        "customer-counts":0,
+        "customer-disabled-counts":0
+      }
+    }
   },
   computed: {
     customerCounts: function() {
@@ -32,7 +41,13 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("CustomerService/loadCustomers");
+    this.$store.dispatch("CustomerService/loadCustomers").then(()=>{
+      this.CustomerComponentName="CustomersInfo";
+      this.CustomersInfoData = {
+        "customer-counts":this.customerCounts,
+        "customer-disabled-counts":this.customerDisabledCounts
+      }
+    });
   }
 };
 </script>

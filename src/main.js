@@ -13,65 +13,40 @@ import { ValidationProvider } from 'vee-validate';
 import * as firebase from 'firebase/app'
 import 'firebase/analytics'
 import VueMeta from 'vue-meta'
+import Vue2TouchEvents from "vue2-touch-events";
+import DynamicDirectives from  './directives/dynamicEvents'
+import progressOptions from "./options/progressOptions";
 //import VueSignalR from '@latelier/vue-signalr'
 
-const progressOptions = {
-  color: '#fffe1d',
-  failedColor: '#874b4b',
-  thickness: '5px',
-  transition: {
-    speed: '0.5s',
-    opacity: '0.6s',
-    termination: 600
-  },
-  autoRevert: false,
-  location: 'top',
-  inverse: false
-}
-const  accessToken  =  localStorage.getItem('access_token')
+const  accessToken  =  localStorage.getItem('access_token');
 const companyid = localStorage.getItem('companyid');
 
-Vue.config.productionTip  =  false
-axois.defaults.baseURL = 'https://aiki-co-helpdesk-webapi.herokuapp.com/'
+axois.defaults.baseURL = 'https://aiki-co-helpdesk-webapi.herokuapp.com/';
 axois.defaults.headers.common['Content-Type'] = 'application/json';
-
 if (accessToken) {
   axois.defaults.headers.common['Authorization'] =  accessToken;
   axois.defaults.headers.common['CompanyID'] =  companyid;
 }
 
+Vue.config.productionTip  =  false;
 //Vue.use(VueSignalR,'http://localhost:2025')
-Vue.use(VueRouter)
-Vue.use(VueProgressBar, progressOptions)
-Vue.use(UUID)
-Vue.use(VueMeta)
+Vue.use(VueRouter);
+Vue.use(VueProgressBar, progressOptions);
+Vue.use(UUID);
+Vue.use(VueMeta);
+Vue.use(Vue2TouchEvents);
 
-Vue.directive('DynamicEvents',{
-  bind: function (el, binding, vnode) {
-    const allEvents = binding.value;
-    allEvents.forEach((event) => {
-      // register handler in the dynamic component
-      vnode.componentInstance.$on(event, (eventData) => {
-        // when the event is fired, the proxyEvent function is going to be called
-        vnode.context.proxyEvent(event, eventData);
-      });
-    });
-  },
-  unbind: function (el, binding, vnode) {
-    vnode.componentInstance.$off();
-  },
-});
-
+Vue.directive('DynamicEvents',DynamicDirectives);
 Vue.component('ValidationProvider', ValidationProvider);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 var config = {
   apiKey: 'AIzaSyCSuLmkyLa2KhAgPWxswwjcVOTDVjBYy94',
   projectId: 'aiki-helpdesk-v1',
   appId: '1:185350520841:web:38306a62a0ab7b9b32b8d8',
   measurementId: 'G-8CY0SWQXMJ'
-}
-firebase.initializeApp(config)
+};
+firebase.initializeApp(config);
 Vue.prototype.$analytics = firebase.analytics();
 
 new Vue({
@@ -95,4 +70,4 @@ new Vue({
     });
   },
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

@@ -20,7 +20,7 @@
     </template>
     <v-divider />
     <v-list shaped dense>
-      <v-list-item-group color="primary">
+      <v-list-item-group :color="$store.state.defaultColor">
         <v-list-item
           v-for="(item, i) in this.$store.state.MenuService.menuItems"
           :key="i"

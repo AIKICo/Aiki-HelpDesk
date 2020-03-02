@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-sheet v-model="sheet" inset :max-width="300">
+  <v-bottom-sheet v-model="sheet" inset :max-width="350">
     <v-sheet class="text-center">
       <v-card>
         <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">ارزیابی ناظر درخواست {{workorder.woNo}}</v-card-title>

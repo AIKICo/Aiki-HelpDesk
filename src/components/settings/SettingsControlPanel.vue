@@ -13,11 +13,12 @@
                     >
                         <v-item v-slot:default="{ active, toggle }">
                             <v-card
-                                    :color="active ? 'primary' : ''"
+                                    :color="active ? this.$store.state.defaultColor : ''"
                                     class="d-flex align-center"
                                     height="150"
                                     @click="toggle"
                                     :to="setting.path"
+                                    hover
                             >
                                 <v-card-text :class="active?'text-center white--text    ':'text-center'">
                                    {{setting.label}}
