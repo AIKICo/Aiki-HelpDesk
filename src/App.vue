@@ -42,7 +42,7 @@
 <script>
 import AppBar from "./components/AppBar";
 import AppDrawer from "./components/AppDrawer";
-import * as firebase from 'firebase/app'
+import * as firebase from "firebase/app";
 
 export default {
   name: "App",
@@ -65,25 +65,27 @@ export default {
     dark: false,
     refreshing: false,
     registration: null,
-    snackBtnText: '',
-    snackWithBtnText: '',
+    snackBtnText: "",
+    snackWithBtnText: "",
     snackWithButtons: false,
-    timeout: 0,
+    timeout: 0
   }),
   methods: {
     showRefreshUI(e) {
       this.registration = e.detail;
-      this.snackBtnText = 'بروز رسانی';
-      this.snackWithBtnText = 'نسخه جدید در دسترس است!';
+      this.snackBtnText = "بروز رسانی";
+      this.snackWithBtnText = "نسخه جدید در دسترس است!";
       this.snackWithButtons = true;
     },
     refreshApp() {
       this.snackWithButtons = false;
-      if (!this.registration || !this.registration.waiting) { return; }
-      this.registration.waiting.postMessage('skipWaiting');
+      if (!this.registration || !this.registration.waiting) {
+        return;
+      }
+      this.registration.waiting.postMessage("skipWaiting");
     },
-    newTicket(){
-      if (this.$router.currentRoute.name==="CustomerList"){
+    newTicket() {
+      if (this.$router.currentRoute.name === "CustomerList") {
         this.$router.push("/Customer/Insert/undefined");
       }
     }
@@ -93,20 +95,19 @@ export default {
   },
   created() {
     this.$Progress.start();
-    document.addEventListener('swUpdated', this.showRefreshUI, { once: true });
+    document.addEventListener("swUpdated", this.showRefreshUI, { once: true });
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (this.refreshing) return;
       this.refreshing = true;
       window.location.href = window.location;
     });
   },
-  computed:{
-  },
+  computed: {},
   watch: {
     dark: function(val) {
       this.$vuetify.theme.dark = val;
     }
-  },
+  }
 };
 </script>
 <style scoped>
