@@ -23,7 +23,7 @@ export default {
   name: "CustomersInfo",
   props: ["customerCounts", "customerDisabledCounts"],
   data: () => ({
-    items: null
+    items: []
   }),
   watch: {
     customerCounts: function() {
@@ -55,7 +55,27 @@ export default {
     }
   },
   created() {
-
+    this.items.push({
+      name: "Total",
+      title: "تعداد کل مشتریان",
+      valueCount: this.customerCounts,
+      icon: "mdi-human",
+      iconColor: "black"
+    });
+    this.items.push({
+      name: "enabled",
+      title: "فعال",
+      valueCount: this.customerCounts - this.customerDisabledCounts,
+      icon: "mdi-check",
+      iconColor: "green"
+    });
+    this.items.push({
+      name: "disabled",
+      title: "غیرفعال",
+      valueCount: this.customerDisabledCounts,
+      icon: "mdi-block-helper",
+      iconColor: "red"
+    });
   }
 };
 </script>
