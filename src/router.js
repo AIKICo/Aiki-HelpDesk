@@ -1,4 +1,5 @@
 import VueRouter from "vue-router";
+import store from "./store/index"
 import cartabl from "./components/tickets/Cartabl";
 import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
@@ -40,7 +41,7 @@ const routes = [
   },
   {
     name: "Customer",
-    path: "/Customer/Edit/:id",
+    path: "/Customer/:formType/:id",
     component: Customer,
     props:true,
     meta: {
@@ -55,11 +56,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  var allowAddRecord = ["CustomerList"];
   if (to.meta.requiresAuth) {
     const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
     if (!authUser || !authUser.token) {
       next({ name: "login" });
     } else {
+      store.state.allowAddRecord=allowAddRecord.includes(to.name);
       next();
     }
   } else if (to.name === "login") {

@@ -31,11 +31,13 @@ export default new Vuex.Store({
     accessToken: localStorage.getItem("access_token") || "",
     currentUser: {},
     isLoggedIn: !!localStorage.getItem("userInfo"),
+    allowAddRecord: false,
     drawer: null,
     defaultColor: "indigo",
     defaultTextColor: "indigo--text",
     defaultHeaderTextColor: "white--text",
-    defaultBadgeColor: "red"
+    defaultBadgeColor: "red",
+    companyId:localStorage.getItem('companyid')
   },
   mutations: {},
   actions: {},

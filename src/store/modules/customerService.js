@@ -16,15 +16,23 @@ const customerService = {
     async addCustomer(context, payload) {
       let response = (await Customer.api().post("/customers", payload))
         .response;
+      if (response.status === 201) {
+        return response;
+      } else if (response.data.error) {
+        throw new Error("Something is wrong.");
+      }
+    },
+    async editCustomer(context, payload) {
+      let response = (await Customer.api().put("/customers", payload)).response;
       if (response.status === 200) {
         return response;
       } else if (response.data.error) {
         throw new Error("Something is wrong.");
       }
     },
-    async editCustomet(context, payload) {
+    async patchCustomer(context, payload) {
       let response = (
-        await Customer.api().put("/customers/" + payload.id, payload)
+        await Customer.api().patch("/customers/" + payload.id, payload.patchDoc)
       ).response;
       if (response.status === 200) {
         return response;
@@ -45,14 +53,9 @@ const customerService = {
   },
   getters: {
     getCustomers: () => Customer.all(),
-    getCustomer: customerId => Customer.find(customerId),
+    getCustomer: () => customerId => Customer.find(customerId),
     getCustomersCount: () => Customer.all().length,
-    getDisabledCustomersCount: () =>
-      Customer.query()
-        .where(customer => {
-          return customer.Disabled === false;
-        })
-        .get().length
+    getDisabledCustomersCount: () => Customer.query().where(record=> record.disabled===true).get().length
   }
 };
 

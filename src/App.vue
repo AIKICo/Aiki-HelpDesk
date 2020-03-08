@@ -30,8 +30,8 @@
       fab
       fixed
       left
-      @click="$store.dispatch('addNewTicket')"
-      v-if="$store.state.isLoggedIn"
+      @click="newTicket()"
+      v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
     >
       <v-icon>mdi-plus</v-icon>
     </v-btn>
@@ -81,6 +81,11 @@ export default {
       this.snackWithButtons = false;
       if (!this.registration || !this.registration.waiting) { return; }
       this.registration.waiting.postMessage('skipWaiting');
+    },
+    newTicket(){
+      if (this.$router.currentRoute.name==="CustomerList"){
+        this.$router.push("/Customer/Insert/undefined");
+      }
     }
   },
   mounted() {
@@ -94,6 +99,8 @@ export default {
       this.refreshing = true;
       window.location.href = window.location;
     });
+  },
+  computed:{
   },
   watch: {
     dark: function(val) {

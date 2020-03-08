@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar>
-    <span class="subheading">{{ this.customer.title }}</span>
+  <v-toolbar class="mt-3">
+    <span class="subheading text-wrap">{{ this.customer.title }}</span>
 
     <v-spacer></v-spacer>
     <v-divider vertical></v-divider>
@@ -8,7 +8,7 @@
       <div class="mx-1">
         <div>وضعیت</div>
         <v-subheader class="mt-3">{{
-          this.customer.disabled ? "غیرفعال" : "فعال"
+          this.disabledRow ? "غیرفعال" : "فعال"
         }}</v-subheader>
       </div>
       <v-divider vertical></v-divider>
@@ -25,25 +25,27 @@
         <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
       </template>
       <v-list>
-        <v-list-item dense @click="this.anyThing">
-          <v-list-item-icon
-          ><v-icon>mdi-border-color</v-icon></v-list-item-icon
-          >
+        <v-list-item dense @click="this.editCustomer">
+          <v-list-item-icon><v-icon>mdi-border-color</v-icon></v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>ویرایش</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item dense @click="this.anyThing">
+        <v-list-item dense @click="this.disabledCustomer">
           <v-list-item-icon>
-            <v-icon color="red">mdi-cancel</v-icon>
+            <v-icon :color="!this.disabledRow ? 'red' : 'green'">{{
+              !this.disabledRow ? "mdi-cancel" : "mdi-check"
+            }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="red--text">غیرفعال</v-list-item-title>
+            <v-list-item-title
+              :class="!this.disabledRow ? 'text--green' : 'text--red'"
+              >{{ !this.disabledRow ? "غیرفعال" : "فعال" }}</v-list-item-title
+            >
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-menu>
-
   </v-toolbar>
 </template>
 
@@ -51,9 +53,43 @@
 export default {
   name: "CustomerRow",
   props: ["customer"],
+  data() {
+    return {
+      disabledRow: this.customer.disabled
+    };
+  },
+  computed: {},
   methods: {
-    anyThing() {
-      this.$router.push('/Customer/Edit/'+this.customer.id);
+    editCustomer() {
+      this.$router.push("/Customer/Edit/" + this.customer.id);
+    },
+    disabledCustomer() {
+      this.disabledRow = !this.disabledRow;
+    }
+  },
+  watch: {
+    disabledRow: function() {
+      this.$store
+        .dispatch("CustomerService/patchCustomer", {
+          id: this.customer.id,
+          patchDoc: [
+            {
+              op: "replace",
+              path: "/disabled",
+              value: this.disabledRow
+            },
+            {
+              op: "replace",
+              path: "/title",
+              value: this.customer.title
+            }
+          ]
+        })
+        .then(res => {
+          if (res.status === 200) {
+            this.$emit("onDisabledRow",this.disabledRow)
+          }
+        });
     }
   }
 };
