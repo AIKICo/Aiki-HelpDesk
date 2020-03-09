@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="3">
-          <customers-info :customer-counts.sync="CustomersInfoData.totalCount" :customer-disabled-counts.sync="CustomersInfoData.disabledCount"></customers-info>
+        <component :is="this.CustomerComponentName" v-bind="this.CustomersInfoData" :key="CustomerComponentName"></component>
       </v-col>
       <v-col cols="9">
         <customer-row
@@ -27,6 +27,7 @@ export default {
   },
   data: () => {
     return {
+      CustomerComponentName:"",
       CustomersInfoData: {
         totalCount:0,
         disabledCount:0
@@ -57,17 +58,18 @@ export default {
   watch: {
     disabledRow: function() {
       this.CustomersInfoData = {
-        totalCount: this.customerCounts,
-        disabledCount: this.disabledRow
+        "customer-counts": this.customerCounts,
+        "customer-disabled-counts": this.disabledRow
       };
     }
   },
   created() {
     this.$store.dispatch("CustomerService/loadCustomers").then(() => {
       this.disabledRow = this.customerDisabledCounts;
+      this.CustomerComponentName="CustomersInfo";
       this.CustomersInfoData = {
-        totalCount: this.customerCounts,
-        disabledCount: this.customerDisabledCounts
+        "customer-counts": this.customerCounts,
+        "customer-disabled-counts": this.disabledRow
       };
     });
   }

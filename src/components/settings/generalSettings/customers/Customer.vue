@@ -57,7 +57,7 @@
                     text
                     @click="closeDialog"
                   >
-                    انصراف
+                    برگشت
                   </v-btn>
                 </v-card-actions>
               </v-card>
