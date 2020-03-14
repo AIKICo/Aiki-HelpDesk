@@ -5,6 +5,7 @@ import login from "./components/auth/login";
 import settingsControlPanel from "./components/settings/SettingsControlPanel";
 import CustomerList from "./components/settings/generalSettings/customers/CustomerList";
 import Customer from "./components/settings/generalSettings/customers/Customer";
+import OperationHoursList from "./components/settings/generalSettings/operationHoures/OperationHoursList";
 const routes = [
   {
     name: "cartabl",
@@ -48,6 +49,15 @@ const routes = [
       requiresAuth: true
     }
   },
+  {
+    name:"OperationHoursList",
+    path: "/OperationHoursList",
+    component: OperationHoursList,
+    props: true,
+    meta:{
+      requiresAuth: true
+    }
+  }
 ];
 
 const router = new VueRouter({

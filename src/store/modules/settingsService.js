@@ -8,12 +8,12 @@ const settingsService = {
         path: "/SettingsControlPanel",
         icon: "",
         items: [
-          { name: "Operating Hours",label:"ساعات کاری", path: "/OperatingHours", icon: "" },
+          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", icon: "" },
           { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", icon: "" },
           { name: "Groups",label:"گروه ها", path: "/Groups", icon: "" },
           { name: "Agents",label:"اپراتورها", path: "/Agents", icon: "" },
           { name: "Users",label:"کاربران", path: "/Users", icon: "" },
-          { name: "Compnay",label:"مشتریان", path: "/CustomerList", icon: "" }
+          { name: "company",label:"مشتریان", path: "/CustomerList", icon: "" }
         ]
       },
       {
@@ -22,7 +22,7 @@ const settingsService = {
         path: "/SettingsControlPanel",
         icon: "",
         items: [
-          { name: "Operating Hours",label:"ساعات کاری", path: "/OperatingHours", icon: "" },
+          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", icon: "" },
           { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", icon: "" },
           { name: "Groups",label:"گروه ها", path: "/Groups", icon: "" },
           { name: "Agents",label:"اپراتورها", path: "/Agents", icon: "" },
