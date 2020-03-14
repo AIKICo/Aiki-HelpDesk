@@ -21,6 +21,7 @@ jobs:
     - name: Build App
       working-directory: .
       run: |
+        rm -rf node_modules
         npm install
         npm run build
     - name: Upload Artifact
