@@ -8,12 +8,12 @@ const settingsService = {
         path: "/SettingsControlPanel",
         icon: "",
         items: [
-          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", icon: "" },
-          { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", icon: "" },
-          { name: "Groups",label:"گروه ها", path: "/Groups", icon: "" },
-          { name: "Agents",label:"اپراتورها", path: "/Agents", icon: "" },
-          { name: "Users",label:"کاربران", path: "/Users", icon: "" },
-          { name: "company",label:"مشتریان", path: "/CustomerList", icon: "" }
+          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperationHours.png" },
+          { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", image: "" },
+          { name: "Groups",label:"گروه ها", path: "/Groups", image: "" },
+          { name: "Agents",label:"اپراتورها", path: "/Agents", image: "" },
+          { name: "Users",label:"کاربران", path: "/Users", image: "" },
+          { name: "company",label:"مشتریان", path: "/CustomerList", image: "settings-customer.png" }
         ]
       },
       {
@@ -22,12 +22,12 @@ const settingsService = {
         path: "/SettingsControlPanel",
         icon: "",
         items: [
-          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", icon: "" },
-          { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", icon: "" },
-          { name: "Groups",label:"گروه ها", path: "/Groups", icon: "" },
-          { name: "Agents",label:"اپراتورها", path: "/Agents", icon: "" },
-          { name: "Users",label:"کاربران", path: "/Users", icon: "" },
-          { name: "Compnay",label:"مشتریان", path: "/Company", icon: "" }
+          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", image: "" },
+          { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", image: "" },
+          { name: "Groups",label:"گروه ها", path: "/Groups", image: "" },
+          { name: "Agents",label:"اپراتورها", path: "/Agents", image: "" },
+          { name: "Users",label:"کاربران", path: "/Users", image: "" },
+          { name: "Compnay",label:"مشتریان", path: "/Company", image: "" }
         ]
       }
     ]

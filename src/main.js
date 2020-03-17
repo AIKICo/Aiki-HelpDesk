@@ -49,6 +49,18 @@ var config = {
 firebase.initializeApp(config);
 Vue.prototype.$analytics = firebase.analytics();
 
+Vue.mixin({
+  methods: {
+    getStaticImage(image) {
+      if (image!="")
+        return require(`./assets/${image}`);
+      else{
+        return '';
+      }
+    }
+  }
+});
+
 new Vue({
   vuetify,
   store,
