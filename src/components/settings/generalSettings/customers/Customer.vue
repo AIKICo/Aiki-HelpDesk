@@ -10,7 +10,7 @@
                   :class="$store.state.defaultColor + ' white--text'"
                 >
                   <v-icon large color="white">mdi-edit</v-icon>
-                  ویرایش
+                  {{$route.params.formType === "Edit"?"ویرایش":"درج"}}
                 </v-card-title>
                 <v-card-text class="mt-3">
                   <validation-provider
