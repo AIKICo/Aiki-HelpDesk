@@ -17,6 +17,7 @@ import Vue2TouchEvents from "vue2-touch-events";
 import DynamicDirectives from  './directives/dynamicEvents'
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
+import moment from 'moment-jalaali'
 //import VueSignalR from '@latelier/vue-signalr'
 
 const  accessToken  =  localStorage.getItem('access_token');
@@ -40,6 +41,12 @@ Vue.use(Vue2TouchEvents);
 Vue.directive('DynamicEvents',DynamicDirectives);
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('date-picker', VuePersianDatetimePicker);
+
+Vue.filter('formatDate', function(value){
+  if (value) {
+    return moment(String(value)).format('YYYY/MM/DD')
+  }
+})
 
 Vue.config.productionTip = false;
 var config = {

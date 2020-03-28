@@ -20,24 +20,24 @@
                   </v-row>
                   <v-row
                     v-for="item in OperationHour.workdays"
-                    :key="item.DayName"
+                    :key="item.dayName"
                     align="center"
                     justify="center"
                     no-gutters
                   >
                     <v-col>
-                      {{ item.DayName }}
+                      {{ item.dayName }}
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.StartTime"
+                        v-model="item.startTime"
                         style="width: 100px;"
                         type="time"
                       ></v-text-field>
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.EndTime"
+                        v-model="item.endTime"
                         style="width: 100px;"
                         type="time"
                       ></v-text-field>
@@ -64,8 +64,8 @@
                           </v-row>
                           <v-row v-for="item in OperationHour.holidays" :key="item.Day" no-gutters>
                             <v-col>
-                              <span v-text="item.Day" class="text-bold ml-3"></span>
-                              <span v-text="item.Reason"></span>
+                              <span class="text-bold ml-3">{{ item.day | formatDate}}</span>
+                              <span v-text="item.reason"></span>
                             </v-col>
                           </v-row>
                         </v-card-text>
@@ -133,32 +133,56 @@ export default {
             }
           });
       }
+      else if (this.$route.params.formType === "Edit") {
+        this.$store
+                .dispatch("OperationHourService/editOperationHours", this.OperationHour)
+                .then(res => {
+                  if (res.status === 200) {
+                    this.closeDialog();
+                  }
+                });
+      }
     },
     addHoliday(){
-      this.OperationHour.holidays.push({Day:this.holiday, Reason:this.holidayComment})
+      this.OperationHour.holidays.push({day:this.holiday, reason:this.holidayComment})
       this.holiday="";
       this.holidayComment="";
     },
     closeDialog() {
       this.$router.push("/OperationHoursList");
+    },
+    getOperationHour(id){
+      return this.$store.getters["OperationHourService/getOperationsHour"](id);
     }
   },
   created() {
-    this.OperationHour = {
-      companyid: this.$store.state.companyId,
-      title: "",
-      timezone: "",
-      workdays: [
-        { DayName: "شنبه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "یکشنبه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "دوشنبه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "سه شنبه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "چهار شنبه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "پنج شنیه", StartTime: "08:00", EndTime: "14:00" },
-        { DayName: "جمعه", StartTime: "00:00", EndTime: "00:00" }
-      ],
-      holidays: []
-    };
+    if (this.$route.params.formType === "Edit") {
+      var record = this.getOperationHour(this.$route.params.id);
+      this.OperationHour = {
+        id:this.$route.params.id,
+        companyid: this.$store.state.companyId,
+        title: record.title,
+        timezone: "",
+        workdays: record.workdays,
+        holidays: record.holidays
+      };
+    } else if (this.$route.params.formType === "Insert"){
+      this.OperationHour = {
+        companyid: this.$store.state.companyId,
+        title: "",
+        timezone: "",
+        workdays: [
+          { DayName: "شنبه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "یکشنبه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "دوشنبه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "سه شنبه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "چهار شنبه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "پنج شنیه", StartTime: "08:00", EndTime: "14:00" },
+          { DayName: "جمعه", StartTime: "00:00", EndTime: "00:00" }
+        ],
+        holidays: []
+      };
+    }
   }
 };
 </script>

@@ -1,19 +1,19 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="3">
-        <component :is="this.CustomerComponentName" v-bind="this.CustomersInfoData" :key="CustomerComponentName"></component>
-      </v-col>
-      <v-col cols="9">
-        <customer-row
-          v-for="item in this.customers"
-          :customer="item"
-          :key="item.id"
-          v-on:onDisabledRow="rowDisabled($event)"
-        ></customer-row>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-container>
+      <v-row>
+        <v-col cols="3">
+          <component :is="this.CustomerComponentName" v-bind="this.CustomersInfoData" :key="CustomerComponentName"></component>
+        </v-col>
+        <v-col cols="9">
+          <customer-row
+            v-for="item in this.customers"
+            :customer="item"
+            :key="item.id"
+            v-on:onDisabledRow="rowDisabled($event)"
+          ></customer-row>
+        </v-col>
+      </v-row>
+    </v-container>
 </template>
 
 <script>

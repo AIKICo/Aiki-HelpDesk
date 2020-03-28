@@ -100,7 +100,6 @@ export default {
         this.$store
           .dispatch("CustomerService/editCustomer", this.Customer)
           .then(res => {
-            console.log(res);
             if (res.status === 200) {
               this.closeDialog();
             }
