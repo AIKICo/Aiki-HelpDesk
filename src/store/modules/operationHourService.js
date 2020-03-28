@@ -1,0 +1,35 @@
+import OperatingHour from "../models/OperatingHour";
+
+const operationHourService = {
+  namespaced: true,
+  stat: {},
+  mutation: {},
+  actions: {
+    async loadOperationHours() {
+      let response = (await OperatingHour.api().get("/OperatingHours"))
+        .response;
+      if (response.status === 200) {
+        return response;
+      } else if (response.data.error) {
+        throw new Error("Something is wrong.");
+      }
+    },
+    async addOperationHours(context, payload) {
+      let response = (
+        await OperatingHour.api().post("/OperatingHours", payload)
+      ).response;
+      if (response.status === 201) {
+        return response;
+      } else if (response.data.error) {
+        throw new Error("Something is wrong.");
+      }
+    }
+  },
+  getters: {
+    getOperationsHours: () => OperatingHour.all(),
+    getOperationsHour: () => operationHourId =>
+      OperatingHour.find(operationHourId)
+  }
+};
+
+export default operationHourService;

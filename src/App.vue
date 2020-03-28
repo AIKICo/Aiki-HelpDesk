@@ -88,6 +88,9 @@ export default {
       if (this.$router.currentRoute.name === "CustomerList") {
         this.$router.push("/Customer/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "OperationHoursList"){
+        this.$router.push("/OperationHours/Insert/undefined");
+      }
     }
   },
   mounted() {

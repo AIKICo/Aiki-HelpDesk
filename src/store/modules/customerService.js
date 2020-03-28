@@ -34,7 +34,7 @@ const customerService = {
       let response = (
         await Customer.api().patch("/customers/" + payload.id, payload.patchDoc)
       ).response;
-      if (response.status === 200) {
+        if (response.status === 200) {
         return response;
       } else if (response.data.error) {
         throw new Error("Something is wrong.");
