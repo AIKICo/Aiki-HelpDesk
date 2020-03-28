@@ -16,7 +16,7 @@ const operationHourService = {
     },
     async addOperationHours(context, payload) {
       let response = (
-        await OperatingHour.api().post("/OperatingHours", payload)
+        await OperatingHour.api().post("/OperationHours", payload)
       ).response;
       if (response.status === 201) {
         return response;

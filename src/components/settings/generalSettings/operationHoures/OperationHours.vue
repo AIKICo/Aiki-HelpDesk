@@ -20,24 +20,24 @@
                   </v-row>
                   <v-row
                     v-for="item in OperationHour.workdays"
-                    :key="item.dayName"
+                    :key="item.DayName"
                     align="center"
                     justify="center"
                     no-gutters
                   >
                     <v-col>
-                      {{ item.dayName }}
+                      {{ item.DayName }}
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.startTime"
+                        v-model="item.StartTime"
                         style="width: 100px;"
                         type="time"
                       ></v-text-field>
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.endTime"
+                        v-model="item.EndTime"
                         style="width: 100px;"
                         type="time"
                       ></v-text-field>
@@ -49,14 +49,23 @@
                         <v-card-title>روزهای تعطیل</v-card-title>
                         <v-card-text>
                           <v-row no-gutters>
-                            <v-col cols="3" class="mt-7"><date-picker ></date-picker></v-col>
+                            <v-col cols="3" class="mt-7"><date-picker v-model="holiday"></date-picker></v-col>
                             <v-col cols="8">
-                              <v-text-field placeholder="توضیحات"></v-text-field>
+                              <v-text-field placeholder="علت تعطیلی" v-model="holidayComment"></v-text-field>
                             </v-col>
                             <v-col cols="1" class="mt-7">
-                              <v-icon x-large :color="$store.state.defaultColor">
+                              <v-icon x-large :color="$store.state.defaultColor" @click="addHoliday">
                                 mdi-plus
                               </v-icon>
+                            </v-col>
+                          </v-row>
+                          <v-row>
+                            <v-spacer></v-spacer>
+                          </v-row>
+                          <v-row v-for="item in OperationHour.holidays" :key="item.Day" no-gutters>
+                            <v-col>
+                              <span v-text="item.Day" class="text-bold ml-3"></span>
+                              <span v-text="item.Reason"></span>
                             </v-col>
                           </v-row>
                         </v-card-text>
@@ -106,6 +115,8 @@ export default {
   data() {
     return {
       OperationHour: null,
+      holiday:"",
+      holidayComment:""
     };
   },
   methods: {
@@ -123,6 +134,11 @@ export default {
           });
       }
     },
+    addHoliday(){
+      this.OperationHour.holidays.push({Day:this.holiday, Reason:this.holidayComment})
+      this.holiday="";
+      this.holidayComment="";
+    },
     closeDialog() {
       this.$router.push("/OperationHoursList");
     }
@@ -133,13 +149,13 @@ export default {
       title: "",
       timezone: "",
       workdays: [
-        { dayName: "شنبه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "یکشنبه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "دوشنبه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "سه شنبه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "چهار شنبه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "پنج شنیه", startTime: "08:00", endTime: "14:00" },
-        { dayName: "جمعه", startTime: "00:00", endTime: "00:00" }
+        { DayName: "شنبه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "یکشنبه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "دوشنبه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "سه شنبه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "چهار شنبه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "پنج شنیه", StartTime: "08:00", EndTime: "14:00" },
+        { DayName: "جمعه", StartTime: "00:00", EndTime: "00:00" }
       ],
       holidays: []
     };
