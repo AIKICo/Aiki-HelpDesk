@@ -13,6 +13,11 @@
                   {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                 </v-card-title>
                 <v-card-text class="mt-3">
+                  <v-row no-gutters>
+                    <v-col cols="10">
+                      <v-text-field v-model="OperationHour.title" placeholder="عنوان"></v-text-field>
+                    </v-col>
+                  </v-row>
                   <v-row
                     v-for="item in OperationHour.workdays"
                     :key="item.dayName"
@@ -26,13 +31,15 @@
                     <v-col>
                       <v-text-field
                         v-model="item.startTime"
-                        style="width: 50px;"
+                        style="width: 100px;"
+                        type="time"
                       ></v-text-field>
                     </v-col>
                     <v-col>
                       <v-text-field
                         v-model="item.endTime"
-                        style="width: 50px;"
+                        style="width: 100px;"
+                        type="time"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -42,7 +49,7 @@
                         <v-card-title>روزهای تعطیل</v-card-title>
                         <v-card-text>
                           <v-row no-gutters>
-                            <v-col cols="3" class="mt-5"><date-picker ></date-picker></v-col>
+                            <v-col cols="3" class="mt-7"><date-picker ></date-picker></v-col>
                             <v-col cols="8">
                               <v-text-field placeholder="توضیحات"></v-text-field>
                             </v-col>
@@ -98,7 +105,7 @@ export default {
   },
   data() {
     return {
-      OperationHour: null
+      OperationHour: null,
     };
   },
   methods: {

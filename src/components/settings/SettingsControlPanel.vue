@@ -15,13 +15,17 @@
           >
             <v-item v-slot:default="{ active, toggle }">
               <v-card
-                class="d-flex align-center"
-                height="150"
+                height="158px"
                 @click="toggle"
                 :to="setting.path"
                 hover
               >
-                <v-img :src="getStaticImage(setting.image)" @click="toggle"/>
+                <v-img
+                        :src="getStaticImage(setting.image)"
+                        @click="toggle"/>
+                <v-card-actions>
+                  <div class="indigo--text">{{setting.label}}</div>
+                </v-card-actions>
               </v-card>
             </v-item>
           </v-col>
@@ -39,6 +43,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

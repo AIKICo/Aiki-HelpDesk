@@ -16,20 +16,6 @@ const settingsService = {
           { name: "company",label:"مشتریان", path: "/CustomerList", image: "settings-customer.png" }
         ]
       },
-      {
-        name: "Channels",
-        label:"کانال های ارتباطی",
-        path: "/SettingsControlPanel",
-        icon: "",
-        items: [
-          { name: "Operating Hours",label:"ساعات کاری", path: "/OperationHoursList", image: "" },
-          { name: "SLA Policies",label:"توافق نامه سطح سرویس", path: "/SLAPoliceis", image: "" },
-          { name: "Groups",label:"گروه ها", path: "/Groups", image: "" },
-          { name: "Agents",label:"اپراتورها", path: "/Agents", image: "" },
-          { name: "Users",label:"کاربران", path: "/Users", image: "" },
-          { name: "Compnay",label:"مشتریان", path: "/Company", image: "" }
-        ]
-      }
     ]
   },
   mutations: {},
