@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout align-center>
       <v-row justify="center" align="center" no-gutters>
-        <v-col cols="12">
+        <v-col>
           <validationObserver ref="observer" v-slot="{ handleSubmit }">
             <form @submit.prevent="handleSubmit(onSubmit)">
               <v-card outlined>
@@ -12,6 +12,68 @@
                   <v-icon large color="white">mdi-edit</v-icon>
                   {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                 </v-card-title>
+                <v-card-text class="mt-3">
+                  <v-row
+                    v-for="item in OperationHour.workdays"
+                    :key="item.dayName"
+                    align="center"
+                    justify="center"
+                    no-gutters
+                  >
+                    <v-col>
+                      {{ item.dayName }}
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                        v-model="item.startTime"
+                        style="width: 50px;"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col>
+                      <v-text-field
+                        v-model="item.endTime"
+                        style="width: 50px;"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-card>
+                        <v-card-title>روزهای تعطیل</v-card-title>
+                        <v-card-text>
+                          <v-row no-gutters>
+                            <v-col cols="3" class="mt-5"><date-picker ></date-picker></v-col>
+                            <v-col cols="8">
+                              <v-text-field placeholder="توضیحات"></v-text-field>
+                            </v-col>
+                            <v-col cols="1" class="mt-7">
+                              <v-icon x-large :color="$store.state.defaultColor">
+                                mdi-plus
+                              </v-icon>
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    :color="$store.state.defaultColor + ' darken-1'"
+                    text
+                    type="submit"
+                  >
+                    تایید
+                  </v-btn>
+                  <v-btn
+                    :color="$store.state.defaultColor + ' darken-1'"
+                    text
+                    @click="closeDialog"
+                  >
+                    برگشت
+                  </v-btn>
+                </v-card-actions>
               </v-card>
             </form>
           </validationObserver>
@@ -23,11 +85,7 @@
 
 <script>
 import { required } from "vee-validate/dist/rules";
-import {
-  extend,
-  ValidationObserver,
-  setInteractionMode
-} from "vee-validate";
+import { extend, ValidationObserver, setInteractionMode } from "vee-validate";
 setInteractionMode("eager");
 extend("required", {
   ...required,
@@ -36,7 +94,7 @@ extend("required", {
 export default {
   name: "OperationHours",
   components: {
-    ValidationObserver,
+    ValidationObserver
   },
   data() {
     return {
@@ -68,13 +126,13 @@ export default {
       title: "",
       timezone: "",
       workdays: [
-        { dayName: "Monday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Tuesday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Wednesday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Thursday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Friday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Saturday", startTime: "8:00", endTime: "14:00" },
-        { dayName: "Sunday", startTime: "8:00", endTime: "14:00" }
+        { dayName: "شنبه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "یکشنبه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "دوشنبه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "سه شنبه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "چهار شنبه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "پنج شنیه", startTime: "08:00", endTime: "14:00" },
+        { dayName: "جمعه", startTime: "00:00", endTime: "00:00" }
       ],
       holidays: []
     };
