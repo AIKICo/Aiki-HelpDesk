@@ -32,11 +32,22 @@ const operationHourService = {
       } else if (response.data.error) {
         throw new Error("Something is wrong.");
       }
+    },
+    async deleteOperationHour(context, payload) {
+      let response = (
+          await OperatingHour.api().delete("/OperationHours/" + payload, { delete: 42 })
+      ).response;
+      if (response.status === 200) {
+        return response;
+      } else if (response.data.error) {
+        throw new Error("Something is wrong.");
+      }
     }
   },
   getters: {
     getOperationsHours: () => OperatingHour.all(),
-    getOperationsHour: () => Id => OperatingHour.find(Id)
+    getOperationsHour: () => Id => OperatingHour.find(Id),
+    getExistsIsDefault:()=>OperatingHour.query().where(record=> record.isdefault===true).get().length
   }
 };
 

@@ -12,7 +12,8 @@ export default class Customer extends Model {
             description: this.attr(null),
             domains: this.attr(null),
             schema: this.attr(null),
-            disabled:this.attr(null)
+            disabled:this.attr(null),
+            operatinghourid:this.attr(null)
         }
     }
 }

@@ -10,7 +10,7 @@
                   :class="$store.state.defaultColor + ' white--text'"
                 >
                   <v-icon large color="white">mdi-edit</v-icon>
-                  {{$route.params.formType === "Edit"?"ویرایش":"درج"}}
+                  {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                 </v-card-title>
                 <v-card-text class="mt-3">
                   <validation-provider
@@ -41,6 +41,14 @@
                     outlined
                     shaped
                   ></v-text-field>
+                  <v-select
+                    :items="OperatingHours"
+                    item-text="title"
+                    item-value="id"
+                    v-model="Customer.operatinghourid"
+                    label="ساعات کاری"
+                  >
+                  </v-select>
                 </v-card-text>
 
                 <v-card-actions>
@@ -86,7 +94,8 @@ export default {
   name: "Customer",
   data() {
     return {
-      Customer: null
+      Customer: null,
+      OperatingHours:[]
     };
   },
   components: {
@@ -104,14 +113,14 @@ export default {
               this.closeDialog();
             }
           });
-      }else if (this.$route.params.formType === "Insert"){
+      } else if (this.$route.params.formType === "Insert") {
         this.$store
-                .dispatch("CustomerService/addCustomer", this.Customer)
-                .then(res => {
-                  if (res.status === 201) {
-                    this.closeDialog();
-                  }
-                });
+          .dispatch("CustomerService/addCustomer", this.Customer)
+          .then(res => {
+            if (res.status === 201) {
+              this.closeDialog();
+            }
+          });
       }
     },
     closeDialog() {
@@ -119,12 +128,12 @@ export default {
     },
     getCustomer(id) {
       return this.$store.getters["CustomerService/getCustomer"](id);
-    }
+    },
   },
   created() {
     if (this.$route.params.formType === "Edit") {
       this.Customer = this.getCustomer(this.$route.params.id);
-    } else if (this.$route.params.formType === "Insert"){
+    } else if (this.$route.params.formType === "Insert") {
       this.Customer = {
         companyid: this.$store.state.companyId,
         title: "",
@@ -133,9 +142,11 @@ export default {
         schema: null
       };
     }
+    this.$store.dispatch("OperationHourService/loadOperationHours").then(() =>{
+      this.OperatingHours =this.$store.getters["OperationHourService/getOperationsHours"];
+    })
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

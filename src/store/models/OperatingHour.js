@@ -11,7 +11,8 @@ export default class OperatingHour extends Model {
       title: this.attr(""),
       timezone: this.attr(""),
       workdays: this.attr([]),
-      holidays: this.attr([])
+      holidays: this.attr([]),
+      isdefault: this.attr(null)
     };
   }
 }
