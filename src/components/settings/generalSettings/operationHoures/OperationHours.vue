@@ -89,6 +89,14 @@
                                 item.day | formatDate
                               }}</span>
                               <span v-text="item.reason"></span>
+                              <span>
+                                <v-icon
+                                  color="red"
+                                  @click="deleteHoliday(item)"
+                                >
+                                  mdi-delete
+                                </v-icon>
+                              </span>
                             </v-col>
                           </v-row>
                         </v-card-text>
@@ -176,6 +184,14 @@ export default {
       });
       this.holiday = "";
       this.holidayComment = "";
+    },
+    deleteHoliday(item) {
+      var newItems = this.OperationHour.holidays.filter(function(
+              el
+      ) {
+        return el.day != item.day;
+      });
+      this.OperationHour.holidays = newItems;
     },
     closeDialog() {
       this.$router.push("/OperationHoursList");
