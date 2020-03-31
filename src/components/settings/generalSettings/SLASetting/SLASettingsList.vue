@@ -11,6 +11,9 @@
             return{
                 
             }
+        },
+        created(){
+            
         }
     }
 </script>

@@ -1,4 +1,4 @@
-import { Model } from '@vuex-orm/core'
+import { Model } from '@vuex-orm/core';
 
 export default class Customer extends Model {
     static entity = 'customers';
@@ -14,6 +14,6 @@ export default class Customer extends Model {
             schema: this.attr(null),
             disabled:this.attr(null),
             operatinghourid:this.attr(null)
-        }
+        };
     }
 }
