@@ -12,7 +12,7 @@ import settingsService from "./modules/settingsService";
 import companyService from "./modules/companyService";
 import customerService from "./modules/customerService";
 import operationHourService from "./modules/operationHourService";
-import sLASettingService from './modules/sLASettingService'
+import sLASettingService from './modules/sLASettingService';
 
 import User from "./models/User";
 import Company from "./models/Company";
