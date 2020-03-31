@@ -7,6 +7,8 @@ import CustomerList from "./components/settings/generalSettings/customers/Custom
 import Customer from "./components/settings/generalSettings/customers/Customer";
 import OperationHoursList from "./components/settings/generalSettings/operationHoures/OperationHoursList";
 import OperationHours from "./components/settings/generalSettings/operationHoures/OperationHours";
+import SLASettingsList from "./components/settings/generalSettings/SLASetting/SLASettingsList.vue"
+
 const routes = [
   {
     name: "cartabl",
@@ -67,7 +69,16 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    name: "SLASettings",
+    path: "/SLASettings",
+    component: SLASettingsList,
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
+  },
 ];
 
 const router = new VueRouter({
