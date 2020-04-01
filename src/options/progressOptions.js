@@ -11,4 +11,4 @@ const progressOptions = {
     location: 'top',
     inverse: false
 };
-export default  progressOptions;
+export default progressOptions;

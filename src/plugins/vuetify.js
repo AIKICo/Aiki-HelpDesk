@@ -3,18 +3,18 @@ import Vuetify from 'vuetify/lib';
 import fa from 'vuetify/es5/locale/fa'
 
 Vue.use(Vuetify, {
-    lang:{
+    lang: {
         locales: {fa},
-        current:'fa'
+        current: 'fa'
     }
 });
 export default new Vuetify({
-    rtl:true,
+    rtl: true,
     lang: {
         locales: {fa},
         current: fa
     },
-    theme:{
-        dark:false
+    theme: {
+        dark: false
     }
 });

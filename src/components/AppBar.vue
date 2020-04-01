@@ -5,9 +5,10 @@
             dark
             :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
-        <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer" />
+        <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"/>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down"
-        >میزکار خدمات رایانه ای</v-toolbar-title
+        >میزکار خدمات رایانه ای
+        </v-toolbar-title
         >
         <v-text-field
                 flat
@@ -16,7 +17,7 @@
                 prepend-inner-icon="mdi-magnify"
                 label="جستجو"
         />
-        <v-spacer />
+        <v-spacer/>
         <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
             <v-icon large>mdi-logout</v-icon>
         </v-btn>
@@ -37,9 +38,9 @@
 
 <script>
     export default {
-        methods:{
-            logout(){
-                this.$store.dispatch('UserService/logout').then(()=>{
+        methods: {
+            logout() {
+                this.$store.dispatch('UserService/logout').then(() => {
                     this.$router.go("/login")
                 })
             }

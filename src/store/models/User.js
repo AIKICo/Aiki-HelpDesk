@@ -1,4 +1,4 @@
-import { Model } from '@vuex-orm/core'
+import {Model} from '@vuex-orm/core'
 
 export default class User extends Model {
     // This is the name used as module name of the Vuex Store.
@@ -7,14 +7,14 @@ export default class User extends Model {
 
     // List of all fields (schema) of the post model. `this.attr` is used
     // for the generic field type. The argument is the default value.
-    static fields () {
+    static fields() {
         return {
             id: this.attr(''),
-            companyid:this.attr(''),
+            companyid: this.attr(''),
             membername: this.attr(''),
-            username:this.attr(''),
-            password:this.attr(''),
-            roles:this.attr(''),
+            username: this.attr(''),
+            password: this.attr(''),
+            roles: this.attr(''),
             email: this.attr('')
         }
     }
