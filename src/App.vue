@@ -91,6 +91,9 @@ export default {
       else if (this.$router.currentRoute.name === "OperationHoursList"){
         this.$router.push("/OperationHours/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "SLASettings"){
+        this.$router.push("/SLASetting/Insert/undefined");
+      }
     }
   },
   mounted() {
