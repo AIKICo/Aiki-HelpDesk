@@ -11,8 +11,8 @@ export default class SLASetting extends Model {
             title: this.attr(""),
             description: this.attr(null),
             operatinghourid: this.attr(null),
-            targetspriority: this.attr(""),
-            requesttypepriority: this.attr("")
+            targetspriority: this.attr([]),
+            requesttypepriority: this.attr([])
         };
     }
 }
