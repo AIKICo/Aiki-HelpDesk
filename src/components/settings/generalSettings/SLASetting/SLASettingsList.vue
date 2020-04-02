@@ -7,13 +7,13 @@
 <script>
     export default {
         name:"SLASettingsList",
-        data(){
+        data: () => {
             return{
                 
             }
         },
         created(){
-            
+            this.$store.dispatch("SLASettingService/loadSLASettings")
         }
     }
 </script>

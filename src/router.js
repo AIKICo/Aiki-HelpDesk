@@ -10,101 +10,101 @@ import OperationHours from "./components/settings/generalSettings/operationHoure
 import SLASettingsList from "./components/settings/generalSettings/SLASetting/SLASettingsList.vue"
 
 const routes = [
-  {
-    name: "cartabl",
-    path: "/cartabl",
-    component: cartabl,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  { name: "login", path: "/login", component: login },
-  {
-    name: "root",
-    path: "/",
-    component: cartabl,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "settingsControlPanel",
-    path: "/SettingsControlPanel",
-    component: settingsControlPanel,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "CustomerList",
-    path: "/CustomerList",
-    component: CustomerList,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "Customer",
-    path: "/Customer/:formType/:id",
-    component: Customer,
-    props: true,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "OperationHoursList",
-    path: "/OperationHoursList",
-    component: OperationHoursList,
-    props: true,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "OperationHours",
-    path: "/OperationHours/:formType/:id",
-    component: OperationHours,
-    props: true,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    name: "SLASettings",
-    path: "/SLASettings",
-    component: SLASettingsList,
-    props: true,
-    meta: {
-      requiresAuth: true
-    }
-  },
+    {
+        name: "cartabl",
+        path: "/cartabl",
+        component: cartabl,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {name: "login", path: "/login", component: login},
+    {
+        name: "root",
+        path: "/",
+        component: cartabl,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "settingsControlPanel",
+        path: "/SettingsControlPanel",
+        component: settingsControlPanel,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "CustomerList",
+        path: "/CustomerList",
+        component: CustomerList,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "Customer",
+        path: "/Customer/:formType/:id",
+        component: Customer,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "OperationHoursList",
+        path: "/OperationHoursList",
+        component: OperationHoursList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "OperationHours",
+        path: "/OperationHours/:formType/:id",
+        component: OperationHours,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "SLASettings",
+        path: "/SLASettings",
+        component: SLASettingsList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = new VueRouter({
-  mode: "history",
-  routes: routes
+    mode: "history",
+    routes: routes
 });
 
 router.beforeEach((to, from, next) => {
-  var allowAddRecord = ["CustomerList", "OperationHoursList"];
-  if (to.meta.requiresAuth) {
-    const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
-    if (!authUser || !authUser.token) {
-      next({ name: "login" });
+    var allowAddRecord = ["CustomerList", "OperationHoursList"];
+    if (to.meta.requiresAuth) {
+        const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
+        if (!authUser || !authUser.token) {
+            next({name: "login"});
+        } else {
+            store.state.allowAddRecord = allowAddRecord.includes(to.name);
+            next();
+        }
+    } else if (to.name === "login") {
+        const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
+        if (authUser) {
+            next({name: "cartabl"});
+        } else {
+            next();
+        }
     } else {
-      store.state.allowAddRecord = allowAddRecord.includes(to.name);
-      next();
+        next();
     }
-  } else if (to.name === "login") {
-    const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
-    if (authUser) {
-      next({ name: "cartabl" });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
 });
 export default router;

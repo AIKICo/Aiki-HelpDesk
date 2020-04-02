@@ -1,4 +1,4 @@
-export default class Workday{
+export default class Workday {
     DayName
     StartTime
     EndTime
