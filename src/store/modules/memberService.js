@@ -13,6 +13,14 @@ const memberService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadMember(Id) {
+            let response = (await Member.api().get("/Users/" + Id)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async addMember(context, payload) {
             let response = (await Member.api().post("/Users", payload))
                 .response;

@@ -2,11 +2,11 @@ import {Model} from '@vuex-orm/core'
 
 export default class Member extends Model {
     static entity = 'members';
-    static $primaryKey = "id";
+    static primaryKey = "id";
 
-    static $fields() {
+    static fields() {
         return {
-            id: this.uid(() => this.$uuid.v4()),
+            id:  this.attr(null),
             companyid: this.attr(null),
             membername: this.attr(""),
             username: this.attr(""),

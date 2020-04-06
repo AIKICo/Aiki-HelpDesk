@@ -116,7 +116,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members"];
+    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members","cartabl"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
