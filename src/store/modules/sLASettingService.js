@@ -46,7 +46,7 @@ const sLASetting = {
         },
         async deleteSLASetting(context, payload) {
             let response = (
-                await SLASetting.api().delete("/SLASetting/" + payload.id, {
+                await SLASetting.api().delete("/SLASetting/" + payload, {
                     delete: 42
                 })
             ).response;

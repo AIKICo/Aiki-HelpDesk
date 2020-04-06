@@ -42,11 +42,13 @@
                     shaped
                   ></v-text-field>
                   <v-select
-                    :items="OperatingHours"
+                    :items="SLAItems"
                     item-text="title"
                     item-value="id"
                     v-model="Customer.operatinghourid"
-                    label="ساعات کاری"
+                    label="توافق نامه سطح سرویس"
+                    shaped
+                    outlined
                   >
                   </v-select>
                 </v-card-text>
@@ -95,7 +97,7 @@ export default {
   data() {
     return {
       Customer: null,
-      OperatingHours:[]
+      SLAItems:[]
     };
   },
   components: {
@@ -142,8 +144,8 @@ export default {
         schema: null
       };
     }
-    this.$store.dispatch("OperationHourService/loadOperationHours").then(() =>{
-      this.OperatingHours =this.$store.getters["OperationHourService/getOperationsHours"];
+    this.$store.dispatch("SLASettingService/loadSLASettings").then(() => {
+      this.SLAItems = this.$store.getters["SLASettingService/getSLASettings"];
     })
   }
 };

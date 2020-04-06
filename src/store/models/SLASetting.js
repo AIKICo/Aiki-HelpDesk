@@ -9,7 +9,7 @@ export default class SLASetting extends Model {
             id: this.uid(() => this.$uuid.v4()),
             companyid: this.attr(null),
             title: this.attr(""),
-            description: this.attr(null),
+            description: this.attr(""),
             operatinghourid: this.attr(null),
             targetspriority: this.attr([]),
             requesttypepriority: this.attr([])

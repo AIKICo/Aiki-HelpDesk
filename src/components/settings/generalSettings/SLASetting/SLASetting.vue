@@ -13,7 +13,87 @@
                                     {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                                 </v-card-title>
                                 <v-card-text class="mt-3">
-
+                                    <v-row no-gutters>
+                                        <v-col cols="10">
+                                            <validation-provider
+                                                    v-slot="{ errors }"
+                                                    name="عنوان"
+                                                    rules="required"
+                                            >
+                                                <v-text-field
+                                                        v-model="SLASetting.title"
+                                                        label="عنوان توافق نامه"
+                                                        clearable
+                                                        :error-messages="errors"
+                                                        outlined
+                                                        shaped
+                                                ></v-text-field>
+                                            </validation-provider>
+                                            <v-textarea
+                                                    v-model="SLASetting.description"
+                                                    shaped
+                                                    outlined
+                                                    clearable
+                                                    placeholder="شرح مختصر"
+                                            >
+                                            </v-textarea>
+                                            <v-select
+                                                    :items="OperatingHours"
+                                                    item-text="title"
+                                                    item-value="id"
+                                                    v-model="SLASetting.operatinghourid"
+                                                    label="ساعات کاری"
+                                                    shaped
+                                                    outlined
+                                            >
+                                            </v-select>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
+                                        <v-col>
+                                            <v-card>
+                                                <v-card-title>تعیین اولویت اهداف</v-card-title>
+                                                <v-card-text>
+                                                    <v-row
+                                                            v-for="item in SLASetting.targetspriority"
+                                                            :key="item.title"
+                                                            no-gutters
+                                                    >
+                                                        <v-col>
+                                                            <v-row>
+                                                                <v-col cols="2">
+                                                                    <v-text-field
+                                                                            v-model="item.title"
+                                                                            label="اولویت"
+                                                                            placeholder="اولویت"
+                                                                    ></v-text-field>
+                                                                </v-col>
+                                                                <v-col cols="2">
+                                                                    <v-text-field
+                                                                            v-model="item.responseTime"
+                                                                            placeholder="زمان پاسخ گویی"
+                                                                            label="مدت زمان پاسخ گویی"
+                                                                    ></v-text-field>
+                                                                </v-col>
+                                                                <v-col cols="2">
+                                                                    <v-text-field
+                                                                            v-model="item.resolveTime"
+                                                                            placeholder="زمان کل مشکل"
+                                                                            label="مدت زمان رفع ایراد"
+                                                                    ></v-text-field>
+                                                                </v-col>
+                                                                <v-col cols="1">
+                                                                    <v-icon color="red" class="mt-8">
+                                                                        mdi-delete
+                                                                    </v-icon>
+                                                                </v-col>
+                                                            </v-row>
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-card-text>
+                                            </v-card>
+                                        </v-col>
+                                    </v-row>
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
@@ -58,18 +138,16 @@
         data() {
             return {
                 SLASetting: null,
-                targetspriority:[],
-                requesttypepriority:[]
+                OperatingHours: null,
+                targetspriority: [],
+                requesttypepriority: []
             };
         },
         methods: {
             onSubmit() {
                 if (this.$route.params.formType === "Insert") {
                     this.$store
-                        .dispatch(
-                            "SLASettingService/addSLASetting",
-                            this.SLASetting
-                        )
+                        .dispatch("SLASettingService/addSLASetting", this.SLASetting)
                         .then(res => {
                             if (res.status === 201) {
                                 this.closeDialog();
@@ -77,10 +155,7 @@
                         });
                 } else if (this.$route.params.formType === "Edit") {
                     this.$store
-                        .dispatch(
-                            "SLASettingService/editSLASetting",
-                            this.SLASetting
-                        )
+                        .dispatch("SLASettingService/editSLASetting", this.SLASetting)
                         .then(res => {
                             if (res.status === 200) {
                                 this.closeDialog();
@@ -89,10 +164,8 @@
                 }
             },
             addTargetsPriority() {
-
             },
-            addRequestTypePriority(){
-
+            addRequestTypePriority() {
             },
             deleteTargetsPriority(item) {
                 console.log(item);
@@ -101,7 +174,7 @@
                 console.log(item);
             },
             closeDialog() {
-                this.$router.push("/SLASettingsList");
+                this.$router.push("/SLASettings");
             },
             getSLASetting(id) {
                 return this.$store.getters["SLASettingService/getSLASetting"](id);
@@ -109,7 +182,7 @@
         },
         created() {
             if (this.$route.params.formType === "Edit") {
-                var record = this.getOperationHour(this.$route.params.id);
+                var record = this.getSLASetting(this.$route.params.id);
                 this.SLASetting = {
                     id: this.$route.params.id,
                     companyid: this.$store.state.companyId,
@@ -120,26 +193,30 @@
                     requesttypepriority: record.requesttypepriority
                 };
             } else if (this.$route.params.formType === "Insert") {
-                this.OperationHour = {
+                this.SLASetting = {
                     companyid: this.$store.state.companyId,
+                    title: "",
                     description: "",
                     operatinghourid: "",
                     targetspriority: [
-                        {title: "Low", reponseTime: "4 HOURS", resolveTime: "1 DAY"},
-                        {title: "Medium", reponseTime: "4 HOURS", resolveTime: "8 HOURS"},
-                        {title: "High", reponseTime: "2 HOURS", resolveTime: "4 HOURS"},
-                        {title: "Urgent", reponseTime: "1 HOURS", resolveTime: "3 HOURS"},
+                        {title: "کم", responseTime: "4 ساعت", resolveTime: "1 روز"},
+                        {title: "متوسط", responseTime: "4 ساعت", resolveTime: "8 ساعت"},
+                        {title: "بالا", responseTime: "2 ساعت", resolveTime: "4 ساعت"},
+                        {title: "آنی", responseTime: "1 ساعت", resolveTime: "3 روز"}
                     ],
                     requesttypepriority: [
                         {title: "Web Protal", priority: "Medium"},
                         {title: "Email Channel", priority: "Medium"}
-                    ],
+                    ]
                 };
             }
+            this.$store.dispatch("OperationHourService/loadOperationHours").then(() => {
+                this.OperatingHours = this.$store.getters[
+                    "OperationHourService/getOperationsHours"
+                    ];
+            });
         }
-    }
+    };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
