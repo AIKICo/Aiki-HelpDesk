@@ -9,6 +9,8 @@ import OperationHoursList from "./components/settings/generalSettings/operationH
 import OperationHours from "./components/settings/generalSettings/operationHoures/OperationHours";
 import SLASettingsList from "./components/settings/generalSettings/SLASetting/SLASettingsList.vue";
 import SLASetting from "./components/settings/generalSettings/SLASetting/SLASetting";
+import MembersList from "./components/settings/generalSettings/members/MembersList";
+import Member from "./components/settings/generalSettings/members/Member";
 
 const routes = [
     {
@@ -89,6 +91,23 @@ const routes = [
             requiresAuth: true
         }
     },
+    {
+        name: "Members",
+        path: "/Members",
+        component: MembersList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "Member",
+        path: "/Member/:formType/:id",
+        component: Member,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = new VueRouter({
@@ -97,7 +116,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings"];
+    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {

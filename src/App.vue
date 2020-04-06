@@ -94,6 +94,9 @@ export default {
       else if (this.$router.currentRoute.name === "SLASettings"){
         this.$router.push("/SLASetting/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "Members"){
+        this.$router.push("/Member/Insert/undefined");
+      }
     }
   },
   mounted() {

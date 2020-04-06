@@ -9,7 +9,7 @@ export default class Company extends Model {
     // for the generic field type. The argument is the default value.
     static fields() {
         return {
-            id: this.attr(''),
+            id: this.uid(() => this.$uuid.v4()),
             title: this.attr(''),
             email: this.attr(''),
         };

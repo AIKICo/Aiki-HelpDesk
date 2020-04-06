@@ -10,8 +10,7 @@ const settingsService = {
         items: [
           { name: "Operating Hours",label:"", path: "/OperationHoursList", image: "OperationHours.png" },
           { name: "SLA Policies",label:"", path: "/SLASettings", image: "SLA.png" },
-          { name: "Agents",label:"اپراتورها", path: "/Agents", image: "" },
-          { name: "Users",label:"کاربران", path: "/Users", image: "" },
+          { name: "Members",label:"کاربران و اپراتورها", path: "/Members", image: "" },
           { name: "company",label:"", path: "/CustomerList", image: "settings-customer.png" }
         ]
       },
