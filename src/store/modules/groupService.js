@@ -5,7 +5,7 @@ const groupService = {
     state: {},
     mutations: {},
     actions: {
-        async loadCustomers() {
+        async loadGroups() {
             let response = (await Group.api().get("/Groups")).response;
             if (response.status === 200) {
                 return response;
@@ -13,7 +13,7 @@ const groupService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async addCustomer(context, payload) {
+        async addGroup(context, payload) {
             let response = (await Group.api().post("/Groups", payload))
                 .response;
             if (response.status === 201) {
@@ -22,7 +22,7 @@ const groupService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async editCustomer(context, payload) {
+        async editGroup(context, payload) {
             let response = (await Group.api().put("/Groups", payload)).response;
             if (response.status === 200) {
                 return response;
@@ -30,7 +30,7 @@ const groupService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async patchCustomer(context, payload) {
+        async patchGroup(context, payload) {
             let response = (
                 await Group.api().patch("/Groups/" + payload.id, payload.patchDoc)
             ).response;
@@ -40,9 +40,9 @@ const groupService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async deleteCustomer(context, payload) {
+        async deleteGroup(context, payload) {
             let response = (
-                await Group.api().delete("/Groups/" + payload.id, {delete: 42})
+                await Group.api().delete("/Groups/" + payload, {delete: 42})
             ).response;
             if (response.status === 200) {
                 return response;
@@ -52,8 +52,8 @@ const groupService = {
         }
     },
     getters: {
-        getCustomers: () => Group.all(),
-        getCustomer: () => groupId => Group.find(groupId),
+        getGroups: () => Group.all(),
+        getGroup: () => groupId => Group.find(groupId),
     }
 };
 

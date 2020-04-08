@@ -141,14 +141,14 @@ html {
 }
 
 .fade-enter-active {
-  transition: opacity 1s ease;
+  transition: opacity 500ms ease;
 }
 
 .fade-leave {
 }
 
 .fade-leave-active {
-  transition: opacity 1s ease;
+  transition: opacity 500ms ease;
   opacity: 0;
 }
 .snack >>> .v-snack__content {
