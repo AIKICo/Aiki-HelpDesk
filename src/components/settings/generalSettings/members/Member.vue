@@ -136,7 +136,9 @@
             return {
                 Member: null,
                 Roles: [
-                    {Label: "مدیر", Value: "مدیر"}, {Label: "اپراتور", Value: "اپراتور"}]
+                    {Label: "مدیر", Value: "مدیر"},
+                    {Label: "اپراتور", Value: "اپراتور"}
+                ]
             };
         },
         components: {

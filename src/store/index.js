@@ -14,6 +14,7 @@ import customerService from "./modules/customerService";
 import operationHourService from "./modules/operationHourService";
 import sLASettingService from './modules/sLASettingService';
 import memberService from "./modules/memberService";
+import groupService from "./modules/groupService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -21,6 +22,7 @@ import Customer from "./models/Customer";
 import OperatingHour from "./models/OperatingHour";
 import SLASetting from "./models/SLASetting";
 import Member from "./models/Member";
+import Group from "./models/Group";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -32,6 +34,7 @@ database.register(Customer);
 database.register(OperatingHour);
 database.register(SLASetting);
 database.register(Member)
+database.register(Group)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -59,7 +62,8 @@ export default new Vuex.Store({
         CustomerService: customerService,
         OperationHourService: operationHourService,
         SLASettingService: sLASettingService,
-        MemberService: memberService
+        MemberService: memberService,
+        GroupService:groupService
     },
     getters: {}
 });

@@ -97,6 +97,9 @@ export default {
       else if (this.$router.currentRoute.name === "Members"){
         this.$router.push("/Member/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "Groups"){
+        this.$router.push("/Group/Insert/undefined");
+      }
     }
   },
   mounted() {

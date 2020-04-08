@@ -11,6 +11,8 @@ import SLASettingsList from "./components/settings/generalSettings/SLASetting/SL
 import SLASetting from "./components/settings/generalSettings/SLASetting/SLASetting";
 import MembersList from "./components/settings/generalSettings/members/MembersList";
 import Member from "./components/settings/generalSettings/members/Member";
+import GroupList from "./components/settings/generalSettings/groups/GroupList";
+import Group from "./components/settings/generalSettings/groups/Group";
 
 const routes = [
     {
@@ -108,6 +110,23 @@ const routes = [
             requiresAuth: true
         }
     },
+    {
+        name: "Groups",
+        path: "/Groups",
+        component: GroupList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "Group",
+        path: "/Group/:formType/:id",
+        component: Group,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = new VueRouter({
@@ -116,7 +135,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members","cartabl"];
+    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members","cartabl","Groups"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
