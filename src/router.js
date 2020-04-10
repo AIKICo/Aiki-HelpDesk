@@ -13,6 +13,8 @@ import MembersList from "./components/settings/generalSettings/members/MembersLi
 import Member from "./components/settings/generalSettings/members/Member";
 import GroupList from "./components/settings/generalSettings/groups/GroupList";
 import Group from "./components/settings/generalSettings/groups/Group";
+import AppConstantList from "./components/settings/generalSettings/appConstant/AppConstantList";
+import AppConstant from "./components/settings/generalSettings/appConstant/AppConstant";
 
 const routes = [
     {
@@ -127,6 +129,23 @@ const routes = [
             requiresAuth: true
         }
     },
+    {
+        name: "AppConstants",
+        path: "/AppConstants/:id",
+        component: AppConstantList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "AppConstant",
+        path: "/AppConstant/:formType/:id",
+        component: AppConstant,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = new VueRouter({
@@ -135,7 +154,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var allowAddRecord = ["CustomerList", "OperationHoursList","SLASettings","Members","cartabl","Groups"];
+    var allowAddRecord = [
+        "CustomerList", "OperationHoursList","SLASettings",
+        "Members","cartabl","Groups","AppConstants"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
