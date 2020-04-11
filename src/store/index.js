@@ -3,6 +3,8 @@ import axios from "axios";
 import Vuex from "vuex";
 import VuexORM from "@vuex-orm/core";
 import VuexORMAxios from "@vuex-orm/plugin-axios";
+import VuexORMSearch from '@vuex-orm/plugin-search'
+
 import isMobile from "mobile-device-detect";
 
 import WorkOrder from "./modules/WorkOrder";
@@ -28,6 +30,9 @@ import AppConstantItem from "./models/AppConstantItem";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
+VuexORM.use(VuexORMSearch, {
+    // Configure default fuse.js options here (see "Configuration" section below).
+})
 
 const database = new VuexORM.Database();
 database.register(User);
