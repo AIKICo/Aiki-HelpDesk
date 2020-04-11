@@ -32,8 +32,8 @@
             }
         },
         created(){
-            this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", {id: this.$route.params.id}).then(() => {
-                this.AppConstantItems = this.$store.getters["AppConstantItemsService/getAppConstantItems"];
+            this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", this.$route.params.id).then((res) => {
+                this.AppConstantItems = res.data;
             })
         }
     }

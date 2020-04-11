@@ -6,7 +6,7 @@ const appConstantItemsService = {
     mutations: {},
     actions: {
         async loadAppConstantItems(context, payload) {
-            let response = (await AppConstantItem.api().get("/AppConstantItems/" + payload.id)).response;
+            let response = (await AppConstantItem.api().get("/AppConstantItems/GetByParentId/" + payload)).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {

@@ -84,7 +84,7 @@
             onSubmit() {
                 if (this.$route.params.formType === "Edit") {
                     this.$store
-                        .dispatch("CustomerService/editCustomer", this.AppConstantItem)
+                        .dispatch("AppConstantItemsService/editAppConstantItem", this.AppConstantItem)
                         .then(res => {
                             if (res.status === 200) {
                                 this.closeDialog();
@@ -92,7 +92,7 @@
                         });
                 } else if (this.$route.params.formType === "Insert") {
                     this.$store
-                        .dispatch("CustomerService/addCustomer", this.AppConstantItem)
+                        .dispatch("AppConstantItemsService/addAppConstantItem", this.AppConstantItem)
                         .then(res => {
                             if (res.status === 201) {
                                 this.closeDialog();
