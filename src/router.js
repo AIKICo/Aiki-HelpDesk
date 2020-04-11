@@ -140,7 +140,7 @@ const routes = [
     },
     {
         name: "AppConstant",
-        path: "/AppConstant/:formType/:id",
+        path: "/AppConstant/:formType/:parentid/:id",
         component: AppConstant,
         meta: {
             requiresAuth: true

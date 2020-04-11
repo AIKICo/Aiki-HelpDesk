@@ -146,7 +146,7 @@ export default {
     }
     this.$store.dispatch("SLASettingService/loadSLASettings").then(() => {
       this.SLAItems = this.$store.getters["SLASettingService/getSLASettings"];
-    })
+    });
   }
 };
 </script>

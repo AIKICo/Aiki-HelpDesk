@@ -5,8 +5,8 @@ const appConstantItemsService = {
     state: {},
     mutations: {},
     actions: {
-        async loadAppConstantItems() {
-            let response = (await AppConstantItem.api().get("/AppConstantItems")).response;
+        async loadAppConstantItems(context, payload) {
+            let response = (await AppConstantItem.api().get("/AppConstantItems/" + payload.id)).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {
