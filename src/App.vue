@@ -103,6 +103,9 @@ export default {
       else if (this.$router.currentRoute.name === "AppConstants"){
         this.$router.push("/AppConstant/Insert/" + this.$router.currentRoute.params.id + "/undefined");
       }
+      else if (this.$router.currentRoute.name === "OrganizeCharts"){
+        alert("add item")
+      }
     }
   },
   mounted() {

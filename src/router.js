@@ -15,6 +15,7 @@ import GroupList from "./components/settings/generalSettings/groups/GroupList";
 import Group from "./components/settings/generalSettings/groups/Group";
 import AppConstantList from "./components/settings/generalSettings/appConstant/AppConstantList";
 import AppConstant from "./components/settings/generalSettings/appConstant/AppConstant";
+import OrganizeCharts from "./components/settings/generalSettings/organizeChart/OrganizeCharts";
 
 const routes = [
     {
@@ -146,6 +147,14 @@ const routes = [
             requiresAuth: true
         }
     },
+    {
+        name: "OrganizeCharts",
+        path: "/OrganizeCharts",
+        component: OrganizeCharts,
+        meta:{
+            requiresAuth: true
+        }
+    }
 ];
 
 const router = new VueRouter({
