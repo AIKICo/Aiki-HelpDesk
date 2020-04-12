@@ -18,6 +18,7 @@ import sLASettingService from './modules/sLASettingService';
 import memberService from "./modules/memberService";
 import groupService from "./modules/groupService";
 import appConstantItemsService from "./modules/appContantItemsService";
+import organizeChartService from "./modules/organizeChartService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -27,6 +28,7 @@ import SLASetting from "./models/SLASetting";
 import Member from "./models/Member";
 import Group from "./models/Group";
 import AppConstantItem from "./models/AppConstantItem";
+import OrganizeChart from "./models/OrganizeChart";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -43,6 +45,7 @@ database.register(SLASetting);
 database.register(Member)
 database.register(Group)
 database.register(AppConstantItem)
+database.register(OrganizeChart)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -72,7 +75,8 @@ export default new Vuex.Store({
         SLASettingService: sLASettingService,
         MemberService: memberService,
         GroupService:groupService,
-        AppConstantItemsService:appConstantItemsService
+        AppConstantItemsService:appConstantItemsService,
+        OrganizeChartService: organizeChartService
     },
     getters: {}
 });

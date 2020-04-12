@@ -86,7 +86,8 @@ new Vue({
         axois.interceptors.response.use(response => {
             this.$Progress.finish();
             return response;
-        }, function () {
+        }, function (error) {
+            console.log(error); // Log into RavenDB
             this.$Progress.fail();
         });
     },
