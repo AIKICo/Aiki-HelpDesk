@@ -109,6 +109,7 @@ const routes = [
         name: "Member",
         path: "/Member/:formType/:id",
         component: Member,
+        props: true,
         meta: {
             requiresAuth: true
         }
@@ -126,6 +127,7 @@ const routes = [
         name: "Group",
         path: "/Group/:formType/:id",
         component: Group,
+        props: true,
         meta: {
             requiresAuth: true
         }
@@ -143,14 +145,16 @@ const routes = [
         name: "AppConstant",
         path: "/AppConstant/:formType/:parentid/:id",
         component: AppConstant,
+        props: true,
         meta: {
             requiresAuth: true
         }
     },
     {
         name: "OrganizeCharts",
-        path: "/OrganizeCharts",
+        path: "/OrganizeCharts/:id" ,
         component: OrganizeCharts,
+        props: true,
         meta:{
             requiresAuth: true
         }

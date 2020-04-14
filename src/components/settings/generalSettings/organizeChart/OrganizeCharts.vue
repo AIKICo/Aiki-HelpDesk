@@ -53,7 +53,8 @@
             }
         },
         created() {
-            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView", this.$store.state.companyId).then((res) => {
+            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView",
+                this.$route.params.id).then((res) => {
                 this.OrganizeChartItems = JSON.parse("[" + res.data[0].organizecharts + "]");
             })
         }
