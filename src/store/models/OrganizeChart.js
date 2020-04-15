@@ -9,7 +9,8 @@ export default class OrganizeChart extends Model{
             id:  this.attr(null),
             parent_id:  this.attr(null),
             companyid: this.attr(null),
-            title: this.attr("")
+            title: this.attr(""),
+            additionalinfo:this.attr([])
         }
     }
 }

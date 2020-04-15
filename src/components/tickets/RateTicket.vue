@@ -20,7 +20,6 @@
       </v-card>
     </v-sheet>
   </v-bottom-sheet>
-
 </template>
 
 <script>
