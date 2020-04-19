@@ -2,26 +2,32 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-treeview :items="OrganizeChartItems"
-                            item-key="id"
-                            item-text="title"
-                            dense activatable hoverable shaped rounded>
-                    <template v-slot:append="{ item }">
-                        <v-btn icon @click="addChild(item)">
-                            <v-icon :color="$store.state.defaultColor">
-                                mdi-plus
-                            </v-icon>
-                        </v-btn>
-                        <v-btn icon @click="deleteChild(item)">
-                            <v-icon :color="$store.state.defaultColor">
-                                mdi-minus
-                            </v-icon>
-                        </v-btn>
-                        <v-btn icon @click="editChild(item)">
-                            <v-icon :color="$store.state.defaultColor">
-                                mdi-cursor-text
-                            </v-icon>
-                        </v-btn>
+                <v-treeview
+                        :items="OrganizeChartItems"
+                        item-key="id"
+                        item-text="title"
+                        dense activatable shaped rounded open-on-click>
+                    <template v-slot:label="{ item }">
+                        <v-hover v-slot:default="{ hover }">
+                            <div>
+                                <span>{{item.title}}</span>
+                                <v-btn class="mr-5" v-if="hover" icon @click="addChild(item)">
+                                    <v-icon :color="$store.state.defaultColor">
+                                        mdi-plus
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn v-if="hover" icon @click="deleteChild(item)">
+                                    <v-icon :color="$store.state.defaultColor">
+                                        mdi-minus
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn v-if="hover" icon @click="editChild(item)">
+                                    <v-icon :color="$store.state.defaultColor">
+                                        mdi-cursor-text
+                                    </v-icon>
+                                </v-btn>
+                            </div>
+                        </v-hover>
                     </template>
                 </v-treeview>
             </v-col>
@@ -29,9 +35,10 @@
         <v-row>
             <OrganizeChart :operation="sheetOperation"
                            :sheet="sheet"
-                           :item="selectedItem"
+                           :item.sync="selectedItem"
                            @close-sheet="closeSheet"
-                           @item-added="addedChild">
+                           @item-added="addedChild"
+                           @item-updated="updatedItem">
             </OrganizeChart>
         </v-row>
     </v-container>
@@ -40,15 +47,17 @@
 
 <script>
     import OrganizeChart from "./OrganizeChart";
+
     export default {
         name: "OrganizeCharts",
         components: {OrganizeChart},
         data() {
             return {
                 OrganizeChartItems: [],
-                sheet:false,
-                sheetOperation:"",
-                selectedItem:null,
+                sheet: false,
+                sheetOperation: "",
+                selectedItem: null,
+                parentItem: null
             }
         },
         methods: {
@@ -56,29 +65,37 @@
                 this.sheetOperation = "insert";
                 this.sheet = !this.sheet;
                 this.selectedItem = {
-                    id:null,
-                    title:"",
+                    id: null,
+                    title: "",
                     companyId: parentItem.companyid,
-                    parent_id : parentItem.id,
-                    children:[]
+                    parent_id: parentItem.id,
+                    children: []
                 };
+                this.ParentItem = parentItem;
             },
-            addedChild(e){
+            addedChild(e) {
+                if (!this.ParentItem.children) {
+                    this.$set(this.ParentItem, "children", []);
+                }
+                this.ParentItem.children.push(e.itemAdded);
                 this.sheet = e.sheet;
+
             },
             deleteChild(item) {
-                alert("delete child");
                 console.log(item);
             },
             editChild(item) {
-                this.sheetOperation="update";
+                this.sheetOperation = "update";
                 this.sheet = !this.sheet;
                 this.selectedItem = item;
-                this.parentSelectedItem=null;
+            },
+            updatedItem(e) {
+                this.sheet = !this.sheet;
+                console.log(e);
             },
             closeSheet(e) {
                 this.sheet = e.sheet;
-            }
+            },
         },
         created() {
             this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView",

@@ -71,15 +71,15 @@
         },
         data() {
             return {
-                sheetOperation: this.operation,
             }
         },
         methods: {
             onSubmit() {
-                if (this.sheetOperation === "update") {
-                    this.closeDialog();
-                } else if (this.sheetOperation === "insert") {
-
+                if (this.operation==="insert"){
+                    this.$emit("item-added", {'sheet': false,"itemAdded":this.item});
+                }
+                else{
+                    this.$emit("item-updated", {'sheet': false,"itemUpdated":this.item});
                 }
             },
             closeDialog() {
