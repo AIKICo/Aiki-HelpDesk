@@ -65,7 +65,6 @@
                 this.sheetOperation = "insert";
                 this.sheet = !this.sheet;
                 this.selectedItem = {
-                    id: null,
                     title: "",
                     companyId: parentItem.companyid,
                     parent_id: parentItem.id,
@@ -77,9 +76,12 @@
                 if (!this.ParentItem.children) {
                     this.$set(this.ParentItem, "children", []);
                 }
-                this.ParentItem.children.push(e.itemAdded);
+                this.$store.dispatch("OrganizeChartService/addOrganizeChart", e.itemAdded).then((res)=>{
+                    if (res.status===201){
+                        this.ParentItem.children.push(e.itemAdded);
+                    }
+                })
                 this.sheet = e.sheet;
-
             },
             deleteChild(item) {
                 console.log(item);
