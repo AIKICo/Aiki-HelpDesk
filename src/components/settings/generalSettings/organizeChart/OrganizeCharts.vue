@@ -4,9 +4,16 @@
             <v-col>
                 <v-treeview
                         :items="OrganizeChartItems"
+                        :load-children="loadChildren"
+                        :active.sync="active"
+                        :open.sync="open"
                         item-key="id"
                         item-text="title"
-                        dense activatable shaped rounded open-on-click>
+                        activatable
+                        open-on-click
+                        dense
+                        rounded
+                        transition>
                     <template v-slot:label="{ item }">
                         <v-hover v-slot:default="{ hover }">
                             <div>
@@ -54,6 +61,8 @@
         data() {
             return {
                 OrganizeChartItems: [],
+                active: [],
+                open: [],
                 sheet: false,
                 sheetOperation: "",
                 selectedItem: null,
@@ -61,6 +70,11 @@
             }
         },
         methods: {
+            loadChildren(item) {
+                this.$store.dispatch("OrganizeChartService/loadChildOrganizeChart", item.id).then((res) => {
+                    item.children.push(...res.data);
+                })
+            },
             addChild(parentItem) {
                 this.sheetOperation = "insert";
                 this.sheet = !this.sheet;
@@ -76,8 +90,8 @@
                 if (!this.ParentItem.children) {
                     this.$set(this.ParentItem, "children", []);
                 }
-                this.$store.dispatch("OrganizeChartService/addOrganizeChart", e.itemAdded).then((res)=>{
-                    if (res.status===201){
+                this.$store.dispatch("OrganizeChartService/addOrganizeChart", e.itemAdded).then((res) => {
+                    if (res.status === 201) {
                         this.ParentItem.children.push(e.itemAdded);
                     }
                 })
@@ -100,9 +114,10 @@
             },
         },
         created() {
-            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView",
+            this.$store.dispatch("OrganizeChartService/loadParentOrganizeChart",
                 this.$route.params.id).then((res) => {
-                this.OrganizeChartItems = JSON.parse("[" + res.data[0].organizecharts + "]");
+                this.OrganizeChartItems = res.data;
+                this.$set(this.OrganizeChartItems[0], "children", []);
             })
         }
     }

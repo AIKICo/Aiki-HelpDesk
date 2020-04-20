@@ -5,8 +5,16 @@ const organizeChartService = {
     state: {},
     mutations: {},
     actions: {
-        async loadOrganizeChart() {
-            let response = (await OrganizeChart.api().get("/OrganizeCharts")).response;
+        async loadParentOrganizeChart(context, payload) {
+            let response = (await OrganizeChart.api().get("/OrganizeCharts/GetParentByCompanyId/" + payload)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
+        async loadChildOrganizeChart(context, payload) {
+            let response = (await OrganizeChart.api().get("/OrganizeCharts/GetChildByCompanyId/" + payload)).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {
