@@ -87,7 +87,11 @@
                 this.sheet = e.sheet;
             },
             deleteChild(item) {
-                console.log(item);
+                this.$store.dispatch("OrganizeChartService/deleteOrganizeChart", item.id).then((res) => {
+                    if (res.status === 200) {
+                        console.log("deleted");
+                    }
+                });
             },
             editChild(item) {
                 this.sheetOperation = "update";
@@ -97,7 +101,7 @@
             updatedItem(e) {
                 this.sheet = !this.sheet;
                 this.$store.dispatch("OrganizeChartService/editOrganizeChart", e.itemUpdated).then((res) => {
-                    if (res.status === 201) {
+                    if (res.status === 200) {
                         this.selectedItem = e.itemUpdated;
                     }
                 });
