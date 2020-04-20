@@ -4,13 +4,9 @@
             <v-col>
                 <v-treeview
                         :items="OrganizeChartItems"
-                        :load-children="loadChildren"
-                        :active.sync="active"
-                        :open.sync="open"
                         item-key="id"
                         item-text="title"
                         activatable
-                        open-on-click
                         dense
                         rounded
                         transition>
@@ -61,8 +57,6 @@
         data() {
             return {
                 OrganizeChartItems: [],
-                active: [],
-                open: [],
                 sheet: false,
                 sheetOperation: "",
                 selectedItem: null,
@@ -70,11 +64,6 @@
             }
         },
         methods: {
-            loadChildren(item) {
-                this.$store.dispatch("OrganizeChartService/loadChildOrganizeChart", item.id).then((res) => {
-                    item.children.push(...res.data);
-                })
-            },
             addChild(parentItem) {
                 this.sheetOperation = "insert";
                 this.sheet = !this.sheet;
@@ -92,9 +81,9 @@
                 }
                 this.$store.dispatch("OrganizeChartService/addOrganizeChart", e.itemAdded).then((res) => {
                     if (res.status === 201) {
-                        this.ParentItem.children.push(e.itemAdded);
+                        this.ParentItem.children.push(res.data);
                     }
-                })
+                });
                 this.sheet = e.sheet;
             },
             deleteChild(item) {
@@ -107,17 +96,20 @@
             },
             updatedItem(e) {
                 this.sheet = !this.sheet;
-                console.log(e);
+                this.$store.dispatch("OrganizeChartService/editOrganizeChart", e.itemUpdated).then((res) => {
+                    if (res.status === 201) {
+                        this.selectedItem = e.itemUpdated;
+                    }
+                });
             },
             closeSheet(e) {
                 this.sheet = e.sheet;
             },
         },
         created() {
-            this.$store.dispatch("OrganizeChartService/loadParentOrganizeChart",
+            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView",
                 this.$route.params.id).then((res) => {
-                this.OrganizeChartItems = res.data;
-                this.$set(this.OrganizeChartItems[0], "children", []);
+                this.OrganizeChartItems = JSON.parse(res.data[0].organizecharts);
             })
         }
     }
