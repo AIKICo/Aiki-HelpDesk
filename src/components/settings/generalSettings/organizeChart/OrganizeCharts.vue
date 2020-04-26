@@ -89,9 +89,20 @@
             deleteChild(item) {
                 this.$store.dispatch("OrganizeChartService/deleteOrganizeChart", item.id).then((res) => {
                     if (res.status === 200) {
-                        console.log("deleted");
+                        this.deleteFromJson(this.OrganizeChartItems, item.id);
                     }
                 });
+            },
+            deleteFromJson(itemArr, nId){
+                for (var i = 0; i < itemArr.length; i++) {
+                    if (itemArr[i].id && itemArr[i].id === nId) {
+                        itemArr.splice(i, 1);
+                    } else {
+                        if (itemArr[i].children) {
+                            this.deleteFromJson(itemArr[i].children, nId);
+                        }
+                    }
+                }
             },
             editChild(item) {
                 this.sheetOperation = "update";
@@ -111,9 +122,8 @@
             },
         },
         created() {
-            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView",
-                this.$route.params.id).then((res) => {
-                this.OrganizeChartItems = JSON.parse(res.data[0].organizecharts);
+            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView").then((res) => {
+                this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
             })
         }
     }

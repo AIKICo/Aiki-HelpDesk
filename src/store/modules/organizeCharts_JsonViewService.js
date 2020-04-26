@@ -5,8 +5,8 @@ const organizeCharts_JsonViewService = {
     state: {},
     mutations: {},
     actions: {
-        async loadOrganizeCharts_JsonView(context, payload) {
-            let response = (await OrganizeCharts_JsonView.api().get("/OrganizeChartsJsonView/GetByCompanyId/" + payload)).response;
+        async loadOrganizeCharts_JsonView() {
+            let response = (await OrganizeCharts_JsonView.api().get("/OrganizeChartsJsonView/GetByCompanyId")).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {
