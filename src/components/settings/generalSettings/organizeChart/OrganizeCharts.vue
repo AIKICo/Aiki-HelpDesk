@@ -71,7 +71,8 @@
                     title: "",
                     companyId: parentItem.companyid,
                     parent_id: parentItem.id,
-                    children: []
+                    children: [],
+                    additionalInfo:[]
                 };
                 this.ParentItem = parentItem;
             },
@@ -87,11 +88,13 @@
                 this.sheet = e.sheet;
             },
             deleteChild(item) {
-                this.$store.dispatch("OrganizeChartService/deleteOrganizeChart", item.id).then((res) => {
-                    if (res.status === 200) {
-                        this.deleteFromJson(this.OrganizeChartItems, item.id);
-                    }
-                });
+                if (item.parent_id!=null){
+                    this.$store.dispatch("OrganizeChartService/deleteOrganizeChart", item.id).then((res) => {
+                        if (res.status === 200) {
+                            this.deleteFromJson(this.OrganizeChartItems, item.id);
+                        }
+                    });
+                }
             },
             deleteFromJson(itemArr, nId){
                 for (var i = 0; i < itemArr.length; i++) {
