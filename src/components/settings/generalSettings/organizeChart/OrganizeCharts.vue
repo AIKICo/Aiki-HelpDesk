@@ -72,7 +72,7 @@
                     companyId: parentItem.companyid,
                     parent_id: parentItem.id,
                     children: [],
-                    additionalInfo:[]
+                    additionalinfo:[]
                 };
                 this.ParentItem = parentItem;
             },
