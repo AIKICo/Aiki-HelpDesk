@@ -34,8 +34,8 @@ const settingsService = {
         path: "/SettingsControlPanel",
         icon: "",
         items: [
-          { name: "Assets",label:"معرفی اموال", path: "/Assets", image: "" },
-          { name: "AssetsLocation",label:"موقعیت اموال", path: "/AssetsLocation", image: "" },
+          { name: "Assets",label:"معرفی اموال", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7e", image: "" },
+          { name: "AssetsLocation",label:"موقعیت اموال", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f", image: "" },
         ]
       },
     ]
