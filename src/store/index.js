@@ -20,6 +20,7 @@ import groupService from "./modules/groupService";
 import appConstantItemsService from "./modules/appContantItemsService";
 import organizeChartService from "./modules/organizeChartService";
 import organizeCharts_JsonViewService from "./modules/organizeCharts_JsonViewService";
+import assetService from "./modules/assetService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -31,6 +32,7 @@ import Group from "./models/Group";
 import AppConstantItem from "./models/AppConstantItem";
 import OrganizeChart from "./models/OrganizeChart";
 import OrganizeCharts_JsonView from "./models/OrganizeCharts_JsonView";
+import Asset from "./models/Asset";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -49,6 +51,7 @@ database.register(Group)
 database.register(AppConstantItem)
 database.register(OrganizeChart)
 database.register(OrganizeCharts_JsonView)
+database.register(Asset)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -80,7 +83,8 @@ export default new Vuex.Store({
         GroupService:groupService,
         AppConstantItemsService:appConstantItemsService,
         OrganizeChartService: organizeChartService,
-        OrganizeChartsJsonView: organizeCharts_JsonViewService
+        OrganizeChartsJsonView: organizeCharts_JsonViewService,
+        AssetService: assetService
     },
     getters: {}
 });
