@@ -54,7 +54,6 @@ const assetService = {
     getters: {
         getAssets: () => Asset.all(),
         getAsset: () => assetId => Asset.find(assetId),
-        getAssetsCount: () => Asset.all().length,
     }
 };
 
