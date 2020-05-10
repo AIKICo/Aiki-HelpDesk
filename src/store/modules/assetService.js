@@ -2,9 +2,58 @@ import Asset from "../models/Asset";
 
 const assetService = {
     namespaced: true,
-    state: {},
-    mutations: {},
+    state: {
+        currrent:[],
+        allAssets:[],
+        pagination: {
+            descending: true,
+            page: 1,
+            rowsPerPage: 20,
+            sortBy: "fat",
+            totalItems: 0,
+            rowsPerPageItems: [10, 20, 30, 40, 50],
+        },
+        totalItems: 0,
+        loader: false,
+    },
+    mutations: {
+        SET_LOADER(state, payload) {
+            state.loader = payload;
+        },
+        SET_CURRENT(state, payload) {
+            state.current = payload;
+        },
+        SET_TOTAL(state, paylod) {
+            state.totalItems = parseInt(paylod);
+            state.pagination.totalItems= paylod;
+        },
+    },
     actions: {
+        async loadPagingAssets({state, commit}, {rows, page}) {
+            commit("SET_LOADER", true);
+            var start = parseInt(rows) * (parseInt(page) - 1);
+            var end = start + parseInt(rows);
+            var list = state.allAssets.slice(start, end);
+            console.log(rows, page);
+            if (list.length > 0) {
+                commit("SET_CURRENT", list);
+                commit("SET_LOADER", false);
+                console.log(state.allAssets.length, state.allAssets);
+                console.log(list);
+            } else
+            {
+                let response = (await Asset.api().get("/Assets/rows/page")).response;
+                if (response.status === 200) {
+                    commit("SET_TOTAL", response.headers["x-total-count"]);
+                    commit("ADD_BOOKINGS", response.data);
+                    commit("SET_CURRENT", response.data);
+                    commit("SET_LOADER", false);
+                    return response;
+                } else if (response.data.error) {
+                    throw new Error("Something is wrong.");
+                }
+            }
+        },
         async loadAssets() {
             let response = (await Asset.api().get("/Assets")).response;
             if (response.status === 200) {

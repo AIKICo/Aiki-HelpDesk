@@ -16,6 +16,8 @@ import Group from "./components/settings/generalSettings/groups/Group";
 import AppConstantList from "./components/settings/generalSettings/appConstant/AppConstantList";
 import AppConstant from "./components/settings/generalSettings/appConstant/AppConstant";
 import OrganizeCharts from "./components/settings/generalSettings/organizeChart/OrganizeCharts";
+import AssetList from "./components/assetManagement/AssetList";
+import Asset from "./components/assetManagement/Asset";
 
 const routes = [
     {
@@ -158,7 +160,25 @@ const routes = [
         meta:{
             requiresAuth: true
         }
-    }
+    },
+    {
+        name: "AssetList",
+        path: "/AssetList",
+        component: AssetList,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "Asset",
+        path: "/Asset/:formType/:id",
+        component: Asset,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];
 
 const router = new VueRouter({
@@ -169,7 +189,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     var allowAddRecord = [
         "CustomerList", "OperationHoursList","SLASettings",
-        "Members","cartabl","Groups","AppConstants"];
+        "Members","cartabl","Groups","AppConstants","AssetList"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
