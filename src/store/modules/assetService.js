@@ -3,8 +3,8 @@ import Asset from "../models/Asset";
 const assetService = {
     namespaced: true,
     state: {
-        currrent:[],
-        allAssets:[],
+        current: [],
+        allAssets: [],
         pagination: {
             descending: true,
             page: 1,
@@ -25,7 +25,7 @@ const assetService = {
         },
         SET_TOTAL(state, paylod) {
             state.totalItems = parseInt(paylod);
-            state.pagination.totalItems= paylod;
+            state.pagination.totalItems = paylod;
         },
     },
     actions: {
@@ -34,18 +34,13 @@ const assetService = {
             var start = parseInt(rows) * (parseInt(page) - 1);
             var end = start + parseInt(rows);
             var list = state.allAssets.slice(start, end);
-            console.log(rows, page);
             if (list.length > 0) {
                 commit("SET_CURRENT", list);
                 commit("SET_LOADER", false);
-                console.log(state.allAssets.length, state.allAssets);
-                console.log(list);
-            } else
-            {
-                let response = (await Asset.api().get("/Assets/rows/page")).response;
+            } else {
+                let response = (await Asset.api().get(`/Assets/${rows}/${page}`)).response;
                 if (response.status === 200) {
                     commit("SET_TOTAL", response.headers["x-total-count"]);
-                    commit("ADD_BOOKINGS", response.data);
                     commit("SET_CURRENT", response.data);
                     commit("SET_LOADER", false);
                     return response;
@@ -54,10 +49,12 @@ const assetService = {
                 }
             }
         },
-        async loadAssets() {
+        async loadAssets({commit}) {
             let response = (await Asset.api().get("/Assets")).response;
             if (response.status === 200) {
-                return response;
+                commit("SET_TOTAL", response.headers["x-total-count"]);
+                commit("SET_CURRENT", response.data);
+                commit("SET_LOADER", false);
             } else if (response.data.error) {
                 throw new Error("Something is wrong.");
             }
