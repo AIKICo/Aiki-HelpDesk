@@ -8,9 +8,9 @@ export default class Asset extends Model {
       return{
           id: this.uid(() => this.$uuid.v4()),
           companyid: this.attr(null),
-          employeeid: this.uid(() => this.$uuid.v4()),
-          assetlocationid: this.uid(() => this.$uuid.v4()),
-          assettypeid: this.uid(() => this.$uuid.v4()),
+          employeeid: this.uid(null),
+          assetlocationid: this.uid(null),
+          assettypeid: this.uid(null),
           assetnumber: this.attr(''),
           assetadditionalinfo: this.attr([])
       };
