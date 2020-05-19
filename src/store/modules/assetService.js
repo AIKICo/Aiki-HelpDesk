@@ -1,4 +1,5 @@
 import Asset from "../models/Asset";
+import AssetsView from "../models/AssetsView";
 
 const assetService = {
     namespaced: true,
@@ -51,6 +52,16 @@ const assetService = {
         },
         async loadAssets({commit}) {
             let response = (await Asset.api().get("/Assets")).response;
+            if (response.status === 200) {
+                commit("SET_TOTAL", response.headers["x-total-count"]);
+                commit("SET_CURRENT", response.data);
+                commit("SET_LOADER", false);
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
+        async loadAssetsView({commit}) {
+            let response = (await AssetsView.api().get("/AssetsView")).response;
             if (response.status === 200) {
                 commit("SET_TOTAL", response.headers["x-total-count"]);
                 commit("SET_CURRENT", response.data);

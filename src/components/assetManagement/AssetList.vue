@@ -4,16 +4,16 @@
             <v-col cols="12">
                 <v-data-table
                         :headers="headers"
-                        item-key="id"
-                        multi-sort
                         :items="items"
                         class="elevation-1"
+                        item-key="id"
+                        multi-sort
                 >
                     <template v-slot:item="{ item }">
                         <tr
                                 :key="item.id"
-                                @mouseover="selectItem(item)"
                                 @mouseleave="unSelectItem()"
+                                @mouseover="selectItem(item)"
                         >
                             <td class="text-center">
                                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
@@ -21,30 +21,26 @@
                                     {{ item.assetnumber }}
                                 </v-chip>
                             </td>
+                            <td class="text-center">
+                                {{ item.title }}
+                            </td>
+                            <td class="text-center">
+                                {{ item.assettypeid }}
+                            </td>
+                            <td class="text-center">
+                                {{ item.assetlocationid }}
+                            </td>
                             <td>
                                 <div v-if="item === selectedItem">
-                                    <v-btn icon :color="$store.state.defaultColor" @click="showHistorySheet(item)">
-                                        <v-icon>mdi-history</v-icon>
+                                    <v-btn :color="$store.state.defaultColor" @click="closeTicket(item)" icon>
+                                        <v-icon>mdi-delete</v-icon>
                                     </v-btn>
                                     <v-btn
-                                            icon
-                                            :color="$store.state.defaultColor"
-                                            @click="nextStageTicket(item)"
-                                    >
-                                        <v-icon>mdi-check-circle</v-icon>
-                                    </v-btn>
-                                    <v-btn icon :color="$store.state.defaultColor" @click="closeTicket(item)">
-                                        <v-icon>mdi-close-circle</v-icon>
-                                    </v-btn>
-                                    <v-btn
-                                            icon
                                             :color="$store.state.defaultColor"
                                             @click="showStarsheet(item, 'rateTicket')"
+                                            icon
                                     >
                                         <v-icon>mdi-star</v-icon>
-                                    </v-btn>
-                                    <v-btn icon :color="$store.state.defaultColor" @click="rejectWorkOrder(item)">
-                                        <v-icon>mdi-cancel</v-icon>
                                     </v-btn>
                                 </div>
                                 <div v-if="item!=selectedItem">
@@ -75,6 +71,24 @@
                         align: "center",
                     },
                     {
+                        text: "تحویل گیرنده",
+                        value: "assetnumber",
+                        width: 150,
+                        align: "title",
+                    },
+                    {
+                        text: "نوع اموال",
+                        value: "assettypeid",
+                        width: 200,
+                        align: "title",
+                    },
+                    {
+                        text: "محل اموال",
+                        value: "assetlocationid",
+                        width: 200,
+                        align: "title",
+                    },
+                    {
                         text: "",
                         value: "actions",
                         align: "center",
@@ -96,7 +110,7 @@
         },
         methods: {
             ...mapActions({
-                getAssetList: "AssetService/loadAssets"
+                getAssetList: "AssetService/loadAssetsView"
             }),
             selectItem(item) {
                 this.selectedItem = item;
