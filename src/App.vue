@@ -106,6 +106,9 @@ export default {
       else if (this.$router.currentRoute.name === "AssetList"){
         this.$router.push("/Asset/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "cartabl"){
+        alert("add new ticket")
+      }
     }
   },
   mounted() {

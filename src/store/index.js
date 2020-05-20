@@ -7,7 +7,6 @@ import VuexORMSearch from '@vuex-orm/plugin-search'
 
 import isMobile from "mobile-device-detect";
 
-import WorkOrder from "./modules/WorkOrder";
 import menuService from "./modules/menuService";
 import userService from "./modules/userService";
 import settingsService from "./modules/settingsService";
@@ -21,6 +20,7 @@ import appConstantItemsService from "./modules/appContantItemsService";
 import organizeChartService from "./modules/organizeChartService";
 import organizeCharts_JsonViewService from "./modules/organizeCharts_JsonViewService";
 import assetService from "./modules/assetService";
+import ticketService from "./modules/ticketService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -34,6 +34,7 @@ import OrganizeChart from "./models/OrganizeChart";
 import OrganizeCharts_JsonView from "./models/OrganizeCharts_JsonView";
 import Asset from "./models/Asset";
 import AssetsView from "./models/AssetsView";
+import Ticket from "./models/Ticket";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -54,6 +55,7 @@ database.register(OrganizeChart)
 database.register(OrganizeCharts_JsonView)
 database.register(Asset)
 database.register(AssetsView)
+database.register(Ticket)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -73,7 +75,6 @@ export default new Vuex.Store({
     mutations: {},
     actions: {},
     modules: {
-        WorkOrderService: WorkOrder,
         MenuService: menuService,
         UserService: userService,
         SettingsService: settingsService,
@@ -86,7 +87,8 @@ export default new Vuex.Store({
         AppConstantItemsService:appConstantItemsService,
         OrganizeChartService: organizeChartService,
         OrganizeChartsJsonView: organizeCharts_JsonViewService,
-        AssetService: assetService
+        AssetService: assetService,
+        TicketService:ticketService
     },
     getters: {}
 });
