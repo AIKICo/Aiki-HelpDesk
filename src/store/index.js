@@ -33,6 +33,7 @@ import AppConstantItem from "./models/AppConstantItem";
 import OrganizeChart from "./models/OrganizeChart";
 import OrganizeCharts_JsonView from "./models/OrganizeCharts_JsonView";
 import Asset from "./models/Asset";
+import AssetsView from "./models/AssetsView";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -52,6 +53,7 @@ database.register(AppConstantItem)
 database.register(OrganizeChart)
 database.register(OrganizeCharts_JsonView)
 database.register(Asset)
+database.register(AssetsView)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],

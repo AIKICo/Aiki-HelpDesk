@@ -26,7 +26,7 @@
                                 </v-btn>
                                 <v-btn v-if="hover" icon @click="editChild(item)">
                                     <v-icon :color="$store.state.defaultColor">
-                                        mdi-cursor-text
+                                        mdi-content-save-edit-outline
                                     </v-icon>
                                 </v-btn>
                             </div>

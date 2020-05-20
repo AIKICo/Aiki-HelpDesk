@@ -2,12 +2,25 @@
     <v-container>
         <v-row>
             <v-col cols="12">
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="searchKey"
+                        append-icon="mdi-magnify"
+                        label="جستجو بر اساس شماره اموال"
+                        single-line
+                        hide-details
+                ></v-text-field>
                 <v-data-table
+                        :footer-props="{
+                                            'items-per-page-options': [50, 100, 150, 200, 250]
+                                          }"
                         :headers="headers"
                         :items="items"
+                        :items-per-page="itemPerPage"
                         class="elevation-1"
                         item-key="id"
                         multi-sort
+                        :search="searchKey"
                 >
                     <template v-slot:item="{ item }">
                         <tr
@@ -32,15 +45,15 @@
                             </td>
                             <td>
                                 <div v-if="item === selectedItem">
-                                    <v-btn :color="$store.state.defaultColor" @click="closeTicket(item)" icon>
+                                    <v-btn :color="$store.state.defaultColor" @click="delAsset(item)" icon>
                                         <v-icon>mdi-delete</v-icon>
                                     </v-btn>
                                     <v-btn
                                             :color="$store.state.defaultColor"
-                                            @click="showStarsheet(item, 'rateTicket')"
+                                            @click="editAsset(item)"
                                             icon
                                     >
-                                        <v-icon>mdi-star</v-icon>
+                                        <v-icon>mdi-content-save-edit-outline</v-icon>
                                     </v-btn>
                                 </div>
                                 <div v-if="item!=selectedItem">
@@ -67,33 +80,33 @@
                     {
                         text: "شماره اموال",
                         value: "assetnumber",
-                        width: 60,
+                        width: 100,
                         align: "center",
                     },
                     {
                         text: "تحویل گیرنده",
                         value: "assetnumber",
                         width: 150,
-                        align: "title",
+                        align: "center",
                     },
                     {
                         text: "نوع اموال",
                         value: "assettypeid",
-                        width: 200,
-                        align: "title",
+                        width: 150,
+                        align: "center",
                     },
                     {
                         text: "محل اموال",
                         value: "assetlocationid",
                         width: 200,
-                        align: "title",
+                        align: "center",
                     },
                     {
                         text: "",
                         value: "actions",
                         align: "center",
                         sortable: false,
-                        width: "350px"
+                        width: "150px"
                     }
                 ],
                 expanded: [],
@@ -101,6 +114,8 @@
                 selectedItem: false,
                 editedIndex: -1,
                 editedItem: [],
+                itemPerPage: 50,
+                searchKey: ""
             }
         },
         computed: {
@@ -110,7 +125,8 @@
         },
         methods: {
             ...mapActions({
-                getAssetList: "AssetService/loadAssetsView"
+                getAssetList: "AssetService/loadAssetsView",
+                deleteAsset: "AssetService/deleteAsset"
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -118,6 +134,16 @@
             unSelectItem() {
                 this.selectedItem = false;
             },
+            delAsset(item) {
+                this.deleteAsset({"id": item.id}).then(() => {
+                    //this.getAssetList();
+                    var index = this.items.indexOf(item);
+                    this.items.splice(index, 1);
+                })
+            },
+            editAsset(item) {
+                this.$router.push("/Asset/Edit/" + item.id);
+            }
         },
         created() {
             this.getAssetList();

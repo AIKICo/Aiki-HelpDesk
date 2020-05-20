@@ -132,7 +132,6 @@
         data() {
             return {
                 Asset: null,
-                AssetAdditionalInfo: [],
                 Employes: [],
                 EmployeSearchKey:"",
                 AssetLocations: [],
@@ -190,7 +189,7 @@
                     assetlocationid:"",
                     assettypeid:"",
                     assetnumber:"",
-                    assetadditionalinfo: this.AssetAdditionalInfo
+                    assetadditionalinfo: []
                 };
             }
         }
