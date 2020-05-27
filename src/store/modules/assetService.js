@@ -70,6 +70,14 @@ const assetService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadAsset(state,payload) {
+            let response = (await Asset.api().get("/Assets/"+payload)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async addAsset(context, payload) {
             let response = (await Asset.api().post("/Assets", payload))
                 .response;
@@ -110,7 +118,6 @@ const assetService = {
     },
     getters: {
         getAssets: () => Asset.all(),
-        getAsset: () => assetId => Asset.find(assetId),
     }
 };
 

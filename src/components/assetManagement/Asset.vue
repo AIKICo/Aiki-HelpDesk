@@ -163,9 +163,6 @@
             closeDialog() {
                 this.$router.push("/AssetList");
             },
-            getAsset(id) {
-                return this.$store.getters["AssetService/getAsset"](id);
-            }
         },
         created() {
             this.$store.dispatch("OrganizeChartService/loadOrganizeChart").then((res) => {
@@ -181,7 +178,9 @@
             });
 
             if (this.$route.params.formType === "Edit") {
-                this.Asset = this.getAsset(this.$route.params.id);
+                this.$store.dispatch("AssetService/loadAsset",this.$route.params.id).then((res)=>{
+                    this.Asset = res.data;
+                });
             } else if (this.$route.params.formType === "Insert") {
                 this.Asset = {
                     companyid: this.$store.state.companyId,
