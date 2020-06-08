@@ -18,12 +18,22 @@ import AppConstant from "./components/settings/generalSettings/appConstant/AppCo
 import OrganizeCharts from "./components/settings/generalSettings/organizeChart/OrganizeCharts";
 import AssetList from "./components/assetManagement/AssetList";
 import Asset from "./components/assetManagement/Asset";
+import Ticket from "./components/tickets/Ticket";
 
 const routes = [
     {
         name: "cartabl",
         path: "/cartabl",
         component: cartabl,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "Ticket",
+        path: "/Ticket/:formType/:id",
+        component: Ticket,
+        props: true,
         meta: {
             requiresAuth: true
         }
