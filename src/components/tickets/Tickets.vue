@@ -39,7 +39,10 @@
                             <td class="text-center">{{ item.ticketcategory }}</td>
                             <td class="text-center">{{ item.tickettags }}</td>
                             <td class="text-center">
-                                <b>{{ item.asset }}</b>
+                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                        :text-color="$store.state.defaultColor">
+                                    <b>{{ item.asset }}</b>
+                                </v-chip>
                             </td>
                             <td>
                                 <div v-if="item === selectedItem">
@@ -110,6 +113,7 @@
             activeComponent: "",
             activeComponentProperty: {},
             headers: [
+                {text: "", value: "", align: "center"},
                 {text: "تاریخ ثبت", value: "registerdate", align: "center"},
                 {text: "نوع درخواست", value: "tickettype", align: "center"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
