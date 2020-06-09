@@ -1,4 +1,5 @@
 import Ticket from "../models/Ticket";
+import TicketsView from "../models/TicketsView";
 
 const ticketService = {
     namespaced: true,
@@ -17,7 +18,7 @@ const ticketService = {
     actions: {
         async loadTickets({commit}) {
             commit("SET_LOADER", true);
-            let response = (await Ticket.api().get("/Tickets")).response;
+            let response = (await TicketsView.api().get("/TicketsView")).response;
             if (response.status === 200) {
                 commit("SET_CURRENT", response.data);
                 commit("SET_LOADER", false);

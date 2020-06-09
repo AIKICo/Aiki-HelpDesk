@@ -35,6 +35,7 @@ import OrganizeCharts_JsonView from "./models/OrganizeCharts_JsonView";
 import Asset from "./models/Asset";
 import AssetsView from "./models/AssetsView";
 import Ticket from "./models/Ticket";
+import TicketsView from "./models/TicketsView";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -56,6 +57,7 @@ database.register(OrganizeCharts_JsonView)
 database.register(Asset)
 database.register(AssetsView)
 database.register(Ticket)
+database.register(TicketsView)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
