@@ -142,7 +142,8 @@
         methods: {
             ...mapActions({
                 getTickets: "TicketService/loadTickets",
-                deleteTicket: "TicketService/deleteTicket"
+                deleteTicket: "TicketService/deleteTicket",
+                getTicketHistories:"TicketHistoryService/loadTicketHistories"
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -151,17 +152,17 @@
                 this.selectedItem = false;
             },
             showHistorySheet(workorder) {
+                console.log(workorder);
                 this.activeComponent = "ticket-timeline";
                 this.selectedWorkOrder = workorder;
-                this.$store
-                    .dispatch("WorkOrderService/getTicketReports", {wono: this.selectedWorkOrder.woNo})
+                this.getTicketHistories(this.selectedWorkOrder.id)
                     .then(response => {
                         this.sheet = !this.sheet;
                         this.activeComponentProperty = {
                             sheet: this.sheet,
                             wonoReports: response.data,
                             workorder: workorder,
-                            wono: workorder.woNo
+                            wono: workorder.id
                         };
                     });
             },

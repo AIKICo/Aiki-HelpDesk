@@ -21,6 +21,7 @@ import organizeChartService from "./modules/organizeChartService";
 import organizeCharts_JsonViewService from "./modules/organizeCharts_JsonViewService";
 import assetService from "./modules/assetService";
 import ticketService from "./modules/ticketService";
+import ticketHistoryService from "./modules/ticketHistoryService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -36,6 +37,7 @@ import Asset from "./models/Asset";
 import AssetsView from "./models/AssetsView";
 import Ticket from "./models/Ticket";
 import TicketsView from "./models/TicketsView";
+import TicketHistory from "./models/TicketHistory";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -49,15 +51,16 @@ database.register(Company);
 database.register(Customer);
 database.register(OperatingHour);
 database.register(SLASetting);
-database.register(Member)
-database.register(Group)
-database.register(AppConstantItem)
-database.register(OrganizeChart)
-database.register(OrganizeCharts_JsonView)
-database.register(Asset)
-database.register(AssetsView)
-database.register(Ticket)
-database.register(TicketsView)
+database.register(Member);
+database.register(Group);
+database.register(AppConstantItem);
+database.register(OrganizeChart);
+database.register(OrganizeCharts_JsonView);
+database.register(Asset);
+database.register(AssetsView);
+database.register(Ticket);
+database.register(TicketsView);
+database.register(TicketHistory);
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -90,7 +93,8 @@ export default new Vuex.Store({
         OrganizeChartService: organizeChartService,
         OrganizeChartsJsonView: organizeCharts_JsonViewService,
         AssetService: assetService,
-        TicketService:ticketService
+        TicketService:ticketService,
+        TicketHistoryService: ticketHistoryService
     },
     getters: {}
 });
