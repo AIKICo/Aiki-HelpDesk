@@ -34,6 +34,14 @@
                                     {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
                                 </v-icon>
                             </td>
+
+                            <td class="text-center">
+                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                        :text-color="$store.state.defaultColor">
+                                    <b>{{ item.ticketfriendlynumber }}</b>
+                                </v-chip>
+                            </td>
+                            <td class="text-center">{{ item.agentname }}</td>
                             <td class="text-center">{{ item.registerdate }}</td>
                             <td class="text-center">{{ item.tickettype }}</td>
                             <td class="text-center">{{ item.ticketcategory }}</td>
@@ -114,7 +122,9 @@
             activeComponentProperty: {},
             headers: [
                 {text: "", value: "", align: "center"},
-                {text: "تاریخ ثبت", value: "registerdate", align: "center"},
+                {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
+                {text: "انجام دهنده", value: "agentname", align: "center"},
+                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "250px"},
                 {text: "نوع درخواست", value: "tickettype", align: "center"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
                 {text: "برچسب درخواست", value: "tickettags", align: "center"},
