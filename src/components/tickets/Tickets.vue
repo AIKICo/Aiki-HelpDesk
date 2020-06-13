@@ -124,7 +124,7 @@
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
                 {text: "انجام دهنده", value: "agentname", align: "center"},
-                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "250px"},
+                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "180px"},
                 {text: "نوع درخواست", value: "tickettype", align: "center"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
                 {text: "برچسب درخواست", value: "tickettags", align: "center"},
@@ -153,6 +153,7 @@
             ...mapActions({
                 getTickets: "TicketService/loadTickets",
                 deleteTicket: "TicketService/deleteTicket",
+                patchTicket: "TicketService/patchTicket",
                 getTicketHistories:"TicketHistoryService/loadTicketHistories"
             }),
             selectItem(item) {
@@ -221,6 +222,24 @@
                 };
                 if ("workorder" in e) {
                     console.log(e.workorder);
+                }
+                if ("actionName" in e){
+                    if (e.dialogResult==="ok"){
+                        switch (e.actionName) {
+                            case "setRate":
+                                this.patchTicket({
+                                    id: this.selectedWorkOrder.id,
+                                    patchDoc:[
+                                        {
+                                            op:"replace",
+                                            path:"/ticketrate",
+                                            value:e.rate
+                                        }
+                                    ]
+                                })
+                                break;
+                        }
+                    }
                 }
             }
         },

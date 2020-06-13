@@ -4,16 +4,16 @@
       <v-card>
         <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">ارزیابی ناظر درخواست {{workorder.woNo}}</v-card-title>
         <v-card-text class="text-center">
-          <v-rating v-model="workorder.manageRate" :color="$store.state.defaultColor"></v-rating>
+          <v-rating v-model="workorder.ticketrate" :color="$store.state.defaultColor"></v-rating>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn :color="$store.state.defaultColor +  ' darken-1'" text @click="closeDialog">
+          <v-btn :color="$store.state.defaultColor +  ' darken-1'" text @click="closeDialog('OK')">
             تایید
           </v-btn>
-          <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog">
+          <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog('Cancel')">
             انصراف
           </v-btn>
         </v-card-actions>
@@ -29,8 +29,14 @@ export default {
   data: () => ({
   }),
   methods: {
-    closeDialog() {
-      this.$emit("close-sheet", {'sheet':false, 'rate':this.workorder.manageRate});
+    closeDialog(action) {
+      if (action==="OK")
+      {
+        this.$emit("close-sheet", {"sheet":false, "rate":this.workorder.ticketrate, "actionName":"setRate", "dialogResult":"ok"});
+      }
+      else{
+        this.$emit("close-sheet", {"sheet":false, "rate":this.workorder.ticketrate, "actionName":"setRate","dialogResult":"cancel"});
+      }
     },
   }
 };

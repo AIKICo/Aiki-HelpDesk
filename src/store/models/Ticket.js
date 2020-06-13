@@ -15,6 +15,8 @@ export default class Ticket extends Model{
             ticketcategory: this.attr(null),
             tickettags: this.attr(null),
             asset: this.attr(''),
+            ticketrate: this.attr(null),
+            ticketfriendlynumber:this.attr('')
         }
     }
 }
