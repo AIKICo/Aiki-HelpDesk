@@ -9,6 +9,8 @@
                         :hide-default-footer="true"
                         :items="this.items"
                         :single-expand="singleExpand"
+                        :sort-by="['ticketfriendlynumber']"
+                        :sort-desc="[true]"
                         class="elevation-1"
                         item-key="id"
                 >
@@ -163,6 +165,7 @@
                 this.selectedItem = false;
             },
             showHistorySheet(workorder) {
+
                 console.log(workorder);
                 this.activeComponent = "ticket-timeline";
                 this.selectedWorkOrder = workorder;
