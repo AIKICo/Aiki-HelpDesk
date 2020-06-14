@@ -13,8 +13,9 @@ const memberService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async loadMember(Id) {
-            let response = (await Member.api().get("/Users/" + Id)).response;
+        async loadMember(payload) {
+             console.log(payload);
+            let response = (await Member.api().get("/Users/" + payload)).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {

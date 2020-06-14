@@ -7,7 +7,9 @@
             transition="dialog-bottom-transition">
         <v-sheet class="text-center">
             <v-card>
-                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت درخواست {{workorder.woNo}}</v-card-title>
+                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت
+                    درخواست {{workorder.woNo}}
+                </v-card-title>
                 <v-card-text class="text-center">
                     <v-form class="mt-3">
                         <v-textarea
@@ -25,11 +27,12 @@
                                 :items="Members"
                                 item-text="membername"
                                 item-value="id"
-                                v-model="nextstageAgent"
+                                v-model="nextstageAgentId"
                                 label="درخواست ارجاع داده شود به"
                                 shaped
                                 outlined
-                                    chips
+                                chips
+                                v-on:change="getText"
                         >
                         </v-select>
                         <v-checkbox
@@ -54,36 +57,44 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import {mapActions} from 'vuex'
+
     export default {
         name: "NextStageTicket",
-        data:()=>{
+        data: () => {
             return {
-                comment:"",
-                endWorkOrder:false,
-                nextstageAgent:null,
-                Members:[]
+                comment: "",
+                endWorkOrder: false,
+                nextstageAgentId: null,
+                choiceText:"",
+                Members: []
             }
         },
         props: ["sheet", "workorder"],
         methods: {
             ...mapActions({
-               getMembers:"MemberService/loadMembers"
+                getMembers: "MemberService/loadMembers"
             }),
             closeDialog(dialogResult) {
                 this.$emit("close-sheet", {
                     sheet: false,
                     workorder: this.workorder,
-                    actionName:"nextStage",
-                    dialogResult:dialogResult,
+                    actionName: "nextStage",
+                    dialogResult: dialogResult,
                     historyComment: this.comment,
                     endTicket: this.endWorkOrder,
-                    nextStageAgentName: this.nextstageAgent
+                    nextStageAgentId: this.nextstageAgentId,
+                    nesxtStageAgentName: this.choiceText
                 });
+            },
+            getText (e) {
+                this.choiceText = this.Members.find(obj=>{
+                    return obj.id == e
+                }).membername;
             }
         },
         created() {
-            this.getMembers().then((res)=>{
+            this.getMembers().then((res) => {
                 this.Members = res.data;
             });
         }

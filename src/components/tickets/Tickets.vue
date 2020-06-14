@@ -127,9 +127,9 @@
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
                 {text: "انجام دهنده", value: "agentname", align: "center", width: "155px"},
                 {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "165px"},
-                {text: "نوع درخواست", value: "tickettype", align: "center", width: "120px"},
-                {text: "گروه درخواست", value: "ticketcategory", align: "center"},
-                {text: "برچسب درخواست", value: "tickettags", align: "center", width: "110px"},
+                {text: "نوع", value: "tickettype", align: "center", width: "120px"},
+                {text: "گروه", value: "ticketcategory", align: "center"},
+                {text: "برچسب", value: "tickettags", align: "center", width: "110px"},
                 {text: "شماره اموال", value: "asset", align: "center"},
                 {
                     text: "",
@@ -258,9 +258,21 @@
                                         this.addTicketHistory({
                                             ticketid:this.selectedWorkOrder.id,
                                             companyid:this.$store.state.companyId,
-                                            historycomment: e.historyComment,
-                                            agentname:e.nextStageAgentName===null ? this.$store.state.memberName : e.nextStageAgentName
+                                            historycomment:`درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
+                                            agentname:null
                                         })
+                                        setTimeout(() =>
+                                        {
+                                            this.addTicketHistory({
+                                                ticketid:this.selectedWorkOrder.id,
+                                                companyid:this.$store.state.companyId,
+                                                historycomment: e.historyComment,
+                                                agentname:e.nesxtStageAgentName
+                                            }).then(()=>{
+                                                this.selectedWorkOrder.agentname = e.nesxtStageAgentName;
+                                            })
+                                        }, 1000);
+
                                     }
                                 }
                                 else{
