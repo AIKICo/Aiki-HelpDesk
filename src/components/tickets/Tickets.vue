@@ -126,7 +126,7 @@
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
                 {text: "انجام دهنده", value: "agentname", align: "center", width: "240px"},
-                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "180px"},
+                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "170px"},
                 {text: "نوع درخواست", value: "tickettype", align: "center"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
                 {text: "برچسب درخواست", value: "tickettags", align: "center", width: "130px"},
