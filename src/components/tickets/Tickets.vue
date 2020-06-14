@@ -156,8 +156,8 @@
                 getTickets: "TicketService/loadTickets",
                 deleteTicket: "TicketService/deleteTicket",
                 patchTicket: "TicketService/patchTicket",
-                getTicketHistories:"TicketHistoryService/loadTicketHistories",
-                addTicketHistory:"TicketHistoryService/addTicketHistory",
+                getTicketHistories: "TicketHistoryService/loadTicketHistories",
+                addTicketHistory: "TicketHistoryService/addTicketHistory",
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -173,7 +173,7 @@
                         this.sheet = !this.sheet;
                         this.activeComponentProperty = {
                             sheet: this.sheet,
-                            wonoReports:this.lodash.orderBy(response.data,"historydate","desc"),
+                            wonoReports: this.lodash.orderBy(response.data, "historydate", "desc"),
                             workorder: workorder,
                             wono: workorder.ticketfriendlynumber
                         };
@@ -192,16 +192,22 @@
                 this.selectedWorkOrder = workorder;
                 this.patchTicket({
                     id: this.selectedWorkOrder.id,
-                    patchDoc:[
+                    patchDoc: [
                         {
-                            op:"replace",
-                            path:"/tickettype",
-                            value:"9e2a917a-fd55-4483-9270-e2a7fa3d69c0"
+                            op: "replace",
+                            path: "/tickettype",
+                            value: "9e2a917a-fd55-4483-9270-e2a7fa3d69c0"
                         }
                     ]
-                }).then((res)=>{
-                    if (res.status==200){
-                            this.selectedWorkOrder.tickettype="رد درخواست"
+                }).then((res) => {
+                    if (res.status == 200) {
+                        this.selectedWorkOrder.tickettype = "رد درخواست";
+                        this.addTicketHistory({
+                            ticketid: this.selectedWorkOrder.id,
+                            companyid: this.$store.state.companyId,
+                            historycomment: "درخواست لغو گردید",
+                            agentname: null
+                        })
                     }
                 });
             },
@@ -212,13 +218,6 @@
                 this.activeComponentProperty = {
                     sheet: this.sheet,
                     workorder: workorder,
-                    commentItems: [
-                        {consCommentCode: 25, consCommentText: "نصب سیستم عامل"},
-                        {consCommentCode: 26, consCommentText: "رفع ایراد سخت افزاری"},
-                        {consCommentCode: 27, consCommentText: "تعویض تونر"},
-                        {consCommentCode: 28, consCommentText: "نصب و راه اندازی سیستم عامل"},
-                        {consCommentCode: 29, consCommentText: "نصب و راه اندازی سیستم عامل"}
-                    ]
                 };
             },
             nextStageTicket(workorder) {
@@ -236,63 +235,69 @@
                     sheet: this.sheet,
                     workorder: this.selectedWorkOrder
                 };
-                if ("actionName" in e){
-                    if (e.dialogResult==="ok"){
+                if ("actionName" in e) {
+                    if (e.dialogResult === "ok") {
                         switch (e.actionName) {
                             case "setRate":
                                 this.patchTicket({
                                     id: this.selectedWorkOrder.id,
-                                    patchDoc:[
+                                    patchDoc: [
                                         {
-                                            op:"replace",
-                                            path:"/ticketrate",
-                                            value:e.rate
+                                            op: "replace",
+                                            path: "/ticketrate",
+                                            value: e.rate
                                         }
                                     ]
                                 });
                                 break;
-                        case "nextStage":
-                            if (e.dialogResult==="ok"){
-                                if (e.endTicket===false){
-                                    if (e.historyComment!=""){
-                                        this.addTicketHistory({
-                                            ticketid:this.selectedWorkOrder.id,
-                                            companyid:this.$store.state.companyId,
-                                            historycomment:`درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
-                                            agentname:null
-                                        })
-                                        setTimeout(() =>
-                                        {
+                            case "nextStage":
+                                if (e.dialogResult === "ok") {
+                                    if (e.endTicket === false) {
+                                        if (e.historyComment != "") {
                                             this.addTicketHistory({
-                                                ticketid:this.selectedWorkOrder.id,
-                                                companyid:this.$store.state.companyId,
-                                                historycomment: e.historyComment,
-                                                agentname:e.nesxtStageAgentName
+                                                ticketid: this.selectedWorkOrder.id,
+                                                companyid: this.$store.state.companyId,
+                                                historycomment: `درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
+                                                agentname: null
                                             }).then(()=>{
-                                                this.selectedWorkOrder.agentname = e.nesxtStageAgentName;
-                                            })
+                                                setTimeout(()=>{
+                                                    this.addTicketHistory({
+                                                        ticketid: this.selectedWorkOrder.id,
+                                                        companyid: this.$store.state.companyId,
+                                                        historycomment: e.historyComment,
+                                                        agentname: e.nesxtStageAgentName
+                                                    }).then(() => {
+                                                        this.selectedWorkOrder.agentname = e.nesxtStageAgentName;
+                                                    });
+                                                },1000);
+                                            });
+                                        }
+                                    } else {
+                                        this.addTicketHistory({
+                                            ticketid: this.selectedWorkOrder.id,
+                                            companyid: this.$store.state.companyId,
+                                            historycomment: e.historyComment,
+                                            agentname: this.$store.state.memberName
+                                        });
+                                        setTimeout(()=>{
+                                            this.patchTicket({
+                                                id: this.selectedWorkOrder.id,
+                                                patchDoc: [
+                                                    {
+                                                        op: "replace",
+                                                        path: "/tickettype",
+                                                        value: "e746ba44-ccf0-4159-a60d-1f147656bdfc"
+                                                    }
+                                                ]
+                                            }).then((res) => {
+                                                if (res.status == 200) {
+                                                    this.selectedWorkOrder.tickettype = "بسته"
+                                                }
+                                            });
                                         }, 1000);
-
                                     }
                                 }
-                                else{
-                                    this.patchTicket({
-                                        id: this.selectedWorkOrder.id,
-                                        patchDoc:[
-                                            {
-                                                op:"replace",
-                                                path:"/tickettype",
-                                                value:"e746ba44-ccf0-4159-a60d-1f147656bdfc"
-                                            }
-                                        ]
-                                    }).then((res)=>{
-                                        if (res.status==200){
-                                            this.selectedWorkOrder.tickettype="بسته"
-                                        }
-                                    });
-                                }
-                            }
-                            break;
+                                break;
                         }
                     }
                 }

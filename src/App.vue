@@ -109,6 +109,9 @@ export default {
       else if (this.$router.currentRoute.name === "cartabl"){
         this.$router.push("/Ticket/Insert/undefined");
       }
+      else if (this.$router.currentRoute.name === "root"){
+        this.$router.push("/Ticket/Insert/undefined");
+      }
     }
   },
   mounted() {

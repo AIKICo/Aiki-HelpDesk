@@ -8,38 +8,46 @@
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت
-                    درخواست {{workorder.woNo}}
+                    درخواست {{workorder.ticketfriendlynumber}}
                 </v-card-title>
                 <v-card-text class="text-center">
                     <v-form class="mt-3">
-                        <v-textarea
-                                v-model="comment"
-                                type="number"
-                                label="شرح درخواست"
-                                outlined
-                                shaped
-                                auto-grow
-                                autofocus
-                                :disabled="endWorkOrder"
-                                :color="$store.state.defaultColor"
-                        ></v-textarea>
-                        <v-select
-                                :items="Members"
-                                item-text="membername"
-                                item-value="id"
-                                v-model="nextstageAgentId"
-                                label="درخواست ارجاع داده شود به"
-                                shaped
-                                outlined
-                                chips
-                                v-on:change="getText"
-                        >
-                        </v-select>
-                        <v-checkbox
-                                v-model="endWorkOrder"
-                                label="اعلان پایان کار درخواست"
-                                :color="$store.state.defaultColor"
-                        ></v-checkbox>
+                        <validationObserver>
+                            <validation-provider
+                                    v-slot="{ errors }"
+                                    name="شرح مختصر اقدام صورت گرفته"
+                                    rules="required"
+                            >
+                                <v-textarea
+                                        v-model="comment"
+                                        label="شرح مختصر اقدام صورت گرفته"
+                                        outlined
+                                        shaped
+                                        auto-grow
+                                        autofocus
+                                        :color="$store.state.defaultColor"
+                                        :error-messages="errors"
+                                ></v-textarea>
+                            </validation-provider>
+                            <v-select
+                                    :items="Members"
+                                    item-text="membername"
+                                    item-value="id"
+                                    v-model="nextstageAgentId"
+                                    label="درخواست ارجاع داده شود به"
+                                    shaped
+                                    outlined
+                                    chips
+                                    :disabled="endWorkOrder"
+                                    v-on:change="getText"
+                            >
+                            </v-select>
+                            <v-checkbox
+                                    v-model="endWorkOrder"
+                                    label="اعلان پایان کار درخواست"
+                                    :color="$store.state.defaultColor"
+                            ></v-checkbox>
+                        </validationObserver>
                     </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -58,7 +66,18 @@
 
 <script>
     import {mapActions} from 'vuex'
-
+    import {
+        extend,
+        ValidationObserver,
+        ValidationProvider,
+        setInteractionMode
+    } from "vee-validate";
+    import {required} from "vee-validate/dist/rules";
+    setInteractionMode("eager");
+    extend("required", {
+        ...required,
+        message: "{_field_} نمی تواند خالی باشد"
+    });
     export default {
         name: "NextStageTicket",
         data: () => {
@@ -70,12 +89,20 @@
                 Members: []
             }
         },
+        components: {
+            ValidationObserver,
+            ValidationProvider
+        },
         props: ["sheet", "workorder"],
         methods: {
             ...mapActions({
                 getMembers: "MemberService/loadMembers"
             }),
             closeDialog(dialogResult) {
+                if (dialogResult==="ok")
+                {
+                    if (this.comment==="") return;
+                }
                 this.$emit("close-sheet", {
                     sheet: false,
                     workorder: this.workorder,
@@ -97,6 +124,9 @@
             this.getMembers().then((res) => {
                 this.Members = res.data;
             });
+            this.Members=[];
+            this.nextstageAgentId=null;
+            this.choiceText="";
         }
     }
 </script>
