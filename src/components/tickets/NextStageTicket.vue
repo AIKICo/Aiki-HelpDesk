@@ -25,10 +25,10 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn :color="$store.state.defaultColor +  ' darken-1'" text @click="closeDialog">
+                    <v-btn :color="$store.state.defaultColor +  ' darken-1'" text @click="closeDialog('ok')">
                         تایید
                     </v-btn>
-                    <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog">
+                    <v-btn :color="$store.state.defaultColor + ' darken-1'" text @click="closeDialog('cancel')">
                         انصراف
                     </v-btn>
                 </v-card-actions>
@@ -42,14 +42,21 @@
         name: "NextStageTicket",
         data:()=>{
             return {
-                comment:'',
+                comment:"",
                 endWorkOrder:false
             }
         },
         props: ["sheet", "workorder"],
         methods: {
-            closeDialog() {
-                this.$emit("close-sheet", { sheet: false, workorder: this.workorder });
+            closeDialog(dialogResult) {
+                this.$emit("close-sheet", {
+                    sheet: false,
+                    workorder: this.workorder,
+                    actionName:"nextStage",
+                    dialogResult:dialogResult,
+                    historyComment: this.comment,
+                    endTicket: this.endWorkOrder
+                });
             }
         }
     }

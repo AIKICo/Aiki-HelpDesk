@@ -2,8 +2,8 @@
     <v-bottom-sheet v-model="sheet" inset scrollable persistent>
         <v-sheet class="text-center">
             <v-card>
-                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تاریخچه
-                    درخواست {{this.wono}}
+                <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">
+                     <span>رویدادنگاری  </span><b> {{this.wono}}</b>
                 </v-card-title>
                 <v-card-text class="text-center" style="overflow-y: scroll;max-height: 600px;">
                     <v-btn

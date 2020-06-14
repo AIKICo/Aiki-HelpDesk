@@ -125,18 +125,18 @@
             headers: [
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
-                {text: "انجام دهنده", value: "agentname", align: "center"},
+                {text: "انجام دهنده", value: "agentname", align: "center", width: "240px"},
                 {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "180px"},
                 {text: "نوع درخواست", value: "tickettype", align: "center"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
-                {text: "برچسب درخواست", value: "tickettags", align: "center"},
+                {text: "برچسب درخواست", value: "tickettags", align: "center", width: "130px"},
                 {text: "شماره اموال", value: "asset", align: "center"},
                 {
                     text: "",
                     value: "actions",
                     align: "center",
                     sortable: false,
-                    width: "350px"
+                    width: "220px"
                 }
             ]
         }),
@@ -156,7 +156,8 @@
                 getTickets: "TicketService/loadTickets",
                 deleteTicket: "TicketService/deleteTicket",
                 patchTicket: "TicketService/patchTicket",
-                getTicketHistories:"TicketHistoryService/loadTicketHistories"
+                getTicketHistories:"TicketHistoryService/loadTicketHistories",
+                addTicketHistory:"TicketHistoryService/addTicketHistory"
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -165,8 +166,6 @@
                 this.selectedItem = false;
             },
             showHistorySheet(workorder) {
-
-                console.log(workorder);
                 this.activeComponent = "ticket-timeline";
                 this.selectedWorkOrder = workorder;
                 this.getTicketHistories(this.selectedWorkOrder.id)
@@ -174,13 +173,14 @@
                         this.sheet = !this.sheet;
                         this.activeComponentProperty = {
                             sheet: this.sheet,
-                            wonoReports: response.data,
+                            wonoReports:this.lodash.orderBy(response.data,"historydate","desc"),
                             workorder: workorder,
-                            wono: workorder.id
+                            wono: workorder.ticketfriendlynumber
                         };
                     });
             },
             showStarsheet(workorder) {
+                console.log(workorder);
                 this.activeComponent = "RateTicket";
                 this.sheet = !this.sheet;
                 this.selectedWorkOrder = workorder;
@@ -223,9 +223,6 @@
                     sheet: this.sheet,
                     workorder: this.selectedWorkOrder
                 };
-                if ("workorder" in e) {
-                    console.log(e.workorder);
-                }
                 if ("actionName" in e){
                     if (e.dialogResult==="ok"){
                         switch (e.actionName) {
@@ -239,8 +236,39 @@
                                             value:e.rate
                                         }
                                     ]
-                                })
+                                });
                                 break;
+                        case "nextStage":
+                            if (e.dialogResult==="ok"){
+                                if (e.endTicket===false){
+                                    if (e.historyComment!=""){
+                                        this.addTicketHistory({
+                                            ticketid:this.selectedWorkOrder.id,
+                                            companyid:this.$store.state.companyId,
+                                            historycomment: e.historyComment,
+                                            agentname:this.$store.state.memberName
+                                        })
+                                    }
+                                }
+                                else{
+                                    this.patchTicket({
+                                        id: this.selectedWorkOrder.id,
+                                        patchDoc:[
+                                            {
+                                                op:"replace",
+                                                path:"/tickettype",
+                                                value:"e746ba44-ccf0-4159-a60d-1f147656bdfc"
+                                            }
+                                        ]
+                                    }).then((res)=>{
+                                        if (res.status==200){
+                                            this.selectedWorkOrder.tickettype="بسته"
+                                            console.log("OK");
+                                        }
+                                    });
+                                }
+                            }
+                            break;
                         }
                     }
                 }

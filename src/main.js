@@ -18,6 +18,8 @@ import DynamicDirectives from './directives/dynamicEvents'
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
 import moment from 'moment-jalaali'
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
 //import VueSignalR from '@latelier/vue-signalr'
 
 const accessToken = localStorage.getItem('access_token');
@@ -37,6 +39,7 @@ Vue.use(VueProgressBar, progressOptions);
 Vue.use(UUID);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
+Vue.use(VueLodash, { name: 'custom' , lodash: lodash })
 
 Vue.directive('DynamicEvents', DynamicDirectives);
 Vue.component('ValidationProvider', ValidationProvider);

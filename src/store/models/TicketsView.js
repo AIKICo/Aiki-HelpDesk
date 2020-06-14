@@ -16,7 +16,8 @@ export default class TicketsView extends Model{
             tickettags: this.attr(null),
             asset: this.attr(''),
             ticketfriendlynumber: this.attr(''),
-            agentname: this.attr('')
+            agentname: this.attr(''),
+            ticketrate:this.attr(null)
         }
     }
 }

@@ -32,10 +32,10 @@ export default {
     closeDialog(action) {
       if (action==="OK")
       {
-        this.$emit("close-sheet", {"sheet":false, "rate":this.workorder.ticketrate, "actionName":"setRate", "dialogResult":"ok"});
+        this.$emit("close-sheet", {sheet:false, rate:this.workorder.ticketrate, actionName:"setRate", dialogResult:"ok"});
       }
       else{
-        this.$emit("close-sheet", {"sheet":false, "rate":this.workorder.ticketrate, "actionName":"setRate","dialogResult":"cancel"});
+        this.$emit("close-sheet", {sheet:false, rate:this.workorder.ticketrate, actionName:"setRate",dialogResult:"cancel"});
       }
     },
   }
