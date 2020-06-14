@@ -1,5 +1,10 @@
 <template>
-    <v-bottom-sheet v-model="sheet" inset max-width="500px">
+    <v-bottom-sheet
+            v-model="sheet"
+            inset
+            max-width="500px"
+            persistent
+            transition="dialog-bottom-transition">
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت درخواست {{workorder.woNo}}</v-card-title>
@@ -16,6 +21,17 @@
                                 :disabled="endWorkOrder"
                                 :color="$store.state.defaultColor"
                         ></v-textarea>
+                        <v-select
+                                :items="Members"
+                                item-text="membername"
+                                item-value="id"
+                                v-model="nextstageAgent"
+                                label="درخواست ارجاع داده شود به"
+                                shaped
+                                outlined
+                                    chips
+                        >
+                        </v-select>
                         <v-checkbox
                                 v-model="endWorkOrder"
                                 label="اعلان پایان کار درخواست"
@@ -38,16 +54,22 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
     export default {
         name: "NextStageTicket",
         data:()=>{
             return {
                 comment:"",
-                endWorkOrder:false
+                endWorkOrder:false,
+                nextstageAgent:null,
+                Members:[]
             }
         },
         props: ["sheet", "workorder"],
         methods: {
+            ...mapActions({
+               getMembers:"MemberService/loadMembers"
+            }),
             closeDialog(dialogResult) {
                 this.$emit("close-sheet", {
                     sheet: false,
@@ -55,9 +77,15 @@
                     actionName:"nextStage",
                     dialogResult:dialogResult,
                     historyComment: this.comment,
-                    endTicket: this.endWorkOrder
+                    endTicket: this.endWorkOrder,
+                    nextStageAgentName: this.nextstageAgent
                 });
             }
+        },
+        created() {
+            this.getMembers().then((res)=>{
+                this.Members = res.data;
+            });
         }
     }
 </script>

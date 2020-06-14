@@ -120,16 +120,16 @@
             editedItem: [],
             sheet: false,
             selectedWorkOrder: {},
-            activeComponent: "",
+            activeComponent: null,
             activeComponentProperty: {},
             headers: [
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
-                {text: "انجام دهنده", value: "agentname", align: "center", width: "240px"},
-                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "170px"},
-                {text: "نوع درخواست", value: "tickettype", align: "center"},
+                {text: "انجام دهنده", value: "agentname", align: "center", width: "155px"},
+                {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "165px"},
+                {text: "نوع درخواست", value: "tickettype", align: "center", width: "120px"},
                 {text: "گروه درخواست", value: "ticketcategory", align: "center"},
-                {text: "برچسب درخواست", value: "tickettags", align: "center", width: "130px"},
+                {text: "برچسب درخواست", value: "tickettags", align: "center", width: "110px"},
                 {text: "شماره اموال", value: "asset", align: "center"},
                 {
                     text: "",
@@ -157,7 +157,7 @@
                 deleteTicket: "TicketService/deleteTicket",
                 patchTicket: "TicketService/patchTicket",
                 getTicketHistories:"TicketHistoryService/loadTicketHistories",
-                addTicketHistory:"TicketHistoryService/addTicketHistory"
+                addTicketHistory:"TicketHistoryService/addTicketHistory",
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -180,7 +180,6 @@
                     });
             },
             showStarsheet(workorder) {
-                console.log(workorder);
                 this.activeComponent = "RateTicket";
                 this.sheet = !this.sheet;
                 this.selectedWorkOrder = workorder;
@@ -191,6 +190,20 @@
             },
             rejectWorkOrder(workorder) {
                 this.selectedWorkOrder = workorder;
+                this.patchTicket({
+                    id: this.selectedWorkOrder.id,
+                    patchDoc:[
+                        {
+                            op:"replace",
+                            path:"/tickettype",
+                            value:"9e2a917a-fd55-4483-9270-e2a7fa3d69c0"
+                        }
+                    ]
+                }).then((res)=>{
+                    if (res.status==200){
+                            this.selectedWorkOrder.tickettype="رد درخواست"
+                    }
+                });
             },
             closeTicket(workorder) {
                 this.activeComponent = "CloseTicket";
@@ -246,7 +259,7 @@
                                             ticketid:this.selectedWorkOrder.id,
                                             companyid:this.$store.state.companyId,
                                             historycomment: e.historyComment,
-                                            agentname:this.$store.state.memberName
+                                            agentname:e.nextStageAgentName===null ? this.$store.state.memberName : e.nextStageAgentName
                                         })
                                     }
                                 }
@@ -263,7 +276,6 @@
                                     }).then((res)=>{
                                         if (res.status==200){
                                             this.selectedWorkOrder.tickettype="بسته"
-                                            console.log("OK");
                                         }
                                     });
                                 }
