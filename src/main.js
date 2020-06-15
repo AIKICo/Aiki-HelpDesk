@@ -2,23 +2,23 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import store from './store'
+import VueRouter from 'vue-router'
+import UUID from 'vue-uuid'
+import VueMeta from 'vue-meta'
+import moment from 'moment-jalaali'
+import VueLodash from 'vue-lodash'
 import './registerServiceWorker'
 import 'es6-promise/auto'
 import axois from 'axios'
-import VueRouter from 'vue-router'
 import router from './router'
 import VueProgressBar from 'vue-progressbar'
-import UUID from 'vue-uuid'
 import {ValidationProvider} from 'vee-validate';
 import * as firebase from 'firebase/app'
 import 'firebase/analytics'
-import VueMeta from 'vue-meta'
 import Vue2TouchEvents from "vue2-touch-events";
 import DynamicDirectives from './directives/dynamicEvents'
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker';
-import moment from 'moment-jalaali'
-import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
 //import VueSignalR from '@latelier/vue-signalr'
 
