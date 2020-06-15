@@ -73,7 +73,7 @@
                                             :color="$store.state.defaultColor"
                                             @click="showStarsheet(item, 'rateTicket')"
                                             icon
-                                    v-if="$store.state.memberRole==='admin'">
+                                            v-if="$store.state.memberRole==='admin'">
                                         <v-icon>mdi-star</v-icon>
                                     </v-btn>
                                     <v-btn :color="$store.state.defaultColor" @click="rejectWorkOrder(item)" icon>
@@ -113,7 +113,7 @@
     export default {
         name: "Tickets",
         data: () => ({
-            tickets:[],
+            tickets: [],
             expanded: [],
             singleExpand: true,
             selectedItem: false,
@@ -147,8 +147,7 @@
             CloseTicket,
             NextStageTicket
         },
-        computed: {
-        },
+        computed: {},
         methods: {
             ...mapActions({
                 getTickets: "TicketService/loadTickets",
@@ -331,25 +330,23 @@
                     }
                 }
             },
-            refreshData(){
+            refreshData() {
                 this.tickets = this.tickets.filter(function (el) {
-                    return (el.enddate===null)
+                    return (el.enddate === null)
                 })
             }
         },
         created() {
             this.getTickets().then((res) => {
-                if (this.$store.state.memberRole === "admin")
-                {
+                if (this.$store.state.memberRole === "admin") {
                     this.tickets = res.data;
                     this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.enddate===null)
+                        return (el.enddate === null)
                     }).length;
-                }
-                else {
+                } else {
                     let memberName = this.$store.state.memberName;
                     this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.agentname === memberName && el.enddate===null)
+                        return (el.agentname === memberName && el.enddate === null)
                     }).length;
                 }
             });
