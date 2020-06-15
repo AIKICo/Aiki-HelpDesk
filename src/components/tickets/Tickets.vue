@@ -332,7 +332,7 @@
             },
             refreshData() {
                 this.tickets = this.tickets.filter(function (el) {
-                    return (el.enddate === null)
+                    return (el.tickettype != "بسته")
                 })
             }
         },
@@ -341,12 +341,12 @@
                 if (this.$store.state.memberRole === "admin") {
                     this.tickets = res.data;
                     this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.enddate === null)
+                        return (el.tickettype != "بسته")
                     }).length;
                 } else {
                     let memberName = this.$store.state.memberName;
                     this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.agentname === memberName && el.enddate === null)
+                        return (el.agentname === memberName && el.tickettype != "بسته")
                     }).length;
                 }
             });
