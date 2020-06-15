@@ -7,7 +7,7 @@
                         :expanded.sync="expanded"
                         :headers="headers"
                         :hide-default-footer="true"
-                        :items="this.items"
+                        :items="tickets"
                         :single-expand="singleExpand"
                         :sort-by="['ticketfriendlynumber']"
                         :sort-desc="[true]"
@@ -108,11 +108,12 @@
     import RateTicket from "./RateTicket";
     import CloseTicket from "./CloseTicket";
     import NextStageTicket from "./NextStageTicket";
-    import {mapState, mapActions} from 'vuex'
+    import {mapActions} from 'vuex'
 
     export default {
         name: "Tickets",
         data: () => ({
+            tickets:[],
             expanded: [],
             singleExpand: true,
             selectedItem: false,
@@ -147,16 +148,6 @@
             NextStageTicket
         },
         computed: {
-            ...mapState({
-                items: state => {
-                    if (state.memberRole === "admin")
-                        return state.TicketService.current;
-                    else
-                        return state.TicketService.current.filter(function (el) {
-                            return el.agentname === state.memberName
-                        });
-                },
-            }),
         },
         methods: {
             ...mapActions({
@@ -341,7 +332,7 @@
                 }
             },
             refreshData(){
-                this.items = this.items.filter(function (el) {
+                this.tickets = this.tickets.filter(function (el) {
                     return (el.enddate===null)
                 })
             }
@@ -349,12 +340,15 @@
         created() {
             this.getTickets().then((res) => {
                 if (this.$store.state.memberRole === "admin")
-                    this.$store.state.activeTickets = res.data.filter(function (el) {
+                {
+                    this.tickets = res.data;
+                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
                         return (el.enddate===null)
                     }).length;
+                }
                 else {
                     let memberName = this.$store.state.memberName;
-                    this.$store.state.activeTickets = res.data.filter(function (el) {
+                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
                         return (el.agentname === memberName && el.enddate===null)
                     }).length;
                 }
