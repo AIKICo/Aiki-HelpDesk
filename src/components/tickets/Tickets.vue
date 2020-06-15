@@ -7,7 +7,7 @@
                         :expanded.sync="expanded"
                         :headers="headers"
                         :hide-default-footer="true"
-                        :items="tickets"
+                        :items="items"
                         :single-expand="singleExpand"
                         :sort-by="['ticketfriendlynumber']"
                         :sort-desc="[true]"
@@ -108,12 +108,11 @@
     import RateTicket from "./RateTicket";
     import CloseTicket from "./CloseTicket";
     import NextStageTicket from "./NextStageTicket";
-    import {mapActions} from 'vuex'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         name: "Tickets",
         data: () => ({
-            tickets: [],
             expanded: [],
             singleExpand: true,
             selectedItem: false,
@@ -147,7 +146,11 @@
             CloseTicket,
             NextStageTicket
         },
-        computed: {},
+        computed: {
+            ...mapState({
+                items: state=>state.TicketService.current
+            })
+        },
         methods: {
             ...mapActions({
                 getTickets: "TicketService/loadTickets",
@@ -331,25 +334,22 @@
                 }
             },
             refreshData() {
-                this.tickets = this.tickets.filter(function (el) {
+                this.items = this.items.filter(function (el) {
                     return (el.tickettype != "بسته")
                 })
             }
         },
         created() {
-            this.getTickets().then((res) => {
-                if (this.$store.state.memberRole === "admin") {
-                    this.tickets = res.data;
-                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.tickettype != "بسته")
-                    }).length;
-                } else {
-                    let memberName = this.$store.state.memberName;
-                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.agentname === memberName && el.tickettype != "بسته")
-                    }).length;
-                }
-            });
+            if (this.$store.state.memberRole === "admin") {
+                this.$store.state.activeTickets = this.items.filter(function (el) {
+                    return (el.tickettype != "بسته")
+                }).length;
+            } else {
+                let memberName = this.$store.state.memberName;
+                this.$store.state.activeTickets = this.items.filter(function (el) {
+                    return (el.agentname === memberName && el.tickettype != "بسته")
+                }).length;
+            }
         }
     };
 </script>

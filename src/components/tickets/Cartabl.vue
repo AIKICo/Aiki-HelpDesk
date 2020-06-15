@@ -6,13 +6,20 @@
 
 <script>
     import Tickets from "./Tickets";
+    import {mapActions} from "vuex";
 
     export default {
         name: "Cartabl",
         components:{
             Tickets
         },
+        methods:{
+            ...mapActions({
+                getTickets: "TicketService/loadTickets",
+            }),
+        },
         created() {
+            this.getTickets()
         },
         metaInfo: {
             title: 'کارتابل'
