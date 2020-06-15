@@ -76,8 +76,8 @@ export default new Vuex.Store({
         defaultHeaderTextColor: "white--text",
         defaultBadgeColor: "red",
         companyId: localStorage.getItem("companyid"),
-        memberName: JSON.parse(localStorage.getItem("userInfo")).membername,
-        memberRole: JSON.parse(localStorage.getItem("userInfo")).roles,
+        memberName: localStorage.getItem("userInfo")!=null?JSON.parse(localStorage.getItem("userInfo")).membername:null,
+        memberRole: localStorage.getItem("userInfo")!=null?JSON.parse(localStorage.getItem("userInfo")).roles:null,
         activeTickets:0
     },
     mutations: {},
