@@ -64,7 +64,7 @@
                                             @click="nextStageTicket(item)"
                                             icon
                                     >
-                                        <v-icon>mdi-check-circle</v-icon>
+                                        <v-icon>mdi-account-arrow-left</v-icon>
                                     </v-btn>
                                     <v-btn :color="$store.state.defaultColor" @click="closeTicket(item)" icon>
                                         <v-icon>mdi-close-circle</v-icon>
@@ -73,11 +73,11 @@
                                             :color="$store.state.defaultColor"
                                             @click="showStarsheet(item, 'rateTicket')"
                                             icon
-                                    >
+                                    v-if="$store.state.memberRole==='admin'">
                                         <v-icon>mdi-star</v-icon>
                                     </v-btn>
                                     <v-btn :color="$store.state.defaultColor" @click="rejectWorkOrder(item)" icon>
-                                        <v-icon>mdi-cancel</v-icon>
+                                        <v-icon>mdi-text-box-remove</v-icon>
                                     </v-btn>
                                 </div>
                             </td>
@@ -148,8 +148,15 @@
         },
         computed: {
             ...mapState({
-                items: state => state.TicketService.current
-            })
+                items: state => {
+                    if (state.memberRole === "admin")
+                        return state.TicketService.current;
+                    else
+                        return state.TicketService.current.filter(function (el) {
+                            return el.agentname === state.memberName
+                        });
+                },
+            }),
         },
         methods: {
             ...mapActions({
@@ -199,16 +206,6 @@
                             value: "9e2a917a-fd55-4483-9270-e2a7fa3d69c0"
                         }
                     ]
-                }).then((res) => {
-                    if (res.status == 200) {
-                        this.selectedWorkOrder.tickettype = "رد درخواست";
-                        this.addTicketHistory({
-                            ticketid: this.selectedWorkOrder.id,
-                            companyid: this.$store.state.companyId,
-                            historycomment: "درخواست لغو گردید",
-                            agentname: null
-                        })
-                    }
                 });
             },
             closeTicket(workorder) {
@@ -254,23 +251,34 @@
                                 if (e.dialogResult === "ok") {
                                     if (e.endTicket === false) {
                                         if (e.historyComment != "") {
-                                            this.addTicketHistory({
-                                                ticketid: this.selectedWorkOrder.id,
-                                                companyid: this.$store.state.companyId,
-                                                historycomment: `درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
-                                                agentname: null
-                                            }).then(()=>{
-                                                setTimeout(()=>{
-                                                    this.addTicketHistory({
-                                                        ticketid: this.selectedWorkOrder.id,
-                                                        companyid: this.$store.state.companyId,
-                                                        historycomment: e.historyComment,
-                                                        agentname: e.nesxtStageAgentName
-                                                    }).then(() => {
-                                                        this.selectedWorkOrder.agentname = e.nesxtStageAgentName;
-                                                    });
-                                                },1000);
-                                            });
+                                            if (e.nesxtStageAgentName != "") {
+                                                this.addTicketHistory({
+                                                    ticketid: this.selectedWorkOrder.id,
+                                                    companyid: this.$store.state.companyId,
+                                                    historycomment: `درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
+                                                    agentname: null
+                                                }).then(() => {
+                                                    setTimeout(() => {
+                                                        this.addTicketHistory({
+                                                            ticketid: this.selectedWorkOrder.id,
+                                                            companyid: this.$store.state.companyId,
+                                                            historycomment: e.historyComment,
+                                                            agentname: e.nesxtStageAgentName
+                                                        }).then(() => {
+                                                            this.selectedWorkOrder.agentname = e.nesxtStageAgentName;
+                                                        });
+                                                    }, 1000);
+                                                });
+                                            } else {
+                                                this.addTicketHistory({
+                                                    ticketid: this.selectedWorkOrder.id,
+                                                    companyid: this.$store.state.companyId,
+                                                    historycomment: e.historyComment,
+                                                    agentname: this.$store.state.memberName
+                                                }).then(() => {
+                                                    this.selectedWorkOrder.agentname = this.$store.state.memberName;
+                                                });
+                                            }
                                         }
                                     } else {
                                         this.addTicketHistory({
@@ -279,7 +287,7 @@
                                             historycomment: e.historyComment,
                                             agentname: this.$store.state.memberName
                                         });
-                                        setTimeout(()=>{
+                                        setTimeout(() => {
                                             this.patchTicket({
                                                 id: this.selectedWorkOrder.id,
                                                 patchDoc: [
@@ -292,19 +300,65 @@
                                             }).then((res) => {
                                                 if (res.status == 200) {
                                                     this.selectedWorkOrder.tickettype = "بسته"
+                                                    this.refreshData();
                                                 }
                                             });
                                         }, 1000);
                                     }
                                 }
                                 break;
+                            case "closeTicket":
+                                if (e.dialogResult === "ok") {
+                                    this.patchTicket({
+                                        id: this.selectedWorkOrder.id,
+                                        patchDoc: [
+                                            {
+                                                op: "replace",
+                                                path: "/mandays",
+                                                value: e.workorder.mandays
+                                            },
+                                            {
+                                                op: "replace",
+                                                path: "/operateid",
+                                                value: e.workorder.operateid
+                                            },
+                                            {
+                                                op: "replace",
+                                                path: "/tickettype",
+                                                value: "e746ba44-ccf0-4159-a60d-1f147656bdfc"
+                                            }
+                                        ]
+                                    }).then((res) => {
+                                        if (res.status == 200) {
+                                            this.selectedWorkOrder.tickettype = "بسته"
+                                            this.refreshData()
+                                        }
+                                    });
+                                }
+                                break;
                         }
                     }
                 }
+            },
+            refreshData(){
+                this.items = this.items.filter(function (el) {
+                    return (el.enddate===null)
+                })
             }
         },
         created() {
-            this.getTickets();
+            this.getTickets().then((res) => {
+                if (this.$store.state.memberRole === "admin")
+                    this.$store.state.activeTickets = res.data.filter(function (el) {
+                        return (el.enddate===null)
+                    }).length;
+                else {
+                    let memberName = this.$store.state.memberName;
+                    this.$store.state.activeTickets = res.data.filter(function (el) {
+                        return (el.agentname === memberName && el.enddate===null)
+                    }).length;
+                }
+            });
         }
     };
 </script>

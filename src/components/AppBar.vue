@@ -28,7 +28,7 @@
                 offset-y="17"
                 offset-x="17"
         >
-            <span slot="badge">{{ this.getTicketsLength }}</span>
+            <span slot="badge">{{ $store.state.activeTickets }}</span>
             <v-btn icon>
                 <v-icon large>mdi-bell</v-icon>
             </v-btn>
@@ -37,14 +37,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
-
     export default {
-        computed:{
-            ...mapGetters({
-               getTicketsLength:"TicketService/getTicketsLength"
-            })
-        },
         methods: {
             logout() {
                 this.$store.dispatch('UserService/logout').then(() => {

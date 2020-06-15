@@ -39,6 +39,7 @@
                                     outlined
                                     chips
                                     :disabled="endWorkOrder"
+                                    clearable
                                     v-on:change="getText"
                             >
                             </v-select>
