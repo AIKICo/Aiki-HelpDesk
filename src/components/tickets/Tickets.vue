@@ -341,9 +341,7 @@
         },
         created() {
             if (this.$store.state.memberRole === "admin") {
-                this.$store.state.activeTickets = this.items.filter(function (el) {
-                    return (el.tickettype != "بسته")
-                }).length;
+                this.$store.state.activeTickets = this.items.filter(function (el) { return (el.tickettype != "بسته") }).length;
             } else {
                 let memberName = this.$store.state.memberName;
                 this.$store.state.activeTickets = this.items.filter(function (el) {
