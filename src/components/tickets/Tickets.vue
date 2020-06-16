@@ -46,8 +46,7 @@
                             <td class="text-center">{{ item.agentname }}</td>
                             <td class="text-center">{{ item.registerdate }}</td>
                             <td class="text-center">{{ item.tickettype }}</td>
-                            <td class="text-center">{{ item.ticketcategory }}</td>
-                            <td class="text-center">{{ item.tickettags }}</td>
+                            <td class="text-center">{{ item.requester }}</td>
                             <td class="text-center">
                                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
                                         :text-color="$store.state.defaultColor">
@@ -131,9 +130,8 @@
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
                 {text: "انجام دهنده", value: "agentname", align: "center", width: "155px"},
                 {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "170px"},
-                {text: "نوع", value: "tickettype", align: "center", width: "120px"},
-                {text: "گروه", value: "ticketcategory", align: "center"},
-                {text: "برچسب", value: "tickettags", align: "center", width: "110px"},
+                {text: "وضعیت", value: "tickettype", align: "center", width: "120px"},
+                {text: "درخواست کننده", value: "requester", align: "center", width: "120px"},
                 {text: "شماره اموال", value: "asset", align: "center"},
                 {
                     text: "",

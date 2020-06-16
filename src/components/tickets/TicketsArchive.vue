@@ -3,95 +3,103 @@
         <v-row>
             <v-col>
                 <v-spacer></v-spacer>
-                <v-text-field
-                        v-model="searchKey"
-                        append-icon="mdi-magnify"
-                        label="جستجو بر اساس شماره درخواست"
-                        single-line
-                        hide-details
-                ></v-text-field>
-                <v-data-table
-                        :footer-props="{
+                <v-row>
+                    <v-col cols="5">
+                        <v-text-field
+                                v-model="searchKey"
+                                append-icon="mdi-magnify"
+                                label="جستجو بر اساس شماره درخواست"
+                                single-line
+                                hide-details
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-data-table
+                                :footer-props="{
                                             'items-per-page-options': [50, 100, 150, 200, 250]
                                           }"
-                        :expanded.sync="expanded"
-                        :headers="headers"
-                        :items="tickets"
-                        :items-per-page="itemPerPage"
-                        :single-expand="singleExpand"
-                        :sort-by="['ticketfriendlynumber']"
-                        :sort-desc="[true]"
-                        class="elevation-1"
-                        item-key="id"
-                        :search="searchKey"
-                >
-                    <template v-slot:top>
-                        <component
-                                :is="activeComponent"
-                                @close-sheet="closeSheet"
-                                v-bind="activeComponentProperty"
-                        ></component>
-                    </template>
-                    <template v-slot:item="{ item, expand, isExpanded }">
-                        <tr
-                                :key="item.id"
-                                @mouseleave="unSelectItem()"
-                                @mouseover="selectItem(item)"
+                                :expanded.sync="expanded"
+                                :headers="headers"
+                                :items="tickets"
+                                :items-per-page="itemPerPage"
+                                :single-expand="singleExpand"
+                                :sort-by="['ticketfriendlynumber']"
+                                :sort-desc="[true]"
+                                class="elevation-1"
+                                item-key="id"
+                                :search="searchKey"
                         >
-                            <td class="text-center">
-                                <v-icon
-                                        :color="$store.state.defaultColor"
-                                        @click="expand(!isExpanded)"
-                                        class="ml-1"
+                            <template v-slot:top>
+                                <component
+                                        :is="activeComponent"
+                                        @close-sheet="closeSheet"
+                                        v-bind="activeComponentProperty"
+                                ></component>
+                            </template>
+                            <template v-slot:item="{ item, expand, isExpanded }">
+                                <tr
+                                        :key="item.id"
+                                        @mouseleave="unSelectItem()"
+                                        @mouseover="selectItem(item)"
                                 >
-                                    {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
-                                </v-icon>
-                            </td>
+                                    <td class="text-center">
+                                        <v-icon
+                                                :color="$store.state.defaultColor"
+                                                @click="expand(!isExpanded)"
+                                                class="ml-1"
+                                        >
+                                            {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
+                                        </v-icon>
+                                    </td>
 
-                            <td class="text-center">
-                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                        :text-color="$store.state.defaultColor">
-                                    <b>{{ item.ticketfriendlynumber }}</b>
-                                </v-chip>
-                            </td>
-                            <td class="text-center">{{ item.agentname }}</td>
-                            <td class="text-center">{{ item.registerdate }}</td>
-                            <td class="text-center">{{ item.tickettype }}</td>
-                            <td class="text-center">{{ item.ticketcategory }}</td>
-                            <td class="text-center">{{ item.tickettags }}</td>
-                            <td class="text-center">
-                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                        :text-color="$store.state.defaultColor">
-                                    <b>{{ item.asset }}</b>
-                                </v-chip>
-                            </td>
-                            <td>
-                                <div v-if="item === selectedItem">
-                                    <v-btn :color="$store.state.defaultColor" @click="showHistorySheet(item)" icon>
-                                        <v-icon>mdi-history</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="reopenTicket(item)" icon>
-                                        <v-icon>mdi-reload</v-icon>
-                                    </v-btn>
-                                </div>
-                            </td>
-                        </tr>
-                    </template>
-                    <template v-slot:expanded-item="{ headers, item }">
-                        <td :colspan="headers.length">
-                            <v-alert
-                                    :color="$store.state.defaultColor"
-                                    border="left"
-                                    class="mt-1"
-                                    dense
-                                    icon="mdi-fire"
-                                    text
-                            >
-                                {{ item.description }}
-                            </v-alert>
-                        </td>
-                    </template>
-                </v-data-table>
+                                    <td class="text-center">
+                                        <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                                :text-color="$store.state.defaultColor">
+                                            <b>{{ item.ticketfriendlynumber }}</b>
+                                        </v-chip>
+                                    </td>
+                                    <td class="text-center">{{ item.agentname }}</td>
+                                    <td class="text-center">{{ item.registerdate }}</td>
+                                    <td class="text-center">{{ item.tickettype }}</td>
+                                    <td class="text-center">{{ item.ticketcategory }}</td>
+                                    <td class="text-center">{{ item.tickettags }}</td>
+                                    <td class="text-center">
+                                        <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                                :text-color="$store.state.defaultColor">
+                                            <b>{{ item.asset }}</b>
+                                        </v-chip>
+                                    </td>
+                                    <td>
+                                        <div v-if="item === selectedItem">
+                                            <v-btn :color="$store.state.defaultColor" @click="showHistorySheet(item)" icon>
+                                                <v-icon>mdi-history</v-icon>
+                                            </v-btn>
+                                            <v-btn :color="$store.state.defaultColor" @click="reopenTicket(item)" icon>
+                                                <v-icon>mdi-reload</v-icon>
+                                            </v-btn>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template v-slot:expanded-item="{ headers, item }">
+                                <td :colspan="headers.length">
+                                    <v-alert
+                                            :color="$store.state.defaultColor"
+                                            border="left"
+                                            class="mt-1"
+                                            dense
+                                            icon="mdi-fire"
+                                            text
+                                    >
+                                        {{ item.description }}
+                                    </v-alert>
+                                </td>
+                            </template>
+                        </v-data-table>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>

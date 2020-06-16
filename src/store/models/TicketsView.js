@@ -17,7 +17,11 @@ export default class TicketsView extends Model{
             asset: this.attr(''),
             ticketfriendlynumber: this.attr(''),
             agentname: this.attr(''),
-            ticketrate:this.attr(null)
+            ticketrate:this.attr(null),
+            mandays:this.attr(null),
+            operateid: this.attr(null),
+            requestpriority:this.attr(''),
+            requester:this.attr('')
         }
     }
 }

@@ -18,7 +18,7 @@
                                             <validation-provider
                                                     v-slot="{ errors }"
                                                     name="شماره اموال"
-                                                    rules="required"
+                                                    rules="required|isAssetExists"
                                                     immediate
                                             >
                                                 <v-text-field
@@ -176,6 +176,7 @@
 
 <script>
     import {required} from "vee-validate/dist/rules";
+    import {mapActions} from 'vuex'
     import {
         extend,
         ValidationObserver,
@@ -246,7 +247,10 @@
                 this.Asset.assetadditionalinfo.push({label: this.label, value: this.valueLabel});
                 this.label="";
                 this.valueLabel="";
-            }
+            },
+            ...mapActions({
+                isAssetExists:"AssetService/notIsAssetExists"
+            }),
         },
         created() {
             this.$store.dispatch("OrganizeChartService/loadOrganizeChart").then((res) => {
@@ -280,6 +284,12 @@
                     assetadditionalinfo: []
                 };
             }
+        },
+        mounted() {
+            extend("isAssetExists", {
+                validate: this.isAssetExists,
+                message: "اموال تحویل شخصی دیگری داده شده است"
+            });
         }
     }
 </script>

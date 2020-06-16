@@ -19,7 +19,6 @@ export default class Ticket extends Model{
             ticketfriendlynumber:this.attr(''),
             mandays:this.attr(null),
             operateid: this.attr(null),
-            requesterid:this.attr(null),
             requestpriority:this.attr('')
         }
     }

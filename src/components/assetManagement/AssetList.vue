@@ -3,66 +3,74 @@
         <v-row>
             <v-col>
                 <v-spacer></v-spacer>
-                <v-text-field
-                        v-model="searchKey"
-                        append-icon="mdi-magnify"
-                        label="جستجو بر اساس شماره اموال"
-                        single-line
-                        hide-details
-                ></v-text-field>
-                <v-data-table
-                        :footer-props="{
+                <v-row>
+                    <v-col cols="5">
+                        <v-text-field
+                                v-model="searchKey"
+                                append-icon="mdi-magnify"
+                                label="جستجو بر اساس شماره اموال"
+                                single-line
+                                hide-details
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col>
+                        <v-data-table
+                                :footer-props="{
                                             'items-per-page-options': [50, 100, 150, 200, 250]
                                           }"
-                        :headers="headers"
-                        :items="items"
-                        :items-per-page="itemPerPage"
-                        class="elevation-1"
-                        item-key="id"
-                        multi-sort
-                        :search="searchKey"
-                >
-                    <template v-slot:item="{ item }">
-                        <tr
-                                :key="item.id"
-                                @mouseleave="unSelectItem()"
-                                @mouseover="selectItem(item)"
+                                :headers="headers"
+                                :items="items"
+                                :items-per-page="itemPerPage"
+                                class="elevation-1"
+                                item-key="id"
+                                multi-sort
+                                :search="searchKey"
                         >
-                            <td class="text-center">
-                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                        :text-color="$store.state.defaultColor">
-                                    {{ item.assetnumber }}
-                                </v-chip>
-                            </td>
-                            <td class="text-center">
-                                {{ item.title }}
-                            </td>
-                            <td class="text-center">
-                                {{ item.assettypeid }}
-                            </td>
-                            <td class="text-center">
-                                {{ item.assetlocationid }}
-                            </td>
-                            <td>
-                                <div v-if="item === selectedItem">
-                                    <v-btn :color="$store.state.defaultColor" @click="delAsset(item)" icon>
-                                        <v-icon>mdi-delete</v-icon>
-                                    </v-btn>
-                                    <v-btn
-                                            :color="$store.state.defaultColor"
-                                            @click="editAsset(item)"
-                                            icon
-                                    >
-                                        <v-icon>mdi-content-save-edit-outline</v-icon>
-                                    </v-btn>
-                                </div>
-                                <div v-if="item!=selectedItem">
-                                    {{ item.lastStatus }}
-                                </div>
-                            </td>
-                        </tr>
-                    </template>
-                </v-data-table>
+                            <template v-slot:item="{ item }">
+                                <tr
+                                        :key="item.id"
+                                        @mouseleave="unSelectItem()"
+                                        @mouseover="selectItem(item)"
+                                >
+                                    <td class="text-center">
+                                        <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                                :text-color="$store.state.defaultColor">
+                                            {{ item.assetnumber }}
+                                        </v-chip>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ item.title }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ item.assettypeid }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ item.assetlocationid }}
+                                    </td>
+                                    <td>
+                                        <div v-if="item === selectedItem">
+                                            <v-btn :color="$store.state.defaultColor" @click="delAsset(item)" icon>
+                                                <v-icon>mdi-delete</v-icon>
+                                            </v-btn>
+                                            <v-btn
+                                                    :color="$store.state.defaultColor"
+                                                    @click="editAsset(item)"
+                                                    icon
+                                            >
+                                                <v-icon>mdi-content-save-edit-outline</v-icon>
+                                            </v-btn>
+                                        </div>
+                                        <div v-if="item!=selectedItem">
+                                            {{ item.lastStatus }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </v-data-table>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>

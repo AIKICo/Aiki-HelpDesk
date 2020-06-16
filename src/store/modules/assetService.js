@@ -124,7 +124,19 @@ const assetService = {
             } else if (response.data.error) {
                 throw new Error("Something is wrong.");
             }
+        },
+        async notIsAssetExists(context, payload) {
+            let response = (
+                await Asset.api().get("/Assets/isAssetExists/" + payload )
+            ).response;
+            if (response.status === 200) {
+                response.data = !response.data;
+                return response.data;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
         }
+
     },
     getters: {
         getAssets: () => Asset.all(),
