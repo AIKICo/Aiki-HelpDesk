@@ -3,7 +3,7 @@
     <v-layout align-center >
       <v-row justify="center" align="center" no-gutters>
         <v-col cols="12" md="5" lg="5" >
-          <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
+          <ValidationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
             <form @submit.prevent="handleSubmit(onSubmit)">
               <v-card class="mx-auto" outlined>
                 <v-card-title :class="$store.state.defaultColor + ' white--text'">
@@ -23,12 +23,14 @@
                       :error-messages="errors"
                       outlined
                       shaped
+                      immediate
                     ></v-text-field>
                   </ValidationProvider>
                   <ValidationProvider
                     v-slot="{ errors }"
                     name="کلمه عبور"
                     rules="required"
+                    immediate
                   >
                     <v-text-field
                       v-model="loginDetails.password"
@@ -45,6 +47,7 @@
                 <v-card-actions>
                   <v-btn
                     :color="$store.state.defaultColor + ' darken-1'"
+                    :disabled="invalid"
                     value="login"
                     type="submit"
                     text

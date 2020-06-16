@@ -3,7 +3,7 @@
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>
                 <v-col cols="8">
-                    <validationObserver ref="observer" v-slot="{ handleSubmit }">
+                    <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
                         <form @submit.prevent="handleSubmit(onSubmit)">
                             <v-card outlined>
                                 <v-card-title
@@ -16,7 +16,8 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="اموال"
-                                            rules="required"
+                                            rules="required|isAssetExists"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="Ticket.asset"
@@ -25,12 +26,14 @@
                                                 :error-messages="errors"
                                                 outlined
                                                 shaped
+                                                :disabled="diabledControl"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="شرح مختصر ایراد/درخواست"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-textarea
                                                 v-model="Ticket.description"
@@ -39,6 +42,7 @@
                                                 outlined
                                                 shaped
                                                 :error-messages="errors"
+                                                :disabled="diabledControl"
                                         ></v-textarea>
                                     </validation-provider>
                                     <v-select
@@ -85,6 +89,7 @@
                                             :color="$store.state.defaultColor + ' darken-1'"
                                             text
                                             type="submit"
+                                            :disabled="invalid"
                                     >
                                         تایید
                                     </v-btn>
@@ -108,11 +113,11 @@
 <script>
     import {required} from "vee-validate/dist/rules";
     import {mapActions} from 'vuex'
-        import {
+    import {
         extend,
         ValidationObserver,
         ValidationProvider,
-        setInteractionMode
+        setInteractionMode,
     } from "vee-validate";
 
     setInteractionMode("eager");
@@ -124,10 +129,11 @@
         name: "Ticket",
         data() {
             return {
-                Ticket: null,
+                Ticket: "",
                 TicketTypes: [],
                 TicketCategories: [],
-                TicketTags: []
+                TicketTags: [],
+                diabledControl: false
             }
         },
         components: {
@@ -154,25 +160,27 @@
                 this.$router.push("/cartabl");
             },
             ...mapActions({
-                loadConstant:"AppConstantItemsService/loadAppConstantItems",
-                loadTicket:"TicketService/loadTicket",
-                addTicket:"TicketService/addTicket",
-                editTicket:"TicketService/editTicket"
-            })
+                loadConstant: "AppConstantItemsService/loadAppConstantItems",
+                loadTicket: "TicketService/loadTicket",
+                addTicket: "TicketService/addTicket",
+                editTicket: "TicketService/editTicket",
+                isAssetExists:"AssetService/isAssetExists"
+            }),
         },
         created() {
-            this.loadConstant('473b359f-30a7-4963-a671-6f618b277e48').then((res)=>{
-                this.TicketTypes=res.data
+            this.loadConstant('473b359f-30a7-4963-a671-6f618b277e48').then((res) => {
+                this.TicketTypes = res.data
             })
-            this.loadConstant('0a8b50c5-762e-47ea-b60d-4ed9d0a71f50').then((res)=>{
-                this.TicketCategories=res.data
+            this.loadConstant('0a8b50c5-762e-47ea-b60d-4ed9d0a71f50').then((res) => {
+                this.TicketCategories = res.data
             })
-            this.loadConstant('e215f24f-4d28-46e7-b75d-26a19feb656a').then((res)=>{
-                this.TicketTags=res.data
+            this.loadConstant('e215f24f-4d28-46e7-b75d-26a19feb656a').then((res) => {
+                this.TicketTags = res.data
             })
             if (this.$route.params.formType === "Edit") {
-                this.loadTicket(this.$route.params.id).then((res)=>{
-                   this.Ticket = res.data;
+                this.loadTicket(this.$route.params.id).then((res) => {
+                    this.Ticket = res.data;
+                    this.diabledControl = true;
                 });
             } else if (this.$route.params.formType === "Insert") {
                 this.Ticket = {
@@ -186,6 +194,12 @@
                     asset: null
                 };
             }
+        },
+        mounted() {
+            extend("isAssetExists", {
+                validate: this.isAssetExists,
+                message: "شماره اموال وجود ندارد"
+            });
         }
     }
 </script>

@@ -3,7 +3,7 @@
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>
                 <v-col cols="5">
-                    <validationObserver ref="observer" v-slot="{ handleSubmit }">
+                    <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
                         <form @submit.prevent="handleSubmit(onSubmit)">
                             <v-card outlined>
                                 <v-card-title
@@ -19,6 +19,7 @@
                                                     v-slot="{ errors }"
                                                     name="شماره اموال"
                                                     rules="required"
+                                                    immediate
                                             >
                                                 <v-text-field
                                                         v-model="Asset.assetnumber"
@@ -33,6 +34,7 @@
                                                     v-slot="{ errors }"
                                                     name="تحویل گیرنده"
                                                     rules="required"
+                                                    immediate
                                             >
                                                 <v-autocomplete
                                                         :items="Employes"
@@ -53,6 +55,7 @@
                                                     v-slot="{ errors }"
                                                     name="نوع اموال"
                                                     rules="required"
+                                                    immediate
                                             >
                                                 <v-autocomplete
                                                         :items="AssetTypes"
@@ -73,6 +76,7 @@
                                                     v-slot="{ errors }"
                                                     name="موقعیت اموال"
                                                     rules="required"
+                                                    immediate
                                             >
                                                 <v-autocomplete
                                                         :items="AssetLocations"
@@ -147,6 +151,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                             :color="$store.state.defaultColor + ' darken-1'"
+                                            :disabled="invalid"
                                             text
                                             type="submit"
                                     >

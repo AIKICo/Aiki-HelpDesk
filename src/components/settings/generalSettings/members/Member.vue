@@ -3,7 +3,7 @@
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>
                 <v-col cols="8">
-                    <validationObserver ref="observer" v-slot="{ handleSubmit }">
+                    <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
                         <form @submit.prevent="handleSubmit(onSubmit)">
                             <v-card outlined>
                                 <v-card-title
@@ -17,6 +17,7 @@
                                             v-slot="{ errors }"
                                             name="نام کاربری"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="Member.membername"
@@ -31,6 +32,7 @@
                                             v-slot="{ errors }"
                                             name="نام کاربری"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="Member.username"
@@ -45,6 +47,7 @@
                                             v-slot="{ errors }"
                                             name="کلمه عبور"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="Member.password"
@@ -60,6 +63,7 @@
                                             v-slot="{ errors }"
                                             name="آدرس ایمیل"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="Member.email"
@@ -75,6 +79,7 @@
                                             v-slot="{ errors }"
                                             name="نقش کاربر"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-select
                                                 :items="Roles"
@@ -94,6 +99,7 @@
                                     <v-spacer></v-spacer>
                                     <v-btn
                                             :color="$store.state.defaultColor + ' darken-1'"
+                                            :disabled="invalid"
                                             text
                                             type="submit"
                                     >

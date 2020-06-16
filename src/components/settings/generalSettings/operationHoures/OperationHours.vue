@@ -3,7 +3,7 @@
     <v-layout align-center>
       <v-row justify="center" align="center" no-gutters>
         <v-col>
-          <validationObserver ref="observer" v-slot="{ handleSubmit }">
+          <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
             <form @submit.prevent="handleSubmit(onSubmit)">
               <v-card outlined>
                 <v-card-title
@@ -108,6 +108,7 @@
                   <v-spacer></v-spacer>
                   <v-btn
                     :color="$store.state.defaultColor + ' darken-1'"
+                    :disabled="invalid"
                     text
                     type="submit"
                   >

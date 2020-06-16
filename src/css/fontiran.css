@@ -14,6 +14,7 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum)_Black.ttf")
       format("truetype");
+    font-display: block;
 }
 @font-face {
   font-family: IRANSans;
@@ -31,6 +32,7 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum)_Bold.ttf")
       format("truetype");
+    font-display: block;
 }
 @font-face {
   font-family: IRANSans;
@@ -48,6 +50,7 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf")
       format("truetype");
+    font-display: block;
 }
 @font-face {
   font-family: IRANSans;
@@ -65,6 +68,7 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum)_Light.ttf")
       format("truetype");
+    font-display: block;
 }
 @font-face {
   font-family: IRANSans;
@@ -82,6 +86,7 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf")
       format("truetype");
+    font-display: block;
 }
 @font-face {
   font-family: IRANSans;
@@ -98,4 +103,5 @@
     /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
       url("../fonts/IranSansFD/fonts/ttf/IRANSansWeb(FaNum).ttf")
       format("truetype");
+    font-display: block;
 }

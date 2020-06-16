@@ -3,7 +3,7 @@
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>
                 <v-col cols="8">
-                    <validationObserver ref="observer" v-slot="{ handleSubmit }">
+                    <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
                         <form @submit.prevent="handleSubmit(onSubmit)">
                             <v-card outlined>
                                 <v-card-title
@@ -17,6 +17,7 @@
                                             v-slot="{ errors }"
                                             name="عنوان"
                                             rules="required"
+                                            immediate
                                     >
                                         <v-text-field
                                                 v-model="AppConstantItem.value1"
@@ -35,6 +36,7 @@
                                             :color="$store.state.defaultColor + ' darken-1'"
                                             text
                                             type="submit"
+                                            :disabled="invalid"
                                     >
                                         تایید
                                     </v-btn>
