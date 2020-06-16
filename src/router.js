@@ -19,6 +19,7 @@ import OrganizeCharts from "./components/settings/generalSettings/organizeChart/
 import AssetList from "./components/assetManagement/AssetList";
 import Asset from "./components/assetManagement/Asset";
 import Ticket from "./components/tickets/Ticket";
+import TicketsArchive from "./components/tickets/TicketsArchive";
 
 const routes = [
     {
@@ -184,6 +185,15 @@ const routes = [
         name: "Asset",
         path: "/Asset/:formType/:id",
         component: Asset,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "TicketsArchive",
+        path: "/TicketsArchive",
+        component: TicketsArchive,
         props: true,
         meta: {
             requiresAuth: true

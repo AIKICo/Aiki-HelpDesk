@@ -2,17 +2,28 @@
     <v-container fluid>
         <v-row>
             <v-col>
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="searchKey"
+                        append-icon="mdi-magnify"
+                        label="جستجو بر اساس شماره درخواست"
+                        single-line
+                        hide-details
+                ></v-text-field>
                 <v-data-table
-                        :disable-pagination="true"
+                        :footer-props="{
+                                            'items-per-page-options': [50, 100, 150, 200, 250]
+                                          }"
                         :expanded.sync="expanded"
                         :headers="headers"
-                        :hide-default-footer="true"
                         :items="tickets"
+                        :items-per-page="itemPerPage"
                         :single-expand="singleExpand"
                         :sort-by="['ticketfriendlynumber']"
                         :sort-desc="[true]"
                         class="elevation-1"
                         item-key="id"
+                        :search="searchKey"
                 >
                     <template v-slot:top>
                         <component
@@ -59,28 +70,8 @@
                                     <v-btn :color="$store.state.defaultColor" @click="showHistorySheet(item)" icon>
                                         <v-icon>mdi-history</v-icon>
                                     </v-btn>
-                                    <v-btn
-                                            :color="$store.state.defaultColor"
-                                            @click="nextStageTicket(item)"
-                                            icon
-                                    >
-                                        <v-icon>mdi-account-arrow-left</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="closeTicket(item)" icon>
-                                        <v-icon>mdi-close-circle</v-icon>
-                                    </v-btn>
-                                    <v-btn
-                                            :color="$store.state.defaultColor"
-                                            @click="showStarsheet(item, 'rateTicket')"
-                                            icon
-                                            v-if="$store.state.memberRole==='admin'">
-                                        <v-icon>mdi-star</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="rejectWorkOrder(item)" icon>
-                                        <v-icon>mdi-text-box-remove</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="editTicket(item)" icon>
-                                        <v-icon>mdi-content-save-edit-outline</v-icon>
+                                    <v-btn :color="$store.state.defaultColor" @click="reopenTicket(item)" icon>
+                                        <v-icon>mdi-reload</v-icon>
                                     </v-btn>
                                 </div>
                             </td>
@@ -114,7 +105,7 @@
     import {mapActions} from 'vuex'
 
     export default {
-        name: "Tickets",
+        name: "TicketsArchive",
         data: () => ({
             tickets:[],
             expanded: [],
@@ -126,6 +117,8 @@
             selectedWorkOrder: {},
             activeComponent: null,
             activeComponentProperty: {},
+            itemPerPage: 50,
+            searchKey: "",
             headers: [
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
@@ -140,7 +133,7 @@
                     value: "actions",
                     align: "center",
                     sortable: false,
-                    width: "250px"
+                    width: "220px"
                 }
             ]
         }),
@@ -155,7 +148,7 @@
         },
         methods: {
             ...mapActions({
-                getTickets: "TicketService/loadTickets",
+                getTickets: "TicketService/loadAllTickets",
                 deleteTicket: "TicketService/deleteTicket",
                 patchTicket: "TicketService/patchTicket",
                 getTicketHistories: "TicketHistoryService/loadTicketHistories",
@@ -343,8 +336,21 @@
                     this.tickets = res.data;
                 });
             },
-            editTicket(item) {
-                this.$router.push("/Ticket/Edit/" + item.id);
+            reopenTicket(item){
+                this.selectedWorkOrder = item;
+                this.patchTicket({
+                    id: this.selectedWorkOrder.id,
+                    patchDoc: [
+                        {
+                            op: "replace",
+                            path: "/tickettype",
+                            value: "e6c7460f-de37-4a0e-8790-bbfe5a5e8ac9"
+                        }
+                    ]
+                }).then(()=>{
+                    this.selectedWorkOrder.enddate = null;
+                    this.selectedWorkOrder.tickettype="مجدد باز شده";
+                });
             }
         },
         created() {

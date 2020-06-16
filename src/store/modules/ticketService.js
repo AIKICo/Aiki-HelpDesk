@@ -27,6 +27,17 @@ const ticketService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadAllTickets({commit}) {
+            commit("SET_LOADER", true);
+            let response = (await TicketsView.api().get("/TicketsView/GetAll")).response;
+            if (response.status === 200) {
+                commit("SET_CURRENT", response.data);
+                commit("SET_LOADER", false);
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async loadTicket({commit},payload) {
             commit("SET_LOADER", true);
             let response = (await Ticket.api().get("/Tickets/" + payload)).response;

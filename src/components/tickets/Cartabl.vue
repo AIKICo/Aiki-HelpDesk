@@ -19,7 +19,7 @@
             }),
         },
         created() {
-            this.getTickets()
+
         },
         metaInfo: {
             title: 'کارتابل'

@@ -50,6 +50,7 @@
                                             shaped
                                             outlined
                                             chips
+                                            clearable
                                     >
                                     </v-select>
                                     <v-select
@@ -61,6 +62,7 @@
                                             shaped
                                             outlined
                                             chips
+                                            clearable
                                     >
                                     </v-select>
                                     <v-select
@@ -72,6 +74,7 @@
                                             shaped
                                             outlined
                                             chips
+                                            clearable
                                     >
                                     </v-select>
                                 </v-card-text>
@@ -168,7 +171,9 @@
                 this.TicketTags=res.data
             })
             if (this.$route.params.formType === "Edit") {
-                this.Ticket = this.loadTicket(this.$route.params.id);
+                this.loadTicket(this.$route.params.id).then((res)=>{
+                   this.Ticket = res.data;
+                });
             } else if (this.$route.params.formType === "Insert") {
                 this.Ticket = {
                     companyid: this.$store.state.companyId,
