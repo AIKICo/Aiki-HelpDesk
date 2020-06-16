@@ -348,15 +348,15 @@
         created() {
             this.getTickets().then((res)=>{
                 this.tickets = res.data;
+                if (this.$store.state.memberRole === "admin") {
+                    this.$store.state.activeTickets = this.tickets.length;
+                } else {
+                    let memberName = this.$store.state.memberName;
+                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
+                        return (el.agentname === memberName)
+                    }).length;
+                }
             });
-            if (this.$store.state.memberRole === "admin") {
-                this.$store.state.activeTickets = this.tickets.length;
-            } else {
-                let memberName = this.$store.state.memberName;
-                this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                    return (el.agentname === memberName)
-                }).length;
-            }
         }
     };
 </script>

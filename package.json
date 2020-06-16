@@ -27,6 +27,7 @@
     "vue-filepond": "^6.0.2",
     "vue-i18n": "^8.18.2",
     "vue-lodash": "^2.1.2",
+    "vue-material-design-icons": "^4.7.1",
     "vue-meta": "^2.4.0",
     "vue-persian-datetime-picker": "^2.1.5",
     "vue-progressbar": "^0.7.5",
@@ -39,6 +40,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@mdi/font": "^5.3.45",
     "@vue/cli-plugin-babel": "^4.4.1",
     "@vue/cli-plugin-eslint": "^4.4.1",
     "@vue/cli-plugin-pwa": "^4.4.1",
@@ -47,6 +49,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "material-design-icons-iconfont": "^5.0.1",
     "persian-date": "^1.1.0",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.0",
