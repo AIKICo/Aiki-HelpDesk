@@ -97,6 +97,35 @@
                             >
                                 {{ item.description }}
                             </v-alert>
+                            <v-chip-group>
+                                <v-chip
+                                        class="ma-2"
+                                        color="primary"
+                                        label
+                                >
+                                    <v-icon left>mdi-account-circle-outline</v-icon>
+                                    {{item.lasthistorycomment}}
+                                </v-chip>
+                                <v-chip
+                                        class="ma-2"
+                                        color="red"
+                                        text-color="white"
+                                        v-if="item.ticketcategory!=''"
+                                >
+                                    {{item.ticketcategory}}
+                                </v-chip>
+                                <v-chip
+                                        class="ma-2"
+                                        color="pink"
+                                        label
+                                        text-color="white"
+                                        v-if="item.tickettags!=''"
+                                >
+                                    <v-icon left>mdi-label</v-icon>
+                                    {{item.tickettags}}
+                                </v-chip>
+                            </v-chip-group>
+
                         </td>
                     </template>
                 </v-data-table>
@@ -115,7 +144,7 @@
     export default {
         name: "Tickets",
         data: () => ({
-            tickets:[],
+            tickets: [],
             expanded: [],
             singleExpand: true,
             selectedItem: false,
@@ -148,9 +177,7 @@
             CloseTicket,
             NextStageTicket
         },
-        computed: {
-
-        },
+        computed: {},
         methods: {
             ...mapActions({
                 getTickets: "TicketService/loadTickets",
@@ -199,7 +226,7 @@
                             value: "9e2a917a-fd55-4483-9270-e2a7fa3d69c0"
                         }
                     ]
-                }).then(()=>{
+                }).then(() => {
                     this.selectedWorkOrder.enddate = new Date().toISOString();
                     this.refreshData();
                 });
@@ -337,8 +364,16 @@
                 }
             },
             refreshData() {
-                this.getTickets().then((res)=>{
+                this.getTickets().then((res) => {
                     this.tickets = res.data;
+                    if (this.$store.state.memberRole === "admin") {
+                        this.$store.state.activeTickets = this.tickets.length;
+                    } else {
+                        let memberName = this.$store.state.memberName;
+                        this.$store.state.activeTickets = this.tickets.filter(function (el) {
+                            return (el.agentname === memberName)
+                        }).length;
+                    }
                 });
             },
             editTicket(item) {
@@ -346,18 +381,11 @@
             }
         },
         created() {
-            this.getTickets().then((res)=>{
-                this.tickets = res.data;
-                if (this.$store.state.memberRole === "admin") {
-                    this.$store.state.activeTickets = this.tickets.length;
-                } else {
-                    let memberName = this.$store.state.memberName;
-                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                        return (el.agentname === memberName)
-                    }).length;
-                }
-            });
-        }
+            this.refreshData();
+            setInterval(()=>{
+                this.refreshData();
+            },30000)
+        },
     };
 </script>
 

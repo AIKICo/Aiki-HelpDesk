@@ -21,7 +21,8 @@ export default class TicketsView extends Model{
             mandays:this.attr(null),
             operateid: this.attr(null),
             requestpriority:this.attr(''),
-            requester:this.attr('')
+            requester:this.attr(''),
+            lasthistorycomment:this.attr('')
         }
     }
 }
