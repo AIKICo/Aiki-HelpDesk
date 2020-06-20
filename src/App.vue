@@ -2,7 +2,7 @@
     <v-app>
         <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
         <app-bar v-if="$store.state.isLoggedIn"></app-bar>
-        <v-content>
+        <v-main>
             <v-snackbar
                     v-model="snackWithButtons"
                     :timeout="timeout"
@@ -22,7 +22,7 @@
             <transition name="fade" mode="out-in">
                 <router-view></router-view>
             </transition>
-        </v-content>
+        </v-main>
         <v-btn
                 bottom
                 :color="$store.state.defaultColor"
@@ -68,7 +68,7 @@
             snackBtnText: "",
             snackWithBtnText: "",
             snackWithButtons: false,
-            timeout: 0
+            timeout: -1
         }),
         methods: {
             showRefreshUI(e) {

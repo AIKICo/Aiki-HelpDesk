@@ -19,9 +19,7 @@ import DynamicDirectives from "./directives/dynamicEvents"
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 import lodash from "lodash"
-import JSCharting from "jscharting-vue";
 //import VueSignalR from "@latelier/vue-signalr"
-
 const accessToken = localStorage.getItem("access_token");
 const companyid = localStorage.getItem("companyid");
 
@@ -43,7 +41,6 @@ Vue.use(VueLodash, { name: "custom" , lodash: lodash })
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("date-picker", VuePersianDatetimePicker);
-Vue.component("jsCharting",JSCharting);
 
 Vue.filter("formatDate", function (value) {
     if (value) {
