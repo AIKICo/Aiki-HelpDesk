@@ -17,7 +17,7 @@
                         <v-list-item-title>ویرایش</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item dense @click="this.deleteAppConstantItem">
+                <v-list-item dense @click="this.deleteAppConstantItem" v-if="AppConstantItem.allowdelete">
                     <v-list-item-icon><v-icon>mdi-delete</v-icon></v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>حذف</v-list-item-title>

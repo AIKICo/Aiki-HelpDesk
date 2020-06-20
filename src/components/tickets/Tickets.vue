@@ -169,7 +169,8 @@
                     sortable: false,
                     width: "250px"
                 }
-            ]
+            ],
+            timer:null
         }),
         components: {
             TicketTimeline,
@@ -382,10 +383,13 @@
         },
         created() {
             this.refreshData();
-            setInterval(()=>{
+            this.timer = setInterval(()=>{
                 this.refreshData();
             },30000)
         },
+        destroyed() {
+            clearInterval(this.timer);
+        }
     };
 </script>
 

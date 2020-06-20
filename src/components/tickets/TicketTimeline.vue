@@ -22,7 +22,7 @@
                                 large
                         >
                             <template v-slot:opposite>
-                                <v-chip :color="$store.state.defaultColor" outlined pill>
+                                <v-chip color="deep-purple accent-4" outlined pill>
                                     <v-icon right class="ml-1">mdi-account-outline</v-icon>
                                     {{
                                     item.agentname === null

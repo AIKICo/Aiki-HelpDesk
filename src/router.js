@@ -20,6 +20,7 @@ import AssetList from "./components/assetManagement/AssetList";
 import Asset from "./components/assetManagement/Asset";
 import Ticket from "./components/tickets/Ticket";
 import TicketsArchive from "./components/tickets/TicketsArchive";
+import dashboard from "./components/dashboard/dashboard";
 
 const routes = [
     {
@@ -194,6 +195,15 @@ const routes = [
         name: "TicketsArchive",
         path: "/TicketsArchive",
         component: TicketsArchive,
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        name: "dashboard",
+        path: "/dashboard",
+        component: dashboard,
         props: true,
         meta: {
             requiresAuth: true
