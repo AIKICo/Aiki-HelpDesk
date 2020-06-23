@@ -44,7 +44,7 @@ const routes = [
     {
         name: "root",
         path: "/",
-        component: cartabl,
+        component: dashboard,
         meta: {
             requiresAuth: true
         }
@@ -231,7 +231,7 @@ router.beforeEach((to, from, next) => {
     } else if (to.name === "login") {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (authUser) {
-            next({name: "cartabl"});
+            next({name: "dashboard"});
         } else {
             next();
         }

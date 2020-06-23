@@ -30,6 +30,12 @@
 
                 chart.paddingRight = 20;
                 chart.rtl = true;
+
+                let title = chart.titles.create();
+                title.text = "درخواست های سی روز اخیر";
+                title.fontSize = 20;
+                title.marginBottom = 30;
+
                 chart.data = [{
                     "country": "1399/01/01",
                     "visits": 2025
@@ -87,6 +93,9 @@
                 labelBullet.label.verticalCenter = "bottom";
                 labelBullet.label.dy = -10;
                 labelBullet.label.text = "{values.valueY.workingValue.formatNumber('#.')}";
+
+                let circleBullet = series.bullets.push(new am4charts.CircleBullet());
+                circleBullet.property="radius";
 
                 chart.zoomOutButton.disabled = true;
 
