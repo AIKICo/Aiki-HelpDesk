@@ -12,8 +12,10 @@
 <script>
     import * as am4core from "@amcharts/amcharts4/core";
     import * as am4charts from "@amcharts/amcharts4/charts";
+    import am4themes_frozen from "@amcharts/amcharts4/themes/frozen";
     import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
+    am4core.useTheme(am4themes_frozen);
     am4core.useTheme(am4themes_animated);
     export default {
         name: "scatterChart",
@@ -22,38 +24,71 @@
                 name: "columnChart",
             }
         },
-        methods:{
-            generateChart(){
+        methods: {
+            generateChart() {
                 let chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart);
 
                 chart.paddingRight = 20;
-                chart.rtl=true;
-                let data = [];
-                let visits = 10;
-                for (let i = 1; i < 366; i++) {
-                    visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-                    data.push({date: new Date(2018, 0, i), name: "name" + i, value: visits});
-                }
+                chart.rtl = true;
+                chart.data = [{
+                    "country": "1399/01/01",
+                    "visits": 2025
+                }, {
+                    "country": "1399/01/02",
+                    "visits": 1882
+                }, {
+                    "country": "1399/01/03",
+                    "visits": 1809
+                }, {
+                    "country": "1399/01/04",
+                    "visits": 1322
+                }, {
+                    "country": "1399/01/05",
+                    "visits": 1122
+                }, {
+                    "country": "1399/01/06",
+                    "visits": 1114
+                }, {
+                    "country": "1399/01/07",
+                    "visits": 984
+                }, {
+                    "country": "1399/01/08",
+                    "visits": 711
+                }, {
+                    "country": "1399/01/09",
+                    "visits": 665
+                }, {
+                    "country": "1399/01/10",
+                    "visits": 580
+                }, {
+                    "country": "1399/01/11",
+                    "visits": 443
+                }, {
+                    "country": "1399/01/12",
+                    "visits": 441
+                }];
 
-                chart.data = data;
-
-                let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-                dateAxis.renderer.grid.template.location = 0;
+                let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.renderer.grid.template.location = 0;
+                categoryAxis.dataFields.category = "country";
+                categoryAxis.renderer.minGridDistance = 60;
+                categoryAxis.renderer.inversed = true;
+                categoryAxis.renderer.labels.template.rotation=-45;
 
                 let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-                valueAxis.tooltip.disabled = true;
-                valueAxis.renderer.minWidth = 35;
+                valueAxis.min = 0;
+                valueAxis.extraMax = 0.1;
 
                 let series = chart.series.push(new am4charts.LineSeries());
-                series.dataFields.dateX = "date";
-                series.dataFields.valueY = "value";
+                series.dataFields.categoryX = "country";
+                series.dataFields.valueY = "visits";
 
-                series.tooltipText = "{valueY.value}";
-                chart.cursor = new am4charts.XYCursor();
+                let labelBullet = series.bullets.push(new am4charts.LabelBullet());
+                labelBullet.label.verticalCenter = "bottom";
+                labelBullet.label.dy = -10;
+                labelBullet.label.text = "{values.valueY.workingValue.formatNumber('#.')}";
 
-                let scrollbarX = new am4charts.XYChartScrollbar();
-                scrollbarX.series.push(series);
-                chart.scrollbarX = scrollbarX;
+                chart.zoomOutButton.disabled = true;
 
                 this.chart = chart;
             }
