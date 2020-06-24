@@ -1,5 +1,6 @@
 import Ticket from "../models/Ticket";
 import TicketsView from "../models/TicketsView";
+import Last30Ticket from "../models/Last30Ticket";
 
 const ticketService = {
     namespaced: true,
@@ -41,6 +42,16 @@ const ticketService = {
         async loadTicket({commit},payload) {
             commit("SET_LOADER", true);
             let response = (await Ticket.api().get("/Tickets/" + payload)).response;
+            if (response.status === 200) {
+                commit("SET_LOADER", false);
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
+        async loadLast30Ticket({commit}) {
+            commit("SET_LOADER", true);
+            let response = (await Last30Ticket.api().get("/Tickets/GetLast30Ticket")).response;
             if (response.status === 200) {
                 commit("SET_LOADER", false);
                 return response;

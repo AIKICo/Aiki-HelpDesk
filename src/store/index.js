@@ -38,6 +38,7 @@ import AssetsView from "./models/AssetsView";
 import Ticket from "./models/Ticket";
 import TicketsView from "./models/TicketsView";
 import TicketHistory from "./models/TicketHistory";
+import Last30Ticket from "./models/Last30Ticket";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -61,6 +62,7 @@ database.register(AssetsView);
 database.register(Ticket);
 database.register(TicketsView);
 database.register(TicketHistory);
+database.register(Last30Ticket);
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
