@@ -1,4 +1,5 @@
 # aiki-helpdesk
+![ticket app CI](https://github.com/AIKICo/Aiki-HelpDesk/workflows/ticket%20app%20CI/badge.svg)
 
 ## Project setup
 ```
