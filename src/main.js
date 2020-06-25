@@ -1,24 +1,24 @@
-import Vue from "vue"
-import App from "./App.vue"
+import Vue from "vue";
+import App from "./App.vue";
 import vuetify from "./plugins/vuetify";
-import store from "./store"
-import VueRouter from "vue-router"
-import VueMeta from "vue-meta"
-import moment from "moment-jalaali"
-import VueLodash from "vue-lodash"
-import "./registerServiceWorker"
-import "es6-promise/auto"
-import axois from "axios"
-import router from "./router"
-import VueProgressBar from "vue-progressbar"
+import store from "./store";
+import VueRouter from "vue-router";
+import VueMeta from "vue-meta";
+import moment from "moment-jalaali";
+import VueLodash from "vue-lodash";
+import "./registerServiceWorker";
+import "es6-promise/auto";
+import axois from "axios";
+import router from "./router";
+import VueProgressBar from "vue-progressbar";
 import {ValidationProvider} from "vee-validate";
-import * as firebase from "firebase/app"
-import "firebase/analytics"
+import * as firebase from "firebase/app";
+import "firebase/analytics";
 import Vue2TouchEvents from "vue2-touch-events";
-import DynamicDirectives from "./directives/dynamicEvents"
+import DynamicDirectives from "./directives/dynamicEvents";
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
-import lodash from "lodash"
+import lodash from "lodash";
 //import VueSignalR from "@latelier/vue-signalr"
 const accessToken = localStorage.getItem("access_token");
 const companyid = localStorage.getItem("companyid");
@@ -26,8 +26,8 @@ const companyid = localStorage.getItem("companyid");
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
 if (accessToken) {
-    axois.defaults.headers.common["Authorization"] = accessToken;
-    axois.defaults.headers.common["CompanyID"] = companyid;
+    axois.defaults.headers.common.Authorization ="Bearer " + accessToken;
+    axois.defaults.headers.common.CompanyID = companyid;
 }
 
 Vue.config.productionTip = false;
@@ -36,7 +36,7 @@ Vue.use(VueRouter);
 Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
-Vue.use(VueLodash, { name: "custom" , lodash: lodash })
+Vue.use(VueLodash, { name: "custom" , lodash: lodash });
 
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("ValidationProvider", ValidationProvider);
@@ -44,9 +44,9 @@ Vue.component("date-picker", VuePersianDatetimePicker);
 
 Vue.filter("formatDate", function (value) {
     if (value) {
-        return moment(String(value)).format("YYYY/MM/DD")
+        return moment(String(value)).format("YYYY/MM/DD");
     }
-})
+});
 
 Vue.config.productionTip = false;
 var config = {
