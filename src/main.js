@@ -11,13 +11,13 @@ import "es6-promise/auto";
 import axois from "axios";
 import router from "./router";
 import VueProgressBar from "vue-progressbar";
-import {ValidationProvider} from "vee-validate";
 import * as firebase from "firebase/app";
 import "firebase/analytics";
 import Vue2TouchEvents from "vue2-touch-events";
 import DynamicDirectives from "./directives/dynamicEvents";
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
+
 import lodash from "lodash";
 //import VueSignalR from "@latelier/vue-signalr"
 const accessToken = localStorage.getItem("access_token");
@@ -39,7 +39,6 @@ Vue.use(Vue2TouchEvents);
 Vue.use(VueLodash, { name: "custom" , lodash: lodash });
 
 Vue.directive("DynamicEvents", DynamicDirectives);
-Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("date-picker", VuePersianDatetimePicker);
 
 Vue.filter("formatDate", function (value) {

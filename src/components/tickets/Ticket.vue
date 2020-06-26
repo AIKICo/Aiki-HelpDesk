@@ -17,6 +17,7 @@
                                             v-slot="{ errors }"
                                             name="اموال"
                                             rules="required|isAssetExists"
+                                            events="['blur']"
                                             immediate
                                     >
                                         <v-text-field
