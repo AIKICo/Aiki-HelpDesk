@@ -16,8 +16,8 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="اموال"
-                                            rules="required|isAssetExists"
-                                            events="['blur']"
+                                            rules="required"
+                                            vid="asset"
                                             immediate
                                     >
                                         <v-text-field
@@ -150,12 +150,22 @@
                         }
                     });
                 } else if (this.$route.params.formType === "Insert") {
-                    this.addTicket(this.Ticket).then(res => {
-                        if (res.status === 201) {
-                            this.closeDialog();
+                    this.isAssetExists(this.Ticket.asset).then((res)=>{
+                        if (res.data===false)
+                        {
+                            this.$refs.observer.setErrors({
+                                asset: ['شماره اموال وجود ندارد']
+                            });
+                            return;
+                        }else{
+                            this.addTicket(this.Ticket).then(res => {
+                                if (res.status === 201) {
+                                    this.closeDialog();
+                                }
+                            });
                         }
                     });
-                }
+               }
             },
             closeDialog() {
                 this.$router.push("/cartabl");

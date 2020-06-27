@@ -1,5 +1,6 @@
 import Asset from "../models/Asset";
 import AssetsView from "../models/AssetsView";
+import axios from "axios"
 
 const assetService = {
     namespaced: true,
@@ -30,7 +31,13 @@ const assetService = {
         },
     },
     actions: {
-        async loadPagingAssets({state, commit}, {rows, page}) {
+        async loadPagingAssets({
+                                   state,
+                                   commit
+                               }, {
+                                   rows,
+                                   page
+                               }) {
             commit("SET_LOADER", true);
             var start = parseInt(rows) * (parseInt(page) - 1);
             var end = start + parseInt(rows);
@@ -50,7 +57,9 @@ const assetService = {
                 }
             }
         },
-        async loadAssets({commit}) {
+        async loadAssets({
+                             commit
+                         }) {
             let response = (await Asset.api().get("/Assets")).response;
             if (response.status === 200) {
                 commit("SET_TOTAL", response.headers["x-total-count"]);
@@ -60,7 +69,9 @@ const assetService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async loadAssetsView({commit}) {
+        async loadAssetsView({
+                                 commit
+                             }) {
             let response = (await AssetsView.api().get("/AssetsView")).response;
             if (response.status === 200) {
                 commit("SET_TOTAL", response.headers["x-total-count"]);
@@ -70,8 +81,8 @@ const assetService = {
                 throw new Error("Something is wrong.");
             }
         },
-        async loadAsset(state,payload) {
-            let response = (await Asset.api().get("/Assets/"+payload)).response;
+        async loadAsset(state, payload) {
+            let response = (await Asset.api().get("/Assets/" + payload)).response;
             if (response.status === 200) {
                 return response;
             } else if (response.data.error) {
@@ -107,7 +118,9 @@ const assetService = {
         },
         async deleteAsset(context, payload) {
             let response = (
-                await Asset.api().delete("/Assets/" + payload.id, {delete: 42})
+                await Asset.api().delete("/Assets/" + payload.id, {
+                    delete: 42
+                })
             ).response;
             if (response.status === 200) {
                 return response;
@@ -116,18 +129,20 @@ const assetService = {
             }
         },
         async isAssetExists(context, payload) {
-            let response = (
-                await Asset.api().get("/Assets/isAssetExists/" + payload )
-            ).response;
-            if (response.status === 200) {
-                return response.data;
-            } else if (response.data.error) {
-                throw new Error("Something is wrong.");
-            }
+            let response = await axios.get("/Assets/isAssetExists/" + payload);
+            return response;
+            //let response = (
+            //await Asset.api().get("/Assets/isAssetExists/" + payload )
+            //).response;
+            //if (response.status === 200) {
+            //return response.data;
+            //} else if (response.data.error) {
+            //    throw new Error("Something is wrong.");
+            //}
         },
         async notIsAssetExists(context, payload) {
             let response = (
-                await Asset.api().get("/Assets/isAssetExists/" + payload )
+                await Asset.api().get("/Assets/isAssetExists/" + payload)
             ).response;
             if (response.status === 200) {
                 response.data = !response.data;

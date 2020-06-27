@@ -4,7 +4,7 @@
       <v-row justify="center" align="center" no-gutters>
         <v-col cols="12" md="5" lg="5" >
           <ValidationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
-            <form @submit.prevent="handleSubmit(onSubmit)">
+            <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
               <v-card class="mx-auto" outlined>
                 <v-card-title :class="$store.state.defaultColor + ' white--text'">
                   <v-icon large color="white">mdi-handshake</v-icon>

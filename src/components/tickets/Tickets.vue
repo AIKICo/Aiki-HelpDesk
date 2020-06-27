@@ -110,7 +110,7 @@
                                         class="ma-2"
                                         color="red"
                                         text-color="white"
-                                        v-if="item.ticketcategory!=''"
+                                        v-if="item.ticketcategory!=null"
                                 >
                                     {{item.ticketcategory}}
                                 </v-chip>
@@ -119,7 +119,7 @@
                                         color="pink"
                                         label
                                         text-color="white"
-                                        v-if="item.tickettags!=''"
+                                        v-if="item.tickettags!=null"
                                 >
                                     <v-icon left>mdi-label</v-icon>
                                     {{item.tickettags}}
@@ -170,7 +170,7 @@
                     width: "250px"
                 }
             ],
-            timer:null
+            timer: null
         }),
         components: {
             TicketTimeline,
@@ -364,7 +364,7 @@
                     }
                 }
             },
-            refreshData() {
+            loadData(){
                 this.getTickets().then((res) => {
                     this.tickets = res.data;
                     if (this.$store.state.memberRole === "admin") {
@@ -377,15 +377,19 @@
                     }
                 });
             },
+            refreshData() {
+
+                this.tickets = this.lodash.filter(this.tickets, item => item.enddate === null);
+            },
             editTicket(item) {
                 this.$router.push("/Ticket/Edit/" + item.id);
             }
         },
         created() {
-            this.refreshData();
-            this.timer = setInterval(()=>{
+            this.loadData();
+            this.timer = setInterval(() => {
                 this.refreshData();
-            },30000)
+            }, 30000)
         },
         destroyed() {
             clearInterval(this.timer);
