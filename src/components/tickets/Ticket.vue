@@ -82,6 +82,18 @@
                                             clearable
                                     >
                                     </v-select>
+                                    <v-select
+                                            :items="TicketTags"
+                                            item-text="value1"
+                                            item-value="id"
+                                            v-model="Ticket.requestpriority"
+                                            label="اولویت"
+                                            shaped
+                                            outlined
+                                            chips
+                                            clearable
+                                    >
+                                    </v-select>
                                 </v-card-text>
 
                                 <v-card-actions>
@@ -202,7 +214,8 @@
                     tickettype: null,
                     ticketcategory: null,
                     tickettags: null,
-                    asset: null
+                    asset: null,
+                    requestpriority:""
                 };
             }
         },

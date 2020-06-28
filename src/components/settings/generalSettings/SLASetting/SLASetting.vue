@@ -15,7 +15,7 @@
                                 <v-card-text class="mt-3">
                                     <v-row no-gutters>
                                         <v-col cols="10">
-                                            <validation-provider
+                                            <ValidationProvider
                                                     v-slot="{ errors }"
                                                     name="عنوان"
                                                     rules="required"
@@ -29,7 +29,7 @@
                                                         outlined
                                                         shaped
                                                 ></v-text-field>
-                                            </validation-provider>
+                                            </ValidationProvider>
                                             <v-textarea
                                                     v-model="SLASetting.description"
                                                     shaped
@@ -125,7 +125,7 @@
 
 <script>
     import {required} from "vee-validate/dist/rules";
-    import {extend, ValidationObserver, setInteractionMode} from "vee-validate";
+    import {extend, ValidationObserver, setInteractionMode, ValidationProvider} from "vee-validate";
 
     setInteractionMode("eager");
     extend("required", {
@@ -135,7 +135,8 @@
     export default {
         name: "SLASetting",
         components: {
-            ValidationObserver
+            ValidationObserver,
+            ValidationProvider
         },
         data() {
             return {
