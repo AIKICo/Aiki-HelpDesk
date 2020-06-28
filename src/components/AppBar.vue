@@ -42,7 +42,7 @@
             logout() {
                 this.$store.dispatch('UserService/logout').then(() => {
                     this.$router.go("/login")
-                })
+                });
             }
         },
     }

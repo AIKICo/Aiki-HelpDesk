@@ -86,8 +86,16 @@ new Vue({
             this.$Progress.finish();
             return response;
         }, function (error) {
-            console.log(error); // Log into RavenDB
-            this.$Progress.fail();
+            if (401 === error.response.status) {
+                this.$store.dispatch('UserService/logout').then(() => {
+                    this.$router.go("/login")
+                });
+                this.$Progress.fail();
+                return Promise.resolve(error.response);
+            } else {
+                this.$Progress.fail();
+                return Promise.reject(error);
+            }
         });
     },
     render: h => h(App)

@@ -101,28 +101,36 @@
                                 <v-chip
                                         class="ma-2"
                                         color="primary"
-                                        label
                                 >
                                     <v-icon left>mdi-account-circle-outline</v-icon>
                                     {{item.lasthistorycomment}}
                                 </v-chip>
                                 <v-chip
                                         class="ma-2"
-                                        color="red"
+                                        color="green"
                                         text-color="white"
                                         v-if="item.ticketcategory!=null"
                                 >
+                                    <v-icon left>mdi-shield-bug</v-icon>
                                     {{item.ticketcategory}}
                                 </v-chip>
                                 <v-chip
                                         class="ma-2"
                                         color="pink"
-                                        label
                                         text-color="white"
                                         v-if="item.tickettags!=null"
                                 >
                                     <v-icon left>mdi-label</v-icon>
                                     {{item.tickettags}}
+                                </v-chip>
+                                <v-chip
+                                        class="ma-2"
+                                        color="red"
+                                        text-color="white"
+                                        v-if="item.requestpriority!=null"
+                                >
+                                    <v-icon left>mdi-flag-variant</v-icon>
+                                    {{item.requestpriority}}
                                 </v-chip>
                             </v-chip-group>
 

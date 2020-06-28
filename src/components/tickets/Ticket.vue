@@ -83,9 +83,9 @@
                                     >
                                     </v-select>
                                     <v-select
-                                            :items="TicketTags"
-                                            item-text="value1"
-                                            item-value="id"
+                                            :items="requestpriority"
+                                            item-text="label"
+                                            item-value="labelValue"
                                             v-model="Ticket.requestpriority"
                                             label="اولویت"
                                             shaped
@@ -146,7 +146,13 @@
                 TicketTypes: [],
                 TicketCategories: [],
                 TicketTags: [],
-                diabledControl: false
+                diabledControl: false,
+                requestpriority: [
+                    {label: "کم", labelValue:"کم"},
+                    {label: "متوسط", labelValue:"متوسط"},
+                    {label: "بالا", labelValue:"بالا"},
+                    {label: "آنی", labelValue:"آنی"},
+                ]
             }
         },
         components: {
@@ -162,14 +168,13 @@
                         }
                     });
                 } else if (this.$route.params.formType === "Insert") {
-                    this.isAssetExists(this.Ticket.asset).then((res)=>{
-                        if (res.data===false)
-                        {
+                    this.isAssetExists(this.Ticket.asset).then((res) => {
+                        if (res.data === false) {
                             this.$refs.observer.setErrors({
                                 asset: ['شماره اموال وجود ندارد']
                             });
                             return;
-                        }else{
+                        } else {
                             this.addTicket(this.Ticket).then(res => {
                                 if (res.status === 201) {
                                     this.closeDialog();
@@ -177,7 +182,7 @@
                             });
                         }
                     });
-               }
+                }
             },
             closeDialog() {
                 this.$router.push("/cartabl");
@@ -187,7 +192,7 @@
                 loadTicket: "TicketService/loadTicket",
                 addTicket: "TicketService/addTicket",
                 editTicket: "TicketService/editTicket",
-                isAssetExists:"AssetService/isAssetExists"
+                isAssetExists: "AssetService/isAssetExists"
             }),
         },
         created() {
@@ -215,7 +220,7 @@
                     ticketcategory: null,
                     tickettags: null,
                     asset: null,
-                    requestpriority:""
+                    requestpriority: ""
                 };
             }
         },

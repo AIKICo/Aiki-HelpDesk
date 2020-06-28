@@ -166,10 +166,10 @@ const routes = [
     },
     {
         name: "OrganizeCharts",
-        path: "/OrganizeCharts/:id" ,
+        path: "/OrganizeCharts/:id",
         component: OrganizeCharts,
         props: true,
-        meta:{
+        meta: {
             requiresAuth: true
         }
     },
@@ -218,8 +218,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     var allowAddRecord = [
-        "CustomerList", "OperationHoursList","SLASettings",
-        "Members","cartabl","Groups","AppConstants","AssetList","root"];
+        "CustomerList", "OperationHoursList", "SLASettings",
+        "Members", "cartabl", "Groups", "AppConstants", "AssetList", "root"];
     if (to.meta.requiresAuth) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
