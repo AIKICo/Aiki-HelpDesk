@@ -18,7 +18,8 @@
                                             <validation-provider
                                                     v-slot="{ errors }"
                                                     name="شماره اموال"
-                                                    rules="required|isAssetExists"
+                                                    rules="required"
+                                                    vid="assetnumber"
                                                     immediate
                                             >
                                                 <v-text-field
@@ -28,6 +29,7 @@
                                                         :error-messages="errors"
                                                         outlined
                                                         shaped
+                                                        :disabled="disableControl"
                                                 ></v-text-field>
                                             </validation-provider>
                                             <validation-provider
@@ -209,7 +211,8 @@
                 AssetTypeSearchKey: "",
                 label: "",
                 valueLabel: "",
-                AppConstants: []
+                AppConstants: [],
+                disableControl:false
             }
         },
         components: {
@@ -225,9 +228,19 @@
                         }
                     });
                 } else if (this.$route.params.formType === "Insert") {
-                    this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
-                        if (res.status === 201) {
-                            this.closeDialog();
+                    this.isAssetExists(this.Asset.assetnumber).then((res)=>{
+                        if (res.data===true)
+                        {
+                            this.$refs.observer.setErrors({
+                                assetnumber: ['شماره اموال وجود دارد']
+                            });
+                            return;
+                        }else{
+                            this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
+                                if (res.status === 201) {
+                                    this.closeDialog();
+                                }
+                            });
                         }
                     });
                 }
@@ -249,7 +262,7 @@
                 this.valueLabel="";
             },
             ...mapActions({
-                isAssetExists:"AssetService/notIsAssetExists"
+                isAssetExists:"AssetService/isAssetExists"
             }),
         },
         created() {
@@ -272,7 +285,7 @@
             if (this.$route.params.formType === "Edit") {
                 this.$store.dispatch("AssetService/loadAsset", this.$route.params.id).then((res) => {
                     this.Asset = res.data;
-
+                    this.disableControl = true;
                 });
             } else if (this.$route.params.formType === "Insert") {
                 this.Asset = {
