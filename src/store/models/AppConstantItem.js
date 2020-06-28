@@ -9,9 +9,10 @@ export default class AppConstantItem extends Model{
             id: this.attr(null),
             appconstantid: this.attr(null),
             companyid:this.attr(null),
-            value1: this.string(""),
-            value2: this.string(""),
-            allowdelete:this.boolean(null)
+            value1: this.attr(""),
+            value2: this.attr(""),
+            allowdelete:this.boolean(null),
+            additionalinfo: this.attr([])
         };
     }
 }
