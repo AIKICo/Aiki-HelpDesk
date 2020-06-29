@@ -1,4 +1,5 @@
 import User from "../models/User";
+import router from '@/router.js';
 
 const userService = {
     namespaced: true,
@@ -18,7 +19,8 @@ const userService = {
             return result;
         },
         logout() {
-            localStorage.clear()
+            localStorage.clear();
+            router.push("/login");
         },
     },
     getters: {

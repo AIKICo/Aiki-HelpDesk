@@ -15,6 +15,26 @@
                                 <v-card-text class="mt-3">
                                     <validation-provider
                                             v-slot="{ errors }"
+                                            name="مشتری"
+                                            rules="required"
+                                            immediate
+                                    >
+                                        <v-select
+                                                :items="customers"
+                                                item-text="title"
+                                                item-value="id"
+                                                v-model="Ticket.customerid"
+                                                label="مشتری"
+                                                shaped
+                                                outlined
+                                                chips
+                                                clearable
+                                                :error-messages="errors"
+                                        >
+                                        </v-select>
+                                    </validation-provider>
+                                    <validation-provider
+                                            v-slot="{ errors }"
                                             name="اموال"
                                             rules="required"
                                             vid="asset"
@@ -147,6 +167,7 @@
                 TicketCategories: [],
                 TicketTags: [],
                 diabledControl: false,
+                customers:[],
                 requestpriority: [
                     {label: "کم", labelValue:"کم"},
                     {label: "متوسط", labelValue:"متوسط"},
@@ -189,6 +210,7 @@
             },
             ...mapActions({
                 loadConstant: "AppConstantItemsService/loadAppConstantItems",
+                loadCustomer:"CustomerService/loadCustomers",
                 loadTicket: "TicketService/loadTicket",
                 addTicket: "TicketService/addTicket",
                 editTicket: "TicketService/editTicket",
@@ -198,13 +220,16 @@
         created() {
             this.loadConstant('473b359f-30a7-4963-a671-6f618b277e48').then((res) => {
                 this.TicketTypes = res.data
-            })
+            });
             this.loadConstant('0a8b50c5-762e-47ea-b60d-4ed9d0a71f50').then((res) => {
                 this.TicketCategories = res.data
-            })
+            });
             this.loadConstant('e215f24f-4d28-46e7-b75d-26a19feb656a').then((res) => {
                 this.TicketTags = res.data
-            })
+            });
+            this.loadCustomer().then((res)=>{
+                this.customers = res.data;
+            });
             if (this.$route.params.formType === "Edit") {
                 this.loadTicket(this.$route.params.id).then((res) => {
                     this.Ticket = res.data;

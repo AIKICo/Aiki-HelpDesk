@@ -28,7 +28,8 @@ const routes = [
         path: "/cartabl",
         component: cartabl,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -37,7 +38,8 @@ const routes = [
         component: Ticket,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {name: "login", path: "/login", component: login},
@@ -46,15 +48,17 @@ const routes = [
         path: "/",
         component: dashboard,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
-        name: "settingsControlPanel",
+            name: "settingsControlPanel",
         path: "/SettingsControlPanel",
         component: settingsControlPanel,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin"
         }
     },
     {
@@ -62,7 +66,8 @@ const routes = [
         path: "/CustomerList",
         component: CustomerList,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -71,7 +76,8 @@ const routes = [
         component: Customer,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -80,7 +86,8 @@ const routes = [
         component: OperationHoursList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -89,7 +96,8 @@ const routes = [
         component: OperationHours,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -98,7 +106,8 @@ const routes = [
         component: SLASettingsList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -107,7 +116,8 @@ const routes = [
         component: SLASetting,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -116,7 +126,8 @@ const routes = [
         component: MembersList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -125,7 +136,8 @@ const routes = [
         component: Member,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -134,7 +146,8 @@ const routes = [
         component: GroupList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -143,7 +156,8 @@ const routes = [
         component: Group,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -152,7 +166,8 @@ const routes = [
         component: AppConstantList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -161,7 +176,8 @@ const routes = [
         component: AppConstant,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -170,7 +186,8 @@ const routes = [
         component: OrganizeCharts,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -179,7 +196,8 @@ const routes = [
         component: AssetList,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -188,7 +206,8 @@ const routes = [
         component: Asset,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -197,7 +216,8 @@ const routes = [
         component: TicketsArchive,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
     {
@@ -206,7 +226,8 @@ const routes = [
         component: dashboard,
         props: true,
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            role:"admin,user"
         }
     },
 ];
@@ -220,7 +241,7 @@ router.beforeEach((to, from, next) => {
     var allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",
         "Members", "cartabl", "Groups", "AppConstants", "AssetList", "root"];
-    if (to.meta.requiresAuth) {
+    if (to.meta.requiresAuth && to.meta.role.split(',').includes(store.state.memberRole)) {
         const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
         if (!authUser || !authUser.token) {
             next({name: "login"});
@@ -235,8 +256,6 @@ router.beforeEach((to, from, next) => {
         } else {
             next();
         }
-    } else {
-        next();
     }
 });
 export default router;

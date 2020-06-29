@@ -78,9 +78,9 @@ export default new Vuex.Store({
         defaultHeaderTextColor: "white--text",
         defaultBadgeColor: "red",
         companyId: localStorage.getItem("companyid"),
-        memberName: localStorage.getItem("userInfo")!=null?JSON.parse(localStorage.getItem("userInfo")).membername:null,
-        memberRole: localStorage.getItem("userInfo")!=null?JSON.parse(localStorage.getItem("userInfo")).roles:null,
-        activeTickets:0
+        memberName: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).membername : null,
+        memberRole: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).roles : null,
+        activeTickets: 0
     },
     mutations: {},
     actions: {},
@@ -93,12 +93,12 @@ export default new Vuex.Store({
         OperationHourService: operationHourService,
         SLASettingService: sLASettingService,
         MemberService: memberService,
-        GroupService:groupService,
-        AppConstantItemsService:appConstantItemsService,
+        GroupService: groupService,
+        AppConstantItemsService: appConstantItemsService,
         OrganizeChartService: organizeChartService,
         OrganizeChartsJsonView: organizeCharts_JsonViewService,
         AssetService: assetService,
-        TicketService:ticketService,
+        TicketService: ticketService,
         TicketHistoryService: ticketHistoryService
     },
     getters: {}

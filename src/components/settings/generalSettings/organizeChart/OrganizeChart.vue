@@ -29,6 +29,26 @@
                                                         shaped
                                                 ></v-text-field>
                                             </validation-provider>
+                                            <validation-provider
+                                                    v-slot="{ errors }"
+                                                    name="نوع"
+                                                    rules="required"
+                                                    immediate
+                                            >
+                                                <v-select
+                                                        :items="titletypes"
+                                                        item-text="value1"
+                                                        item-value="id"
+                                                        v-model="item.titletype"
+                                                        label="نوع"
+                                                        shaped
+                                                        outlined
+                                                        chips
+                                                        clearable
+                                                        :error-messages="errors"
+                                                >
+                                                </v-select>
+                                            </validation-provider>
                                         </v-col>
                                     </v-row>
                                     <v-row no-gutters>
@@ -113,6 +133,7 @@
 
 <script>
     import {required} from "vee-validate/dist/rules";
+    import {mapActions} from "vuex";
     import {
         extend,
         ValidationObserver,
@@ -136,7 +157,8 @@
             return {
                 label: "",
                 valueLabel: "",
-                AppConstants: []
+                AppConstants: [],
+                titletypes:[]
             }
         },
         methods: {
@@ -162,11 +184,17 @@
                 this.item.additionalinfo.push({label: this.label, value: this.valueLabel});
                 this.label="";
                 this.valueLabel="";
-            }
+            },
+            ...mapActions({
+                loadAppConstantItems:"AppConstantItemsService/loadAppConstantItems"
+            })
         },
         created() {
-            this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", "416e2a28-cfc4-49f9-9bf1-6ef0451a5b7b").then((res) => {
+            this.loadAppConstantItems("416e2a28-cfc4-49f9-9bf1-6ef0451a5b7b").then((res) => {
                 this.AppConstants = res.data;
+            });
+            this.loadAppConstantItems("0e5aa3a0-f7c5-4960-8fb2-a6e58b1f663b").then((res) => {
+                this.titletypes = res.data;
             });
         }
     }

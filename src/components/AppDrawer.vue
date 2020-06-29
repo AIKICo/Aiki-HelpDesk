@@ -16,7 +16,8 @@
 
                 <v-list-item-content>
                     <v-list-item-title>{{ $store.state.memberName}}</v-list-item-title>
-                    <v-list-item-subtitle>{{ $store.state.memberRole==="admin"?"مدیریت": "اپراتور"}}</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{ $store.state.memberRole==="admin"?"مدیریت": "اپراتور"}}
+                    </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
         </template>
@@ -24,7 +25,7 @@
         <v-list shaped dense>
             <v-list-item-group :color="$store.state.defaultColor">
                 <v-list-item
-                        v-for="(item, i) in this.$store.state.MenuService.menuItems"
+                        v-for="(item, i) in this.$store.state.MenuService.menuItems.filter(el=> el.role.split(',').includes($store.state.memberRole))"
                         :key="i"
                         :to="item.to"
                 >

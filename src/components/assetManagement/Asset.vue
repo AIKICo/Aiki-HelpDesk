@@ -17,6 +17,26 @@
                                         <v-col>
                                             <validation-provider
                                                     v-slot="{ errors }"
+                                                    name="مشتری"
+                                                    rules="required"
+                                                    immediate
+                                            >
+                                                <v-select
+                                                        :items="customers"
+                                                        item-text="title"
+                                                        item-value="id"
+                                                        v-model="Asset.customerid"
+                                                        label="مشتری"
+                                                        shaped
+                                                        outlined
+                                                        chips
+                                                        clearable
+                                                        :error-messages="errors"
+                                                >
+                                                </v-select>
+                                            </validation-provider>
+                                            <validation-provider
+                                                    v-slot="{ errors }"
                                                     name="شماره اموال"
                                                     rules="required"
                                                     vid="assetnumber"
@@ -201,7 +221,8 @@
                     assetlocationid: null,
                     assettypeid: null,
                     assetnumber: null,
-                    assetadditionalinfo: []
+                    assetadditionalinfo: [],
+                    customers:[]
                 },
                 Employes: [],
                 EmployeSearchKey: "",
@@ -262,7 +283,8 @@
                 this.valueLabel="";
             },
             ...mapActions({
-                isAssetExists:"AssetService/isAssetExists"
+                isAssetExists:"AssetService/isAssetExists",
+                loadCustomer:"CustomerService/loadCustomers",
             }),
         },
         created() {
@@ -280,6 +302,10 @@
 
             this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", "416e2a28-cfc4-49f9-9bf1-6ef0451a5b7D").then((res) => {
                 this.AppConstants = res.data;
+            });
+
+            this.loadCustomer().then((res)=>{
+                this.customers = res.data;
             });
 
             if (this.$route.params.formType === "Edit") {
