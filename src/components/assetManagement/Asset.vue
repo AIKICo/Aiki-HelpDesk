@@ -221,8 +221,7 @@
                     assetlocationid: null,
                     assettypeid: null,
                     assetnumber: null,
-                    assetadditionalinfo: [],
-                    customers:[]
+                    assetadditionalinfo: []
                 },
                 Employes: [],
                 EmployeSearchKey: "",
@@ -233,7 +232,8 @@
                 label: "",
                 valueLabel: "",
                 AppConstants: [],
-                disableControl:false
+                disableControl: false,
+                customers: []
             }
         },
         components: {
@@ -249,14 +249,13 @@
                         }
                     });
                 } else if (this.$route.params.formType === "Insert") {
-                    this.isAssetExists(this.Asset.assetnumber).then((res)=>{
-                        if (res.data===true)
-                        {
+                    this.isAssetExists(this.Asset.assetnumber).then((res) => {
+                        if (res.data === true) {
                             this.$refs.observer.setErrors({
                                 assetnumber: ['شماره اموال وجود دارد']
                             });
                             return;
-                        }else{
+                        } else {
                             this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
                                 if (res.status === 201) {
                                     this.closeDialog();
@@ -270,7 +269,7 @@
                 this.$router.push("/AssetList");
             },
             deleteAdditionalInfo(item) {
-                var newItems = this.Asset.assetadditionalinfo.filter(function(
+                var newItems = this.Asset.assetadditionalinfo.filter(function (
                     el
                 ) {
                     return el.label != item.label;
@@ -279,17 +278,19 @@
             },
             addAdditionalInfo() {
                 this.Asset.assetadditionalinfo.push({label: this.label, value: this.valueLabel});
-                this.label="";
-                this.valueLabel="";
+                this.label = "";
+                this.valueLabel = "";
             },
             ...mapActions({
-                isAssetExists:"AssetService/isAssetExists",
-                loadCustomer:"CustomerService/loadCustomers",
+                isAssetExists: "AssetService/isAssetExists",
+                loadCustomer: "CustomerService/loadCustomers",
             }),
         },
         created() {
             this.$store.dispatch("OrganizeChartService/loadOrganizeChart").then((res) => {
-                this.Employes = res.data;
+                console.log(res.data);
+                this.Employes = this.lodash.filter(res.data, item=> item.titletype==="5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
+
             });
 
             this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", "416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f").then((res) => {
@@ -304,7 +305,7 @@
                 this.AppConstants = res.data;
             });
 
-            this.loadCustomer().then((res)=>{
+            this.loadCustomer().then((res) => {
                 this.customers = res.data;
             });
 

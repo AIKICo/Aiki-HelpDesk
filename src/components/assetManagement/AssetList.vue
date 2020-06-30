@@ -21,7 +21,7 @@
                                             'items-per-page-options': [50, 100, 150, 200, 250]
                                           }"
                                 :headers="headers"
-                                :items="items"
+                                :items="filterItems"
                                 :items-per-page="itemPerPage"
                                 class="elevation-1"
                                 item-key="id"
@@ -93,7 +93,7 @@
                     },
                     {
                         text: "تحویل گیرنده",
-                        value: "assetnumber",
+                        value: "employeeid",
                         width: 150,
                         align: "center",
                     },
@@ -123,7 +123,8 @@
                 editedIndex: -1,
                 editedItem: [],
                 itemPerPage: 50,
-                searchKey: ""
+                searchKey: "",
+                filterItems:[]
             }
         },
         computed: {
@@ -155,6 +156,7 @@
         },
         created() {
             this.getAssetList();
+            this.filterItems = this.items;
         }
     }
 </script>
