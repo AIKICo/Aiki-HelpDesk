@@ -36,7 +36,10 @@
 
     export default {
         name: "dashboard",
-        components: {ScatterChart, DashboardCard}
+        components: {ScatterChart, DashboardCard},
+        metaInfo: {
+            title: "داشبورد"
+        },
     }
 </script>
 

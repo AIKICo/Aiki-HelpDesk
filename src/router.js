@@ -29,7 +29,7 @@ const routes = [
         component: cartabl,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -39,7 +39,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {name: "login", path: "/login", component: login},
@@ -49,16 +49,16 @@ const routes = [
         component: dashboard,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
-            name: "settingsControlPanel",
+        name: "settingsControlPanel",
         path: "/SettingsControlPanel",
         component: settingsControlPanel,
         meta: {
             requiresAuth: true,
-            role:"admin"
+            role: "admin"
         }
     },
     {
@@ -67,7 +67,7 @@ const routes = [
         component: CustomerList,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -77,7 +77,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -87,7 +87,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -97,7 +97,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -107,7 +107,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -117,7 +117,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -127,7 +127,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -137,7 +137,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -147,7 +147,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -157,7 +157,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -167,7 +167,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -177,7 +177,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -187,7 +187,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -197,7 +197,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -207,7 +207,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -217,7 +217,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
     {
@@ -227,7 +227,7 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: true,
-            role:"admin,user"
+            role: "admin,user"
         }
     },
 ];

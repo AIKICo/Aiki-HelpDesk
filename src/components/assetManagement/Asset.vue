@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>
-                <v-col cols="5">
+                <v-col cols="6">
                     <validationObserver ref="observer" v-slot="{ handleSubmit, invalid }">
                         <form @submit.prevent="handleSubmit(onSubmit)">
                             <v-card outlined>
@@ -288,9 +288,7 @@
         },
         created() {
             this.$store.dispatch("OrganizeChartService/loadOrganizeChart").then((res) => {
-                console.log(res.data);
                 this.Employes = this.lodash.filter(res.data, item=> item.titletype==="5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
-
             });
 
             this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", "416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f").then((res) => {

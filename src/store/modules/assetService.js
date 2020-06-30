@@ -77,6 +77,7 @@ const assetService = {
                 commit("SET_TOTAL", response.headers["x-total-count"]);
                 commit("SET_CURRENT", response.data);
                 commit("SET_LOADER", false);
+                return response;
             } else if (response.data.error) {
                 throw new Error("Something is wrong.");
             }

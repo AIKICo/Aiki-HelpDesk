@@ -21,7 +21,7 @@
                                             'items-per-page-options': [50, 100, 150, 200, 250]
                                           }"
                                 :headers="headers"
-                                :items="filterItems"
+                                :items="items"
                                 :items-per-page="itemPerPage"
                                 class="elevation-1"
                                 item-key="id"
@@ -77,10 +77,13 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapActions} from 'vuex'
 
     export default {
         name: "AssetList",
+        metaInfo: {
+            title: "کنترل اموال"
+        },
         components: {},
         data() {
             return {
@@ -124,13 +127,8 @@
                 editedItem: [],
                 itemPerPage: 50,
                 searchKey: "",
-                filterItems:[]
+                items:[],
             }
-        },
-        computed: {
-            ...mapState({
-                items: state => state.AssetService.current
-            })
         },
         methods: {
             ...mapActions({
@@ -145,7 +143,6 @@
             },
             delAsset(item) {
                 this.deleteAsset({"id": item.id}).then(() => {
-                    //this.getAssetList();
                     var index = this.items.indexOf(item);
                     this.items.splice(index, 1);
                 })
@@ -155,8 +152,9 @@
             }
         },
         created() {
-            this.getAssetList();
-            this.filterItems = this.items;
+            this.getAssetList().then((res)=>{
+                this.items = res.data;
+            });
         }
     }
 </script>

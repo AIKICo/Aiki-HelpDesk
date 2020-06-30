@@ -130,16 +130,7 @@
     @import "css/fontiran.css";
 
     * {
-        font-family: "IRANSans", sans-serif !important;
-    }
-
-    html {
-        margin: 0;
-        padding: 0;
-    }
-
-    .router-link-active {
-        color: red;
+        font-family: "IRANSans", sans-serif;
     }
 
     .fade-enter {
@@ -157,9 +148,4 @@
         transition: opacity 500ms ease;
         opacity: 0;
     }
-
-    .snack >>> .v-snack__content {
-        padding-right: 16px;
-    }
-
 </style>

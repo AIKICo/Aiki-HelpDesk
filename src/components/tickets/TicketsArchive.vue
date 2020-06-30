@@ -151,6 +151,9 @@
 
     export default {
         name: "TicketsArchive",
+        metaInfo: {
+            title: "آرشیو درخواست ها"
+        },
         data: () => ({
             tickets:[],
             expanded: [],
