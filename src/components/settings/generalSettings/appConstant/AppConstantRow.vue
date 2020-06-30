@@ -11,7 +11,7 @@
                 <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
             </template>
             <v-list>
-                <v-list-item dense @click="this.editAppConstantItem">
+                <v-list-item dense @click="this.editAppConstantItem" v-if="AppConstantItem.allowdelete">
                     <v-list-item-icon><v-icon>mdi-border-color</v-icon></v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title>ویرایش</v-list-item-title>
