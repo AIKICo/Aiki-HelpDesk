@@ -201,7 +201,7 @@
                     appconstantid: this.$route.params.parentid,
                     value1: "",
                     value2: "",
-                    allowdelete: false,
+                    allowdelete: true,
                     additionalinfo: []
                 };
             }

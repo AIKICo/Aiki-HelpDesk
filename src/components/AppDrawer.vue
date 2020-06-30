@@ -25,7 +25,7 @@
         <v-list shaped dense>
             <v-list-item-group :color="$store.state.defaultColor">
                 <v-list-item
-                        v-for="(item, i) in this.$store.state.MenuService.menuItems.filter(el=> el.role.split(',').includes($store.state.memberRole))"
+                        v-for="(item, i) in items"
                         :key="i"
                         :to="item.to"
                 >
@@ -44,8 +44,12 @@
 <script>
     export default {
         data: () => ({
-            mini: false
-        })
+            mini: false,
+            items:[]
+        }),
+        created() {
+            this.items=this.$store.state.MenuService.menuItems.filter(el=> el.role.split(',').includes(this.$store.state.memberRole));
+        }
     };
 </script>
 
