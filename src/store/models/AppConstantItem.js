@@ -2,7 +2,7 @@ import {Model} from "@vuex-orm/core";
 
 export default class AppConstantItem extends Model{
     static entity = "appConstantItems";
-    static primaryKey = "id";
+    static primaryKey = ["id","companyid"];
 
     static fields() {
         return {
