@@ -15,6 +15,7 @@ const userService = {
                 window.localStorage.setItem("userInfo", JSON.stringify(result.data));
                 window.localStorage.setItem("companyid", result.data.encryptedCompnayId);
                 window.localStorage.setItem("access_token", result.data.token);
+
                 router.go("/dashboard");
 
             }
