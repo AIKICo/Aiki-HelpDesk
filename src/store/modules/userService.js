@@ -7,13 +7,13 @@ const userService = {
     mutations: {},
     actions: {
         async authenticate(context, payload) {
-            var result = (await User.api().post("/users/authenticate", {
+            let result = (await User.api().post("/users/authenticate", {
                 Username: payload.userName,
                 Password: payload.passwd
             })).response
             if (result.status === 200) {
                 window.localStorage.setItem("userInfo", JSON.stringify(result.data));
-                window.localStorage.setItem("companyid", result.data.encryptedCompnayId);
+                window.localStorage.setItem("companyid", result.data.companyid);
                 window.localStorage.setItem("access_token", result.data.token);
 
                 router.go("/dashboard");
