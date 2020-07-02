@@ -1,5 +1,6 @@
 import User from "../models/User";
 import router from '@/router.js';
+import axois from "axios";
 
 const userService = {
     namespaced: true,
@@ -7,6 +8,7 @@ const userService = {
     mutations: {},
     actions: {
         async authenticate(context, payload) {
+            delete axois.defaults.headers.common.CompanyID;
             let result = (await User.api().post("/users/authenticate", {
                 Username: payload.userName,
                 Password: payload.passwd
