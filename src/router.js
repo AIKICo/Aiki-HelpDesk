@@ -238,24 +238,25 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    var allowAddRecord = [
+    const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
+    let allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",
         "Members", "cartabl", "Groups", "AppConstants", "AssetList", "root"];
-    if (to.meta.requiresAuth && to.meta.role.split(',').includes(store.state.memberRole)) {
-        const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
+    if (to.meta.requiresAuth && to.name === "root") {
+        if (authUser) {
+            next({name: "dashboard"});
+        } else {
+            next({name:"login"});
+        }
+    }else if (to.meta.requiresAuth && to.meta.role.split(',').includes(store.state.memberRole)) {
         if (!authUser || !authUser.token) {
             next({name: "login"});
         } else {
             store.state.allowAddRecord = allowAddRecord.includes(to.name);
             next();
         }
-    } else if (to.name === "login") {
-        const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
-        if (authUser) {
-            next({name: "dashboard"});
-        } else {
-            next();
-        }
+    } else{
+        next();
     }
 });
 export default router;
