@@ -242,7 +242,7 @@ router.beforeEach((to, from, next) => {
     let allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",
         "Members", "cartabl", "Groups", "AppConstants", "AssetList", "root"];
-    if (to.meta.requiresAuth && to.name === "root") {
+    if (to.name === "root") {
         if (authUser) {
             next({name: "dashboard"});
         } else {

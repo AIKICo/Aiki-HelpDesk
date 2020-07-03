@@ -102,7 +102,7 @@ export default {
               .then(response => {
                 if (response.status === 200) {
                   this.$store.state.isLoggedIn = true;
-                  this.$router.push("/cartabl");
+                  this.$router.push("/dashboard");
                 }
               })
               .catch(function (err) {
