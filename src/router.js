@@ -21,6 +21,7 @@ import Asset from "./components/assetManagement/Asset";
 import Ticket from "./components/tickets/Ticket";
 import TicketsArchive from "./components/tickets/TicketsArchive";
 import dashboard from "./components/dashboard/dashboard";
+import registerUser from "./components/userManagement/registerUser";
 
 const routes = [
     {
@@ -228,6 +229,15 @@ const routes = [
         meta: {
             requiresAuth: true,
             role: "admin,user"
+        }
+    },
+    {
+        name: "registerUser",
+        path: "/registerUser",
+        component: registerUser,
+        props: true,
+        meta: {
+            requiresAuth: false,
         }
     },
 ];

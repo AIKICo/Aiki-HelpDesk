@@ -1,5 +1,5 @@
 <template >
-  <v-container fluid fill-height style="background-color: #0d47a1" v-if="!$store.state.isLoggedIn">
+  <v-container fluid fill-height v-if="!$store.state.isLoggedIn">
     <v-layout align-center >
       <v-row justify="center" align="center" no-gutters>
         <v-col cols="12" md="5" lg="5" >
@@ -63,7 +63,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <v-btn x-large value="register" class="col-12 info">ثبت نام</v-btn>
+              <v-btn x-large value="register" class="col-12 info" @click="$router.push('/registerUser')">ثبت نام</v-btn>
             </v-col>
           </v-row>
         </v-col>
