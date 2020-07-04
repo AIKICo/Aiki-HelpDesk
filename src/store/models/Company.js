@@ -12,6 +12,7 @@ export default class Company extends Model {
             id: this.uid(() => this.$uuid.v4()),
             title: this.attr(''),
             email: this.attr(''),
+            allowdelete:this.boolean(null)
         };
     }
 }

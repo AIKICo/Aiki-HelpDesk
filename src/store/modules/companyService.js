@@ -1,3 +1,5 @@
+import Company from "../models/Company";
+
 const companyService={
     namespaced:true,
     state:{
@@ -9,12 +11,15 @@ const companyService={
         }
     },
     actions:{
-        async loadCompaniesList(context){
-            let response=undefined;
-            console.log(response);
-
-            await context.commit("GET_COMPANIES_LIST", undefined);
-        }
+        async addCompany(context, payload) {
+            let response = (await Company.api().post("/company", payload))
+                .response;
+            if (response.status === 201) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
     },
     getters:{
         getCompanies: (state) => state.companies,

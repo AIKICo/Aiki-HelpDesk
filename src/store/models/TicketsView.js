@@ -22,7 +22,8 @@ export default class TicketsView extends Model{
             operateid: this.attr(null),
             requestpriority:this.attr(''),
             requester:this.attr(''),
-            lasthistorycomment:this.attr('')
+            lasthistorycomment:this.attr(''),
+            allowdelete:this.boolean(null)
         }
     }
 }

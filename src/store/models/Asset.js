@@ -12,7 +12,8 @@ export default class Asset extends Model {
           assetlocationid: this.uid(null),
           assettypeid: this.uid(null),
           assetnumber: this.attr(''),
-          assetadditionalinfo: this.attr([])
+          assetadditionalinfo: this.attr([]),
+          allowdelete:this.boolean(null)
       };
     }
 }

@@ -16,7 +16,8 @@ export default class User extends Model {
             password: this.attr(''),
             roles: this.attr(''),
             email: this.attr(''),
-            encryptedCompnayId:this.attr("")
+            encryptedCompnayId:this.attr(""),
+            allowdelete:this.boolean(null)
         }
     }
 }

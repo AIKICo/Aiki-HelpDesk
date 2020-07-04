@@ -11,7 +11,8 @@ export default class TicketHistory extends Model{
             historydate: this.attr(''),
             historycomment: this.attr(''),
             agentname: this.attr(''),
-            ticketid: this.attr(null)
+            ticketid: this.attr(null),
+            allowdelete:this.boolean(null)
         }
     }
 }

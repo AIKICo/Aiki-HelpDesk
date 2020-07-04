@@ -13,7 +13,8 @@ export default class Customer extends Model {
             domains: this.attr(null),
             schema: this.attr(null),
             disabled: this.attr(null),
-            operatinghourid: this.attr(null)
+            operatinghourid: this.attr(null),
+            allowdelete:this.boolean(null)
         };
     }
 }

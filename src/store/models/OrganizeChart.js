@@ -11,7 +11,8 @@ export default class OrganizeChart extends Model{
             companyid: this.attr(null),
             title: this.attr(""),
             titletype:this.attr(""),
-            additionalinfo:this.attr([])
+            additionalinfo:this.attr([]),
+            allowdelete:this.boolean(null)
         }
     }
 }

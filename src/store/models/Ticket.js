@@ -20,7 +20,8 @@ export default class Ticket extends Model{
             mandays:this.attr(null),
             operateid: this.attr(null),
             requestpriority:this.attr(''),
-            customerid:this.attr(null)
+            customerid:this.attr(null),
+            allowdelete:this.boolean(null)
         }
     }
 }

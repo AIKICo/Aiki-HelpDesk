@@ -13,7 +13,8 @@ export default class Group extends Model{
             operatinghourid: this.attr(null),
             agents: this.attr(""),
             leader: this.attr(""),
-            supportemail: this.attr("")
+            supportemail: this.attr(""),
+            allowdelete:this.boolean(null)
         }
     }
 }
