@@ -1,3 +1,4 @@
+
 module.exports = {
     "transpileDependencies": [
         "vuetify"
@@ -6,7 +7,7 @@ module.exports = {
         host:'localhost',
         hot:true,
         disableHostCheck: true,
-        https: false,
+        https: true,
         proxy: {
             '/api': {
                 target: 'https://aiki-ticket-app.herokuapp.com',
