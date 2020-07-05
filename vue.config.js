@@ -1,6 +1,4 @@
 'use strict'
-const fs = require('fs')
-const appRoot = process.cwd()
 
 module.exports = {
     "transpileDependencies": [
@@ -11,7 +9,7 @@ module.exports = {
         hotOnly:true,
         disableHostCheck: true,
         https: true,
-        port:5001,
+        port:5002,
         proxy: {
             '/api': {
                 target: 'https://aiki-ticket-app.herokuapp.com',

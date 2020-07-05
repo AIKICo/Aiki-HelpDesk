@@ -27,6 +27,7 @@ export default {
   },
   data: () => {
     return {
+      customers:[],
       CustomerComponentName:"",
       CustomersInfoData: {
         totalCount:0,
@@ -34,17 +35,6 @@ export default {
       },
       disabledRow: null
     };
-  },
-  computed: {
-    customerCounts: function() {
-      return this.$store.getters["CustomerService/getCustomersCount"];
-    },
-    customerDisabledCounts: function() {
-      return this.$store.getters["CustomerService/getDisabledCustomersCount"];
-    },
-    customers: function() {
-      return this.$store.getters["CustomerService/getCustomers"];
-    }
   },
   methods: {
     rowDisabled(disabled) {
@@ -58,17 +48,18 @@ export default {
   watch: {
     disabledRow: function() {
       this.CustomersInfoData = {
-        "customer-counts": this.customerCounts,
+        "customer-counts": this.customers.length,
         "customer-disabled-counts": this.disabledRow
       };
     }
   },
   created() {
-    this.$store.dispatch("CustomerService/loadCustomers").then(() => {
+    this.$store.dispatch("CustomerService/loadCustomers").then((res) => {
+      this.customers = res.data;
       this.disabledRow = this.customerDisabledCounts;
       this.CustomerComponentName="CustomersInfo";
       this.CustomersInfoData = {
-        "customer-counts": this.customerCounts,
+        "customer-counts": this.customers.length,
         "customer-disabled-counts": this.disabledRow
       };
     });

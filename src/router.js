@@ -183,7 +183,7 @@ const routes = [
     },
     {
         name: "OrganizeCharts",
-        path: "/OrganizeCharts/:id",
+        path: "/OrganizeCharts",
         component: OrganizeCharts,
         props: true,
         meta: {

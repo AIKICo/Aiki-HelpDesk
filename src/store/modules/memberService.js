@@ -14,7 +14,6 @@ const memberService = {
             }
         },
         async loadMember(payload) {
-             console.log(payload);
             let response = (await Member.api().get("/Users/" + payload)).response;
             if (response.status === 200) {
                 return response;
