@@ -1,5 +1,3 @@
-import store from "../index"
-
 const settingsService = {
   namespaced: true,
   state: {
@@ -28,7 +26,7 @@ const settingsService = {
           { name: "Category",label:"دسته بندی", path: "/AppConstants/0a8b50c5-762e-47ea-b60d-4ed9d0a71f50", image: "" },
           { name: "OperandType",label:"اقدام صورت گرفته", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7a", image: "" },
           { name: "OrganizeChartAttribute",label:"اطلاعات تکمیلی کاربران", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7b", image: "" },
-          { name: "OrganizeChart",label:"چارت سازمانی", path: "/OrganizeCharts/" + store.state.companyid, image: "" },
+          { name: "OrganizeChart",label:"چارت سازمانی", path: "/OrganizeCharts/" + null, image: "" },
           { name: "OrganizeChartItemType",label:"گروه بندی چارت سازمانی", path: "/AppConstants/0e5aa3a0-f7c5-4960-8fb2-a6e58b1f663b", image: "" },
         ]
       },
