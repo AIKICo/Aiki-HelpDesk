@@ -5,7 +5,8 @@
             dark
             :clipped-right="$vuetify.breakpoint.lgAndUp"
     >
-        <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"/>
+        <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"
+                            v-if="$store.state.isLoggedIn"/>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-4 hidden-sm-and-down"
         >میزکار خدمات رایانه ای
         </v-toolbar-title
@@ -16,6 +17,7 @@
                 hide-details
                 prepend-inner-icon="mdi-magnify"
                 label="جستجو"
+                v-if="$store.state.isLoggedIn"
         />
         <v-spacer/>
         <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
@@ -27,6 +29,7 @@
                 overlap
                 offset-y="17"
                 offset-x="17"
+                v-if="$store.state.isLoggedIn"
         >
             <span slot="badge">{{ $store.state.activeTickets }}</span>
             <v-btn icon>

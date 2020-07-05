@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
-        <app-bar v-if="$store.state.isLoggedIn"></app-bar>
+        <app-bar></app-bar>
         <v-main>
             <v-snackbar
                     v-model="snackWithButtons"
