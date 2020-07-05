@@ -7,7 +7,7 @@
             v-model="$store.state.drawer"
     >
         <template v-slot:prepend>
-            <v-list-item two-line>
+            <v-list-item>
                 <v-list-item-avatar>
                     <v-icon>
                         mdi-account
@@ -18,6 +18,17 @@
                     <v-list-item-title>{{ $store.state.memberName}}</v-list-item-title>
                     <v-list-item-subtitle>{{ $store.state.memberRole==="admin"?"مدیریت": "اپراتور"}}
                     </v-list-item-subtitle>
+                </v-list-item-content>
+            </v-list-item>
+            <v-list-item to="/profile" dense>
+                <v-list-item-avatar>
+                    <v-icon>
+                        mdi-cog-outline
+                    </v-icon>
+                </v-list-item-avatar>
+
+                <v-list-item-content>
+                    <v-list-item-title>تنظیمات پروفایل</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
         </template>
