@@ -39,6 +39,8 @@ import Ticket from "./models/Ticket";
 import TicketsView from "./models/TicketsView";
 import TicketHistory from "./models/TicketHistory";
 import Last30Ticket from "./models/Last30Ticket";
+import TicketCountInfo from "./models/TicketCountInfo";
+import ticketCountInfoService from "./modules/ticketCountInfoService";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -63,6 +65,7 @@ database.register(Ticket);
 database.register(TicketsView);
 database.register(TicketHistory);
 database.register(Last30Ticket);
+database.register(TicketCountInfo);
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -99,7 +102,8 @@ export default new Vuex.Store({
         OrganizeChartsJsonView: organizeCharts_JsonViewService,
         AssetService: assetService,
         TicketService: ticketService,
-        TicketHistoryService: ticketHistoryService
+        TicketHistoryService: ticketHistoryService,
+        TicketCountInfoService: ticketCountInfoService
     },
     getters: {}
 });

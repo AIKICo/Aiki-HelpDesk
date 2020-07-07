@@ -2,7 +2,7 @@
     <v-card hover>
         <v-list-item>
             <v-list-item-avatar :color="$store.state.defaultColor">
-                <v-icon dark>mdi-alarm</v-icon>
+                <v-icon dark>{{cardIcon}}</v-icon>
             </v-list-item-avatar>
             <v-list-item-content>
                 <v-list-item-title class="headline">{{ticketCount}}</v-list-item-title>
@@ -16,7 +16,12 @@
 <script>
     export default {
         name: "dashboardCard",
-        props:["title", "ticketCount"]
+        props:["title", "ticketCount", "cardIcon"],
+        data(){
+            return{
+
+            }
+        }
     }
 </script>
 
