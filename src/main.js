@@ -19,8 +19,8 @@ import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 import lodash from "lodash";
 
-axois.defaults.baseURL = "https://localhost:5001/";
-//axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
+///axois.defaults.baseURL = "https://localhost:5001/";
+axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
 
 Vue.config.productionTip = false;
