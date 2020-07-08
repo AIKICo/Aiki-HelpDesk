@@ -23,21 +23,29 @@
                                         <v-item v-slot:default="{ active, toggle }">
                                             <v-row>
                                                 <v-col>
-                                                    <router-link :to="setting.path">
-                                                        <v-avatar
-                                                                :color="$store.state.defaultColor"
-                                                                size="110"
-                                                                @click="toggle"
-                                                        >
-                                                            <img
-                                                                    :src="getStaticImage(setting.image)"
-                                                                    @click="toggle"
-                                                            >
-                                                        </v-avatar>
-                                                    </router-link>
-                                                    <v-chip class="mt-3">
-                                                        {{setting.label}}
-                                                    </v-chip>
+                                                    <v-row no-gutters>
+                                                        <v-col>
+                                                            <router-link :to="setting.path">
+                                                                <v-avatar
+                                                                        :color="$store.state.defaultColor"
+                                                                        size="110"
+                                                                        @click="toggle"
+                                                                >
+                                                                    <img
+                                                                            :src="getStaticImage(setting.image)"
+                                                                            @click="toggle"
+                                                                    >
+                                                                </v-avatar>
+                                                            </router-link>
+                                                        </v-col>
+                                                    </v-row>
+                                                    <v-row no-gutters>
+                                                        <v-col>
+                                                            <v-chip class="mt-3">
+                                                                {{setting.label}}
+                                                            </v-chip>
+                                                        </v-col>
+                                                    </v-row>
                                                 </v-col>
                                             </v-row>
                                         </v-item>

@@ -18,14 +18,12 @@ import DynamicDirectives from "./directives/dynamicEvents";
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 import lodash from "lodash";
-//import VueSignalR from "@latelier/vue-signalr"
 
-//axois.defaults.baseURL = "https://localhost:5001/";
-axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
+axois.defaults.baseURL = "https://localhost:5001/";
+//axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
 
 Vue.config.productionTip = false;
-//Vue.use(VueSignalR,"http://localhost:2025")
 Vue.use(VueRouter);
 Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
@@ -77,16 +75,16 @@ new Vue({
         });
 
         axois.interceptors.response.use(response => {
-            this.$Progress.finish();
+            if (this.$Progress)
+                this.$Progress.finish();
             return response;
-        }, function (error) {
+        }, async function (error) {
             if (401 === error.response.status) {
-                store.dispatch('UserService/logout').then(() => {
-                    router.push("/login").catch(()=>{});
-                });
+                await store.dispatch('UserService/logout');
                 return Promise.resolve(error.response);
             } else {
-                this.$Progress.fail();
+                if (this.$Progress)
+                    this.$Progress.fail();
                 return Promise.reject(error);
             }
         });

@@ -42,6 +42,7 @@
                                     >
                                         <v-text-field
                                                 v-model="Ticket.asset"
+                                                type="number"
                                                 label="شماره اموال"
                                                 clearable
                                                 :error-messages="errors"

@@ -10,6 +10,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.27",
     "@latelier/vue-signalr": "^1.1.9",
+    "@microsoft/signalr": "^3.1.5",
     "@vuex-orm/core": "^0.35.2",
     "@vuex-orm/plugin-axios": "^0.9.3",
     "@vuex-orm/plugin-search": "^0.24.1",
