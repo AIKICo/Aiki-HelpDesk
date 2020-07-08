@@ -83,7 +83,8 @@ export default new Vuex.Store({
         companyId: localStorage.getItem("companyid"),
         memberName: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).membername : null,
         memberRole: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).roles : null,
-        activeTickets: 0
+        memberid: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).id : null,
+        activeTickets: 0,
     },
     mutations: {},
     actions: {},

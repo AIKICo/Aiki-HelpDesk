@@ -43,9 +43,9 @@
     export default {
         methods: {
             logout() {
-                this.$store.dispatch('UserService/logout').then(() => {
-                    this.$router.go("/login")
-                });
+                this.$store.dispatch('UserService/logout').then(()=>{
+                    this.$router.push("/login");
+                })
             }
         },
     }

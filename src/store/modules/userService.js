@@ -1,5 +1,4 @@
 import User from "../models/User";
-import router from "../../router"
 import axois from "axios";
 import store from "../index";
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
@@ -29,6 +28,7 @@ const userService = {
                 store.state.memberName = result.data.membername;
                 store.state.memberRole = result.data.roles;
                 store.state.accessToken = result.data.token;
+                store.state.memberid = result.data.id;
 
                 const connection = new HubConnectionBuilder()
                     .withUrl(`${axois.defaults.baseURL}ticketalarmhub?CompanyID=${store.state.companyId}&MemnberID=${result.data.id}`,
@@ -45,14 +45,19 @@ const userService = {
                         connection.invoke('SendMessage');
                     })
                     .catch(err => console.log(err));
+
                 connection.on("ReceiveMessage",(data)=>{
-                    console.log(data);
-                })
+                    let RecordInfo = JSON.parse(data);
+                    if (RecordInfo)
+                    {
+                        console.log(RecordInfo);
+                    }
+                });
             }
             return result;
         },
         logout() {
-            router.push("/login").then(() => localStorage.clear());
+            localStorage.clear();
         },
     },
     getters: {
