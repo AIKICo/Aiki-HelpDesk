@@ -44,6 +44,7 @@
         methods: {
             logout() {
                 this.$store.dispatch('UserService/logout').then(()=>{
+                    this.$store.state.isLoggedIn = false;
                     this.$router.push("/login");
                 })
             }

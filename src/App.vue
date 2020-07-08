@@ -20,7 +20,7 @@
                 </v-btn>
             </v-snackbar>
             <transition name="fade" mode="out-in">
-                <router-view></router-view>
+                <router-view :key="$route.fullPath"></router-view>
             </transition>
         </v-main>
         <v-btn

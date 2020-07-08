@@ -3,7 +3,6 @@ import axois from "axios";
 import store from "../index";
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
 
-
 const userService = {
     namespaced: true,
     state: {},
@@ -31,7 +30,7 @@ const userService = {
                 store.state.memberid = result.data.id;
 
                 const connection = new HubConnectionBuilder()
-                    .withUrl(`${axois.defaults.baseURL}ticketalarmhub?CompanyID=${store.state.companyId}&MemnberID=${result.data.id}`,
+                    .withUrl(`${axois.defaults.baseURL}ticketalarmhub?CompanyID=${store.state.companyId}&MemberID=${result.data.id}`,
                         {
                             accessTokenFactory: () => result.data.token
                         })
