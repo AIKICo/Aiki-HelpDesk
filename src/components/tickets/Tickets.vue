@@ -168,7 +168,7 @@
                 {text: "انجام دهنده", value: "agentname", align: "center", width: "155px"},
                 {text: "تاریخ ثبت", value: "registerdate", align: "center", width: "170px"},
                 {text: "وضعیت", value: "tickettype", align: "center", width: "120px"},
-                {text: "درخواست کننده", value: "requester", align: "center", width: "120px"},
+                {text: "درخواست کننده", value: "requester", align: "center", width: "130px"},
                 {text: "شماره اموال", value: "asset", align: "center"},
                 {
                     text: "",

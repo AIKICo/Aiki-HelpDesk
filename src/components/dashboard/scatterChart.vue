@@ -31,7 +31,6 @@
             }),
             generateChart() {
                 this.getLast30Ticket().then((res)=> {
-
                     let chart = am4core.create(this.$refs.chartdiv, am4charts.XYChart);
 
                     chart.paddingRight = 20;

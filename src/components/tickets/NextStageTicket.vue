@@ -2,7 +2,7 @@
     <v-bottom-sheet
             v-model="sheet"
             inset
-            max-width="500px"
+            max-width="550px"
             persistent
             transition="dialog-bottom-transition">
         <v-sheet class="text-center">

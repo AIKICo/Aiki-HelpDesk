@@ -28,7 +28,7 @@ Vue.use(VueRouter);
 Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
-Vue.use(VueLodash, { name: "custom" , lodash: lodash });
+Vue.use(VueLodash, {name: "custom", lodash: lodash});
 
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("date-picker", VuePersianDatetimePicker);
@@ -75,16 +75,26 @@ new Vue({
         });
 
         axois.interceptors.response.use(response => {
-            if (this.$Progress)
-                this.$Progress.finish();
+            if (this) {
+                if (this.$Progress) {
+                    this.$Progress.finish();
+                }
+            }
+
             return response;
         }, async function (error) {
             if (401 === error.response.status) {
                 await store.dispatch('UserService/logout');
+                store.state.isLoggedIn = false;
+                router.push("/login").catch(() => {
+                });
                 return Promise.resolve(error.response);
             } else {
-                if (this.$Progress)
-                    this.$Progress.fail();
+                if (this) {
+                    if (this.$Progress) {
+                        this.$Progress.fail();
+                    }
+                }
                 return Promise.reject(error);
             }
         });
