@@ -51,7 +51,7 @@ const userService = {
                     let RecordInfo = JSON.parse(data);
                     if (RecordInfo){
                         if (RecordInfo.agentname===store.state.memberName){
-                            Vue.$toast("I'm a toast!");
+                            Vue.$toast("اطلاعات کارتابل شما تغییر داده شده است لطفا به روز رسانی نمایید");
                         }
                     }
                 });

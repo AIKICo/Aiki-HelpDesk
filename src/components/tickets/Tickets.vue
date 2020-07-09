@@ -139,7 +139,21 @@
                 </v-data-table>
             </v-col>
         </v-row>
+        <v-btn
+                bottom
+                :color="$store.state.defaultColor"
+                dark
+                fab
+                fixed
+                left
+                style="margin-left: 58px"
+                @click="loadData()"
+                v-if="$store.state.isLoggedIn"
+        >
+            <v-icon>mdi-refresh</v-icon>
+        </v-btn>
     </v-container>
+
 </template>
 
 <script>
@@ -386,7 +400,6 @@
                 });
             },
             refreshData() {
-
                 this.tickets = this.lodash.filter(this.tickets, item => item.enddate === null);
             },
             editTicket(item) {

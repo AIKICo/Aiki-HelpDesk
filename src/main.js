@@ -77,14 +77,19 @@ new Vue({
     beforeCreate() {
         this.$vuetify.lang.current = "fa";
         axois.interceptors.request.use(config => {
-            Vue.$Progress.start();
+            this.$Progress.start();
             return config;
         }, function () {
-            Vue.$Progress.fail();
+            this.$Progress.fail();
         });
 
         axois.interceptors.response.use(response => {
-            Vue.$Progress.finish();
+            if (this) {
+                if (this.$Progress) {
+                    this.$Progress.finish();
+                }
+            }
+
             return response;
         }, async function (error) {
             if (401 === error.response.status) {
@@ -94,7 +99,11 @@ new Vue({
                 });
                 return Promise.resolve(error.response);
             } else {
-                Vue.$Progress.fail();
+                if (this) {
+                    if (this.$Progress) {
+                        this.$Progress.fail();
+                    }
+                }
                 return Promise.reject(error);
             }
         });
