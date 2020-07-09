@@ -7,10 +7,16 @@ import Vue from "vue";
 
 const userService = {
     namespaced: true,
-    state: {},
-    mutations: {},
+    state: {
+        connection:null
+    },
+    mutations: {
+        SET_CONNECTION(state, payload) {
+            state.connection = payload;
+        },
+    },
     actions: {
-        async authenticate(context, payload) {
+        async authenticate({commit}, payload,) {
             delete axois.defaults.headers.common.CompanyID;
             let result = (await User.api().post("/users/authenticate", {
                 Username: payload.userName,
@@ -34,15 +40,14 @@ const userService = {
                 const connection = new HubConnectionBuilder()
                     .withUrl(`${axois.defaults.baseURL}ticketalarmhub?CompanyID=${store.state.companyId}&MemberID=${result.data.id}`,
                         {
-                            accessTokenFactory: () => result.data.token
+                            accessTokenFactory: () => result.data.token,
                         })
                     .configureLogging(LogLevel.Debug)
                     .build()
-
+                commit("SET_CONNECTION", connection);
                 connection
                     .start()
                     .then(function () {
-                        console.log('connection started');
                         connection.invoke('SendMessage');
                     })
                     .catch(err => console.log(err));

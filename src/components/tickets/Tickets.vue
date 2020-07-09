@@ -397,6 +397,7 @@
                             return (el.agentname === memberName)
                         }).length;
                     }
+
                 });
             },
             refreshData() {
