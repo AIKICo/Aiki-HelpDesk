@@ -128,6 +128,7 @@
 </script>
 <style scoped>
     @import "css/fontiran.css";
+    @import "css/notification.scss";
 
     * {
         font-family: "IRANSans", sans-serif;

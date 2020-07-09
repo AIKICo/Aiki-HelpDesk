@@ -18,6 +18,13 @@ import DynamicDirectives from "./directives/dynamicEvents";
 import progressOptions from "./options/progressOptions";
 import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 import lodash from "lodash";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+
+const toastOptions = {
+    rtl:true
+    // You can set your default options here
+};
 
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
@@ -29,6 +36,8 @@ Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
 Vue.use(VueLodash, {name: "custom", lodash: lodash});
+Vue.use(Toast, toastOptions);
+
 
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("date-picker", VuePersianDatetimePicker);
@@ -68,19 +77,14 @@ new Vue({
     beforeCreate() {
         this.$vuetify.lang.current = "fa";
         axois.interceptors.request.use(config => {
-            this.$Progress.start();
+            Vue.$Progress.start();
             return config;
         }, function () {
-            this.$Progress.fail();
+            Vue.$Progress.fail();
         });
 
         axois.interceptors.response.use(response => {
-            if (this) {
-                if (this.$Progress) {
-                    this.$Progress.finish();
-                }
-            }
-
+            Vue.$Progress.finish();
             return response;
         }, async function (error) {
             if (401 === error.response.status) {
@@ -90,11 +94,7 @@ new Vue({
                 });
                 return Promise.resolve(error.response);
             } else {
-                if (this) {
-                    if (this.$Progress) {
-                        this.$Progress.fail();
-                    }
-                }
+                Vue.$Progress.fail();
                 return Promise.reject(error);
             }
         });

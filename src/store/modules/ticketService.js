@@ -32,7 +32,6 @@ const ticketService = {
             commit("SET_LOADER", true);
             let response = (await TicketsView.api().get("/TicketsView/GetAll")).response;
             if (response.status === 200) {
-                commit("SET_CURRENT", response.data);
                 commit("SET_LOADER", false);
                 return response;
             } else if (response.data.error) {

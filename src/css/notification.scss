@@ -1,0 +1,13 @@
+.my-style {
+   .notification-title {
+     direction: rtl;
+   }
+
+.notification-content {
+  direction: rtl;
+}
+
+&.my-type {
+  direction: rtl;
+ }
+}

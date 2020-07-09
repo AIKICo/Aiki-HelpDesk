@@ -2,6 +2,8 @@ import User from "../models/User";
 import axois from "axios";
 import store from "../index";
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
+import Vue from "vue";
+
 
 const userService = {
     namespaced: true,
@@ -47,9 +49,10 @@ const userService = {
 
                 connection.on("ReceiveMessage",(data)=>{
                     let RecordInfo = JSON.parse(data);
-                    if (RecordInfo)
-                    {
-                        console.log(RecordInfo);
+                    if (RecordInfo){
+                        if (RecordInfo.agentname===store.state.memberName){
+                            Vue.$toast("I'm a toast!");
+                        }
                     }
                 });
             }

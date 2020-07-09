@@ -373,8 +373,8 @@
                 }
             },
             loadData(){
-                this.getTickets().then((res) => {
-                    this.tickets = res.data;
+                this.getTickets().then(() => {
+                    this.tickets = this.$store.state.TicketService.current;
                     if (this.$store.state.memberRole === "admin") {
                         this.$store.state.activeTickets = this.tickets.length;
                     } else {
