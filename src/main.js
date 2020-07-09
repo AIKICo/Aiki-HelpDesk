@@ -22,13 +22,15 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 const toastOptions = {
-    rtl:true
+    rtl: true
     // You can set your default options here
 };
 
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
+axois.defaults.headers.common.Authorization = "Bearer " + store.state.accessToken;
+axois.defaults.headers.common.CompanyID = store.state.companyId;
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -108,5 +110,17 @@ new Vue({
             }
         });
     },
+    create() {
+        document.addEventListener('beforeunload', this.handlerClose);
+    },
+    methods: {
+        handlerClose: function () {
+            if (this.hasChanged) {
+                console.log("Changes")
+            } else {
+                console.log("no changes");
+            }
+        },
+    },
     render: h => h(App)
-}).$mount("#app");
+    }).$mount("#app");

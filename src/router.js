@@ -247,7 +247,7 @@ const router = new VueRouter({
     routes: routes
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
     let allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",

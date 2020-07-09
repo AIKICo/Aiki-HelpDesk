@@ -115,8 +115,13 @@
             navigator.serviceWorker.addEventListener("controllerchange", () => {
                 if (this.refreshing) return;
                 this.refreshing = true;
-                window.location.reload()
+                window.location.reload();
             });
+            if (localStorage.getItem("userInfo")!=null)
+            {
+                this.$store.isLoggedIn = true;
+                this.$store.dispatch("UserService/notificationStart");
+            }
         },
         computed: {},
         watch: {
