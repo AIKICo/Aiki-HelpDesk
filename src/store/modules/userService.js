@@ -23,7 +23,7 @@ const userService = {
         },
     },
     actions: {
-        async authenticate({commit}, payload,) {
+        async authenticate({commit}, payload) {
             delete axois.defaults.headers.common.CompanyID;
             let result = (await User.api().post("/users/authenticate", {
                 Username: payload.userName,

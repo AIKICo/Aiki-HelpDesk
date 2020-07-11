@@ -10,7 +10,7 @@
                                         :class="$store.state.defaultColor + ' white--text'"
                                 >
                                     <v-icon large color="white">mdi-edit</v-icon>
-                                    {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
+                                    ویرایش پروفایل
                                 </v-card-title>
                                 <v-card-text class="mt-3">
                                     <validation-provider
@@ -41,16 +41,34 @@
                                                 :error-messages="errors"
                                                 outlined
                                                 shaped
+                                                disabled
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="کلمه عبور"
-                                            rules="required"
+                                            rules="password:confirm"
                                             immediate
                                     >
                                         <v-text-field
                                                 v-model="Member.password"
+                                                label="کلمه عبور"
+                                                clearable
+                                                :error-messages="errors"
+                                                type="password"
+                                                outlined
+                                                shaped
+                                        ></v-text-field>
+                                    </validation-provider>
+                                    <validation-provider
+                                            v-slot="{ errors }"
+                                            name="کلمه عبور"
+                                            rules=""
+                                            vid="confirm"
+                                            immediate
+                                    >
+                                        <v-text-field
+                                                v-model="verificationPassword"
                                                 label="کلمه عبور"
                                                 clearable
                                                 :error-messages="errors"
@@ -73,6 +91,7 @@
                                                 type="email"
                                                 outlined
                                                 shaped
+                                                disabled
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
@@ -90,6 +109,7 @@
                                                 label="نقش کاربر"
                                                 shaped
                                                 outlined
+                                                disabled
                                         >
                                         </v-select>
                                     </validation-provider>
@@ -124,6 +144,7 @@
 
 <script>
     import {required} from "vee-validate/dist/rules";
+    import {mapActions} from "vuex";
     import {
         extend,
         ValidationObserver,
@@ -136,11 +157,26 @@
         ...required,
         message: "{_field_} نمی تواند خالی باشد"
     });
+    extend("password", {
+        params: ["target"],
+        validate(value, { target }) {
+            return value === target;
+        },
+        message: "تأیید رمز عبور مطابقت ندارد"
+    });
     export default {
-        name: "Member",
+        name: "editProfile",
         data() {
             return {
-                Member: null,
+                verificationPassword:"",
+                Member: {
+                    companyid: this.$store.state.companyId,
+                    memberName: "",
+                    userName: "",
+                    password: "",
+                    email: "",
+                    roles: []
+                },
                 Roles: [
                     {Label: "مدیر", Value: "admin"},
                     {Label: "اپراتور", Value: "operator"}
@@ -152,47 +188,26 @@
             ValidationProvider
         },
         methods: {
+            ...mapActions({
+                getMember: "MemberService/loadMember"
+            }),
             onSubmit() {
-                if (this.$route.params.formType === "Edit") {
-                    this.$store
-                        .dispatch("MemberService/editMember", this.Member)
-                        .then(res => {
-                            if (res.status === 200) {
-                                this.closeDialog();
-                            }
-                        });
-                } else if (this.$route.params.formType === "Insert") {
-                    this.$store
-                        .dispatch("MemberService/addMember", this.Member)
-                        .then(res => {
-                            if (res.status === 201) {
-                                this.closeDialog();
-                            }
-                        });
-                }
+                this.$store
+                    .dispatch("MemberService/editMember", this.Member);
             },
             closeDialog() {
-                this.$router.push("/Members");
+                this.$router.push("/");
             },
-            getMember(id) {
-                return this.$store.getters["MemberService/getMember"](id);
-            }
         },
         created() {
-            if (this.$route.params.formType === "Edit") {
-                this.Member = this.getMember(this.$route.params.id);
-            } else if (this.$route.params.formType === "Insert") {
-                this.Member = {
-                    companyid: this.$store.state.companyId,
-                    memberName: "",
-                    userName: "",
-                    password: "",
-                    email: "",
-                    roles: []
-                };
-            }
+            this.getMember(this.$store.state.memberid).then((res) => {
+                this.Member = res.data;
+                console.log(this.Member);
+            });
         }
-    };
+    }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -20,7 +20,7 @@
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
-            <v-list-item to="/profile" dense>
+            <v-list-item to="/editProfile" dense>
                 <v-list-item-avatar>
                     <v-icon>
                         mdi-cog-outline

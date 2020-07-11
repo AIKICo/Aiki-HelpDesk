@@ -22,6 +22,7 @@ import Ticket from "./components/tickets/Ticket";
 import TicketsArchive from "./components/tickets/TicketsArchive";
 import dashboard from "./components/dashboard/dashboard";
 import registerUser from "./components/userManagement/registerUser";
+import editProfile from "./components/profile/editProfile";
 
 const routes = [
     {
@@ -238,6 +239,16 @@ const routes = [
         props: true,
         meta: {
             requiresAuth: false,
+        }
+    },
+    {
+        name: "editProfile",
+        path: "/editProfile",
+        component: editProfile,
+        props: true,
+        meta: {
+            requiresAuth: true,
+            role: "admin,user"
         }
     },
 ];
