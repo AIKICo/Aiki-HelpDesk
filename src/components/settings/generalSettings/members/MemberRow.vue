@@ -3,8 +3,8 @@
         <span class="subheading text-wrap">{{ member.membername }} <span :class="$store.state.defaultTextColor">({{member.username}})</span></span>
 
         <v-spacer></v-spacer>
-        <v-divider vertical v-if="AppConstantItem.allowdelete"></v-divider>
-        <v-toolbar-items class="hidden-sm-and-down ml-1" v-if="AppConstantItem.allowdelete">
+        <v-divider vertical v-if="member.allowdelete"></v-divider>
+        <v-toolbar-items class="hidden-sm-and-down ml-1" v-if="member.allowdelete">
             <div class="mx-1">
                 <v-subheader class="mt-3">{{
                     this.disabledRow ? "غیرفعال" : "فعال"
@@ -12,7 +12,7 @@
             </div>
             <v-divider vertical></v-divider>
         </v-toolbar-items>
-        <v-menu offset-y v-if="AppConstantItem.allowdelete">
+        <v-menu offset-y v-if="member.allowdelete">
             <template v-slot:activator="{ on }">
                 <v-app-bar-nav-icon v-on="on"></v-app-bar-nav-icon>
             </template>

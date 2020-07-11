@@ -3,6 +3,7 @@ import axois from "axios";
 import store from "../index";
 import {HubConnectionBuilder, LogLevel} from '@microsoft/signalr'
 import Vue from "vue";
+import axios from "axios";
 
 
 const userService = {
@@ -77,6 +78,11 @@ const userService = {
         logout({commit}) {
             localStorage.clear();
             commit("OFF_CONNECTION");
+        },
+        async IsEmailExists(context, payload) {
+            delete axois.defaults.headers.common.CompanyID;
+            let response = await axios.get("/Users/IsEmailExists/" + payload);
+            return response;
         },
     },
     getters: {

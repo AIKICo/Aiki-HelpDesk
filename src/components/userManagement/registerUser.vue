@@ -17,6 +17,7 @@
                                                     v-slot="{ errors }"
                                                     name="عنوان شرکت"
                                                     rules="required"
+                                                    immediate
                                             >
                                                 <v-text-field
                                                         v-model="company.title"
@@ -25,13 +26,13 @@
                                                         :error-messages="errors"
                                                         outlined
                                                         shaped
-                                                        immediate
                                                 ></v-text-field>
                                             </ValidationProvider>
                                             <ValidationProvider
                                                     v-slot="{ errors }"
                                                     name="آدرس ایمیل"
                                                     rules="required"
+                                                    vid="email"
                                                     immediate
                                             >
                                                 <v-text-field
@@ -107,11 +108,21 @@
         },
         methods: {
             ...mapActions({
-                registerUser:"CompanyService/addCompany"
+                registerUser: "CompanyService/addCompany",
+                IsEmailExists: "UserService/IsEmailExists"
             }),
             onSubmit: function () {
-                this.registerUser(this.company).then(()=>{
-                    this.$router.push("/login");
+                this.IsEmailExists(this.company.email).then((res) => {
+                    console.log(res.data);
+                    if (res.data === true) {
+                        this.$refs.observer.setErrors({
+                            email: ['آدرس ایمیل قبلا به ثبت رسیده است']
+                        });
+                    }else{
+                        this.registerUser(this.company).then(() => {
+                            this.$router.push("/login");
+                        });
+                    }
                 });
             },
         },
