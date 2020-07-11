@@ -113,7 +113,6 @@
             }),
             onSubmit: function () {
                 this.IsEmailExists(this.company.email).then((res) => {
-                    console.log(res.data);
                     if (res.data === true) {
                         this.$refs.observer.setErrors({
                             email: ['آدرس ایمیل قبلا به ثبت رسیده است']
