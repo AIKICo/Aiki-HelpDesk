@@ -1,6 +1,6 @@
 <template>
     <v-toolbar class="mt-3">
-        <span>{{ Group.title}}</span>
+        <span>{{ group.title}}</span>
         <v-spacer></v-spacer>
         <v-divider vertical></v-divider>
         <v-toolbar-items class="hidden-sm-and-down ml-1">
@@ -31,13 +31,13 @@
 <script>
     export default {
         name:"GroupRow",
-        props:["Group"],
+        props:["group"],
         methods:{
             editGroup(){
-                this.$router.push("/Group/Edit/" + this.Group.id);
+                this.$router.push("/Group/Edit/" + this.group.id);
             },
             deleteGroup(){
-                this.$store.dispatch("GroupService/deleteGroup", this.Group.id).then((res)=>{
+                this.$store.dispatch("GroupService/deleteGroup", this.group.id).then((res)=>{
                     if (res.status===200){
                         this.$emit('deletedRow');
                     }

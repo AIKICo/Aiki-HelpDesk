@@ -7,7 +7,6 @@ export default class OrganizeCharts_JsonView extends Model {
     static field() {
         return {
             id: this.attr(null),
-            companyid: this.attr(null),
             organizecharts: this.attr(""),
             allowdelete: this.attr("")
         }

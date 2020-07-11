@@ -188,7 +188,6 @@
                 var record = this.getSLASetting(this.$route.params.id);
                 this.SLASetting = {
                     id: this.$route.params.id,
-                    companyid: this.$store.state.companyId,
                     title: record.title,
                     description: record.description,
                     operatinghourid: record.operatinghourid,
@@ -197,7 +196,6 @@
                 };
             } else if (this.$route.params.formType === "Insert") {
                 this.SLASetting = {
-                    companyid: this.$store.state.companyId,
                     title: "",
                     description: "",
                     operatinghourid: "",

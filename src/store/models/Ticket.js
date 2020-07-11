@@ -7,7 +7,6 @@ export default class Ticket extends Model{
     static fields() {
         return {
             id: this.attr(''),
-            companyid: this.attr(''),
             registerdate: this.attr(''),
             enddate: this.attr(''),
             description: this.attr(''),

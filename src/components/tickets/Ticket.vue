@@ -238,7 +238,6 @@
                 });
             } else if (this.$route.params.formType === "Insert") {
                 this.Ticket = {
-                    companyid: this.$store.state.companyId,
                     registerdate: null,
                     enddate: null,
                     description: null,

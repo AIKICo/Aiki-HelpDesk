@@ -197,7 +197,6 @@
                 this.AppConstantItem = this.getAppConstantItem(this.$route.params.id);
             } else if (this.$route.params.formType === "Insert") {
                 this.AppConstantItem = {
-                    companyid: this.$store.state.companyId,
                     appconstantid: this.$route.params.parentid,
                     value1: "",
                     value2: "",

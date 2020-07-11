@@ -7,7 +7,6 @@ export default class TicketHistory extends Model{
     static fields() {
         return {
             id: this.attr(null),
-            companyid: this.attr(null),
             historydate: this.attr(''),
             historycomment: this.attr(''),
             agentname: this.attr(''),

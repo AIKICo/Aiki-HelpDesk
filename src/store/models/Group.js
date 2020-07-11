@@ -7,7 +7,6 @@ export default class Group extends Model{
     static fields() {
         return {
             id: this.attr(null),
-            companyid: this.attr(null),
             title: this.attr(""),
             description: this.attr(""),
             operatinghourid: this.attr(null),

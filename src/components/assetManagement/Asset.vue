@@ -216,7 +216,6 @@
         data() {
             return {
                 Asset: {
-                    companyid: this.$store.state.companyId,
                     employeeid: null,
                     assetlocationid: null,
                     assettypeid: null,
@@ -314,7 +313,6 @@
                 });
             } else if (this.$route.params.formType === "Insert") {
                 this.Asset = {
-                    companyid: this.$store.state.companyId,
                     employeeid: "",
                     assetlocationid: "",
                     assettypeid: "",

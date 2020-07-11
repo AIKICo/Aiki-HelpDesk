@@ -7,7 +7,6 @@ export default class OperatingHour extends Model {
     static fields() {
         return {
             id: this.attr(""),
-            companyid: this.attr(""),
             title: this.attr(""),
             timezone: this.attr(""),
             workdays: this.attr([]),

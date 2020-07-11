@@ -6,7 +6,7 @@ module.exports = {
     ],
     devServer: {
         host:'localhost',
-        hotOnly:true,
+        hot:true,
         disableHostCheck: true,
         https: true,
         port:5002,

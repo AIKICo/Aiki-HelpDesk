@@ -293,14 +293,12 @@
                                             if (e.nesxtStageAgentName != "") {
                                                 this.addTicketHistory({
                                                     ticketid: this.selectedWorkOrder.id,
-                                                    companyid: this.$store.state.companyId,
                                                     historycomment: `درخواست کار به ${e.nesxtStageAgentName} ارجاع داده شد `,
                                                     agentname: null
                                                 }).then(() => {
                                                     setTimeout(() => {
                                                         this.addTicketHistory({
                                                             ticketid: this.selectedWorkOrder.id,
-                                                            companyid: this.$store.state.companyId,
                                                             historycomment: e.historyComment,
                                                             agentname: e.nesxtStageAgentName
                                                         }).then(() => {
@@ -311,7 +309,6 @@
                                             } else {
                                                 this.addTicketHistory({
                                                     ticketid: this.selectedWorkOrder.id,
-                                                    companyid: this.$store.state.companyId,
                                                     historycomment: e.historyComment,
                                                     agentname: this.$store.state.memberName
                                                 }).then(() => {
@@ -322,7 +319,6 @@
                                     } else {
                                         this.addTicketHistory({
                                             ticketid: this.selectedWorkOrder.id,
-                                            companyid: this.$store.state.companyId,
                                             historycomment: e.historyComment,
                                             agentname: this.$store.state.memberName
                                         });

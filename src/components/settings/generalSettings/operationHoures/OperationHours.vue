@@ -206,7 +206,6 @@ export default {
       var record = this.getOperationHour(this.$route.params.id);
       this.OperationHour = {
         id: this.$route.params.id,
-        companyid: this.$store.state.companyId,
         title: record.title,
         timezone: "",
         workdays: record.workdays,
@@ -215,7 +214,6 @@ export default {
       };
     } else if (this.$route.params.formType === "Insert") {
       this.OperationHour = {
-        companyid: this.$store.state.companyId,
         title: "",
         timezone: "",
         workdays: [

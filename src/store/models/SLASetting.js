@@ -7,7 +7,6 @@ export default class SLASetting extends Model {
     static fields() {
         return {
             id: this.uid(() => this.$uuid.v4()),
-            companyid: this.attr(null),
             title: this.attr(""),
             description: this.attr(""),
             operatinghourid: this.attr(null),

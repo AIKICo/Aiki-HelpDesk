@@ -7,7 +7,6 @@ export default class Member extends Model {
     static fields() {
         return {
             id:  this.attr(null),
-            companyid: this.attr(null),
             da: this.string(''),
             count: this.attr(null),
             allowdelete:this.boolean(null)

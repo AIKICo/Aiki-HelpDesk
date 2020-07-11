@@ -7,7 +7,6 @@ export default class AssetsView extends Model{
     static fields() {
         return{
             id: this.uid(() => this.$uuid.v4()),
-            companyid: this.attr(null),
             assetnumber: this.uid(""),
             title: this.uid(""),
             assetlocationid: this.uid(null),

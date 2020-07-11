@@ -161,7 +161,6 @@
                 this.Group.agents = JSON.parse(this.Group.agents)
             } else if (this.$route.params.formType === "Insert") {
                 this.Group = {
-                    companyid: this.$store.state.companyId,
                     title: "",
                     description: null,
                     operatinghourid:null,

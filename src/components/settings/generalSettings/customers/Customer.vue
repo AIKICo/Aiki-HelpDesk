@@ -140,7 +140,6 @@ export default {
       this.Customer = this.getCustomer(this.$route.params.id);
     } else if (this.$route.params.formType === "Insert") {
       this.Customer = {
-        companyid: this.$store.state.companyId,
         title: "",
         description: null,
         domains: null,

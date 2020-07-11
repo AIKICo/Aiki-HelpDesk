@@ -32,14 +32,14 @@ const userService = {
             })).response;
             if (result.status === 200) {
                 window.localStorage.setItem("userInfo", JSON.stringify(result.data));
-                window.localStorage.setItem("companyid", result.data.companyid);
+                window.localStorage.setItem("companyid", result.data.encryptedCompnayId);
                 window.localStorage.setItem("access_token", result.data.token);
 
                 axois.defaults.headers.common.Authorization = "Bearer " + result.data.token;
-                axois.defaults.headers.common.CompanyID = result.data.companyid;
+                axois.defaults.headers.common.CompanyID = result.data.encryptedCompnayId;
 
                 store.state.isLoggedIn = true;
-                store.state.companyId = result.data.companyid;
+                store.state.companyId = result.data.encryptedCompnayId;
                 store.state.memberName = result.data.membername;
                 store.state.memberRole = result.data.roles;
                 store.state.accessToken = result.data.token;

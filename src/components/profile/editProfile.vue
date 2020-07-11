@@ -170,7 +170,6 @@
             return {
                 verificationPassword:"",
                 Member: {
-                    companyid: this.$store.state.companyId,
                     memberName: "",
                     userName: "",
                     password: "",

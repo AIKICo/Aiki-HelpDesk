@@ -2,6 +2,19 @@
     <v-container>
         <v-row>
             <v-col>
+                <v-select
+                        :items="customers"
+                        item-text="title"
+                        item-value="id"
+                        v-model="selectedCustomer"
+                        label="مشتری"
+                        @change="customerChanged"
+                >
+                </v-select>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
                 <v-treeview
                         :items="OrganizeChartItems"
                         item-key="id"
@@ -19,7 +32,7 @@
                                         mdi-plus
                                     </v-icon>
                                 </v-btn>
-                                <v-btn v-if="hover" icon @click="deleteChild(item)">
+                                <v-btn v-if="hover && item.allowdelete" icon @click="deleteChild(item)">
                                     <v-icon :color="$store.state.defaultColor">
                                         mdi-minus
                                     </v-icon>
@@ -50,6 +63,7 @@
 
 <script>
     import OrganizeChart from "./OrganizeChart";
+    import {mapActions} from "vuex";
 
     export default {
         name: "OrganizeCharts",
@@ -60,21 +74,30 @@
                 sheet: false,
                 sheetOperation: "",
                 selectedItem: null,
-                parentItem: null
+                parentItem: null,
+                customers: null,
+                selectedCustomer: null
             }
         },
         methods: {
+            ...mapActions({
+                loadOrganizeCharts_JsonView_ByCustomerId: "OrganizeChartsJsonView/loadOrganizeCharts_JsonView_ByCustomerId",
+                loadCustomers: "CustomerService/loadCustomers"
+            }),
             addChild(parentItem) {
-                this.sheetOperation = "insert";
-                this.sheet = !this.sheet;
-                this.selectedItem = {
-                    title: "",
-                    companyId: parentItem.companyid,
-                    parent_id: parentItem.id,
-                    children: [],
-                    additionalinfo:[]
-                };
-                this.ParentItem = parentItem;
+                if (this.selectedCustomer){
+                    this.sheetOperation = "insert";
+                    this.sheet = !this.sheet;
+                    this.selectedItem = {
+                        title: "",
+                        parent_id: parentItem.id,
+                        customerid: this.selectedCustomer,
+                        children: [],
+                        additionalinfo: [],
+                        allowdelete:true
+                    };
+                    this.ParentItem = parentItem;
+                }
             },
             addedChild(e) {
                 if (!this.ParentItem.children) {
@@ -88,7 +111,7 @@
                 this.sheet = e.sheet;
             },
             deleteChild(item) {
-                if (item.parent_id!=null){
+                if (item.parent_id != null) {
                     this.$store.dispatch("OrganizeChartService/deleteOrganizeChart", item.id).then((res) => {
                         if (res.status === 200) {
                             this.deleteFromJson(this.OrganizeChartItems, item.id);
@@ -96,7 +119,7 @@
                     });
                 }
             },
-            deleteFromJson(itemArr, nId){
+            deleteFromJson(itemArr, nId) {
                 for (var i = 0; i < itemArr.length; i++) {
                     if (itemArr[i].id && itemArr[i].id === nId) {
                         itemArr.splice(i, 1);
@@ -120,14 +143,20 @@
                     }
                 });
             },
+            customerChanged(e) {
+                this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
+                    this.OrganizeChartItems=[];
+                    this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
+                });
+            },
             closeSheet(e) {
                 this.sheet = e.sheet;
             },
         },
         created() {
-            this.$store.dispatch("OrganizeChartsJsonView/loadOrganizeCharts_JsonView").then((res) => {
-                this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
-            })
+            this.loadCustomers().then((res) => {
+                this.customers = res.data;
+            });
         }
     }
 </script>

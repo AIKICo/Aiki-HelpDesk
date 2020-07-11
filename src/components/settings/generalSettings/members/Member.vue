@@ -183,7 +183,6 @@
                 this.Member = this.getMember(this.$route.params.id);
             } else if (this.$route.params.formType === "Insert") {
                 this.Member = {
-                    companyid: this.$store.state.companyId,
                     memberName: "",
                     userName: "",
                     password: "",

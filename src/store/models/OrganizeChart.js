@@ -8,7 +8,6 @@ export default class OrganizeChart extends Model{
         return {
             id:  this.attr(null),
             parent_id:  this.attr(null),
-            companyid: this.attr(null),
             title: this.attr(""),
             titletype:this.attr(""),
             additionalinfo:this.attr([]),
