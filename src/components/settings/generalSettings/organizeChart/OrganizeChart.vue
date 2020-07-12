@@ -158,9 +158,10 @@
                 label: "",
                 valueLabel: "",
                 AppConstants: [],
-                titletypes:[]
+                titletypes:[],
             }
         },
+
         methods: {
             onSubmit() {
                 if (this.operation === "insert") {

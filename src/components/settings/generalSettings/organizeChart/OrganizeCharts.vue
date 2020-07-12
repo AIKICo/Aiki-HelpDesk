@@ -32,7 +32,8 @@
                                         mdi-plus
                                     </v-icon>
                                 </v-btn>
-                                <v-btn v-if="hover && item.allowdelete" icon @click="deleteChild(item)">
+                                <v-btn v-if="hover && item.allowdelete && item.children.length===0" icon
+                                       @click="deleteChild(item)">
                                     <v-icon :color="$store.state.defaultColor">
                                         mdi-minus
                                     </v-icon>
@@ -40,6 +41,11 @@
                                 <v-btn v-if="hover" icon @click="editChild(item)">
                                     <v-icon :color="$store.state.defaultColor">
                                         mdi-content-save-edit-outline
+                                    </v-icon>
+                                </v-btn>
+                                <v-btn v-if="hover && item.children.length===0" icon @click="showMoveTree(item)">
+                                    <v-icon :color="$store.state.defaultColor">
+                                        mdi-file-tree
                                     </v-icon>
                                 </v-btn>
                             </div>
@@ -56,6 +62,13 @@
                            @item-added="addedChild"
                            @item-updated="updatedItem">
             </OrganizeChart>
+            <move-sheet
+                    :sheet="moveSheet"
+                    :org-charts="OrganizeChartItems"
+                    :item="selectItemForMove"
+                    @close-moveSheet="closeMoveSheet">
+
+            </move-sheet>
         </v-row>
     </v-container>
 
@@ -64,19 +77,22 @@
 <script>
     import OrganizeChart from "./OrganizeChart";
     import {mapActions} from "vuex";
+    import MoveSheet from "./moveSheet";
 
     export default {
         name: "OrganizeCharts",
-        components: {OrganizeChart},
+        components: {MoveSheet, OrganizeChart},
         data() {
             return {
                 OrganizeChartItems: [],
                 sheet: false,
+                moveSheet: false,
                 sheetOperation: "",
                 selectedItem: null,
                 parentItem: null,
                 customers: null,
-                selectedCustomer: null
+                selectedCustomer: null,
+                selectItemForMove:null
             }
         },
         methods: {
@@ -85,7 +101,7 @@
                 loadCustomers: "CustomerService/loadCustomers"
             }),
             addChild(parentItem) {
-                if (this.selectedCustomer){
+                if (this.selectedCustomer) {
                     this.sheetOperation = "insert";
                     this.sheet = !this.sheet;
                     this.selectedItem = {
@@ -94,7 +110,7 @@
                         customerid: this.selectedCustomer,
                         children: [],
                         additionalinfo: [],
-                        allowdelete:true
+                        allowdelete: true
                     };
                     this.ParentItem = parentItem;
                 }
@@ -145,13 +161,20 @@
             },
             customerChanged(e) {
                 this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
-                    this.OrganizeChartItems=[];
+                    this.OrganizeChartItems = [];
                     this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
                 });
+            },
+            showMoveTree(item) {
+                this.selectItemForMove = item;
+                this.moveSheet = true;
             },
             closeSheet(e) {
                 this.sheet = e.sheet;
             },
+            closeMoveSheet(e) {
+                this.moveSheet = e.moveSheet;
+            }
         },
         created() {
             this.loadCustomers().then((res) => {
