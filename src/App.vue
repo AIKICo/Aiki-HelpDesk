@@ -82,6 +82,8 @@
                 if (!this.registration || !this.registration.waiting) {
                     return;
                 }
+                document.location.reload();
+                document.location='/login'
                 this.registration.waiting.postMessage("skipWaiting");
             },
             newTicket() {
