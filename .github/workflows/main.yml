@@ -13,6 +13,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: GITHUB CONTEXT
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo ${{ GITHUB_CONTEXT }}   
+    - name: get commit message
+      run: |
+           echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+    - name: show commit message
+      run : echo $commitmsg 
+      
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -41,10 +51,9 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: "#general" 
-        SLACK_TITLE: "Ticket Web Site Published On Firebase"
-    
+        SLACK_TITLE: "Ticket Web Site Published On Firebase"    
     - name: Send Notification To Microsoft Teams
       uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
       with:
         webhook: ${{ secrets.TEAMS_WEBHOOK }}
-        message: 'Help Desk App Published On Heroku'    
+        message: $commitmsg      
