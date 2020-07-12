@@ -197,23 +197,28 @@
                 this.moveSheet = true;
             },
             closeMoveSheet(e) {
-                this.moveSheet = e.moveSheet;
-                this.patchOrganizeChart({
-                    id: this.selectItemForMove.id,
-                    patchDoc: [
-                        {
-                            op: "replace",
-                            path: "/parent_id",
-                            value: e.selectedItem.id
+                if (e.closetype==="ok"){
+                    this.moveSheet = e.moveSheet;
+                    this.patchOrganizeChart({
+                        id: this.selectItemForMove.id,
+                        patchDoc: [
+                            {
+                                op: "replace",
+                                path: "/parent_id",
+                                value: e.selectedItem.id
+                            }
+                        ]
+                    }).then((res) => {
+                        if (res.status === 200) {
+                            this.selectItemForMove.parent_id = e.selectedItem.id;
+                            this.deleteFromJson(this.OrganizeChartItems, this.selectItemForMove.id);
+                            e.selectedItem.children.push(this.selectItemForMove);
                         }
-                    ]
-                }).then((res) => {
-                    if (res.status === 200) {
-                        this.selectItemForMove.parent_id = e.selectedItem.id;
-                        this.deleteFromJson(this.OrganizeChartItems, this.selectItemForMove.id);
-                        e.selectedItem.children.push(this.selectItemForMove);
-                    }
-                });
+                    });
+                }
+                else{
+                    this.moveSheet = e.moveSheet;
+                }
             }
         },
         created() {
