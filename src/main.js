@@ -51,7 +51,7 @@ Vue.filter("formatDate", function (value) {
 });
 
 Vue.config.productionTip = false;
-var config = {
+const config = {
     apiKey: "AIzaSyCSuLmkyLa2KhAgPWxswwjcVOTDVjBYy94",
     projectId: "aiki-helpdesk-v1",
     appId: "1:185350520841:web:38306a62a0ab7b9b32b8d8",
