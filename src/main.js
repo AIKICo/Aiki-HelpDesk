@@ -26,8 +26,8 @@ const toastOptions = {
     // You can set your default options here
 };
 
-axois.defaults.baseURL = "https://localhost:5001/";
-//axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
+//axois.defaults.baseURL = "https://localhost:5001/";
+axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
 axois.defaults.headers.common.Authorization = "Bearer " + store.state.accessToken;
 axois.defaults.headers.common.CompanyID = store.state.companyId;
