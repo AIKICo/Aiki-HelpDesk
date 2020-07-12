@@ -98,7 +98,8 @@
         methods: {
             ...mapActions({
                 loadOrganizeCharts_JsonView_ByCustomerId: "OrganizeChartsJsonView/loadOrganizeCharts_JsonView_ByCustomerId",
-                loadCustomers: "CustomerService/loadCustomers"
+                loadCustomers: "CustomerService/loadCustomers",
+                patchOrganizeChart:"OrganizeChartService/patchOrganizeChart"
             }),
             addChild(parentItem) {
                 if (this.selectedCustomer) {
@@ -165,15 +166,31 @@
                     this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
                 });
             },
+            closeSheet(e) {
+                this.sheet = e.sheet;
+            },
             showMoveTree(item) {
                 this.selectItemForMove = item;
                 this.moveSheet = true;
             },
-            closeSheet(e) {
-                this.sheet = e.sheet;
-            },
             closeMoveSheet(e) {
                 this.moveSheet = e.moveSheet;
+                this.patchOrganizeChart({
+                    id: this.selectItemForMove.id,
+                    patchDoc: [
+                        {
+                            op: "replace",
+                            path: "/parent_id",
+                            value: e.selectedItem.id
+                        }
+                    ]
+                }).then((res)=>{
+                    if(res.status===200){
+                        this.selectItemForMove.parent_id = e.selectedItem.id;
+                        this.deleteFromJson(this.OrganizeChartItems, this.selectItemForMove.id);
+                        e.selectedItem.children.push(this.selectItemForMove);
+                    }
+                });
             }
         },
         created() {
