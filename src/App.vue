@@ -115,7 +115,6 @@
             navigator.serviceWorker.addEventListener("controllerchange", () => {
                 if (this.refreshing) return;
                 this.refreshing = true;
-                window.location.reload();
             });
             if (localStorage.getItem("userInfo")!=null)
             {
