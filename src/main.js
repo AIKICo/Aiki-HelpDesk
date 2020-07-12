@@ -21,10 +21,6 @@ import lodash from "lodash";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
-const toastOptions = {
-    rtl: true
-    // You can set your default options here
-};
 
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
@@ -38,8 +34,12 @@ Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
 Vue.use(VueLodash, {name: "custom", lodash: lodash});
-Vue.use(Toast, toastOptions);
 
+const toastOptions = {
+    rtl: true
+    // You can set your default options here
+};
+Vue.use(Toast, toastOptions);
 
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("date-picker", VuePersianDatetimePicker);
@@ -50,15 +50,16 @@ Vue.filter("formatDate", function (value) {
     }
 });
 
-Vue.config.productionTip = false;
-const config = {
-    apiKey: "AIzaSyCSuLmkyLa2KhAgPWxswwjcVOTDVjBYy94",
-    projectId: "aiki-helpdesk-v1",
-    appId: "1:185350520841:web:38306a62a0ab7b9b32b8d8",
-    measurementId: "G-8CY0SWQXMJ"
-};
-firebase.initializeApp(config);
-Vue.prototype.$analytics = firebase.analytics();
+if (navigator.onLine) {
+    const config = {
+        apiKey: "AIzaSyCSuLmkyLa2KhAgPWxswwjcVOTDVjBYy94",
+        projectId: "aiki-helpdesk-v1",
+        appId: "1:185350520841:web:38306a62a0ab7b9b32b8d8",
+        measurementId: "G-8CY0SWQXMJ"
+    };
+    firebase.initializeApp(config);
+    Vue.prototype.$analytics = firebase.analytics();
+}
 
 Vue.mixin({
     methods: {
@@ -123,4 +124,4 @@ new Vue({
         },
     },
     render: h => h(App)
-    }).$mount("#app");
+}).$mount("#app");
