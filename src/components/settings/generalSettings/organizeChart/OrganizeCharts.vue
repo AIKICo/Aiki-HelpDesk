@@ -8,6 +8,8 @@
                         item-value="id"
                         v-model="selectedCustomer"
                         label="مشتری"
+                        outlined
+                        shaped
                         @change="customerChanged"
                 >
                 </v-select>
@@ -15,8 +17,18 @@
         </v-row>
         <v-row>
             <v-col>
+                <v-text-field
+                        v-model="searchKey"
+                        label="جستجو در چارت سازمانی"
+                        clearable
+                        outlined
+                        shaped
+                        v-if="showSearchTextBox"
+                ></v-text-field>
                 <v-treeview
                         :items="OrganizeChartItems"
+                        :search="searchKey"
+                        :filter="filter"
                         item-key="id"
                         item-text="title"
                         activatable
@@ -92,14 +104,24 @@
                 parentItem: null,
                 customers: null,
                 selectedCustomer: null,
-                selectItemForMove:null
+                selectItemForMove: null,
+                searchKey: "",
+                caseSensitive: false,
+                showSearchTextBox:false,
             }
+        },
+        computed: {
+            filter() {
+                return this.caseSensitive
+                    ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+                    : undefined
+            },
         },
         methods: {
             ...mapActions({
                 loadOrganizeCharts_JsonView_ByCustomerId: "OrganizeChartsJsonView/loadOrganizeCharts_JsonView_ByCustomerId",
                 loadCustomers: "CustomerService/loadCustomers",
-                patchOrganizeChart:"OrganizeChartService/patchOrganizeChart"
+                patchOrganizeChart: "OrganizeChartService/patchOrganizeChart"
             }),
             addChild(parentItem) {
                 if (this.selectedCustomer) {
@@ -164,6 +186,7 @@
                 this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
                     this.OrganizeChartItems = [];
                     this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
+                    this.showSearchTextBox = true;
                 });
             },
             closeSheet(e) {
@@ -184,8 +207,8 @@
                             value: e.selectedItem.id
                         }
                     ]
-                }).then((res)=>{
-                    if(res.status===200){
+                }).then((res) => {
+                    if (res.status === 200) {
                         this.selectItemForMove.parent_id = e.selectedItem.id;
                         this.deleteFromJson(this.OrganizeChartItems, this.selectItemForMove.id);
                         e.selectedItem.children.push(this.selectItemForMove);
