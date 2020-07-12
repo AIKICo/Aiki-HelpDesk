@@ -8,6 +8,13 @@
                             منتقل شود به:
                         </v-card-title>
                         <v-card-text class="mt-3">
+                            <v-text-field
+                                    v-model="searchKey"
+                                    label="جستجو در چارت سازمانی"
+                                    clearable
+                                    outlined
+                                    shaped
+                            ></v-text-field>
                             <v-treeview
                                     :items="orgCharts"
                                     item-key="id"
@@ -52,10 +59,18 @@
         props: ["sheet", "item", "orgCharts"],
         data() {
             return {
-                selectedItem:null
+                selectedItem:null,
+                searchKey: "",
+                caseSensitive: false,
             }
         },
-        computed: {},
+        computed: {
+            filter() {
+                return this.caseSensitive
+                    ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+                    : undefined
+            },
+        },
         methods: {
             selectItem(item){
               this.selectedItem = item;
