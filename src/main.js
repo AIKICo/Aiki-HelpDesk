@@ -96,7 +96,7 @@ new Vue({
 
             return response;
         }, async function (error) {
-            if (401 === error.response.status || 500 === error.response.status) {
+            if (401 === error.response.status) {
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
                 router.push("/login").catch(() => {
