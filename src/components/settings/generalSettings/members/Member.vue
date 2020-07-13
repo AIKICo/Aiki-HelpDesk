@@ -30,21 +30,6 @@
                                     </validation-provider>
                                     <validation-provider
                                             v-slot="{ errors }"
-                                            name="نام کاربری"
-                                            rules="required"
-                                            immediate
-                                    >
-                                        <v-text-field
-                                                v-model="Member.username"
-                                                label="نام کاربری"
-                                                clearable
-                                                :error-messages="errors"
-                                                outlined
-                                                shaped
-                                        ></v-text-field>
-                                    </validation-provider>
-                                    <validation-provider
-                                            v-slot="{ errors }"
                                             name="کلمه عبور"
                                             rules="required"
                                             immediate
@@ -184,7 +169,6 @@
             } else if (this.$route.params.formType === "Insert") {
                 this.Member = {
                     memberName: "",
-                    userName: "",
                     password: "",
                     email: "",
                     roles: []
