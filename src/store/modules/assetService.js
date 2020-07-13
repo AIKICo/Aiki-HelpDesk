@@ -82,6 +82,17 @@ const assetService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadAssetsViewByCompanyId({commit}, payload) {
+            let response = (await AssetsView.api().get("/AssetsView/GetByCustomerId/" + payload)).response;
+            if (response.status === 200) {
+                commit("SET_TOTAL", response.headers["x-total-count"]);
+                commit("SET_CURRENT", response.data);
+                commit("SET_LOADER", false);
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async loadAsset(state, payload) {
             let response = (await Asset.api().get("/Assets/" + payload)).response;
             if (response.status === 200) {

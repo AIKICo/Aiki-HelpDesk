@@ -2,6 +2,21 @@
     <v-container>
         <v-row>
             <v-col>
+                <v-row>
+                    <v-col cols="7">
+                        <v-select
+                                :items="customers"
+                                item-text="title"
+                                item-value="id"
+                                v-model="customerid"
+                                label="مشتری"
+                                chips
+                                clearable
+                                @change="customerChanged"
+                        >
+                        </v-select>
+                    </v-col>
+                </v-row>
                 <v-spacer></v-spacer>
                 <v-row>
                     <v-col cols="5">
@@ -127,13 +142,16 @@
                 editedItem: [],
                 itemPerPage: 50,
                 searchKey: "",
-                items:[],
+                items: [],
+                customers: [],
+                customerid: null
             }
         },
         methods: {
             ...mapActions({
-                getAssetList: "AssetService/loadAssetsView",
-                deleteAsset: "AssetService/deleteAsset"
+                getAssetList: "AssetService/loadAssetsViewByCompanyId",
+                deleteAsset: "AssetService/deleteAsset",
+                loadCustomer: "CustomerService/loadCustomers"
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -149,11 +167,18 @@
             },
             editAsset(item) {
                 this.$router.push("/Asset/Edit/" + item.id);
+            },
+            customerChanged: function (e) {
+                if (e === undefined) this.items = [];
+                else
+                    this.getAssetList(e).then((res) => {
+                        this.items = res.data;
+                    });
             }
         },
         created() {
-            this.getAssetList().then((res)=>{
-                this.items = res.data;
+            this.loadCustomer().then((res) => {
+                this.customers = res.data;
             });
         }
     }

@@ -8,8 +8,6 @@
                         item-value="id"
                         v-model="selectedCustomer"
                         label="مشتری"
-                        outlined
-                        shaped
                         @change="customerChanged"
                 >
                 </v-select>
