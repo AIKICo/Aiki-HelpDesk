@@ -5,7 +5,8 @@
                 <dashboard-card
                         title="لیست انتظار"
                         card-icon="mdi-email-receive-outline"
-                        :ticket-count="watinigItemCount">
+                        :ticket-count="watinigItemCount"
+                        :color="$store.state.defaultColor">
                 </dashboard-card>
             </v-col>
             <v-col cols="3">
@@ -13,19 +14,22 @@
                         title="فعال"
                         card-icon="mdi-email-open-outline"
                         :ticket-count="activeItemCount"
+                        color="blue"
                 ></dashboard-card>
             </v-col>
             <v-col cols="3">
                 <dashboard-card
                         title="بسته"
                         card-icon="mdi-email-check-outline"
-                        :ticket-count="closeItemCount"></dashboard-card>
+                        :ticket-count="closeItemCount"
+                        color="green"></dashboard-card>
             </v-col>
             <v-col cols="3">
                 <dashboard-card
                         title="رد شده"
                         card-icon="mdi-email-off-outline"
-                        :ticket-count="rejectItemCount"></dashboard-card>
+                        :ticket-count="rejectItemCount"
+                        color="red"></dashboard-card>
             </v-col>
         </v-row>
         <v-row>
