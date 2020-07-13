@@ -14,7 +14,7 @@
                         title="فعال"
                         card-icon="mdi-email-open-outline"
                         :ticket-count="activeItemCount"
-                        color="blue"
+                        color="primary"
                 ></dashboard-card>
             </v-col>
             <v-col cols="3">
