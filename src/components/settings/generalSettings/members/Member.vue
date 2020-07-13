@@ -58,6 +58,7 @@
                                                 type="email"
                                                 outlined
                                                 shaped
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider

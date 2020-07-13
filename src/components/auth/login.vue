@@ -26,6 +26,7 @@
                                 outlined
                                 shaped
                                 immediate
+                                dir="ltr"
                         ></v-text-field>
                       </ValidationProvider>
                       <ValidationProvider
@@ -42,6 +43,7 @@
                                 :error-messages="errors"
                                 outlined
                                 shaped
+                                dir="ltr"
                         ></v-text-field>
                       </ValidationProvider>
                     </v-card-text>
