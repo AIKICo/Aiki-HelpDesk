@@ -52,13 +52,15 @@
         },
         metaInfo: {
             changed(metaInfo) {
-                firebase.analytics().setCurrentScreen(metaInfo.title);
-                firebase.analytics().logEvent("page_view");
-                firebase.analytics().logEvent("screen_view", {
-                    app_name: "aiki-helpdesk-v1",
-                    screen_name: metaInfo.title,
-                    app_version: "1.0"
-                });
+                if (navigator.onLine){
+                    firebase.analytics().setCurrentScreen(metaInfo.title);
+                    firebase.analytics().logEvent("page_view");
+                    firebase.analytics().logEvent("screen_view", {
+                        app_name: "aiki-helpdesk-v1",
+                        screen_name: metaInfo.title,
+                        app_version: "1.0"
+                    });
+                }
             }
         },
         data: () => ({

@@ -2,15 +2,31 @@
     <v-container fluid>
         <v-row>
             <v-col>
+                <v-row>
+                    <v-col cols="7">
+                        <v-select
+                                :items="customers"
+                                item-text="title"
+                                item-value="id"
+                                v-model="customerid"
+                                label="مشتری"
+                                chips
+                                clearable
+                                @change="customerChanged"
+                        >
+                        </v-select>
+                    </v-col>
+                </v-row>
                 <v-spacer></v-spacer>
                 <v-row>
-                    <v-col cols="5">
+                    <v-col cols="3">
                         <v-text-field
                                 v-model="searchKey"
                                 append-icon="mdi-magnify"
                                 label="جستجو بر اساس شماره درخواست"
                                 single-line
                                 hide-details
+                                clearable
                         ></v-text-field>
                     </v-col>
                 </v-row>
@@ -167,6 +183,8 @@
             activeComponentProperty: {},
             itemPerPage: 50,
             searchKey: "",
+            customerid:null,
+            customers:[],
             headers: [
                 {text: "", value: "", align: "center"},
                 {text: "کد رهگیری", value: "ticketfriendlynumber", align: "center"},
@@ -197,10 +215,12 @@
         methods: {
             ...mapActions({
                 getTickets: "TicketService/loadAllTickets",
+                getTicketsByCompanyId:"TicketService/loadAllTicketsByCompanyId",
                 deleteTicket: "TicketService/deleteTicket",
                 patchTicket: "TicketService/patchTicket",
                 getTicketHistories: "TicketHistoryService/loadTicketHistories",
                 addTicketHistory: "TicketHistoryService/addTicketHistory",
+                loadCustomer: "CustomerService/loadCustomers"
             }),
             selectItem(item) {
                 this.selectedItem = item;
@@ -395,20 +415,30 @@
                     this.selectedWorkOrder.enddate = null;
                     this.selectedWorkOrder.tickettype="مجدد باز شده";
                 });
-            }
+            },
+            customerChanged(e) {
+                if (e===undefined) {
+                    this.tickets=[];
+                    this.activeTickets=[];
+                    return;
+                }
+                this.getTicketsByCompanyId(e).then((res)=>{
+                    this.tickets = res.data;
+                });
+                if (this.$store.state.memberRole === "admin") {
+                    this.$store.state.activeTickets = this.tickets.filter(function (el) { return (!!el.enddate) }).length;
+                } else {
+                    let memberName = this.$store.state.memberName;
+                    this.$store.state.activeTickets = this.tickets.filter(function (el) {
+                        return (el.agentname === memberName && !!el.enddate)
+                    }).length;
+                }
+            },
         },
         created() {
-            this.getTickets().then((res)=>{
-                this.tickets = res.data;
+            this.loadCustomer().then((res) => {
+                this.customers = res.data;
             });
-            if (this.$store.state.memberRole === "admin") {
-                this.$store.state.activeTickets = this.tickets.filter(function (el) { return (!!el.enddate) }).length;
-            } else {
-                let memberName = this.$store.state.memberName;
-                this.$store.state.activeTickets = this.tickets.filter(function (el) {
-                    return (el.agentname === memberName && !!el.enddate)
-                }).length;
-            }
         }
     };
 </script>

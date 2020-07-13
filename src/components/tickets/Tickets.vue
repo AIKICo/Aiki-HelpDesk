@@ -142,7 +142,7 @@
                             <v-btn text icon small @click="toggle">
                                 <v-icon>{{ isOpen ? 'mdi-minus' : 'mdi-plus' }}</v-icon>
                             </v-btn>
-                            <span class="mx-2 subtitle-1"> {{items[0].customertitle}}</span>
+                            <span class="mx-2 group-title"> {{items[0].customertitle}}</span>
                         </th>
                     </template>
                 </v-data-table>
@@ -424,4 +424,9 @@
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+    .group-title{
+        font-size: medium;
+        font-weight: normal
+    }
+</style>
