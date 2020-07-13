@@ -21,7 +21,6 @@ import lodash from "lodash";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
-
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
