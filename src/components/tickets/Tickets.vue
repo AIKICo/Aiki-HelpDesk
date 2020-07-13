@@ -11,6 +11,7 @@
                         :single-expand="singleExpand"
                         :sort-by="['ticketfriendlynumber']"
                         :sort-desc="[true]"
+                        group-by="customertitle"
                         class="elevation-1"
                         item-key="id"
                 >
@@ -135,6 +136,14 @@
                             </v-chip-group>
 
                         </td>
+                    </template>
+                    <template v-slot:group.header="{items, isOpen, toggle}">
+                        <th colspan="100%">
+                            <v-btn text icon small @click="toggle">
+                                <v-icon>{{ isOpen ? 'mdi-minus' : 'mdi-plus' }}</v-icon>
+                            </v-btn>
+                            <span class="mx-2 subtitle-1"> {{items[0].customertitle}}</span>
+                        </th>
                     </template>
                 </v-data-table>
             </v-col>
@@ -382,7 +391,7 @@
                     }
                 }
             },
-            loadData(){
+            loadData() {
                 this.getTickets().then(() => {
                     this.tickets = this.$store.state.TicketService.current;
                     if (this.$store.state.memberRole === "admin") {

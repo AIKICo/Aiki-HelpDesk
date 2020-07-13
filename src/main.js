@@ -80,6 +80,7 @@ new Vue({
     beforeCreate() {
         this.$vuetify.lang.current = "fa";
         axois.interceptors.request.use(config => {
+            if (!navigator.onLine) return;
             this.$Progress.start();
             return config;
         }, function () {
