@@ -62,7 +62,7 @@
             disabledRow: function() {
                 this.$store
                     .dispatch("MemberService/patchMember", {
-                        id: this.membername.id,
+                        id: this.member.id,
                         patchDoc: [
                             {
                                 op: "replace",

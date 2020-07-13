@@ -201,7 +201,6 @@
         created() {
             this.getMember(this.$store.state.memberid).then((res) => {
                 this.Member = res.data;
-                console.log(this.Member);
             });
         }
     }
