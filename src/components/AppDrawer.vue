@@ -9,7 +9,7 @@
         <template v-slot:prepend>
             <v-list-item>
                 <v-list-item-avatar>
-                    <v-icon>
+                    <v-icon :color="$store.state.defaultColor">
                         mdi-account
                     </v-icon>
                 </v-list-item-avatar>
@@ -22,7 +22,7 @@
             </v-list-item>
             <v-list-item to="/editProfile" dense>
                 <v-list-item-avatar>
-                    <v-icon>
+                    <v-icon :color="$store.state.defaultColor">
                         mdi-cog-outline
                     </v-icon>
                 </v-list-item-avatar>
@@ -41,7 +41,7 @@
                         :to="item.to"
                 >
                     <v-list-item-icon>
-                        <v-icon v-text="item.icon"></v-icon>
+                        <v-icon v-text="item.icon" :color="$store.state.defaultColor"></v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
                         <v-list-item-title v-text="item.text"></v-list-item-title>
