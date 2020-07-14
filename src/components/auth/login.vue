@@ -51,7 +51,6 @@
                                                         sitekey="e3605ee2-18a4-4e7c-9a8e-5885075be08e"
                                                         @verify="captchaVerified"
                                                         @error="hCaptchaVerified=false">
-
                                                 </vue-hcaptcha>
                                             </div>
                                         </v-card-text>
