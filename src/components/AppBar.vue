@@ -17,7 +17,6 @@
                 hide-details
                 prepend-inner-icon="mdi-magnify"
                 label="جستجو"
-                class="col-12"
                 v-if="$store.state.isLoggedIn"
         />
         <v-spacer/>
