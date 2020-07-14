@@ -47,8 +47,9 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="آدرس ایمیل"
-                                            rules="required"
+                                            rules="required|email"
                                             immediate
+                                            vid="email"
                                     >
                                         <v-text-field
                                                 v-model="Member.email"
@@ -59,6 +60,7 @@
                                                 outlined
                                                 shaped
                                                 dir="ltr"
+                                                :disabled="disabled"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
@@ -109,7 +111,8 @@
 </template>
 
 <script>
-    import {required} from "vee-validate/dist/rules";
+    import {required, email} from "vee-validate/dist/rules";
+    import {mapActions} from "vuex"
     import {
         extend,
         ValidationObserver,
@@ -122,6 +125,11 @@
         ...required,
         message: "{_field_} نمی تواند خالی باشد"
     });
+    extend("email", {
+        ...email,
+        message:"{_field_} آدرس معتبری نمی باشد"
+    });
+
     export default {
         name: "Member",
         data() {
@@ -130,7 +138,8 @@
                 Roles: [
                     {Label: "مدیر", Value: "admin"},
                     {Label: "اپراتور", Value: "operator"}
-                ]
+                ],
+                disabled:false
             };
         },
         components: {
@@ -138,7 +147,11 @@
             ValidationProvider
         },
         methods: {
+            ...mapActions({
+                IsEmailExists: "UserService/IsEmailExists"
+            }),
             onSubmit() {
+
                 if (this.$route.params.formType === "Edit") {
                     this.$store
                         .dispatch("MemberService/editMember", this.Member)
@@ -148,13 +161,23 @@
                             }
                         });
                 } else if (this.$route.params.formType === "Insert") {
-                    this.$store
-                        .dispatch("MemberService/addMember", this.Member)
-                        .then(res => {
-                            if (res.status === 201) {
-                                this.closeDialog();
-                            }
-                        });
+                    this.IsEmailExists(this.Member.email).then((res) => {
+                        if (res.data === true) {
+                            this.$refs.observer.setErrors({
+                                email: ['آدرس ایمیل قبلا به ثبت رسیده است']
+                            });
+                        }
+                        else{
+                            this.$store
+                                .dispatch("MemberService/addMember", this.Member)
+                                .then(res => {
+                                    if (res.status === 201) {
+                                        this.closeDialog();
+                                    }
+                                });
+                        }
+                    });
+
                 }
             },
             closeDialog() {
@@ -166,6 +189,7 @@
         },
         created() {
             if (this.$route.params.formType === "Edit") {
+                this.disabled=true;
                 this.Member = this.getMember(this.$route.params.id);
             } else if (this.$route.params.formType === "Insert") {
                 this.Member = {

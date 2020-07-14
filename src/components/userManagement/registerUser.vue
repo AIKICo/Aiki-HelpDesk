@@ -31,7 +31,7 @@
                                             <ValidationProvider
                                                     v-slot="{ errors }"
                                                     name="آدرس ایمیل"
-                                                    rules="required"
+                                                    rules="required|email"
                                                     vid="email"
                                                     immediate
                                             >
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-    import {required} from "vee-validate/dist/rules";
+    import {required, email} from "vee-validate/dist/rules";
     import {mapActions} from "vuex";
     import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
     import {
@@ -97,6 +97,10 @@
     extend("required", {
         ...required,
         message: "{_field_} نمی تواند خالی باشد"
+    });
+    extend("email", {
+        ...email,
+        message:"{_field_} آدرس معتبری نمی باشد"
     });
 
     export default {
@@ -122,7 +126,7 @@
                 IsEmailExists: "UserService/IsEmailExists"
             }),
             onSubmit: function () {
-                if (this.hCaptchaVerified !== true && this.$store.state.isOnline === true) return;
+                if (this.hCaptchaVerified !== true && this.$store.state.isOnline) return;
                 this.IsEmailExists(this.company.email).then((res) => {
                     if (res.data === true) {
                         this.$refs.observer.setErrors({

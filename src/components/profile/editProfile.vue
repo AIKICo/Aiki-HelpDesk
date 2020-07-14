@@ -62,14 +62,14 @@
                                     </validation-provider>
                                     <validation-provider
                                             v-slot="{ errors }"
-                                            name="کلمه عبور"
+                                            name="تکرار کلمه عبور"
                                             rules=""
                                             vid="confirm"
                                             immediate
                                     >
                                         <v-text-field
                                                 v-model="verificationPassword"
-                                                label="کلمه عبور"
+                                                label="تکرار کلمه عبور"
                                                 clearable
                                                 :error-messages="errors"
                                                 type="password"
