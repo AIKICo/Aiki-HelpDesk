@@ -36,7 +36,6 @@ Vue.use(VueLodash, {name: "custom", lodash: lodash});
 
 const toastOptions = {
     rtl: true
-    // You can set your default options here
 };
 Vue.use(Toast, toastOptions);
 
@@ -92,7 +91,6 @@ new Vue({
                     this.$Progress.finish();
                 }
             }
-
             return response;
         }, async function (error) {
             if (401 === error.response.status) {
@@ -106,8 +104,7 @@ new Vue({
                     }
                 }
                 return Promise.resolve(error.response);
-            }
-            else {
+            } else {
                 if (this) {
                     if (this.$Progress) {
                         this.$Progress.fail();
