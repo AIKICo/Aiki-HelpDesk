@@ -74,6 +74,7 @@ export default new Vuex.Store({
         accessToken: localStorage.getItem("access_token") || "",
         currentUser: {},
         isLoggedIn: !!localStorage.getItem("userInfo"),
+        isOnline: navigator.onLine,
         allowAddRecord: false,
         drawer: null,
         defaultColor: "indigo",

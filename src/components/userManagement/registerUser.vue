@@ -45,6 +45,14 @@
                                                         shaped
                                                 ></v-text-field>
                                             </ValidationProvider>
+                                            <div style="text-align: center" v-if="$store.state.isOnline">
+                                                <vue-hcaptcha
+                                                        sitekey="e3605ee2-18a4-4e7c-9a8e-5885075be08e"
+                                                        @verify="captchaVerified"
+                                                        @error="hCaptchaVerified=false"
+                                                >
+                                                </vue-hcaptcha>
+                                            </div>
                                         </v-card-text>
 
                                         <v-card-actions>
@@ -78,6 +86,7 @@
 <script>
     import {required} from "vee-validate/dist/rules";
     import {mapActions} from "vuex";
+    import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
     import {
         extend,
         ValidationObserver,
@@ -99,12 +108,14 @@
                     title: "",
                     email: ""
                 },
-                submitStatus: null
+                submitStatus: null,
+                hCaptchaVerified: false
             };
         },
         components: {
             ValidationProvider,
-            ValidationObserver
+            ValidationObserver,
+            VueHcaptcha
         },
         methods: {
             ...mapActions({
@@ -112,18 +123,23 @@
                 IsEmailExists: "UserService/IsEmailExists"
             }),
             onSubmit: function () {
+                if (this.hCaptchaVerified !== true && this.$store.state.isOnline === true) return;
                 this.IsEmailExists(this.company.email).then((res) => {
                     if (res.data === true) {
                         this.$refs.observer.setErrors({
                             email: ['آدرس ایمیل قبلا به ثبت رسیده است']
                         });
-                    }else{
+                    } else {
                         this.registerUser(this.company).then(() => {
                             this.$router.push("/login");
                         });
                     }
                 });
             },
+            captchaVerified(e) {
+                if (e) this.hCaptchaVerified = true;
+                else this.hCaptchaVerified = false;
+            }
         },
         metaInfo: {
             title: 'ثبت نام'
