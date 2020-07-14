@@ -96,6 +96,7 @@ new Vue({
             if (401 === error.response.status) {
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
+                localStorage.clear();
                 router.push("/login").catch(() => {
                 });
                 if (this) {
