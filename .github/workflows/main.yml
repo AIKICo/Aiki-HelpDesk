@@ -38,7 +38,7 @@ jobs:
           PROJECT_ID:   "aiki-helpdesk-v1"
          
     - name: Publish On Docker
-      uses: elgohr/Publish-Docker-Github-Action@latest
+      uses: elgohr/Publish-Docker-Github-Action@2.11
       with:
         name: aikico/helpdeskapp
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -46,13 +46,13 @@ jobs:
         tag_names: true
               
     - name: Send Notification To Slack
-      uses: rtCamp/action-slack-notify@latest
+      uses: rtCamp/action-slack-notify@v2.0.0
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: "#general" 
         SLACK_TITLE: "Ticket Web App Published On Firebase"    
     - name: Send Notification To Microsoft Teams
-      uses: dhollerbach/github-action-send-message-to-ms-teams@latest
+      uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
       with:
         webhook: ${{ secrets.TEAMS_WEBHOOK }}
         message: "Ticket Web App Published On Firebase"     
