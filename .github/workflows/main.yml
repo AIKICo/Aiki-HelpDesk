@@ -50,9 +50,9 @@ jobs:
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_CHANNEL: "#general" 
-        SLACK_TITLE: "Ticket Web Site Published On Firebase"    
+        SLACK_TITLE: "Ticket Web App Published On Firebase"    
     - name: Send Notification To Microsoft Teams
       uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
       with:
         webhook: ${{ secrets.TEAMS_WEBHOOK }}
-        message: ${{ SLACK_TITLE }}      
+        message: "Ticket Web App Published On Firebase"     
