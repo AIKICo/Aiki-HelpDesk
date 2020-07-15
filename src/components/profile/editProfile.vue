@@ -47,7 +47,7 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="کلمه عبور"
-                                            rules="password:confirm"
+                                            rules="password:@confirm"
                                             immediate
                                     >
                                         <v-text-field
@@ -58,14 +58,15 @@
                                                 type="password"
                                                 outlined
                                                 shaped
+                                                ref="password"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="تکرار کلمه عبور"
                                             rules=""
-                                            vid="confirm"
                                             immediate
+                                            vid="confirm"
                                     >
                                         <v-text-field
                                                 v-model="verificationPassword"
