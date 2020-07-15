@@ -97,7 +97,7 @@
                             fixed
                             left
                             @click="newAsset()"
-                            v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
+                            v-if="$store.state.isLoggedIn"
                             v-on="on"
                             v-bind="attr"
                     >
@@ -194,6 +194,7 @@
 
             },
             newAsset() {
+                console.log("new Asset");
                 if (this.customerid) {
                     this.$router.push("/Asset/Insert/undefined/" + this.customerid);
                 } else {
