@@ -266,7 +266,11 @@
                 }
             },
             closeDialog() {
-                this.$router.push("/AssetList");
+                if (this.$router.currentRoute.params.customerid){
+                    this.$router.push("/AssetList/" + this.Asset.customerid);
+                }else{
+                    this.$router.push("/AssetList");
+                }
             },
             deleteAdditionalInfo(item) {
                 var newItems = this.Asset.assetadditionalinfo.filter(function (
@@ -308,6 +312,9 @@
 
             this.loadCustomer().then((res) => {
                 this.customers = res.data;
+                if (this.$router.currentRoute.params.customerid){
+                    this.Asset.customerid = this.$router.currentRoute.params.customerid
+                }
             });
 
             if (this.$route.params.formType === "Edit") {
@@ -321,7 +328,8 @@
                     assetlocationid: "",
                     assettypeid: "",
                     assetnumber: "",
-                    assetadditionalinfo: []
+                    assetadditionalinfo: [],
+                    customerid:null
                 };
             }
         },

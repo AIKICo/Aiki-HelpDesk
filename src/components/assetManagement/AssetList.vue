@@ -87,7 +87,20 @@
                     </v-col>
                 </v-row>
             </v-col>
+            <v-btn
+                    bottom
+                    :color="$store.state.defaultColor"
+                    dark
+                    fab
+                    fixed
+                    left
+                    @click="newAsset()"
+                    v-if="$store.state.isLoggedIn"
+            >
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
         </v-row>
+
     </v-container>
 </template>
 
@@ -170,15 +183,30 @@
             },
             customerChanged: function (e) {
                 if (e === undefined) this.items = [];
-                else
-                    this.getAssetList(e).then((res) => {
-                        this.items = res.data;
-                    });
+                this.customerid = e;
+
+            },
+            newAsset() {
+                if (this.customerid) {
+                    this.$router.push("/Asset/Insert/undefined/" + this.customerid);
+                } else {
+                    this.$router.push("/Asset/Insert/undefined/");
+                }
+            }
+        },
+        watch: {
+            customerid: function (val) {
+                this.getAssetList(val).then((res) => {
+                    this.items = res.data;
+                });
             }
         },
         created() {
             this.loadCustomer().then((res) => {
                 this.customers = res.data;
+                if (this.$router.currentRoute.params.customerid) {
+                    this.customerid = this.$router.currentRoute.params.customerid
+                }
             });
         }
     }

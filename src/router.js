@@ -203,8 +203,28 @@ const routes = [
         }
     },
     {
+        name: "AssetListByCustomer",
+        path: "/AssetList/:customerid",
+        component: AssetList,
+        props: true,
+        meta: {
+            requiresAuth: true,
+            role: "admin,user"
+        }
+    },
+    {
         name: "Asset",
         path: "/Asset/:formType/:id",
+        component: Asset,
+        props: true,
+        meta: {
+            requiresAuth: true,
+            role: "admin,user"
+        }
+    },
+    {
+        name: "AssetByCustomer",
+        path: "/Asset/:formType/:id/:customerid",
         component: Asset,
         props: true,
         meta: {
@@ -262,7 +282,7 @@ router.beforeEach(async (to, from, next) => {
     const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
     let allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",
-        "Members", "cartabl", "Groups", "AppConstants", "AssetList", "root"];
+        "Members", "cartabl", "Groups", "AppConstants", "root"];
     if (to.name === "root") {
         if (authUser) {
             next({name: "dashboard"});

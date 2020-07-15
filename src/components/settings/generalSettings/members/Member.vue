@@ -196,7 +196,9 @@
                     memberName: "",
                     password: "",
                     email: "",
-                    roles: []
+                    roles: [],
+                    disabled:false,
+                    allowdelete:false
                 };
             }
         }

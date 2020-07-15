@@ -83,6 +83,9 @@
                     });
             }
         },
+        created() {
+            this.disabledRow = this.member.disabled;
+        }
     }
 </script>
 
