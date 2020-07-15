@@ -157,4 +157,7 @@
         transition: opacity 500ms ease;
         opacity: 0;
     }
+    #app{
+        background-image: url("assets/support-bg-polygon.jpg");
+    }
 </style>

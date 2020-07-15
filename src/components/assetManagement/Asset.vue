@@ -32,6 +32,7 @@
                                                         chips
                                                         clearable
                                                         :error-messages="errors"
+                                                        @change="cuetomerChanged"
                                                 >
                                                 </v-select>
                                             </validation-provider>
@@ -280,16 +281,19 @@
                 this.label = "";
                 this.valueLabel = "";
             },
+            cuetomerChanged(e) {
+                this.loadOrganizeCharteChartByCustomerId(e).then((res) => {
+                    this.Employes = [];
+                    this.Employes = this.lodash.filter(res.data, item => item.titletype === "5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
+                });
+            },
             ...mapActions({
                 isAssetExists: "AssetService/isAssetExists",
                 loadCustomer: "CustomerService/loadCustomers",
+                loadOrganizeCharteChartByCustomerId: "OrganizeChartService/loadOrganizeCharteChartByCustomerId"
             }),
         },
         created() {
-            this.$store.dispatch("OrganizeChartService/loadOrganizeChart").then((res) => {
-                this.Employes = this.lodash.filter(res.data, item=> item.titletype==="5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
-            });
-
             this.$store.dispatch("AppConstantItemsService/loadAppConstantItems", "416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f").then((res) => {
                 this.AssetLocations = res.data;
             });

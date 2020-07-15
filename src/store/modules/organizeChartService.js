@@ -29,6 +29,15 @@ const organizeChartService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadOrganizeCharteChartByCustomerId(context, payload) {
+            let response = (
+                await OrganizeChart.api().get("/OrganizeCharts/GetByCustomerId/" + payload)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async addOrganizeChart(context, payload) {
             let response = (await OrganizeChart.api().post("/OrganizeCharts", payload))
                 .response;
@@ -65,7 +74,7 @@ const organizeChartService = {
             } else if (response.data.error) {
                 throw new Error("Something is wrong.");
             }
-        }
+        },
     },
     getters: {
         getOrganizesChart: () => OrganizeChart.all(),

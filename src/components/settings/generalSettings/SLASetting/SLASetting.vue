@@ -62,7 +62,7 @@
                                                     >
                                                         <v-col>
                                                             <v-row>
-                                                                <v-col cols="2">
+                                                                <v-col cols="1">
                                                                     <v-text-field
                                                                             v-model="item.title"
                                                                             label="اولویت"
@@ -75,6 +75,11 @@
                                                                             placeholder="زمان پاسخ گویی"
                                                                             label="مدت زمان پاسخ گویی"
                                                                     ></v-text-field>
+                                                                    <v-select
+                                                                            v-model="item.responseTimeUnit"
+                                                                            :items="priorityUnit"
+                                                                            placeholder="واحد"
+                                                                    ></v-select>
                                                                 </v-col>
                                                                 <v-col cols="2">
                                                                     <v-text-field
@@ -82,6 +87,11 @@
                                                                             placeholder="زمان کل مشکل"
                                                                             label="مدت زمان رفع ایراد"
                                                                     ></v-text-field>
+                                                                    <v-select
+                                                                            v-model="item.resolveTimeUnit"
+                                                                            :items="priorityUnit"
+                                                                            placeholder="واحد"
+                                                                    ></v-select>
                                                                 </v-col>
                                                                 <v-col cols="1">
                                                                     <v-icon color="red" class="mt-8">
@@ -143,7 +153,8 @@
                 SLASetting: null,
                 OperatingHours: null,
                 targetspriority: [],
-                requesttypepriority: []
+                requesttypepriority: [],
+                priorityUnit: ["روز","ساعت","دقیقه"]
             };
         },
         methods: {
