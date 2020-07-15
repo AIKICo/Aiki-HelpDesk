@@ -282,7 +282,7 @@ router.beforeEach(async (to, from, next) => {
     const authUser = JSON.parse(window.localStorage.getItem("userInfo"));
     let allowAddRecord = [
         "CustomerList", "OperationHoursList", "SLASettings",
-        "Members", "cartabl", "Groups", "AppConstants", "root"];
+        "Members", "cartabl", "Groups", "AppConstants", "root", "AssetList"];
     if (to.name === "root") {
         if (authUser) {
             next({name: "dashboard"});

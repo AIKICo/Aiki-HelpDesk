@@ -148,19 +148,25 @@
                 </v-data-table>
             </v-col>
         </v-row>
-        <v-btn
-                bottom
-                :color="$store.state.defaultColor"
-                dark
-                fab
-                fixed
-                left
-                style="margin-left: 58px"
-                @click="loadData()"
-                v-if="$store.state.isLoggedIn"
-        >
-            <v-icon>mdi-refresh</v-icon>
-        </v-btn>
+        <v-tooltip top v-if="$store.state.isLoggedIn">
+            <template v-slot:activator="{on, attr}">
+                <v-btn
+                        bottom
+                        :color="$store.state.defaultColor"
+                        dark
+                        fab
+                        fixed
+                        left
+                        @click="loadData()"
+                        v-on="on"
+                        v-bind="attr"
+                        style="margin-left: 58px"
+                >
+                    <v-icon>mdi-refresh</v-icon>
+                </v-btn>
+            </template>
+            <span>بارگذاری مجدد</span>
+        </v-tooltip>
     </v-container>
 
 </template>
@@ -425,7 +431,7 @@
 </script>
 
 <style scoped>
-    .group-title{
+    .group-title {
         font-size: medium;
         font-weight: normal
     }

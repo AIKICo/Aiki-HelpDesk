@@ -67,7 +67,7 @@
                 });
             }
         },
-        mounted() {
+        created() {
             this.generateChart();
         },
         beforeDestroy() {

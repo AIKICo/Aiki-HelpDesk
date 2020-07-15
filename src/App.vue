@@ -23,18 +23,25 @@
                 <router-view :key="$route.fullPath"></router-view>
             </transition>
         </v-main>
-        <v-btn
-                bottom
-                :color="$store.state.defaultColor"
-                dark
-                fab
-                fixed
-                left
-                @click="newTicket()"
-                v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
+        <v-tooltip top v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
         >
-            <v-icon>mdi-plus</v-icon>
-        </v-btn>
+            <template v-slot:activator="{on, attr}">
+                <v-btn
+                        bottom
+                        :color="$store.state.defaultColor"
+                        dark
+                        fab
+                        fixed
+                        left
+                        @click="newTicket()"
+                        v-on="on"
+                        v-bind="attr"
+                >
+                    <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </template>
+            <span>درج</span>
+        </v-tooltip>
         <vue-progress-bar></vue-progress-bar>
     </v-app>
 </template>
@@ -52,7 +59,7 @@
         },
         metaInfo: {
             changed(metaInfo) {
-                if (navigator.onLine){
+                if (navigator.onLine) {
                     firebase.analytics().setCurrentScreen(metaInfo.title);
                     firebase.analytics().logEvent("page_view");
                     firebase.analytics().logEvent("screen_view", {
@@ -85,7 +92,7 @@
                     return;
                 }
                 document.location.reload();
-                document.location='/login'
+                document.location = '/login'
                 this.registration.waiting.postMessage("skipWaiting");
             },
             newTicket() {
@@ -118,8 +125,7 @@
                 if (this.refreshing) return;
                 this.refreshing = true;
             });
-            if (localStorage.getItem("userInfo")!=null)
-            {
+            if (localStorage.getItem("userInfo")) {
                 this.$store.isLoggedIn = true;
                 this.$store.dispatch("UserService/notificationStart");
             }
@@ -155,7 +161,8 @@
         transition: opacity 500ms ease;
         opacity: 0;
     }
-    #app{
+
+    #app {
         background-image: url("assets/support-bg-polygon.jpg");
     }
 </style>

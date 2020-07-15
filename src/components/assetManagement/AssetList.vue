@@ -87,18 +87,25 @@
                     </v-col>
                 </v-row>
             </v-col>
-            <v-btn
-                    bottom
-                    :color="$store.state.defaultColor"
-                    dark
-                    fab
-                    fixed
-                    left
-                    @click="newAsset()"
-                    v-if="$store.state.isLoggedIn"
-            >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
+            <v-tooltip top>
+                <template v-slot:activator="{on, attr}">
+                    <v-btn
+                            bottom
+                            :color="$store.state.defaultColor"
+                            dark
+                            fab
+                            fixed
+                            left
+                            @click="newAsset()"
+                            v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
+                            v-on="on"
+                            v-bind="attr"
+                    >
+                        <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                </template>
+                <span>درج</span>
+            </v-tooltip>
         </v-row>
 
     </v-container>
