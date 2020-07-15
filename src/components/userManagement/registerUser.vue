@@ -43,6 +43,7 @@
                                                         :error-messages="errors"
                                                         outlined
                                                         shaped
+                                                        dir="ltr"
                                                 ></v-text-field>
                                             </ValidationProvider>
                                             <div style="text-align: center" v-if="$store.state.isOnline">
