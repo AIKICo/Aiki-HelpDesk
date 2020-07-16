@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-content>
+        <v-main>
             <v-row>
                 <v-col>
                     <v-alert
@@ -16,7 +16,7 @@
                     </v-alert>
                 </v-col>
             </v-row>
-        </v-content>
+        </v-main>
     </v-container>
 </template>
 
