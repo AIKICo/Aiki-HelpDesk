@@ -42,6 +42,7 @@
                     clearable
                     outlined
                     shaped
+                    dir="ltr"
                   ></v-text-field>
                   <v-select
                     :items="SLAItems"
