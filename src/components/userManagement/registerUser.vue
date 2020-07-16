@@ -9,8 +9,10 @@
                                 <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
                                     <v-card class="mx-auto" outlined>
                                         <v-card-title :class="$store.state.defaultColor + ' white--text'">
-                                            <v-icon large color="white">mdi-handshake</v-icon>
-                                            ثبت نام
+                                            <v-icon large color="white">mdi-account-plus</v-icon>
+                                            <span class="mr-2">
+                                                ثبت نام
+                                            </span>
                                         </v-card-title>
                                         <v-card-text class="mt-5">
                                             <ValidationProvider
@@ -135,7 +137,7 @@
                         });
                     } else {
                         this.registerUser(this.company).then(() => {
-                            this.$router.push("/login");
+                            this.$router.push("/registerUserConfirm")
                         });
                     }
                 });

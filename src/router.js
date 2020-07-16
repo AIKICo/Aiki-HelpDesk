@@ -23,6 +23,7 @@ import TicketsArchive from "./components/tickets/TicketsArchive";
 import dashboard from "./components/dashboard/dashboard";
 import registerUser from "./components/userManagement/registerUser";
 import editProfile from "./components/profile/editProfile";
+import registerUserConfirm from "./components/userManagement/registerUserConfirm";
 
 const routes = [
     {
@@ -271,6 +272,15 @@ const routes = [
             role: "admin,user"
         }
     },
+    {
+        name: "registerUserConfirm",
+        path: "/registerUserConfirm",
+        component: registerUserConfirm,
+        props: true,
+        meta: {
+            requiresAuth: false
+        }
+    }
 ];
 
 const router = new VueRouter({

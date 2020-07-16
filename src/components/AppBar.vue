@@ -7,6 +7,9 @@
     >
         <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"
                             v-if="$store.state.isLoggedIn"/>
+        <v-icon x-large>
+            mdi-handshake
+        </v-icon>
         <v-toolbar-title class="hidden-sm-and-down col-2">
             <b>میزکار خدمات رایانه ای</b>
         </v-toolbar-title
