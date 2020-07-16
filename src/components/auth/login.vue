@@ -39,11 +39,13 @@
                                                         v-model="loginDetails.password"
                                                         label="کلمه عبور"
                                                         clearable
-                                                        :type="'password'"
+                                                        :type="showPassword?'text':'password'"
                                                         :error-messages="errors"
                                                         outlined
                                                         shaped
                                                         dir="ltr"
+                                                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                                        @click:append="() => (showPassword = !showPassword)"
                                                 ></v-text-field>
                                             </ValidationProvider>
                                             <div style="text-align: center" v-if="$store.state.isOnline">
@@ -110,7 +112,8 @@
                     password: ""
                 },
                 submitStatus: null,
-                hCaptchaVerified: false
+                hCaptchaVerified: false,
+                showPassword:false
             };
         },
         components: {
