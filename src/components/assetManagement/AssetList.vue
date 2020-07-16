@@ -26,6 +26,7 @@
                                 label="جستجو بر اساس شماره اموال"
                                 single-line
                                 hide-details
+                                clearable
                         ></v-text-field>
                     </v-col>
                 </v-row>

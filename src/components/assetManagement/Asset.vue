@@ -286,7 +286,10 @@
                 this.valueLabel = "";
             },
             cuetomerChanged(e) {
-                this.loadOrganizeCharteChartByCustomerId(e).then((res) => {
+                this.loadOrgannizeChart(e);
+            },
+            loadOrgannizeChart(customerid){
+                this.loadOrganizeCharteChartByCustomerId(customerid).then((res) => {
                     this.Employes = [];
                     this.Employes = this.lodash.filter(res.data, item => item.titletype === "5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
                 });
@@ -313,7 +316,8 @@
             this.loadCustomer().then((res) => {
                 this.customers = res.data;
                 if (this.$router.currentRoute.params.customerid){
-                    this.Asset.customerid = this.$router.currentRoute.params.customerid
+                    this.Asset.customerid = this.$router.currentRoute.params.customerid;
+                    this.loadOrgannizeChart(this.Asset.customerid);
                 }
             });
 

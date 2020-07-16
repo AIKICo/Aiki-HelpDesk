@@ -164,5 +164,7 @@
 
     #app {
         background-image: url("assets/support-bg-polygon.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
