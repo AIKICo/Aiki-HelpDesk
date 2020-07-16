@@ -9,7 +9,7 @@
                                 <form @submit.prevent="handleSubmit(onSubmit)" autocomplete="off">
                                     <v-card class="mx-auto" outlined>
                                         <v-card-title :class="$store.state.defaultColor + ' white--text'">
-                                            <v-icon large color="white">mdi-login-variant</v-icon>
+                                            <v-icon large color="white">mdi-login-variant@7E*J*UuY3apM*vY</v-icon>
                                             <span class="ml-2">ورود</span>
                                         </v-card-title>
                                         <v-card-text class="mt-5">
