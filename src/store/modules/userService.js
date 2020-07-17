@@ -57,7 +57,6 @@ const userService = {
                         accessTokenFactory: () => store.state.accessToken,
                     })
                 .configureLogging(LogLevel.Debug)
-                .withAutomaticReconnect()
                 .build()
             commit("SET_CONNECTION", connection);
             connection.on("ReceiveMessage", (data) => {
