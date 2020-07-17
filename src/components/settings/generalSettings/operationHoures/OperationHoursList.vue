@@ -3,9 +3,10 @@
         <v-row>
             <v-col cols="12">
                 <OperationHoursRow
-                        v-for="item in this.operationHoursList"
+                        v-for="(item, index) in operationHoursList"
                         :operation-hour="item"
-                        :key="item.id"
+                        :key="index"
+                        v-on:deletedRow="deleteRow(index)"
                 ></OperationHoursRow>
             </v-col>
         </v-row>
@@ -19,13 +20,22 @@
         components:{
             OperationHoursRow
         },
+        data(){
+            return{
+                operationHoursList:[]
+            }
+        },
         computed:{
-            operationHoursList: function(){
-                return this.$store.getters["OperationHourService/getOperationsHours"]
+        },
+        methods:{
+            deleteRow: function(index){
+                this.operationHoursList.splice(index, 1);
             }
         },
         created() {
-            this.$store.dispatch("OperationHourService/loadOperationHours");
+            this.$store.dispatch("OperationHourService/loadOperationHours").then((res)=>{
+                this.operationHoursList = res.data;
+            });
         }
     }
 </script>

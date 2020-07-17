@@ -43,7 +43,7 @@ export default {
     deleteOperationHour(){
       this.$store.dispatch("OperationHourService/deleteOperationHour", this.OperationHour.id).then((res)=>{
         if (res.status===200){
-          this.$router.push("/OperationHoursList");
+          this.$emit('deletedRow');
         }
       });
     }

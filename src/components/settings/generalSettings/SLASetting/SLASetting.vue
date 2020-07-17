@@ -38,16 +38,25 @@
                                                     placeholder="شرح مختصر"
                                             >
                                             </v-textarea>
-                                            <v-select
-                                                    :items="OperatingHours"
-                                                    item-text="title"
-                                                    item-value="id"
-                                                    v-model="SLASetting.operatinghourid"
-                                                    label="ساعات کاری"
-                                                    shaped
-                                                    outlined
+                                            <ValidationProvider
+                                                    v-slot="{ errors }"
+                                                    name="ساعات کاری"
+                                                    rules="required"
+                                                    immediate
                                             >
-                                            </v-select>
+                                                <v-select
+                                                        :items="OperatingHours"
+                                                        item-text="title"
+                                                        item-value="id"
+                                                        v-model="SLASetting.operatinghourid"
+                                                        label="ساعات کاری"
+                                                        shaped
+                                                        outlined
+                                                        :error-messages="errors"
+                                                >
+                                                </v-select>
+                                            </ValidationProvider>
+
                                         </v-col>
                                     </v-row>
                                     <v-row>
@@ -74,7 +83,7 @@
                                                                             v-model="item.responseTime"
                                                                             placeholder="زمان پاسخ گویی"
                                                                             label="مدت زمان پاسخ گویی"
-                                                                            type="'number"
+                                                                            type="'number'"
                                                                     ></v-text-field>
                                                                     <v-select
                                                                             v-model="item.responseTimeUnit"
@@ -87,7 +96,7 @@
                                                                             v-model="item.resolveTime"
                                                                             placeholder="زمان کل مشکل"
                                                                             label="مدت زمان رفع ایراد"
-                                                                            type="'number"
+                                                                            type="'number'"
                                                                     ></v-text-field>
                                                                     <v-select
                                                                             v-model="item.resolveTimeUnit"
@@ -198,7 +207,7 @@
         },
         created() {
             if (this.$route.params.formType === "Edit") {
-                var record = this.getSLASetting(this.$route.params.id);
+                let record = this.getSLASetting(this.$route.params.id);
                 this.SLASetting = {
                     id: this.$route.params.id,
                     title: record.title,
@@ -213,10 +222,10 @@
                     description: "",
                     operatinghourid: "",
                     targetspriority: [
-                        {title: "کم", responseTime: "4", ResponseTimeUnit:"ساعت", resolveTime: "1", ResolveTimeUnit:"روز"},
-                        {title: "متوسط", responseTime: "4", ResponseTimeUnit:"ساعت", resolveTime: "8", ResolveTimeUnit:"ساعت"},
-                        {title: "بالا", responseTime: "2", ResponseTimeUnit:"ساعت", resolveTime: "4", ResolveTimeUnit:"ساعت"},
-                        {title: "آنی", responseTime: "1", ResponseTimeUnit:"ساعت", resolveTime: "3", ResolveTimeUnit:"روز"}
+                        {title: "کم", responseTime: "4", responseTimeUnit:"ساعت", resolveTime: "1", resolveTimeUnit:"روز"},
+                        {title: "متوسط", responseTime: "4", responseTimeUnit:"ساعت", resolveTime: "8", resolveTimeUnit:"ساعت"},
+                        {title: "بالا", responseTime: "2", responseTimeUnit:"ساعت", resolveTime: "4", resolveTimeUnit:"ساعت"},
+                        {title: "آنی", responseTime: "1", responseTimeUnit:"ساعت", resolveTime: "3", resolveTimeUnit:"روز"}
                     ],
                     requesttypepriority: [
                         {title: "Web Protal", priority: "Medium"},

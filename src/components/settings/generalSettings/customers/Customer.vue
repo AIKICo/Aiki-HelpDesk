@@ -21,7 +21,7 @@
                   >
                     <v-text-field
                       v-model="Customer.title"
-                      label="عنوان شرکت"
+                      label="عنوان مشتری"
                       clearable
                       :error-messages="errors"
                       immediate
@@ -44,16 +44,25 @@
                     shaped
                     dir="ltr"
                   ></v-text-field>
-                  <v-select
-                    :items="SLAItems"
-                    item-text="title"
-                    item-value="id"
-                    v-model="Customer.operatinghourid"
-                    label="توافق نامه سطح سرویس"
-                    shaped
-                    outlined
+                  <validation-provider
+                          v-slot="{ errors }"
+                          name="توافق نامه سطح سرویس"
+                          rules="required"
+                          immediate
                   >
-                  </v-select>
+                    <v-select
+                            :items="SLAItems"
+                            :error-messages="errors"
+                            item-text="title"
+                            item-value="id"
+                            v-model="Customer.operatinghourid"
+                            label="توافق نامه سطح سرویس"
+                            shaped
+                            outlined
+                    >
+                    </v-select>
+                  </validation-provider>
+
                 </v-card-text>
 
                 <v-card-actions>
