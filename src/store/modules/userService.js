@@ -56,7 +56,7 @@ const userService = {
                     {
                         accessTokenFactory: () => store.state.accessToken,
                     })
-                .configureLogging(LogLevel.Critical)
+                .configureLogging(LogLevel.Debug)
                 .withAutomaticReconnect()
                 .build()
             commit("SET_CONNECTION", connection);
