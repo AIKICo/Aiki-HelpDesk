@@ -74,6 +74,7 @@
                                                                             v-model="item.responseTime"
                                                                             placeholder="زمان پاسخ گویی"
                                                                             label="مدت زمان پاسخ گویی"
+                                                                            type="'number"
                                                                     ></v-text-field>
                                                                     <v-select
                                                                             v-model="item.responseTimeUnit"
@@ -86,6 +87,7 @@
                                                                             v-model="item.resolveTime"
                                                                             placeholder="زمان کل مشکل"
                                                                             label="مدت زمان رفع ایراد"
+                                                                            type="'number"
                                                                     ></v-text-field>
                                                                     <v-select
                                                                             v-model="item.resolveTimeUnit"
@@ -211,10 +213,10 @@
                     description: "",
                     operatinghourid: "",
                     targetspriority: [
-                        {title: "کم", responseTime: "4 ساعت", resolveTime: "1 روز"},
-                        {title: "متوسط", responseTime: "4 ساعت", resolveTime: "8 ساعت"},
-                        {title: "بالا", responseTime: "2 ساعت", resolveTime: "4 ساعت"},
-                        {title: "آنی", responseTime: "1 ساعت", resolveTime: "3 روز"}
+                        {title: "کم", responseTime: "4", ResponseTimeUnit:"ساعت", resolveTime: "1", ResolveTimeUnit:"روز"},
+                        {title: "متوسط", responseTime: "4", ResponseTimeUnit:"ساعت", resolveTime: "8", ResolveTimeUnit:"ساعت"},
+                        {title: "بالا", responseTime: "2", ResponseTimeUnit:"ساعت", resolveTime: "4", ResolveTimeUnit:"ساعت"},
+                        {title: "آنی", responseTime: "1", ResponseTimeUnit:"ساعت", resolveTime: "3", ResolveTimeUnit:"روز"}
                     ],
                     requesttypepriority: [
                         {title: "Web Protal", priority: "Medium"},
