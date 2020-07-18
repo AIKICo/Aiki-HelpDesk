@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-sheet v-model="show" inset max-width="600px" v-click-outside="onClickOutside">
+    <v-bottom-sheet v-model="show" inset max-width="600px">
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">بستن
@@ -59,10 +59,7 @@
                     dialogResult: dialogResult,
                     actionName: "closeTicket"
                 });
-            },
-            onClickOutside () {
-                this.closeDialog('Cancel');
-            },
+            }
         },
         computed: {
             show: {

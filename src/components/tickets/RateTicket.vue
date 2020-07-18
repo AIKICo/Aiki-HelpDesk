@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-sheet v-model="show" inset :max-width="400" v-click-outside="onClickOutside">
+    <v-bottom-sheet v-model="show" inset :max-width="400">
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">ارزیابی
@@ -40,9 +40,6 @@
             }
         },
         methods: {
-            onClickOutside () {
-                this.closeDialog('Cancel');
-            },
             closeDialog(action) {
                 if (action === "OK") {
                     this.$emit("close-sheet", {
