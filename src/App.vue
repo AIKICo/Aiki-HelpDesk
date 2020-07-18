@@ -23,9 +23,9 @@
                 <router-view :key="$route.fullPath"></router-view>
             </transition>
         </v-main>
-        <v-footer :color="$store.state.defaultColor + ' white--text'">
+        <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app>
             <v-row no-gutters>
-                <v-col cols="3">
+                <v-col cols="4">
                     <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی</span>
                 </v-col>
                 <v-col cols="2">
