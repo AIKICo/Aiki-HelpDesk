@@ -13,6 +13,14 @@ const sLASetting = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadByCustomerID(context, payload){
+            let response = (await SLASetting.api().get("/SLASetting/GetByCustomerID/" + payload)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async addSLASetting(context, payload) {
             let response = (await SLASetting.api().post("/SLASetting", payload))
                 .response;

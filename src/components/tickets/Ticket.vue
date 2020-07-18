@@ -30,6 +30,7 @@
                                                 chips
                                                 clearable
                                                 :error-messages="errors"
+                                                @change="loadPriority"
                                         >
                                         </v-select>
                                     </validation-provider>
@@ -105,8 +106,8 @@
                                     </v-select>
                                     <v-select
                                             :items="requestpriority"
-                                            item-text="label"
-                                            item-value="labelValue"
+                                            item-text="title"
+                                            item-value="title"
                                             v-model="Ticket.requestpriority"
                                             label="اولویت"
                                             shaped
@@ -169,12 +170,7 @@
                 TicketTags: [],
                 diabledControl: false,
                 customers:[],
-                requestpriority: [
-                    {label: "کم", labelValue:"کم"},
-                    {label: "متوسط", labelValue:"متوسط"},
-                    {label: "بالا", labelValue:"بالا"},
-                    {label: "آنی", labelValue:"آنی"},
-                ]
+                requestpriority: []
             }
         },
         components: {
@@ -182,6 +178,15 @@
             ValidationProvider
         },
         methods: {
+            ...mapActions({
+                loadConstant: "AppConstantItemsService/loadAppConstantItems",
+                loadCustomer:"CustomerService/loadCustomers",
+                loadTicket: "TicketService/loadTicket",
+                addTicket: "TicketService/addTicket",
+                editTicket: "TicketService/editTicket",
+                isAssetExists: "AssetService/isAssetExists",
+                GetSLAByCustomerID:"SLASettingService/loadByCustomerID"
+            }),
             onSubmit() {
                 if (this.$route.params.formType === "Edit") {
                     this.editTicket(this.Ticket).then(res => {
@@ -209,14 +214,14 @@
             closeDialog() {
                 this.$router.push("/cartabl");
             },
-            ...mapActions({
-                loadConstant: "AppConstantItemsService/loadAppConstantItems",
-                loadCustomer:"CustomerService/loadCustomers",
-                loadTicket: "TicketService/loadTicket",
-                addTicket: "TicketService/addTicket",
-                editTicket: "TicketService/editTicket",
-                isAssetExists: "AssetService/isAssetExists"
-            }),
+            loadPriority(e){
+                if (e){
+                    this.GetSLAByCustomerID(e).then((res)=>{
+                        console.log(res.data.targetspriority);
+                        this.requestpriority = res.data.targetspriority;
+                    })
+                }
+            },
         },
         created() {
             this.loadConstant('473b359f-30a7-4963-a671-6f618b277e48').then((res) => {
