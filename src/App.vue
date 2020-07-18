@@ -24,8 +24,8 @@
             </transition>
         </v-main>
         <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app>
-            <v-row no-gutters>
-                <v-col cols="4">
+            <v-row no-gutters v-if="!$store.state.IsMobile">
+                <v-col>
                     <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی</span>
                 </v-col>
                 <v-col cols="2">
@@ -36,6 +36,20 @@
                 </v-col>
                 <v-col cols="3">
                     <span><b>تحت لایسنس: </b><a style="color: white" href="https://opensource.org/licenses/MIT">MIT LICENSE</a></span>
+                </v-col>
+            </v-row>
+            <v-row no-gutters v-if="$store.state.IsMobile">
+                <v-col>
+                    <v-row no-gutters>
+                        <v-col>
+                            <span> شرکت ایده پردازان دانش هوش مصنوعی</span>
+                        </v-col>
+                    </v-row>
+                    <v-row no-gutters>
+                        <v-col>
+                            <span>moh.mehrnia@gmail.com</span>
+                        </v-col>
+                    </v-row>
                 </v-col>
             </v-row>
         </v-footer>

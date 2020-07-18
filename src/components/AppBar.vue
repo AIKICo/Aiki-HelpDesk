@@ -10,10 +10,12 @@
         <v-icon x-large>
             mdi-handshake
         </v-icon>
-        <v-toolbar-title class="hidden-sm-and-down col-2">
+        <v-toolbar-title class="col-2" v-if="!$store.state.IsMobile">
             <b>میزکار خدمات رایانه ای</b>
-        </v-toolbar-title
-        >
+        </v-toolbar-title>
+        <v-toolbar-title v-if="$store.state.IsMobile && !$store.state.isLoggedIn">
+            <b>میزکار</b>
+        </v-toolbar-title>
         <v-text-field
                 flat
                 solo-inverted
