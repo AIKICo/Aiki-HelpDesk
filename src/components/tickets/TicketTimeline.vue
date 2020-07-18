@@ -1,16 +1,15 @@
 <template>
-    <v-bottom-sheet v-model="show" inset scrollable>
+    <v-bottom-sheet v-model="show" inset scrollable persistent >
         <v-sheet class="text-center">
-            <v-card>
+            <v-card v-click-outside="onClickOutside">
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">
                      <span>رویدادنگاری  </span><b> {{this.wono}}</b>
                 </v-card-title>
                 <v-card-text class="text-center" style="overflow-y: scroll;max-height: 600px;">
                     <v-btn
                             class="mt-6 white--text"
-                            color="red"
                             fab
-                            top
+                            color="red"
                             @click="$emit('close-sheet', {'sheet':false})"
                     >
                         <v-icon>mdi-close</v-icon>
@@ -64,7 +63,9 @@
             }
         },
         methods:{
-
+            onClickOutside () {
+                this.$emit('close-sheet', {'sheet':false})
+            },
         }
     };
 </script>

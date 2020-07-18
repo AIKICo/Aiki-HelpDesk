@@ -6,7 +6,7 @@
             persistent
             transition="dialog-bottom-transition">
         <v-sheet class="text-center">
-            <v-card>
+            <v-card  v-click-outside="onClickOutside">
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت
                     درخواست {{workorder.ticketfriendlynumber}}
                 </v-card-title>
@@ -119,7 +119,10 @@
                 this.choiceText = this.Members.find(obj=>{
                     return obj.id == e
                 }).membername;
-            }
+            },
+            onClickOutside () {
+                this.closeDialog('Cancel');
+            },
         },
         computed: {
             show: {
