@@ -1,10 +1,11 @@
 <template>
     <v-bottom-sheet
-            v-model="sheet"
+            v-model="show"
             inset
             max-width="550px"
             persistent
-            transition="dialog-bottom-transition">
+            transition="dialog-bottom-transition"
+            v-click-outside="onClickOutside">
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت
@@ -119,6 +120,19 @@
                 this.choiceText = this.Members.find(obj=>{
                     return obj.id == e
                 }).membername;
+            },
+            onClickOutside () {
+                this.closeDialog('Cancel');
+            },
+        },
+        computed: {
+            show: {
+                get: function () {
+                    return this.sheet;
+                },
+                set: function (value) {
+                    this.$emit("input", value);
+                }
             }
         },
         created() {

@@ -291,6 +291,7 @@
                     sheet: this.sheet,
                     workorder: this.selectedWorkOrder
                 };
+                this.activeComponent=null;
                 if ("actionName" in e) {
                     if (e.dialogResult === "ok") {
                         switch (e.actionName) {

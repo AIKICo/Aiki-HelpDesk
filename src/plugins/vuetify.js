@@ -11,6 +11,7 @@ Vue.use(Vuetify, {
 });
 export default new Vuetify({
     rtl: true,
+    silent:false,
     lang: {
         locales: {fa},
         current: fa

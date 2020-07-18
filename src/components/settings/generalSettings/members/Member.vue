@@ -31,7 +31,6 @@
                                     <validation-provider
                                             v-slot="{ errors }"
                                             name="کلمه عبور"
-                                            rules="required"
                                             immediate
                                     >
                                         <v-text-field
@@ -42,6 +41,7 @@
                                                 type="password"
                                                 outlined
                                                 shaped
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-    import {required, email} from "vee-validate/dist/rules";
+    import {required, email, regex} from "vee-validate/dist/rules";
     import {mapActions} from "vuex"
     import {
         extend,
@@ -129,7 +129,10 @@
         ...email,
         message:"{_field_} آدرس معتبری نمی باشد"
     });
-
+    extend("regex", {
+        ...regex,
+        message:"{_field_} کلمه عبور نانعتیر می باشد"
+    });
     export default {
         name: "Member",
         data() {

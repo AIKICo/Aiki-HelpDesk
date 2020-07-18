@@ -26,8 +26,7 @@
                         <tr
                                 :key="item.id"
                                 @mouseleave="unSelectItem()"
-                                @mouseover="selectItem(item)"
-                        >
+                                @mouseover="selectItem(item)">
                             <td class="text-center">
                                 <v-icon
                                         :color="$store.state.defaultColor"
@@ -37,17 +36,46 @@
                                     {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
                                 </v-icon>
                             </td>
+                            <v-tooltip top>
+                                <template v-slot:activator="{on, attr}">
+                                    <td class="text-center" v-on="on" v-bind="attr">
+                                        <v-chip :color="$store.state.defaultColor + ' lighten-5'"
+                                                :text-color="$store.state.defaultColor" >
+                                            <b>{{ item.ticketfriendlynumber }}</b>
+                                        </v-chip>
+                                    </td>
+                                </template>
+                                <span>{{item.description}}</span>
+                            </v-tooltip>
 
-                            <td class="text-center">
-                                <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                        :text-color="$store.state.defaultColor">
-                                    <b>{{ item.ticketfriendlynumber }}</b>
-                                </v-chip>
-                            </td>
-                            <td class="text-center">{{ item.agentname }}</td>
-                            <td class="text-center">{{ item.registerdate }}</td>
-                            <td class="text-center">{{ item.tickettype }}</td>
-                            <td class="text-center">{{ item.requester }}</td>
+                            <v-tooltip top>
+                                <template v-slot:activator="{on, attr}">
+                                    <td class="text-center" v-on="on" v-bind="attr">{{ item.agentname }}</td>
+                                </template>
+                                <span>{{item.description}}</span>
+                            </v-tooltip>
+
+                            <v-tooltip top>
+                                <template v-slot:activator="{on, attr}">
+                                    <td class="text-center" v-on="on" v-bind="attr">{{ item.registerdate }}</td>
+                                </template>
+                                <span>{{item.description}}</span>
+                            </v-tooltip>
+
+                            <v-tooltip top>
+                                <template v-slot:activator="{on, attr}">
+                                    <td class="text-center" v-on="on" v-bind="attr">{{ item.tickettype }}</td>
+                                </template>
+                                <span>{{item.description}}</span>
+                            </v-tooltip>
+
+                            <v-tooltip top>
+                                <template v-slot:activator="{on, attr}">
+                                    <td class="text-center" v-on="on" v-bind="attr">{{ item.requester }}</td>
+                                </template>
+                                <span>{{item.description}}</span>
+                            </v-tooltip>
+
                             <td class="text-center">
                                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
                                         :text-color="$store.state.defaultColor">
@@ -56,32 +84,81 @@
                             </td>
                             <td>
                                 <div v-if="item === selectedItem">
-                                    <v-btn :color="$store.state.defaultColor" @click="showHistorySheet(item)" icon>
-                                        <v-icon>mdi-history</v-icon>
-                                    </v-btn>
-                                    <v-btn
-                                            :color="$store.state.defaultColor"
-                                            @click="nextStageTicket(item)"
-                                            icon
-                                    >
-                                        <v-icon>mdi-account-arrow-left</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="closeTicket(item)" icon>
-                                        <v-icon>mdi-close-circle</v-icon>
-                                    </v-btn>
-                                    <v-btn
-                                            :color="$store.state.defaultColor"
-                                            @click="showStarsheet(item, 'rateTicket')"
-                                            icon
-                                            v-if="$store.state.memberRole==='admin'">
-                                        <v-icon>mdi-star</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="rejectWorkOrder(item)" icon>
-                                        <v-icon>mdi-text-box-remove</v-icon>
-                                    </v-btn>
-                                    <v-btn :color="$store.state.defaultColor" @click="editTicket(item)" icon>
-                                        <v-icon>mdi-content-save-edit-outline</v-icon>
-                                    </v-btn>
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn :color="$store.state.defaultColor"
+                                                   @click="showHistorySheet(item)" icon
+                                                   v-on="on"
+                                                   v-bind="attr">
+                                                <v-icon>mdi-history</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>تاریخچه</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn
+                                                    :color="$store.state.defaultColor"
+                                                    @click="nextStageTicket(item)"
+                                                    icon v-on="on"
+                                                    v-bind="attr">
+                                                <v-icon>mdi-account-arrow-left</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>ارجاع</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn :color="$store.state.defaultColor"
+                                                   @click="closeTicket(item)"
+                                                   icon v-on="on"
+                                                   v-bind="attr">
+                                                <v-icon>mdi-close-circle</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>بستن درخواست</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn
+                                                    :color="$store.state.defaultColor"
+                                                    @click="showStarsheet(item, 'rateTicket')"
+                                                    icon v-on="on"
+                                                    v-bind="attr"
+                                                    v-if="$store.state.memberRole==='admin'">
+                                                <v-icon>mdi-star</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>ارزیابی ناظر</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn :color="$store.state.defaultColor"
+                                                   @click="rejectWorkOrder(item)"
+                                                   icon v-on="on"
+                                                   v-bind="attr">
+                                                <v-icon>mdi-text-box-remove</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>رد درخواست</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{on, attr}">
+                                            <v-btn :color="$store.state.defaultColor"
+                                                   @click="editTicket(item)"
+                                                   icon
+                                                   v-on="on"
+                                                   v-bind="attr">
+                                                <v-icon>mdi-content-save-edit-outline</v-icon>
+                                            </v-btn>
+                                        </template>
+                                        <span>ویرایش درخواست</span>
+                                    </v-tooltip>
                                 </div>
                             </td>
                         </tr>
@@ -152,7 +229,7 @@
             <template v-slot:activator="{on, attr}">
                 <v-btn
                         bottom
-                        :color="$store.state.defaultColor"
+                        color="red"
                         dark
                         fab
                         fixed
@@ -293,6 +370,7 @@
                     sheet: this.sheet,
                     workorder: this.selectedWorkOrder
                 };
+                this.activeComponent=null;
                 if ("actionName" in e) {
                     if (e.dialogResult === "ok") {
                         switch (e.actionName) {

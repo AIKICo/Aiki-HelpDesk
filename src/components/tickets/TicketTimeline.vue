@@ -1,5 +1,5 @@
 <template>
-    <v-bottom-sheet v-model="sheet" inset scrollable persistent>
+    <v-bottom-sheet v-model="show" inset scrollable persistent v-click-outside="onClickOutside">
         <v-sheet class="text-center">
             <v-card>
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">
@@ -52,6 +52,21 @@
     export default {
         name: "TicketTimeline",
         props: ["sheet", "wonoReports", "workorder", "wono"],
+        computed: {
+            show: {
+                get: function () {
+                    return this.sheet;
+                },
+                set: function (value) {
+                    this.$emit("input", value);
+                }
+            }
+        },
+        methods:{
+            onClickOutside () {
+                this.$emit('close-sheet', {'sheet':false})
+            },
+        }
     };
 </script>
 

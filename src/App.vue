@@ -58,7 +58,7 @@
             <template v-slot:activator="{on, attr}">
                 <v-btn
                         bottom
-                        :color="$store.state.defaultColor"
+                        color="red"
                         dark
                         fab
                         fixed
