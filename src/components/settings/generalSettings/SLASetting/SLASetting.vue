@@ -72,42 +72,55 @@
                                                         <v-col>
                                                             <v-row>
                                                                 <v-col cols="1">
-                                                                    <v-text-field
-                                                                            v-model="item.title"
-                                                                            label="اولویت"
-                                                                            placeholder="اولویت"
-                                                                    ></v-text-field>
+                                                                    <v-row>
+                                                                        <v-col>
+                                                                            <v-text-field
+                                                                                    v-model="item.title"
+                                                                                    label="اولویت"
+                                                                                    placeholder="اولویت"
+                                                                            ></v-text-field>
+                                                                        </v-col>
+                                                                    </v-row>
                                                                 </v-col>
-                                                                <v-col cols="2">
-                                                                    <v-text-field
-                                                                            v-model="item.responseTime"
-                                                                            placeholder="زمان پاسخ گویی"
-                                                                            label="مدت زمان پاسخ گویی"
-                                                                            type="'number'"
-                                                                    ></v-text-field>
-                                                                    <v-select
-                                                                            v-model="item.responseTimeUnit"
-                                                                            :items="priorityUnit"
-                                                                            placeholder="واحد"
-                                                                    ></v-select>
+                                                                <v-col cols="3">
+                                                                    <v-row>
+                                                                        <v-col cols="5">
+                                                                            <v-text-field
+                                                                                    v-model="item.responseTime"
+                                                                                    placeholder="زمان پاسخ گویی"
+                                                                                    label="مدت زمان پاسخ گویی"
+                                                                                    type="number"
+                                                                            ></v-text-field>
+                                                                        </v-col>
+                                                                        <v-col cols="5">
+                                                                            <v-select
+                                                                                    class="col-2"
+                                                                                    v-model="item.responseTimeUnit"
+                                                                                    :items="priorityUnit"
+                                                                                    placeholder="واحد"
+                                                                            ></v-select>
+                                                                        </v-col>
+                                                                    </v-row>
                                                                 </v-col>
-                                                                <v-col cols="2">
-                                                                    <v-text-field
-                                                                            v-model="item.resolveTime"
-                                                                            placeholder="زمان کل مشکل"
-                                                                            label="مدت زمان رفع ایراد"
-                                                                            type="'number'"
-                                                                    ></v-text-field>
-                                                                    <v-select
-                                                                            v-model="item.resolveTimeUnit"
-                                                                            :items="priorityUnit"
-                                                                            placeholder="واحد"
-                                                                    ></v-select>
-                                                                </v-col>
-                                                                <v-col cols="1">
-                                                                    <v-icon color="red" class="mt-8">
-                                                                        mdi-delete
-                                                                    </v-icon>
+                                                                <v-col cols="3">
+                                                                    <v-row>
+                                                                        <v-col cols="5">
+                                                                            <v-text-field
+                                                                                    v-model="item.resolveTime"
+                                                                                    placeholder="زمان کل مشکل"
+                                                                                    label="مدت زمان رفع ایراد"
+                                                                                    type="number"
+                                                                            ></v-text-field>
+                                                                        </v-col>
+                                                                        <v-col cols="5">
+                                                                            <v-select
+                                                                                    class="col-3"
+                                                                                    v-model="item.resolveTimeUnit"
+                                                                                    :items="priorityUnit"
+                                                                                    placeholder="واحد"
+                                                                            ></v-select>
+                                                                        </v-col>
+                                                                    </v-row>
                                                                 </v-col>
                                                             </v-row>
                                                         </v-col>
