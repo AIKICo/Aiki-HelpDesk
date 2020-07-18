@@ -5,7 +5,6 @@
             :mini-variant.sync="mini"
             right
             v-model="$store.state.drawer"
-            expand-on-hover
     >
         <template v-slot:prepend>
             <v-list-item>
