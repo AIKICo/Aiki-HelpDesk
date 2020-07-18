@@ -23,6 +23,22 @@
                 <router-view :key="$route.fullPath"></router-view>
             </transition>
         </v-main>
+        <v-footer :color="$store.state.defaultColor + ' white--text'">
+            <v-row no-gutters>
+                <v-col cols="3">
+                    <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی</span>
+                </v-col>
+                <v-col cols="2">
+                    <span><b>برنامه نویس:</b>محمد مهرنیا</span>
+                </v-col>
+                <v-col cols="3">
+                    <span><b>پست الترونیک:</b>moh.mehrnia@gmail.com</span>
+                </v-col>
+                <v-col cols="3">
+                    <span><b>تحت لایسنس: </b><a style="color: white" href="https://opensource.org/licenses/MIT">MIT LICENSE</a></span>
+                </v-col>
+            </v-row>
+        </v-footer>
         <v-tooltip top v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
         >
             <template v-slot:activator="{on, attr}">
