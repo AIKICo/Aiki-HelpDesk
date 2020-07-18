@@ -48,7 +48,7 @@
                                                         @click:append="() => (showPassword = !showPassword)"
                                                 ></v-text-field>
                                             </ValidationProvider>
-                                            <div style="text-align: center" v-if="$store.state.isOnline">
+                                            <div style="text-align: center" v-if="$store.state.isOnline && hCaptchaVerified===false">
                                                 <vue-hcaptcha
                                                         sitekey="e3605ee2-18a4-4e7c-9a8e-5885075be08e"
                                                         @verify="captchaVerified"
@@ -112,7 +112,7 @@
                     password: ""
                 },
                 submitStatus: null,
-                hCaptchaVerified: false,
+                hCaptchaVerified: true,
                 showPassword:false
             };
         },
@@ -129,15 +129,14 @@
                         userName: this.loginDetails.userName,
                         passwd: this.loginDetails.password
                     })
-                    .then(response => {
+                    .then((response) => {
                         if (response.status === 200) {
                             this.$store.state.isLoggedIn = true;
                             this.$router.push("/dashboard");
+                        }else if (response==="error"){
+                            this.hCaptchaVerified=false;
                         }
                     })
-                    .catch(function (err) {
-                        console.log(err);
-                    });
             },
             captchaVerified(e) {
                 if (e) this.hCaptchaVerified = true;
