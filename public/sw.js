@@ -19,6 +19,20 @@ self.addEventListener('message', (event) => {
   }
 });
 
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+      caches.keys().then(function(cacheNames) {
+        return Promise.all(
+            // eslint-disable-next-line no-unused-vars
+            cacheNames.filter(function(cacheName) {
+            }).map(function(cacheName) {
+              return caches.delete(cacheName);
+            })
+        );
+      })
+  );
+});
+
 /**
  * The workboxSW.precacheAndRoute() method efficiently caches and responds to
  * requests for URLs in the manifest.
