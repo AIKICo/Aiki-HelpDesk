@@ -89,12 +89,29 @@
                                     </td>
                                     <td>
                                         <div v-if="item === selectedItem">
-                                            <v-btn :color="$store.state.defaultColor" @click="showHistorySheet(item)" icon>
-                                                <v-icon>mdi-history</v-icon>
-                                            </v-btn>
-                                            <v-btn :color="$store.state.defaultColor" @click="reopenTicket(item)" icon>
-                                                <v-icon>mdi-reload</v-icon>
-                                            </v-btn>
+                                            <v-tooltip top>
+                                                <template v-slot:activator="{on, attr}">
+                                                    <v-btn :color="$store.state.defaultColor"
+                                                           @click="showHistorySheet(item)" icon
+                                                           v-on="on"
+                                                           v-bind="attr">
+                                                        <v-icon>mdi-history</v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>تاریخچه</span>
+                                            </v-tooltip>
+                                            <v-tooltip top>
+                                                <template v-slot:activator="{on, attr}">
+                                                    <v-btn :color="$store.state.defaultColor"
+                                                           @click="reopenTicket(item)" icon
+                                                           v-on="on"
+                                                           v-bind="attr">
+                                                        <v-icon>mdi-reload</v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <span>درخواست مجدد در وضعیت باز قرار گیرد</span>
+                                            </v-tooltip>
+
                                         </div>
                                     </td>
                                 </tr>

@@ -66,6 +66,7 @@
                         @click="newTicket()"
                         v-on="on"
                         v-bind="attr"
+                        class="mb-6"
                 >
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>

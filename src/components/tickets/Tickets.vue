@@ -238,6 +238,7 @@
                         v-on="on"
                         v-bind="attr"
                         style="margin-left: 58px"
+                        class="mb-6"
                 >
                     <v-icon>mdi-refresh</v-icon>
                 </v-btn>

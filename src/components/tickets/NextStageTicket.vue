@@ -6,7 +6,7 @@
             persistent
             transition="dialog-bottom-transition">
         <v-sheet class="text-center">
-            <v-card  v-click-outside="onClickOutside">
+            <v-card v-click-outside="onClickOutside">
                 <v-card-title :class="$store.state.defaultColor + ' ' + $store.state.defaultHeaderTextColor">تغییر وضعیت
                     درخواست {{workorder.ticketfriendlynumber}}
                 </v-card-title>
@@ -41,6 +41,8 @@
                                     :disabled="endWorkOrder"
                                     clearable
                                     v-on:change="getText"
+                                    @click="openSelect=true"
+                                    @focusout="openSelect=false"
                             >
                             </v-select>
                             <v-checkbox
@@ -87,7 +89,8 @@
                 endWorkOrder: false,
                 nextstageAgentId: null,
                 choiceText:"",
-                Members: []
+                Members: [],
+                openSelect:false
             }
         },
         components: {
@@ -121,7 +124,8 @@
                 }).membername;
             },
             onClickOutside () {
-                this.closeDialog('Cancel');
+                if (this.openSelect===false)
+                    this.closeDialog('Cancel');
             },
         },
         computed: {
