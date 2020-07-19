@@ -94,7 +94,7 @@
                                                                         </v-col>
                                                                         <v-col cols="5">
                                                                             <v-select
-                                                                                    class="col-2"
+                                                                                    class="col-4"
                                                                                     v-model="item.responseTimeUnit"
                                                                                     :items="priorityUnit"
                                                                                     placeholder="واحد"

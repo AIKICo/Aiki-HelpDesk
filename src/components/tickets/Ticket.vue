@@ -217,7 +217,6 @@
             loadPriority(e){
                 if (e){
                     this.GetSLAByCustomerID(e).then((res)=>{
-                        console.log(res.data.targetspriority);
                         this.requestpriority = res.data.targetspriority;
                     })
                 }
@@ -240,6 +239,7 @@
                 this.loadTicket(this.$route.params.id).then((res) => {
                     this.Ticket = res.data;
                     this.diabledControl = true;
+                    this.loadPriority(this.Ticket.customerid);
                 });
             } else if (this.$route.params.formType === "Insert") {
                 this.Ticket = {
