@@ -89,7 +89,7 @@
                 </v-row>
             </v-col>
 
-            <v-tooltip top v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
+            <v-tooltip top v-if="$store.state.isLoggedIn"
             >
                 <template v-slot:activator="{on, attr}">
                     <v-btn
