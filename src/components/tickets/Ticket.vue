@@ -50,6 +50,7 @@
                                                 outlined
                                                 shaped
                                                 :disabled="diabledControl"
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
