@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-bottom-sheet v-model="sheet" inset :max-width="500">
         <v-sheet class="text-center">
             <v-row no-gutters>

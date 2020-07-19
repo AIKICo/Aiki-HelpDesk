@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-toolbar class="mt-3">
         <span class="subheading text-wrap">{{ member.membername }} <span :class="$store.state.defaultTextColor">({{member.username}})</span></span>
 

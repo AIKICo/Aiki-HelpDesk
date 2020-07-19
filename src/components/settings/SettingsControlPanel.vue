@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-container>
         <v-item-group
                 v-for="header in $store.state.SettingsService.controlPanelItems"

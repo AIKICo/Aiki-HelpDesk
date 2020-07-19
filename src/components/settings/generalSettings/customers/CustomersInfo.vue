@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
   <v-card>
     <v-card-text>
       <v-list>

@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
   <v-toolbar class="mt-3">
     <span class="subheading text-wrap">{{ this.customer.title }}</span>
 

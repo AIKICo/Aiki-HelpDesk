@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-container fluid>
         <v-layout align-center>
             <v-row justify="center" align="center" no-gutters>

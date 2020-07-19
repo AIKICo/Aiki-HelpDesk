@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-card hover>
         <v-list-item>
             <v-list-item-avatar :color="color">

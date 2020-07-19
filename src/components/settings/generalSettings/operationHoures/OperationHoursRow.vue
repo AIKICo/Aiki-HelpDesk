@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
   <v-toolbar class="mt-3">
     <span>{{ OperationHour.title}}</span>
     <span v-if="OperationHour.isdefault" class="indigo white--text mx-5" style="border-radius: 3px">پیش فرض</span>

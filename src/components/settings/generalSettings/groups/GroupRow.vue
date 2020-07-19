@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-toolbar class="mt-3">
         <span>{{ group.title}}</span>
         <v-spacer></v-spacer>
