@@ -88,19 +88,21 @@
                     </v-col>
                 </v-row>
             </v-col>
-            <v-tooltip top>
+
+            <v-tooltip top v-if="$store.state.isLoggedIn && $store.state.allowAddRecord"
+            >
                 <template v-slot:activator="{on, attr}">
                     <v-btn
                             bottom
-                            :color="$store.state.defaultColor"
+                            color="red"
                             dark
                             fab
                             fixed
                             left
                             @click="newAsset()"
-                            v-if="$store.state.isLoggedIn"
                             v-on="on"
                             v-bind="attr"
+                            class="mb-6"
                     >
                         <v-icon>mdi-plus</v-icon>
                     </v-btn>
