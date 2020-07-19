@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-navigation-drawer
             app
             :clipped="$vuetify.breakpoint.lgAndUp"

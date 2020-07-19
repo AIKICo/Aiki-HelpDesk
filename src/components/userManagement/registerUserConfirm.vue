@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-container>
         <v-main>
             <v-row>

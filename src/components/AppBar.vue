@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-app-bar
             app
             :color="$store.state.defaultColor"

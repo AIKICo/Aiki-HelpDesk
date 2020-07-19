@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-app>
         <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
         <app-bar></app-bar>

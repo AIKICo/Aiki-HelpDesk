@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <v-bottom-sheet v-model="show" inset scrollable persistent >
         <v-sheet class="text-center">
             <v-card v-click-outside="onClickOutside">

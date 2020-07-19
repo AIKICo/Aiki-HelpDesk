@@ -1,4 +1,4 @@
-<template>
+<template v-slot:items="props">
     <div>
         <Tickets v-if="!$store.state.IsMobile"></Tickets>
     </div>
