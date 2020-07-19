@@ -1,10 +1,12 @@
 {
   "name": "AIKIDesk",
   "short_name": "AIKIDesk",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
-  "display": "standalone",
-  "orientation": "portrait",
-  "scope": "/",
-  "start_url": "/"
+  "manifest_version": 2,
+  "version": "1.0.0.0",
+  "icons":
+    {
+      "128": "./img/logo.0178c382.png",
+      "16": "./img/logo.0178c382.png",
+      "48": "./img/logo.0178c382.png"
+    }
 }
