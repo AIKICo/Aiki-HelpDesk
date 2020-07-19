@@ -82,9 +82,9 @@
                                                                         </v-col>
                                                                     </v-row>
                                                                 </v-col>
-                                                                <v-col cols="3">
+                                                                <v-col>
                                                                     <v-row>
-                                                                        <v-col cols="5">
+                                                                        <v-col>
                                                                             <v-text-field
                                                                                     v-model="item.responseTime"
                                                                                     placeholder="زمان پاسخ گویی"
@@ -92,9 +92,8 @@
                                                                                     type="number"
                                                                             ></v-text-field>
                                                                         </v-col>
-                                                                        <v-col cols="5">
+                                                                        <v-col>
                                                                             <v-select
-                                                                                    class="col-4"
                                                                                     v-model="item.responseTimeUnit"
                                                                                     :items="priorityUnit"
                                                                                     placeholder="واحد"
@@ -102,9 +101,9 @@
                                                                         </v-col>
                                                                     </v-row>
                                                                 </v-col>
-                                                                <v-col cols="3">
+                                                                <v-col>
                                                                     <v-row>
-                                                                        <v-col cols="5">
+                                                                        <v-col>
                                                                             <v-text-field
                                                                                     v-model="item.resolveTime"
                                                                                     placeholder="زمان کل مشکل"
@@ -112,9 +111,8 @@
                                                                                     type="number"
                                                                             ></v-text-field>
                                                                         </v-col>
-                                                                        <v-col cols="5">
+                                                                        <v-col>
                                                                             <v-select
-                                                                                    class="col-3"
                                                                                     v-model="item.resolveTimeUnit"
                                                                                     :items="priorityUnit"
                                                                                     placeholder="واحد"
