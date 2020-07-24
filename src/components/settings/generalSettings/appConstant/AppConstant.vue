@@ -72,8 +72,8 @@
                                     <v-row>
                                         <v-col>
                                             <v-row
-                                                    v-for="item in AppConstantItem.additionalinfo"
-                                                    :key="item.value"
+                                                    v-for="(index, item) in AppConstantItem.additionalinfo"
+                                                    :key="index"
                                             >
                                                 <v-col>
                                                     <span class="text-bold ml-3">{{ item.label }}</span>
@@ -138,10 +138,10 @@
         name: "AppConstant",
         data() {
             return {
-                AppConstantItem: null,
-                AppConstants: null,
-                label: null,
-                valueLabel: null
+                AppConstantItem: "",
+                AppConstants: [],
+                label: "",
+                valueLabel: ""
             };
         },
         components: {
@@ -151,7 +151,8 @@
         computed: {},
         methods: {
             ...mapActions({
-                getAppConstant: "AppConstantItemsService/loadAppConstantItems"
+                getAppConstant: "AppConstantItemsService/loadAppConstantItems",
+                getSingleAppConstant: "AppConstantItemsService/loadAppConstantItem"
             }),
             onSubmit() {
                 if (this.$route.params.formType === "Edit") {
@@ -175,11 +176,8 @@
             closeDialog() {
                 this.$router.push("/AppConstants/" + this.$route.params.parentid);
             },
-            getAppConstantItem(id) {
-                return this.$store.getters["AppConstantItemsService/getAppConstantItem"](id);
-            },
             deleteAdditionalInfo(item) {
-                var newItems = this.AppConstantItem.additionalinfo.filter(function (
+                let newItems = this.AppConstantItem.additionalinfo.filter(function (
                     el
                 ) {
                     return el.label != item.label;
@@ -194,7 +192,10 @@
         },
         created() {
             if (this.$route.params.formType === "Edit") {
-                this.AppConstantItem = this.getAppConstantItem(this.$route.params.id);
+                this.getSingleAppConstant(this.$route.params.id).then((res) => {
+                    this.AppConstantItem = res.data;
+                });
+
             } else if (this.$route.params.formType === "Insert") {
                 this.AppConstantItem = {
                     appconstantid: this.$route.params.parentid,

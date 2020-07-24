@@ -13,6 +13,14 @@ const appConstantItemsService = {
                 throw new Error("Something is wrong.");
             }
         },
+        async loadAppConstantItem(context, payload) {
+            let response = (await AppConstantItem.api().get("/AppConstantItems/" + payload)).response;
+            if (response.status === 200) {
+                return response;
+            } else if (response.data.error) {
+                throw new Error("Something is wrong.");
+            }
+        },
         async addAppConstantItem(context, payload) {
             let response = (await AppConstantItem.api().post("/AppConstantItems", payload))
                 .response;
