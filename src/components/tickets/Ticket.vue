@@ -30,7 +30,6 @@
                                                 chips
                                                 clearable
                                                 :error-messages="errors"
-                                                @change="loadPriority"
                                         >
                                         </v-select>
                                     </validation-provider>
@@ -106,6 +105,18 @@
                                     >
                                     </v-select>
                                     <v-select
+                                            :items="SLAItems"
+                                            item-text="title"
+                                            item-value="id"
+                                            v-model="Ticket.operateid"
+                                            label="قرارداد سطح سرویس"
+                                            shaped
+                                            outlined
+                                            chips
+                                            clearable
+                                            @change="loadPriority">
+                                    </v-select>
+                                    <v-select
                                             :items="requestpriority"
                                             item-text="title"
                                             item-value="title"
@@ -114,8 +125,7 @@
                                             shaped
                                             outlined
                                             chips
-                                            clearable
-                                    >
+                                            clearable>
                                     </v-select>
                                 </v-card-text>
 
@@ -170,8 +180,9 @@
                 TicketCategories: [],
                 TicketTags: [],
                 diabledControl: false,
-                customers:[],
-                requestpriority: []
+                customers: [],
+                requestpriority: [],
+                SLAItems: []
             }
         },
         components: {
@@ -181,12 +192,14 @@
         methods: {
             ...mapActions({
                 loadConstant: "AppConstantItemsService/loadAppConstantItems",
-                loadCustomer:"CustomerService/loadCustomers",
+                loadCustomer: "CustomerService/loadCustomers",
                 loadTicket: "TicketService/loadTicket",
                 addTicket: "TicketService/addTicket",
                 editTicket: "TicketService/editTicket",
                 isAssetExists: "AssetService/isAssetExists",
-                GetSLAByCustomerID:"SLASettingService/loadByCustomerID"
+                GetSLAByCustomerID: "SLASettingService/loadByCustomerID",
+                LoadSLASettings: "SLASettingService/loadSLASettings",
+                LoadSLASetting: "SLASettingService/loadSLASettings"
             }),
             onSubmit() {
                 if (this.$route.params.formType === "Edit") {
@@ -215,11 +228,11 @@
             closeDialog() {
                 this.$router.push("/cartabl");
             },
-            loadPriority(e){
-                if (e){
-                    this.GetSLAByCustomerID(e).then((res)=>{
-                        this.requestpriority = res.data.targetspriority;
-                    })
+            loadPriority(e) {
+                if (e) {
+                    this.LoadSLASetting(e).then((res)=>{
+                        this.requestpriority = res.data[0].targetspriority;
+                    });
                 }
             },
         },
@@ -233,9 +246,12 @@
             this.loadConstant('e215f24f-4d28-46e7-b75d-26a19feb656a').then((res) => {
                 this.TicketTags = res.data
             });
-            this.loadCustomer().then((res)=>{
+            this.loadCustomer().then((res) => {
                 this.customers = res.data;
             });
+            this.LoadSLASettings().then((res) => {
+                this.SLAItems = res.data;
+            })
             if (this.$route.params.formType === "Edit") {
                 this.loadTicket(this.$route.params.id).then((res) => {
                     this.Ticket = res.data;
