@@ -25,7 +25,6 @@ const userService = {
     },
     actions: {
         async authenticate({commit}, payload) {
-            delete axois.defaults.headers.common.CompanyID;
             try {
                 let result = (await User.api().post("/users/authenticate", {
                     Username: payload.userName,
@@ -84,7 +83,6 @@ const userService = {
             commit("OFF_CONNECTION");
         },
         async IsEmailExists(context, payload) {
-            delete axois.defaults.headers.common.CompanyID;
             let response = await axios.get("/Users/IsEmailExists/" + payload);
             return response;
         },
