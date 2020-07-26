@@ -32,6 +32,7 @@
                         activatable
                         dense
                         rounded
+                        hoverable
                         transition>
                     <template v-slot:label="{ item }">
                         <v-hover v-slot:default="{ hover }">
@@ -142,6 +143,7 @@
                 }
                 this.$store.dispatch("OrganizeChartService/addOrganizeChart", e.itemAdded).then((res) => {
                     if (res.status === 201) {
+                        this.$set(res.data, "children", []);
                         this.ParentItem.children.push(res.data);
                     }
                 });
