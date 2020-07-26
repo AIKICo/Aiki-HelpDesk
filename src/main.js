@@ -21,6 +21,8 @@ import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 import lodash from "lodash";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import VueNativeNotification from 'vue-native-notification'
+
 
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
@@ -34,6 +36,9 @@ Vue.use(VueProgressBar, progressOptions);
 Vue.use(VueMeta);
 Vue.use(Vue2TouchEvents);
 Vue.use(VueLodash, {name: "custom", lodash: lodash});
+Vue.use(VueNativeNotification, {
+    requestOnNotify: true
+})
 
 const toastOptions = {
     rtl: true
