@@ -111,6 +111,8 @@ new Vue({
                     }
                 }
                 return Promise.resolve(error.response);
+            } else if (400 === error.response.status) {
+                Vue.$toast.error(error.response.data.message);
             } else {
                 if (this) {
                     if (this.$Progress) {

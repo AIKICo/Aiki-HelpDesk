@@ -193,7 +193,11 @@
             }),
             onSubmit() {
                 this.$store
-                    .dispatch("MemberService/editMember", this.Member);
+                    .dispatch("MemberService/editMember", this.Member).then((res)=>{
+                        if (res.status===200){
+                            this.$toast.success("اطلاعات پروفایل شما تغییر داده شد");
+                        }
+                });
             },
             closeDialog() {
                 this.$router.push("/");

@@ -25,35 +25,30 @@ const userService = {
     },
     actions: {
         async authenticate({commit}, payload) {
-            try {
-                delete axois.defaults.headers.common.CompanyID;
-                let result = (await User.api().post("/users/authenticate", {
-                    Username: payload.userName,
-                    Password: payload.passwd
-                })).response;
-                if (result.status === 200) {
-                    window.localStorage.setItem("userInfo", JSON.stringify(result.data));
-                    window.localStorage.setItem("companyid", result.data.encryptedCompnayId);
-                    window.localStorage.setItem("access_token", result.data.token);
+            delete axois.defaults.headers.common.CompanyID;
+            let result = (await User.api().post("/users/authenticate", {
+                Username: payload.userName,
+                Password: payload.passwd
+            })).response;
+            if (result.status === 200) {
+                window.localStorage.setItem("userInfo", JSON.stringify(result.data));
+                window.localStorage.setItem("companyid", result.data.encryptedCompnayId);
+                window.localStorage.setItem("access_token", result.data.token);
 
-                    axois.defaults.headers.common.Authorization = "Bearer " + result.data.token;
-                    axois.defaults.headers.common.CompanyID = result.data.encryptedCompnayId;
+                axois.defaults.headers.common.Authorization = "Bearer " + result.data.token;
+                axois.defaults.headers.common.CompanyID = result.data.encryptedCompnayId;
 
-                    store.state.isLoggedIn = true;
-                    store.state.companyId = result.data.encryptedCompnayId;
-                    store.state.memberName = result.data.membername;
-                    store.state.memberRole = result.data.roles;
-                    store.state.accessToken = result.data.token;
-                    store.state.memberid = result.data.id;
-                    axois.defaults.headers.common.CompanyID = store.state.companyId;
-                    commit("OFF_CONNECTION");
-                    await store.dispatch("UserService/notificationStart");
-                }
-                return result;
-            }catch (e) {
-                return "error"
+                store.state.isLoggedIn = true;
+                store.state.companyId = result.data.encryptedCompnayId;
+                store.state.memberName = result.data.membername;
+                store.state.memberRole = result.data.roles;
+                store.state.accessToken = result.data.token;
+                store.state.memberid = result.data.id;
+                commit("OFF_CONNECTION");
+                await store.dispatch("UserService/notificationStart");
             }
-
+            axois.defaults.headers.common.CompanyID = store.state.companyId;
+            return result;
         },
         async notificationStart({commit}){
             const connection = new HubConnectionBuilder()
