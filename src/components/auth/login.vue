@@ -123,7 +123,7 @@
         },
         methods: {
             onSubmit: function () {
-                if (this.hCaptchaVerified !== true && this.$store.state.isOnline) return;
+                //if (this.hCaptchaVerified !== true && this.$store.state.isOnline) return;
                 this.$store
                     .dispatch("UserService/authenticate", {
                         userName: this.loginDetails.userName,
