@@ -140,7 +140,7 @@
                 Member: null,
                 Roles: [
                     {Label: "مدیر", Value: "admin"},
-                    {Label: "کارشناس", Value: "operator"}
+                    {Label: "کارشناس", Value: "user"}
                 ],
                 disabled:false
             };
