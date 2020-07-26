@@ -137,3 +137,11 @@ new Vue({
     },
     render: h => h(App)
 }).$mount("#app");
+
+window.addEventListener('online', () => {
+    Vue.$toast.success("ارتباط با سرویس دهنده برقرار گردید");
+});
+
+window.addEventListener('offline', () => {
+    Vue.$toast.error("ارتباط با سرویس دهنده قطع گردید");
+});
