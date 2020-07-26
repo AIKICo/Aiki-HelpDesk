@@ -1,4 +1,6 @@
 import Company from "../models/Company";
+import store from "../index";
+import axois from "axios";
 
 const companyService={
     namespaced:true,
@@ -12,8 +14,10 @@ const companyService={
     },
     actions:{
         async addCompany(context, payload) {
+            delete axois.defaults.headers.common.CompanyID;
             let response = (await Company.api().post("/company", payload))
                 .response;
+            axois.defaults.headers.common.CompanyID = store.state.companyId;
             if (response.status === 201) {
                 return response;
             } else if (response.data.error) {

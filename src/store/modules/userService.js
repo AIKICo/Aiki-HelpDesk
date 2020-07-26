@@ -26,7 +26,7 @@ const userService = {
     actions: {
         async authenticate({commit}, payload) {
             try {
-                delete axois.defaults.headers.CompanyID;
+                delete axois.defaults.headers.common.CompanyID;
                 let result = (await User.api().post("/users/authenticate", {
                     Username: payload.userName,
                     Password: payload.passwd
@@ -45,7 +45,7 @@ const userService = {
                     store.state.memberRole = result.data.roles;
                     store.state.accessToken = result.data.token;
                     store.state.memberid = result.data.id;
-                    axois.defaults.headers.CompanyID = store.state.companyId;
+                    axois.defaults.headers.common.CompanyID = store.state.companyId;
                     commit("OFF_CONNECTION");
                     await store.dispatch("UserService/notificationStart");
                 }
@@ -84,9 +84,9 @@ const userService = {
             commit("OFF_CONNECTION");
         },
         async IsEmailExists(context, payload) {
-            delete axois.defaults.headers.CompanyID;
+            delete axois.defaults.headers.common.CompanyID;
             let response = await axios.get("/Users/IsEmailExists/" + payload);
-            axois.defaults.headers.CompanyID = store.state.companyId;
+            axois.defaults.headers.common.CompanyID = store.state.companyId;
             return response;
         },
     },
