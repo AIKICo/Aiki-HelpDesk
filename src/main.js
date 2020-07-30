@@ -62,13 +62,13 @@ if (navigator.onLine) {
         measurementId: "G-8CY0SWQXMJ"
     };
     firebase.initializeApp(config);
-    Vue.prototype.$analytics = firebase.analytics();
+    //Vue.prototype.$analytics = firebase.analytics();
 }
 
 Vue.mixin({
     methods: {
         getStaticImage(image) {
-            if (image != "")
+            if (image !== "")
                 return require(`./assets/${image}`);
             else {
                 return "";
