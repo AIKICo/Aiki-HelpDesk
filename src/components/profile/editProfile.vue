@@ -59,6 +59,7 @@
                                                 outlined
                                                 shaped
                                                 ref="password"
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
@@ -76,6 +77,7 @@
                                                 type="password"
                                                 outlined
                                                 shaped
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
@@ -93,6 +95,7 @@
                                                 outlined
                                                 shaped
                                                 disabled
+                                                dir="ltr"
                                         ></v-text-field>
                                     </validation-provider>
                                     <validation-provider
