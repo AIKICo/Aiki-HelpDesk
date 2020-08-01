@@ -28,6 +28,7 @@
     "v-click-outside": "^3.0.1",
     "vee-validate": "^3.3.7",
     "vue": "^2.6.11",
+    "vue-feedback-reaction": "^1.2.0",
     "vue-filepond": "^6.0.2",
     "vue-i18n": "^8.20.0",
     "vue-lodash": "^2.1.2",
