@@ -80,6 +80,13 @@
                             </v-btn>
                         </v-col>
                     </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-alert class="primary white--text">
+                        لطفا نظرات و پیشنهاد خود را به آدرس ایمیل moh.mehrnia@gmail.com ارسال نمایید
+                      </v-alert>
+                    </v-col>
+                  </v-row>
                 </v-col>
             </v-row>
         </v-layout>
