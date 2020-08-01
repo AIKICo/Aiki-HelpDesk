@@ -9,11 +9,11 @@ const settingsService = {
         icon: "",
         roles:"admin",
         items: [
-          { name: "OperatingHours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperationHours.png", roles:["admin"] },
-          { name: "SLA Policies",label:"قرارداد سطح سرویس", path: "/SLASettings", image: "SLA.png", roles:["admin"] },
-          { name: "Members",label:"کاربران", path: "/Members", image: "UsersManagement.png", roles:["admin"] },
-          { name: "company",label:"مشتریان", path: "/CustomerList", image: "settings-customer.png", roles:["admin"] },
-          { name: "Groups",label:"گروه ها", path: "/Groups", image: "Groups.png", roles:["admin"] }
+          { name: "OperatingHours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperationHours.png", roles:"admin" },
+          { name: "SLA Policies",label:"قرارداد سطح سرویس", path: "/SLASettings", image: "SLA.png", roles:"admin" },
+          { name: "Members",label:"کاربران", path: "/Members", image: "UsersManagement.png", roles:"admin" },
+          { name: "company",label:"مشتریان", path: "/CustomerList", image: "settings-customer.png", roles:"admin" },
+          { name: "Groups",label:"گروه ها", path: "/Groups", image: "Groups.png", roles:"admin" }
         ]
       },
       {
@@ -29,7 +29,7 @@ const settingsService = {
           { name: "OperandType",label:"اقدام صورت گرفته", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7a", image: "", roles:"admin,user" },
           { name: "OrganizeChartAttribute",label:"اطلاعات تکمیلی کاربران", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7b", image: "", roles:"admin,user" },
           { name: "OrganizeChart",label:"چارت سازمانی", path: "/OrganizeCharts" , image: "" , roles:"admin"},
-          { name: "OrganizeChartItemType",label:"گروه بندی چارت سازمانی", path: "/AppConstants/0e5aa3a0-f7c5-4960-8fb2-a6e58b1f663b", image: "", roles:"admin" },
+          { name: "OrganizeChartItemType",label:"گروه بندی سازمانی", path: "/AppConstants/0e5aa3a0-f7c5-4960-8fb2-a6e58b1f663b", image: "", roles:"admin" },
         ]
       },
       {
