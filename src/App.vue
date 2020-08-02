@@ -123,8 +123,9 @@ export default {
       if (!this.registration || !this.registration.waiting) {
         return;
       }
-      window.location.reload();
-      window.location.assign("https://aiki-helpdesk-v1.firebaseapp.com/");
+      window.opener.location.reload(true);
+      window.self.close();
+
       this.registration.waiting.postMessage("skipWaiting");
     },
     newTicket() {
