@@ -16,7 +16,7 @@
                   <v-col
                       :key="setting.name"
                       v-for="setting in header.items"
-                      v-show ="setting.roles.split(',').includes($store.state.memberRole)"
+                      v-show="setting.roles.split(',').includes($store.state.memberRole)"
                       cols="12"
                       md="2"
                       align="center"
@@ -26,25 +26,24 @@
                         <v-col>
                           <v-row no-gutters>
                             <v-col>
-                              <router-link :to="setting.path">
-                                <v-avatar
-                                    :color="$store.state.defaultColor"
-                                    size="110"
-                                    @click="toggle"
-                                >
-                                  <img
-                                      :src="getStaticImage(setting.image)"
-                                      @click="toggle"
-                                  >
-                                </v-avatar>
-                              </router-link>
+                              <v-avatar
+                                  size="110"
+                                  @click="toggle">
+                                <embed type="image/svg+xml" :src="getStaticImage(setting.image)" @click="toggle"/>
+                              </v-avatar>
                             </v-col>
                           </v-row>
                           <v-row no-gutters>
                             <v-col>
-                              <v-chip class="mt-3">
-                                {{ setting.label }}
-                              </v-chip>
+                              <v-hover v-slot:default="{ hover }" open-delay="50">
+                                <v-chip class="mt-3"
+                                        :to="setting.path"
+                                        :color="hover? $store.state.defaultColor:''"
+                                        :text-color="hover ? 'white' : ''">
+                                  {{ setting.label }}
+                                </v-chip>
+                              </v-hover>
+
                             </v-col>
                           </v-row>
                         </v-col>
@@ -79,8 +78,7 @@ export default {
       })
     }),
   },
-  methods:{
-  }
+  methods: {}
 };
 </script>
 

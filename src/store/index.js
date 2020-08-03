@@ -22,6 +22,8 @@ import organizeCharts_JsonViewService from "./modules/organizeCharts_JsonViewSer
 import assetService from "./modules/assetService";
 import ticketService from "./modules/ticketService";
 import ticketHistoryService from "./modules/ticketHistoryService";
+import ticketCountInfoService from "./modules/ticketCountInfoService";
+import profilePictureService from "@/store/modules/profilePictureService";
 
 import User from "./models/User";
 import Company from "./models/Company";
@@ -40,7 +42,7 @@ import TicketsView from "./models/TicketsView";
 import TicketHistory from "./models/TicketHistory";
 import Last30Ticket from "./models/Last30Ticket";
 import TicketCountInfo from "./models/TicketCountInfo";
-import ticketCountInfoService from "./modules/ticketCountInfoService";
+import ProfilePicture from "@/store/models/ProfilePicture";
 
 Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {axios});
@@ -66,6 +68,7 @@ database.register(TicketsView);
 database.register(TicketHistory);
 database.register(Last30Ticket);
 database.register(TicketCountInfo);
+database.register(ProfilePicture)
 
 export default new Vuex.Store({
     plugins: [VuexORM.install(database)],
@@ -107,7 +110,8 @@ export default new Vuex.Store({
         AssetService: assetService,
         TicketService: ticketService,
         TicketHistoryService: ticketHistoryService,
-        TicketCountInfoService: ticketCountInfoService
+        TicketCountInfoService: ticketCountInfoService,
+        ProfilePictureService:profilePictureService
     },
     getters: {}
 });
