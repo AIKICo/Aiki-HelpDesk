@@ -1,15 +1,26 @@
 <template v-slot:items="props">
   <v-container>
     <v-item-group
-        v-for="header in controlPanelItemsFilterd"
+        v-for="(header) in controlPanelItemsFilterd"
         :key="header.name">
       <v-container>
         <v-row>
           <v-col>
             <v-card
             >
-              <v-card-title>
-                <v-row>{{ header.label }}</v-row>
+              <v-card-title style="padding: 0">
+                <v-list shaped width="300" disabled style="padding: 1px">
+                  <v-list-item-group :color="$store.state.defaultColor" mandatory>
+                    <v-list-item to="/settingsControlPanel">
+                      <v-list-item-icon>
+                        <v-icon v-text="header.icon" :color="$store.state.defaultColor"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title class="font-weight-bold" style="font-size: 20px" v-text="header.label" :color="$store.state.defaultColor"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
               </v-card-title>
               <v-card-text>
                 <v-row>
