@@ -30,9 +30,11 @@
                         chips
                         clearable
                         :error-messages="errors"
+                        @change="customerChanged"
                     >
                     </v-select>
                   </validation-provider>
+
                   <validation-provider
                       v-slot="{ errors }"
                       name="اموال"
@@ -52,6 +54,29 @@
                         dir="ltr"
                     ></v-text-field>
                   </validation-provider>
+                  <validation-provider
+                      v-slot="{ errors }"
+                      name="درخواست کننده"
+                      :rules="Ticket.asset!==null?'':'required'"
+                      immediate
+                  >
+                    <v-autocomplete
+                        v-if="Ticket.asset===null"
+                        :items="Employes"
+                        item-text="title"
+                        item-value="id"
+                        v-model="Ticket.requester"
+                        label="درخواست کننده"
+                        shaped
+                        outlined
+                        chips
+                        clearable
+                        :error-messages="errors"
+                        :search-input.sync="EmployeSearchKey"
+                    >
+                    </v-autocomplete>
+                  </validation-provider>
+
                   <validation-provider
                       v-slot="{ errors }"
                       name="شرح مختصر ایراد/درخواست"
@@ -182,7 +207,9 @@ export default {
       diabledControl: false,
       customers: [],
       requestpriority: [],
-      SLAItems: []
+      SLAItems: [],
+      Employes: [],
+      EmployeSearchKey: "",
     }
   },
   components: {
@@ -199,7 +226,8 @@ export default {
       isAssetExists: "AssetService/isAssetExists",
       GetSLAByCustomerID: "SLASettingService/loadByCustomerID",
       LoadSLASettings: "SLASettingService/loadSLASettings",
-      LoadSLASetting: "SLASettingService/loadSLASettings"
+      LoadSLASetting: "SLASettingService/loadSLASettings",
+      loadOrganizeCharteChartByCustomerId: "OrganizeChartService/loadOrganizeCharteChartByCustomerId"
     }),
     onSubmit() {
       if (this.$route.params.formType === "Edit") {
@@ -235,6 +263,15 @@ export default {
         });
       }
     },
+    customerChanged(e) {
+      this.loadOrgannizeChart(e);
+    },
+    loadOrgannizeChart(customerid){
+      this.loadOrganizeCharteChartByCustomerId(customerid).then((res) => {
+        this.Employes = [];
+        this.Employes = this.lodash.filter(res.data, item => item.titletype === "5232ad99-404f-4d77-9698-9a9e3ff3dbbd");
+      });
+    },
   },
   created() {
     this.loadConstant('473b359f-30a7-4963-a671-6f618b277e48').then((res) => {
@@ -257,6 +294,7 @@ export default {
         this.Ticket = res.data;
         this.diabledControl = true;
         this.loadPriority(this.Ticket.customerid);
+        this.loadOrgannizeChart(this.Ticket.customerid);
       });
     } else if (this.$route.params.formType === "Insert") {
       this.Ticket = {

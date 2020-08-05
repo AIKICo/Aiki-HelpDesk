@@ -99,6 +99,7 @@ new Vue({
             }
             return response;
         }, async function (error) {
+            console.log(error.response);
             if (401 === error.response.status || error.response.data.includes('was not found in the key ring')) {
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
