@@ -20,7 +20,8 @@ export default class Ticket extends Model{
             operateid: this.attr(null),
             requestpriority:this.attr(''),
             customerid:this.attr(null),
-            allowdelete:this.boolean(null)
+            allowdelete:this.boolean(null),
+            requester:this.attr('')
         }
     }
 }

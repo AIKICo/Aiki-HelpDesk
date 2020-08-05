@@ -11,6 +11,7 @@ export default class OrganizeChart extends Model{
             title: this.attr(""),
             titletype:this.attr(""),
             additionalinfo:this.attr([]),
+            email:this.attr(''),
             allowdelete:this.boolean(null)
         }
     }
