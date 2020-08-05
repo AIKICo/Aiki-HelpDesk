@@ -141,6 +141,7 @@ const assetService = {
             }
         },
         async isAssetExists(context, payload) {
+            if (payload===null) return true;
             let response = await axios.get("/Assets/isAssetExists/" + payload);
             return response;
         },

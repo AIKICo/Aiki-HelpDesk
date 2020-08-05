@@ -83,7 +83,8 @@
                                     <td class="text-center">{{ item.tickettags }}</td>
                                     <td class="text-center">
                                         <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                                :text-color="$store.state.defaultColor">
+                                                :text-color="$store.state.defaultColor"
+                                                v-if="item.asset!==null">
                                             <b>{{ item.asset }}</b>
                                         </v-chip>
                                     </td>

@@ -36,7 +36,7 @@
                   <validation-provider
                       v-slot="{ errors }"
                       name="اموال"
-                      rules="required"
+                      rules=""
                       vid="asset"
                       immediate
                   >

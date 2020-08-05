@@ -78,7 +78,7 @@
 
                             <td class="text-center">
                                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
-                                        :text-color="$store.state.defaultColor">
+                                        :text-color="$store.state.defaultColor" v-if="item.asset!==null">
                                     <b>{{ item.asset }}</b>
                                 </v-chip>
                             </td>
@@ -215,7 +215,7 @@
                         </td>
                     </template>
                     <template v-slot:group.header="{items, isOpen, toggle}">
-                        <th colspan="100%">
+                        <th colspan="100%" style="background-color: white">
                             <v-btn text icon small @click="toggle">
                                 <v-icon>{{ isOpen ? 'mdi-minus' : 'mdi-plus' }}</v-icon>
                             </v-btn>
@@ -512,6 +512,6 @@
 <style scoped>
     .group-title {
         font-size: medium;
-        font-weight: normal
+        font-weight: normal;
     }
 </style>
