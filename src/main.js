@@ -99,7 +99,7 @@ new Vue({
             }
             return response;
         }, async function (error) {
-            if (401 === error.response.status) {
+            if (401 === error.response.status || error.response.data.includes('was not found in the key ring')) {
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
                 localStorage.clear();
@@ -111,9 +111,11 @@ new Vue({
                     }
                 }
                 return Promise.resolve(error.response);
-            } else if (400 === error.response.status) {
+            }
+            else if (400 === error.response.status) {
                 Vue.$toast.error(error.response.data.message);
-            } else {
+            }
+            else {
                 if (this) {
                     if (this.$Progress) {
                         this.$Progress.fail();

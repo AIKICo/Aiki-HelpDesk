@@ -9,11 +9,11 @@
             <v-card
             >
               <v-card-title style="padding: 0">
-                <v-list shaped width="300" disabled style="padding: 1px">
+                <v-list width="100%" disabled style="padding: 1px">
                   <v-list-item-group :color="$store.state.defaultColor" mandatory>
                     <v-list-item to="/settingsControlPanel">
                       <v-list-item-icon>
-                        <v-icon v-text="header.icon" :color="$store.state.defaultColor"></v-icon>
+                        <v-icon v-text="header.icon" :color="$store.state.defaultColor" large dense ></v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title class="font-weight-bold" style="font-size: 20px" v-text="header.label" :color="$store.state.defaultColor"></v-list-item-title>
@@ -50,7 +50,7 @@
                                 <v-chip class="mt-3"
                                         :to="setting.path"
                                         :color="hover? $store.state.defaultColor:''"
-                                        :text-color="hover ? 'white' : ''">
+                                        :text-color="hover ? 'white' : ''" ripple>
                                   {{ setting.label }}
                                 </v-chip>
                               </v-hover>
