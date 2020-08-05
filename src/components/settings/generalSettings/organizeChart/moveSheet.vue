@@ -17,6 +17,8 @@
                             ></v-text-field>
                             <v-treeview
                                     :items="orgCharts"
+                                    :search="searchKey"
+                                    :filter="filter"
                                     item-key="id"
                                     item-text="title"
                                     activatable
