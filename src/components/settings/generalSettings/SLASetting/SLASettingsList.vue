@@ -31,8 +31,8 @@
             }
         },
         created(){
-            this.$store.dispatch("SLASettingService/loadSLASettings").then(() => {
-                this.SLAItems = this.$store.getters["SLASettingService/getSLASettings"];
+            this.$store.dispatch("SLASettingService/loadSLASettings").then((res) => {
+                this.SLAItems = res.data;
             })
         }
     }
