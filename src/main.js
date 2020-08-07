@@ -99,31 +99,30 @@ new Vue({
             }
             return response;
         }, async function (error) {
-            console.log(error.response);
-            if (401 === error.response.status || error.response.data.includes('was not found in the key ring')) {
-                await store.dispatch('UserService/logout');
-                store.state.isLoggedIn = false;
-                localStorage.clear();
-                router.push("/login").catch(() => {
-                });
-                if (this) {
-                    if (this.$Progress) {
-                        this.$Progress.fail();
+            switch (error.response.status){
+                case 400:
+                    Vue.$toast.error(error.response.data.message);
+                    break;
+                case 401 || error.response.data.includes('was not found in the key ring'):
+                    await store.dispatch('UserService/logout');
+                    store.state.isLoggedIn = false;
+                    localStorage.clear();
+                    router.push("/login").catch(() => {
+                    });
+                    if (this) {
+                        if (this.$Progress) {
+                            this.$Progress.fail();
+                        }
                     }
-                }
-                return Promise.resolve(error.response);
-            }
-            else if (400 === error.response.status) {
-                Vue.$toast.error(error.response.data.message);
-            }
-            else {
-                if (this) {
-                    if (this.$Progress) {
-                        this.$Progress.fail();
+                    break;
+                default:
+                    if (this) {
+                        if (this.$Progress) {
+                            this.$Progress.fail();
+                        }
                     }
-                }
-                return Promise.reject(error);
             }
+            return Promise.reject(error);
         });
     },
     create() {
