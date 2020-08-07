@@ -47,34 +47,10 @@
                 </template>
                 <span>{{ item.description }}</span>
               </v-tooltip>
-
-              <v-tooltip top>
-                <template v-slot:activator="{on, attr}">
-                  <td class="text-center" v-on="on" v-bind="attr">{{ item.agentname }}</td>
-                </template>
-                <span>{{ item.description }}</span>
-              </v-tooltip>
-
-              <v-tooltip top>
-                <template v-slot:activator="{on, attr}">
-                  <td class="text-center" v-on="on" v-bind="attr">{{ item.registerdate }}</td>
-                </template>
-                <span>{{ item.description }}</span>
-              </v-tooltip>
-
-              <v-tooltip top>
-                <template v-slot:activator="{on, attr}">
-                  <td class="text-center" v-on="on" v-bind="attr">{{ item.tickettype }}</td>
-                </template>
-                <span>{{ item.description }}</span>
-              </v-tooltip>
-
-              <v-tooltip top>
-                <template v-slot:activator="{on, attr}">
-                  <td class="text-center" v-on="on" v-bind="attr">{{ item.requester }}</td>
-                </template>
-                <span>{{ item.description }}</span>
-              </v-tooltip>
+              <td class="text-center" v-on="on" v-bind="attr">{{ item.agentname }}</td>
+              <td class="text-center" v-on="on" v-bind="attr">{{ item.registerdate }}</td>
+              <td class="text-center" v-on="on" v-bind="attr">{{ item.tickettype }}</td>
+              <td class="text-center" v-on="on" v-bind="attr">{{ item.requester }}</td>
 
               <td class="text-center">
                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
