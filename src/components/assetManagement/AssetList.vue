@@ -189,7 +189,7 @@
                 })
             },
             editAsset(item) {
-                this.$router.push("/Asset/Edit/" + item.id);
+                this.$router.push("/Asset/Edit/" + item.id + '/' + this.customerid);
             },
             customerChanged: function (e) {
                 if (e === undefined) this.items = [];
@@ -197,7 +197,6 @@
 
             },
             newAsset() {
-                console.log("new Asset");
                 if (this.customerid) {
                     this.$router.push("/Asset/Insert/undefined/" + this.customerid);
                 } else {
