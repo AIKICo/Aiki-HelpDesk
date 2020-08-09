@@ -9,11 +9,11 @@ const settingsService = {
         icon: "mdi-cogs",
         roles:"admin",
         items: [
-          { name: "OperatingHours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperationHours.png", imageType:'png', roles:"admin" },
-          { name: "SLA Policies",label:"قرارداد سطح سرویس", path: "/SLASettings", image: "SLA.png", imageType:'png', roles:"admin" },
-          { name: "Members",label:"کاربران", path: "/Members", image: "UsersManagement.png", imageType:'png', roles:"admin" },
-          { name: "company",label:"مشتریان", path: "/CustomerList", image: "settings-customer.png", imageType:'png', roles:"admin" },
-          { name: "Groups",label:"گروه ها", path: "/Groups", image: "Groups.png", imageType:'png', roles:"admin" }
+          { name: "OperatingHours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperatingHours.svg", imageType:'svg', roles:"admin" },
+          { name: "SLA Policies",label:"قرارداد سطح سرویس", path: "/SLASettings", image: "SLA.svg", imageType:'svg', roles:"admin" },
+          { name: "Members",label:"کاربران", path: "/Members", image: "UsersManagement.svg", imageType:'svg', roles:"admin" },
+          { name: "customer",label:"مشتریان", path: "/CustomerList", image: "customer.svg", imageType:'svg', roles:"admin" },
+          { name: "Groups",label:"گروه ها", path: "/Groups", image: "Groups.svg", imageType:'svg', roles:"admin" }
         ]
       },
       {
