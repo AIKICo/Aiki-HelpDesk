@@ -50,6 +50,8 @@
                             :error-messages="errors"
                             outlined
                             shaped
+                            dir="ltr"
+                            :type="'number'"
                             :disabled="disableControl"
                         ></v-text-field>
                       </validation-provider>

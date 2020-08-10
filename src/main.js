@@ -22,6 +22,7 @@ import lodash from "lodash";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import VueNativeNotification from 'vue-native-notification'
+import Splash from 'vue-splash';
 
 
 //axois.defaults.baseURL = "https://localhost:5001/";
@@ -44,6 +45,7 @@ const toastOptions = {
     rtl: true
 };
 Vue.use(Toast, toastOptions);
+Vue.use(Splash)
 
 Vue.directive("DynamicEvents", DynamicDirectives);
 Vue.component("date-picker", VuePersianDatetimePicker);

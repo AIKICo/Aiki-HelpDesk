@@ -1,7 +1,7 @@
 <template v-slot:items="props">
   <v-app>
-    <app-drawer v-if="$store.state.isLoggedIn"></app-drawer>
-    <app-bar></app-bar>
+    <app-drawer v-if="$store.state.isLoggedIn && !showSplash"></app-drawer>
+    <app-bar v-if="!showSplash"></app-bar>
     <v-main>
       <v-snackbar
           v-model="snackWithButtons"
@@ -23,7 +23,7 @@
         <router-view :key="$route.fullPath"></router-view>
       </transition>
     </v-main>
-    <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app>
+    <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app v-if="!showSplash">
       <v-row no-gutters v-if="!$store.state.IsMobile">
         <v-col>
           <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی</span>
@@ -74,7 +74,15 @@
       </template>
       <span>درج</span>
     </v-tooltip>
-    <vue-progress-bar></vue-progress-bar>
+    <vue-progress-bar v-if="!showSplash"></vue-progress-bar>
+    <vue-splash
+        :show="showSplash"
+        :logo="logo"
+        title="میزکار خدمات رایانه ای شرکت ایده پردازان دانش هوش مصنوعی"
+        color="#00bfa5"
+        :size="800"
+        :fixed="true"
+    />
   </v-app>
 </template>
 
@@ -109,7 +117,8 @@ export default {
     snackBtnText: "",
     snackWithBtnText: "",
     snackWithButtons: false,
-    timeout: -1
+    timeout: -1,
+    showSplash:true
   }),
   methods: {
     showRefreshUI(e) {
@@ -162,8 +171,15 @@ export default {
       this.$store.isLoggedIn = true;
       this.$store.dispatch("UserService/notificationStart");
     }
+    setTimeout(()=>{
+      this.showSplash=false;
+    },3000)
   },
-  computed: {},
+  computed: {
+    logo() {
+      return this.getStaticImage('splash.png');
+    }
+  },
   watch: {
     dark: function (val) {
       this.$vuetify.theme.dark = val;

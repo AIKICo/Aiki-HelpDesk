@@ -39,6 +39,7 @@
     "vue-persian-datetime-picker": "^2.2.0",
     "vue-progressbar": "^0.7.5",
     "vue-router": "^3.4.1",
+    "vue-splash": "^1.0.0-alpha5",
     "vue-toastification": "^1.7.6",
     "vue-uuid": "^1.1.1",
     "vue2-persian-datepicker": "^2.1.1",
