@@ -16,7 +16,9 @@
 
                 <v-list-item-content>
                     <v-list-item-title>{{ $store.state.memberName}}</v-list-item-title>
-                    <v-list-item-subtitle>{{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}}
+                    <v-list-item-subtitle>
+                      <p>{{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}}</p>
+                      <p>{{$store.state.companyName}}</p>
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>

@@ -182,7 +182,7 @@
                 },
                 Roles: [
                     {Label: "مدیر", Value: "admin"},
-                    {Label: "اپراتور", Value: "operator"}
+                    {Label: "کارشناس", Value: "operator"}
                 ]
             };
         },

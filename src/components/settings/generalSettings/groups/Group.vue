@@ -40,7 +40,7 @@
                                             item-text="membername"
                                             item-value="id"
                                             v-model="Group.agents"
-                                            label="اپراتورها"
+                                            label="کارشناسان"
                                             shaped
                                             outlined
                                             multiple
