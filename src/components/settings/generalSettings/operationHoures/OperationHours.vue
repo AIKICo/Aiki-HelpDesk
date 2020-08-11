@@ -7,7 +7,7 @@
             <form @submit.prevent="handleSubmit(onSubmit)">
               <v-card outlined>
                 <v-card-title
-                  :class="$store.state.defaultColor + ' white--text'"
+                    :class="$store.state.defaultColor + ' white--text'"
                 >
                   <v-icon large color="white">mdi-edit</v-icon>
                   {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
@@ -16,38 +16,38 @@
                   <v-row no-gutters>
                     <v-col cols="10">
                       <v-text-field
-                        v-model="OperationHour.title"
-                        placeholder="عنوان"
+                          v-model="OperationHour.title"
+                          placeholder="عنوان"
                       ></v-text-field>
                       <v-checkbox
-                        v-model="OperationHour.isdefault"
-                        label="پیش فرض"
-                        v-if="!existsIsDefault"
+                          v-model="OperationHour.isdefault"
+                          label="پیش فرض"
+                          v-if="!existsIsDefault"
                       ></v-checkbox>
                     </v-col>
                   </v-row>
                   <v-row
-                    v-for="item in OperationHour.workdays"
-                    :key="item.dayName"
-                    align="center"
-                    justify="center"
-                    no-gutters
+                      v-for="item in OperationHour.workdays"
+                      :key="item.dayName"
+                      align="center"
+                      justify="center"
+                      no-gutters
                   >
                     <v-col>
                       {{ item.dayName }}
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.startTime"
-                        style="width: 100px;"
-                        type="time"
+                          v-model="item.startTime"
+                          style="width: 100px;"
+                          type="time"
                       ></v-text-field>
                     </v-col>
                     <v-col>
                       <v-text-field
-                        v-model="item.endTime"
-                        style="width: 100px;"
-                        type="time"
+                          v-model="item.endTime"
+                          style="width: 100px;"
+                          type="time"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -57,20 +57,20 @@
                         <v-card-title>روزهای تعطیل</v-card-title>
                         <v-card-text>
                           <v-row no-gutters>
-                            <v-col cols="3" class="mt-7"
-                              ><date-picker v-model="holiday"></date-picker
-                            ></v-col>
+                            <v-col cols="3" class="mt-7">
+                              <date-picker v-model="holiday"></date-picker>
+                            </v-col>
                             <v-col cols="8">
                               <v-text-field
-                                placeholder="علت تعطیلی"
-                                v-model="holidayComment"
+                                  placeholder="علت تعطیلی"
+                                  v-model="holidayComment"
                               ></v-text-field>
                             </v-col>
                             <v-col cols="1" class="mt-7">
                               <v-icon
-                                x-large
-                                :color="$store.state.defaultColor"
-                                @click="addHoliday"
+                                  x-large
+                                  :color="$store.state.defaultColor"
+                                  @click="addHoliday"
                               >
                                 mdi-plus
                               </v-icon>
@@ -80,19 +80,19 @@
                             <v-spacer></v-spacer>
                           </v-row>
                           <v-row
-                            v-for="item in OperationHour.holidays"
-                            :key="item.Day"
-                            no-gutters
+                              v-for="item in OperationHour.holidays"
+                              :key="item.Day"
+                              no-gutters
                           >
                             <v-col>
                               <span class="text-bold ml-3">{{
-                                item.day | formatDate
-                              }}</span>
+                                  item.day | formatDate
+                                }}</span>
                               <span v-text="item.reason"></span>
                               <span>
                                 <v-icon
-                                  color="red"
-                                  @click="deleteHoliday(item)"
+                                    color="red"
+                                    @click="deleteHoliday(item)"
                                 >
                                   mdi-delete
                                 </v-icon>
@@ -107,17 +107,17 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn
-                    :color="$store.state.defaultColor + ' darken-1'"
-                    :disabled="invalid"
-                    text
-                    type="submit"
+                      :color="$store.state.defaultColor + ' darken-1'"
+                      :disabled="invalid"
+                      text
+                      type="submit"
                   >
                     تایید
                   </v-btn>
                   <v-btn
-                    :color="$store.state.defaultColor + ' darken-1'"
-                    text
-                    @click="closeDialog"
+                      :color="$store.state.defaultColor + ' darken-1'"
+                      text
+                      @click="closeDialog"
                   >
                     برگشت
                   </v-btn>
@@ -132,8 +132,9 @@
 </template>
 
 <script>
-import { required } from "vee-validate/dist/rules";
-import { extend, ValidationObserver, setInteractionMode } from "vee-validate";
+import {required} from "vee-validate/dist/rules";
+import {extend, ValidationObserver, setInteractionMode} from "vee-validate";
+
 setInteractionMode("eager");
 extend("required", {
   ...required,
@@ -156,26 +157,26 @@ export default {
     onSubmit() {
       if (this.$route.params.formType === "Insert") {
         this.$store
-          .dispatch(
-            "OperationHourService/addOperationHours",
-            this.OperationHour
-          )
-          .then(res => {
-            if (res.status === 201) {
-              this.closeDialog();
-            }
-          });
+            .dispatch(
+                "OperationHourService/addOperationHours",
+                this.OperationHour
+            )
+            .then(res => {
+              if (res.status === 201) {
+                this.closeDialog();
+              }
+            });
       } else if (this.$route.params.formType === "Edit") {
         this.$store
-          .dispatch(
-            "OperationHourService/editOperationHours",
-            this.OperationHour
-          )
-          .then(res => {
-            if (res.status === 200) {
-              this.closeDialog();
-            }
-          });
+            .dispatch(
+                "OperationHourService/editOperationHours",
+                this.OperationHour
+            )
+            .then(res => {
+              if (res.status === 200) {
+                this.closeDialog();
+              }
+            });
       }
     },
     addHoliday() {
@@ -187,8 +188,8 @@ export default {
       this.holidayComment = "";
     },
     deleteHoliday(item) {
-      var newItems = this.OperationHour.holidays.filter(function(
-              el
+      var newItems = this.OperationHour.holidays.filter(function (
+          el
       ) {
         return el.day != item.day;
       });
@@ -217,20 +218,20 @@ export default {
         title: "",
         timezone: "",
         workdays: [
-          { dayName: "شنبه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "یکشنبه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "دوشنبه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "سه شنبه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "چهار شنبه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "پنج شنیه", startTime: "08:00", endTime: "14:00" },
-          { dayName: "جمعه", startTime: "00:00", endTime: "00:00" }
+          {dayName: "شنبه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "یکشنبه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "دوشنبه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "سه شنبه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "چهار شنبه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "پنج شنیه", startTime: "08:00", endTime: "14:00"},
+          {dayName: "جمعه", startTime: "00:00", endTime: "00:00"}
         ],
         holidays: [],
         isdefault: false
       };
 
       this.existsIsDefault =
-        this.$store.getters["OperationHourService/getExistsIsDefault"] > 0;
+          this.$store.getters["OperationHourService/getExistsIsDefault"] > 0;
     }
   }
 };

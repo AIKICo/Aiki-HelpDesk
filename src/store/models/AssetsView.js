@@ -11,6 +11,7 @@ export default class AssetsView extends Model{
             title: this.uid(""),
             assetlocationid: this.uid(null),
             assettypeid: this.attr(''),
+            deliverydate:this.attr(null),
             allowdelete:this.boolean(null)
         };
     }

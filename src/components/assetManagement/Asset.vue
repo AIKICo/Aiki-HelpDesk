@@ -12,7 +12,7 @@
                   <v-icon large color="white">mdi-edit</v-icon>
                   {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                 </v-card-title>
-                <v-card-text class="mt-3">
+                <v-card-text :class="'mt-3'">
                   <v-row>
                     <v-col>
                       <validation-provider
@@ -117,10 +117,25 @@
                         >
                         </v-autocomplete>
                       </validation-provider>
+                      <v-text-field
+                          id="deliverydate"
+                          :value="Asset.deliverydate | formatDate"
+                          label="تاریخ تحویل"
+                          clearable
+                          outlined
+                          shaped
+                          dir="ltr"
+                      ></v-text-field>
+                      <date-picker
+                          v-model="Asset.deliverydate"
+                          label="تاریخ تحویل"
+                          format="jYYYY/jMM/jDD"
+                          element="deliverydate">
+                      </date-picker>
                     </v-col>
                   </v-row>
                   <v-row no-gutters>
-                    <v-col cols="6" class="ml-2">
+                    <v-col cols="6" :class="'ml-2'">
                       <v-select
                           :items="AppConstants"
                           item-text="value1"
@@ -136,7 +151,7 @@
                           v-model="valueLabel"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="1" class="mt-7">
+                    <v-col cols="1" :class="'mt-7'">
                       <v-icon
                           x-large
                           :color="$store.state.defaultColor"
@@ -156,7 +171,7 @@
                           :key="item.value"
                       >
                         <v-col>
-                          <span class="text-bold ml-3">{{ item.label }}</span>
+                          <span :class="'text-bold ml-3'">{{ item.label }}</span>
                           <span v-text="item.value"></span>
                           <span>
                                                     <v-icon
@@ -256,7 +271,6 @@ export default {
             this.$refs.observer.setErrors({
               assetnumber: ['شماره اموال وجود دارد']
             });
-            return;
           } else {
             this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
               if (res.status === 201) {
@@ -275,10 +289,10 @@ export default {
       }
     },
     deleteAdditionalInfo(item) {
-      var newItems = this.Asset.assetadditionalinfo.filter(function (
+      let newItems = this.Asset.assetadditionalinfo.filter(function (
           el
       ) {
-        return el.label != item.label;
+        return el.label !== item.label;
       });
       this.Asset.assetadditionalinfo = newItems;
     },

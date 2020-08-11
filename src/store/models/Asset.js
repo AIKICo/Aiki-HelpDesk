@@ -12,6 +12,7 @@ export default class Asset extends Model {
           assettypeid: this.uid(null),
           assetnumber: this.attr(''),
           assetadditionalinfo: this.attr([]),
+          deliverydate:this.attr(null),
           allowdelete:this.boolean(null)
       };
     }
