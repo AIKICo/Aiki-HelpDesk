@@ -32,8 +32,8 @@
             }
         },
         created(){
-            this.$store.dispatch("GroupService/loadGroups").then(() => {
-                this.Groups = this.$store.getters["GroupService/getGroups"];
+            this.$store.dispatch("GroupService/loadGroups").then((res) => {
+                this.Groups = res.data;
             })
         }
     }
