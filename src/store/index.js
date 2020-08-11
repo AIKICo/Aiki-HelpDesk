@@ -88,10 +88,10 @@ export default new Vuex.Store({
         memberName: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).membername : null,
         memberRole: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).roles : null,
         memberid: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).id : null,
-        companyName:localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).companyname:null,
-            isUserActive: null,
+        companyName: localStorage.getItem("userInfo") != null ? JSON.parse(localStorage.getItem("userInfo")).companyName : null,
+        isUserActive: null,
         activeTickets: 0,
-        connection:null
+        connection: null
     },
     mutations: {},
     actions: {},
@@ -112,7 +112,7 @@ export default new Vuex.Store({
         TicketService: ticketService,
         TicketHistoryService: ticketHistoryService,
         TicketCountInfoService: ticketCountInfoService,
-        ProfilePictureService:profilePictureService
+        ProfilePictureService: profilePictureService
     },
     getters: {}
 });
