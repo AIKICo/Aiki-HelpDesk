@@ -10,20 +10,9 @@
         <v-icon x-large>
             mdi-handshake
         </v-icon>
-        <v-toolbar-title class="col-2" v-if="!$store.state.IsMobile">
+        <v-toolbar-title>
             <b>میزکار خدمات رایانه ای</b>
         </v-toolbar-title>
-        <v-toolbar-title v-if="$store.state.IsMobile && !$store.state.isLoggedIn">
-            <b>میزکار</b>
-        </v-toolbar-title>
-        <v-text-field
-                flat
-                solo-inverted
-                hide-details
-                prepend-inner-icon="mdi-magnify"
-                label="جستجو"
-                v-if="$store.state.isLoggedIn"
-        />
         <v-spacer/>
         <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
             <v-icon large>mdi-logout</v-icon>

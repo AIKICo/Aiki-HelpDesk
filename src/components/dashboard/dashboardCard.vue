@@ -1,5 +1,5 @@
 <template v-slot:items="props">
-    <v-card hover>
+    <v-card>
         <v-list-item>
             <v-list-item-avatar :color="color">
                 <v-icon dark>{{cardIcon}}</v-icon>

@@ -15,10 +15,12 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                    <v-list-item-title>{{ $store.state.memberName}}</v-list-item-title>
-                    <v-list-item-subtitle>
-                      <p>{{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}}</p>
-                      <p>{{$store.state.companyName}}</p>
+                    <v-list-item-title>
+                      {{ $store.state.memberName}}
+                      ({{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}})
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="text-wrap">
+                      {{$store.state.companyName}}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
