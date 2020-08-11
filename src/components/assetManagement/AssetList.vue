@@ -33,9 +33,7 @@
         <v-row>
           <v-col>
             <v-data-table
-                :footer-props="{
-                                            'items-per-page-options': [50, 100, 150, 200, 250]
-                                          }"
+                :footer-props="{'items-per-page-options': [50, 100, 150, 200, 250]}"
                 :headers="headers"
                 :items="items"
                 :items-per-page="itemPerPage"
@@ -51,7 +49,7 @@
                     @mouseover="selectItem(item)"
                 >
                   <td class="text-center">
-                    {{item.deliverydate}}
+                    {{item.deliverydate | formatDate}}
                   </td>
                   <td class="text-center">
                     <v-chip :color="$store.state.defaultColor + ' lighten-5'"
