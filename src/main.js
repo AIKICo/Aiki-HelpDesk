@@ -138,6 +138,14 @@ new Vue({
                     }
                 }
             }
+            if (error.response.data.includes('was not found in the key ring')){
+                Vue.$toast.error('به دلیل تعداد زیاد connectionها با بانک اطلاعاتی امکان برقراری ارتباط با سرور میسر نمی باشد');
+                if (this) {
+                    if (this.$Progress) {
+                        this.$Progress.fail();
+                    }
+                }
+            }
             return Promise.reject(error);
         });
     },

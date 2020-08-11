@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-row>
-          <v-col cols="7">
+          <v-col md="7">
             <v-select
                 :items="customers"
                 item-text="title"
@@ -19,7 +19,7 @@
         </v-row>
         <v-spacer></v-spacer>
         <v-row>
-          <v-col md="5" sm="12">
+          <v-col md="5">
             <v-text-field
                 v-model="searchKey"
                 append-icon="mdi-magnify"
