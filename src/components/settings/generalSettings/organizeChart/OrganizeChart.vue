@@ -17,7 +17,7 @@
                       <ValidationProvider
                           v-slot="{ errors }"
                           name="آدرس ایمیل"
-                          rules="required|email"
+                          rules="email"
                           vid="email"
                           immediate
                       >

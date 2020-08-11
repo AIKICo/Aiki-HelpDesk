@@ -93,6 +93,9 @@ new Vue({
         });
 
         axois.interceptors.response.use(response => {
+            if (response.status===201){
+                Vue.$toast.success('اطلاعات ثبت گردید')
+            }
             if (this) {
                 if (this.$Progress) {
                     this.$Progress.finish();
