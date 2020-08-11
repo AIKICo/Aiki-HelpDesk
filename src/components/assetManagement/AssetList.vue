@@ -19,7 +19,7 @@
         </v-row>
         <v-spacer></v-spacer>
         <v-row>
-          <v-col cols="5">
+          <v-col md="5" sm="12">
             <v-text-field
                 v-model="searchKey"
                 append-icon="mdi-magnify"
@@ -131,7 +131,7 @@ export default {
           text:"تاریخ تحویل",
           value:"deliverydate",
           width: 100,
-          align: "center"
+          align: "center",
         },
         {
           text: "شماره اموال",
@@ -141,7 +141,7 @@ export default {
         },
         {
           text: "تحویل گیرنده",
-          value: "employeeid",
+          value: "title",
           width: 150,
           align: "center",
         },

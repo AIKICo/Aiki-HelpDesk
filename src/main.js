@@ -24,7 +24,6 @@ import "vue-toastification/dist/index.css";
 import VueNativeNotification from 'vue-native-notification'
 import Splash from 'vue-splash';
 
-
 //axois.defaults.baseURL = "https://localhost:5001/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
@@ -39,7 +38,7 @@ Vue.use(Vue2TouchEvents);
 Vue.use(VueLodash, {name: "custom", lodash: lodash});
 Vue.use(VueNativeNotification, {
     requestOnNotify: true
-})
+});
 
 const toastOptions = {
     rtl: true
