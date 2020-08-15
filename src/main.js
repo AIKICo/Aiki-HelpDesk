@@ -103,7 +103,12 @@ new Vue({
             }
             return response;
         }, async function (error) {
-            switch (error.response.status){
+            if (!error.response)
+            {
+                Vue.$toast.error('ارتباط با شیکه میسر نمی باشد');
+                return Promise.reject(error);
+            }
+                switch (error.response.status){
                 case 400:
                     Vue.$toast.error(error.response.data.message);
                     break;

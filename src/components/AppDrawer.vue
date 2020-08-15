@@ -17,10 +17,9 @@
                 <v-list-item-content>
                     <v-list-item-title>
                       {{ $store.state.memberName}}
-                      ({{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}})
                     </v-list-item-title>
                     <v-list-item-subtitle class="text-wrap">
-                      {{$store.state.companyName}}
+                      {{ $store.state.memberRole==="admin"?"مدیریت": "کارشناس"}}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
