@@ -47,10 +47,10 @@
                 </template>
                 <span>{{ item.description }}</span>
               </v-tooltip>
-              <td class="text-center" v-on="on" v-bind="attr">{{ item.agentname }}</td>
-              <td class="text-center" v-on="on" v-bind="attr">{{ item.registerdate }}</td>
-              <td class="text-center" v-on="on" v-bind="attr">{{ item.tickettype }}</td>
-              <td class="text-center" v-on="on" v-bind="attr">{{ item.requester }}</td>
+              <td class="text-center">{{ item.agentname }}</td>
+              <td class="text-center">{{ item.registerdate }}</td>
+              <td class="text-center">{{ item.tickettype }}</td>
+              <td class="text-center" >{{ item.requester }}</td>
 
               <td class="text-center">
                 <v-chip :color="$store.state.defaultColor + ' lighten-5'"
@@ -453,17 +453,17 @@ export default {
       }
     },
     loadData() {
-      this.getTickets().then(() => {
-        this.tickets = this.$store.state.TicketService.current;
+      this.getTickets().then((res) => {
         if (this.$store.state.memberRole === "admin") {
+          this.tickets = res.data;
           this.$store.state.activeTickets = this.tickets.length;
         } else {
           let memberName = this.$store.state.memberName;
+          this.tickets = this.lodash.filter(res.data, item=>item.agentname===memberName);
           this.$store.state.activeTickets = this.tickets.filter(function (el) {
             return (el.agentname === memberName)
           }).length;
         }
-
       });
     },
     refreshData() {
