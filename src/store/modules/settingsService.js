@@ -37,12 +37,12 @@ const settingsService = {
         label:"اموال",
         path: "/SettingsControlPanel",
         icon: "mdi-desktop-classic",
-        roles:"admin,user",
+        roles:"admin,backupuser",
         items: [
-          { name: "AssetsTypes",label:"معرفی اقلام انبار", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7e", image: "AssetsTypes.svg", imageType:'svg', roles:"admin,user" },
-          { name: "AssetsTypesDetails",label:"اطلاعات تکمیلی اقلام انبار", path: "/AppConstants/9c3a6fa5-9f5e-4af2-bded-f2b256b1fea4", image: "AssetsTypesDetails.svg", imageType:'svg',roles:"admin,user" },
-          { name: "AssetsLocation",label:"محل نصب اقلام", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f", image: "AssetsLocation.svg", imageType:'svg', roles:"admin,user" },
-          { name: "AssetsAdditionalInfo",label:"اطلاعات تکمیلی اموال", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7D", image: "AssetsAdditionalInfo.svg", imageType:'svg', roles:"admin,user" },
+          { name: "AssetsTypes",label:"معرفی اقلام انبار", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7e", image: "AssetsTypes.svg", imageType:'svg', roles:"admin,backupuser" },
+          { name: "AssetsTypesDetails",label:"اطلاعات تکمیلی اقلام انبار", path: "/AppConstants/9c3a6fa5-9f5e-4af2-bded-f2b256b1fea4", image: "AssetsTypesDetails.svg", imageType:'svg',roles:"admin,backupuser" },
+          { name: "AssetsLocation",label:"محل نصب اقلام", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7f", image: "AssetsLocation.svg", imageType:'svg', roles:"admin,backupuser" },
+          { name: "AssetsAdditionalInfo",label:"اطلاعات تکمیلی اموال", path: "/AppConstants/416e2a28-cfc4-49f9-9bf1-6ef0451a5b7D", image: "AssetsAdditionalInfo.svg", imageType:'svg', roles:"admin,backupuser" },
         ]
       },
     ]
