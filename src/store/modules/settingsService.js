@@ -21,7 +21,7 @@ const settingsService = {
         label:"درخواست کار",
         path: "/SettingsControlPanel",
         icon: "mdi-notebook-outline",
-        roles:"admin,user",
+        roles:"admin",
         items: [
           { name: "TicketStatus",label:"وضعیت", path: "/AppConstants/473b359f-30a7-4963-a671-6f618b277e48", image: "TicketStatus.svg",imageType:'svg', roles:"admin" },
           { name: "Tags",label:"برچسب", path: "/AppConstants/e215f24f-4d28-46e7-b75d-26a19feb656a", image: "Tags.svg", imageType:'svg', roles:"admin" },
