@@ -12,7 +12,7 @@
     </v-icon>
     <v-toolbar-title>
       <b>میزکار خدمات رایانه ای</b>
-      <span>({{ $store.state.companyName }})</span>
+      <span v-if="$store.state.isLoggedIn"">({{ $store.state.companyName }})</span>
     </v-toolbar-title>
     <v-spacer/>
     <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
