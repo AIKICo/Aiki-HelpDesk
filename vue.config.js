@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-    publicPath:"/",
+    publicPath:"/Aiki-HelpDesk/",
     "transpileDependencies": [
         "vuetify"
     ],
