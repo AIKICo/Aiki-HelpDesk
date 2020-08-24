@@ -12,6 +12,7 @@
                                     <v-icon large color="white">mdi-edit</v-icon>
                                     {{ $route.params.formType === "Edit" ? "ویرایش" : "درج" }}
                                 </v-card-title>
+
                                 <v-card-text class="mt-3">
                                     <v-row>
                                         <v-col>
@@ -39,6 +40,7 @@
                                             ></v-text-field>
                                         </v-col>
                                     </v-row>
+
                                     <v-row no-gutters>
                                         <v-col cols="6" class="ml-2">
                                             <v-select
@@ -72,7 +74,7 @@
                                     <v-row>
                                         <v-col>
                                             <v-row
-                                                    v-for="(index, item) in AppConstantItem.additionalinfo"
+                                                    v-for="(item, index) in AppConstantItem.additionalinfo"
                                                     :key="index"
                                             >
                                                 <v-col>
@@ -194,6 +196,7 @@
             if (this.$route.params.formType === "Edit") {
                 this.getSingleAppConstant(this.$route.params.id).then((res) => {
                     this.AppConstantItem = res.data;
+                    console.log(this.AppConstantItem);
                 });
 
             } else if (this.$route.params.formType === "Insert") {
