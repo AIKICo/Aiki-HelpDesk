@@ -75,7 +75,7 @@
           </v-row>
           <v-row>
             <v-col>
-              <v-btn x-large value="register" class="col-12 info" @click="$router.push('/registerUser')">
+              <v-btn x-large value="register" class="col-12 white--text" style="background-color: #6200EE" @click="$router.push('/registerUser')">
                 ثبت نام رایگان
               </v-btn>
             </v-col>
