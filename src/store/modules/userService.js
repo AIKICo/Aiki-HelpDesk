@@ -44,6 +44,7 @@ const userService = {
                 store.state.memberRole = result.data.roles;
                 store.state.accessToken = result.data.token;
                 store.state.memberid = result.data.id;
+                store.state.companyName = result.data.companyName;
                 commit("OFF_CONNECTION");
                 await store.dispatch("UserService/notificationStart");
             }

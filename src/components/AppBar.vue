@@ -12,7 +12,7 @@
     </v-icon>
     <v-toolbar-title>
       <b>میزکار خدمات رایانه ای</b>
-      <span v-if="$store.state.isLoggedIn">({{ $store.state.companyName }})</span>
+      <span v-if="$store.state.isLoggedIn">({{ this.companyName }})</span>
     </v-toolbar-title>
     <v-spacer/>
     <v-btn icon @click="this.logout" v-if="$store.state.isLoggedIn">
@@ -35,7 +35,14 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
+  computed: {
+    ...mapState({
+      companyName: state => state.companyName
+    })
+  },
   methods: {
     logout() {
       this.$store.dispatch('UserService/logout').then(() => {
