@@ -24,6 +24,7 @@ import dashboard from "./components/dashboard/dashboard";
 import registerUser from "./components/userManagement/registerUser";
 import editProfile from "./components/profile/editProfile";
 import registerUserConfirm from "./components/userManagement/registerUserConfirm";
+import resendPassword from "@/components/auth/resendPassword";
 
 const routes = [
     {
@@ -278,6 +279,14 @@ const routes = [
         component: registerUserConfirm,
         props: true,
         meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        name:'resetPassword',
+        path: '/resetPassword',
+        component: resendPassword,
+        meta:{
             requiresAuth: false
         }
     }

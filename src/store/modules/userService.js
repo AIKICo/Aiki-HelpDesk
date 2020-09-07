@@ -85,6 +85,12 @@ const userService = {
             axois.defaults.headers.common.CompanyID = store.state.companyId;
             return response;
         },
+        async resendPassword(context, payload) {
+            delete axois.defaults.headers.common.CompanyID;
+            let response = await axios.get("/Users/ResendPassword/" + payload);
+            axois.defaults.headers.common.CompanyID = store.state.companyId;
+            return response;
+        },
     },
     getters: {
         getUsers: () => User.api().get("/users"),

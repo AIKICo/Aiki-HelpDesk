@@ -93,7 +93,7 @@ new Vue({
         });
 
         axois.interceptors.response.use(response => {
-            if (response.status===201){
+            if (response.status === 201) {
                 Vue.$toast.success('اطلاعات ثبت گردید')
             }
             if (this) {
@@ -103,13 +103,15 @@ new Vue({
             }
             return response;
         }, async function (error) {
-            if (!error.response)
-            {
+            if (!error.response) {
                 Vue.$toast.error('ارتباط با شیکه میسر نمی باشد');
                 return Promise.reject(error);
             }
-                switch (error.response.status){
+            switch (error.response.status) {
                 case 400:
+                    Vue.$toast.error(error.response.data.message);
+                    break;
+                case 500:
                     Vue.$toast.error(error.response.data.message);
                     break;
                 case 401:
@@ -131,20 +133,13 @@ new Vue({
                         }
                     }
             }
-            if (error.response.data.includes('was not found in the key ring')){
+            if (error.response.data.includes('was not found in the key ring')) {
+                Vue.$toast.error('به دلیل تعداد زیاد connectionها با بانک اطلاعاتی امکان برقراری ارتباط با سرور میسر نمی باشد');
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
                 localStorage.clear();
                 router.push("/login").catch(() => {
                 });
-                if (this) {
-                    if (this.$Progress) {
-                        this.$Progress.fail();
-                    }
-                }
-            }
-            if (error.response.data.includes('was not found in the key ring')){
-                Vue.$toast.error('به دلیل تعداد زیاد connectionها با بانک اطلاعاتی امکان برقراری ارتباط با سرور میسر نمی باشد');
                 if (this) {
                     if (this.$Progress) {
                         this.$Progress.fail();

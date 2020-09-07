@@ -127,7 +127,7 @@ extend("required", {
 });
 extend("email", {
   ...email,
-  message: "{_field_} آدرس معتبری نمی باشد"
+  message: "{_field_} معتبر نمی باشد"
 });
 extend("regex", {
   ...regex,

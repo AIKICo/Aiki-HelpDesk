@@ -26,6 +26,7 @@
                             outlined
                             shaped
                             immediate
+                            type="email"
                             dir="ltr"
                         ></v-text-field>
                       </ValidationProvider>
@@ -63,19 +64,27 @@
                           :disabled="invalid"
                           value="login"
                           type="submit"
+                          text>
+                        ورود به سامانه
+                      </v-btn>
+                      <v-btn
+                          :color="$store.state.defaultColor + ' darken-1'"
+                          value="resendPassword"
                           text
-                      >ورود به سامانه
-                      </v-btn
-                      >
+                          to="/resetPassword">
+                        ارسال مجدد کلمه عبور
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </form>
               </ValidationObserver>
+
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <v-btn x-large value="register" class="col-12 white--text" style="background-color: #6200EE" @click="$router.push('/registerUser')">
+              <v-btn x-large value="register" class="col-12 white--text" style="background-color: #6200EE"
+                     @click="$router.push('/registerUser')">
                 ثبت نام رایگان
               </v-btn>
             </v-col>
