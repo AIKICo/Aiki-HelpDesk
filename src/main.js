@@ -134,12 +134,19 @@ new Vue({
                     }
             }
             if (error.response.data.includes('was not found in the key ring')) {
-                Vue.$toast.error('به دلیل تعداد زیاد connectionها با بانک اطلاعاتی امکان برقراری ارتباط با سرور میسر نمی باشد');
                 await store.dispatch('UserService/logout');
                 store.state.isLoggedIn = false;
                 localStorage.clear();
                 router.push("/login").catch(() => {
                 });
+                if (this) {
+                    if (this.$Progress) {
+                        this.$Progress.fail();
+                    }
+                }
+            }
+            if (error.response.data.includes('was not found in the key ring')) {
+                Vue.$toast.error('به دلیل تعداد زیاد connectionها با بانک اطلاعاتی امکان برقراری ارتباط با سرور میسر نمی باشد');
                 if (this) {
                     if (this.$Progress) {
                         this.$Progress.fail();

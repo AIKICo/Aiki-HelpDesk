@@ -16,7 +16,7 @@
                       <ValidationProvider
                           v-slot="{ errors }"
                           name="شناسه کاربری"
-                          rules="required"
+                          rules="required|email"
                       >
                         <v-text-field
                             v-model="loginDetails.userName"
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import {required} from "vee-validate/dist/rules";
+import {required, email} from "vee-validate/dist/rules";
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 
 import {
@@ -118,7 +118,10 @@ extend("required", {
   ...required,
   message: "{_field_} نمی تواند خالی باشد"
 });
-
+extend("email", {
+  ...email,
+  message: "{_field_} معتبر نمی باشد"
+});
 export default {
   name: "login",
   data() {
