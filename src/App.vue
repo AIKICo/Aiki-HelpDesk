@@ -78,7 +78,6 @@
     <vue-splash
         :show="showSplash"
         :logo="logo"
-        title="میزکار خدمات رایانه ای شرکت ایده پردازان دانش هوش مصنوعی"
         color="#00bfa5"
         :size="800"
         :fixed="true"

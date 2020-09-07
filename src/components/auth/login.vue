@@ -60,7 +60,7 @@
 
                     <v-card-actions>
                       <v-btn
-                          :color="$store.state.defaultColor + ' darken-1'"
+                          :color="$store.state.defaultColor + ' darken-4'"
                           :disabled="invalid"
                           value="login"
                           type="submit"
