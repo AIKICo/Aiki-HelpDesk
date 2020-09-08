@@ -12,7 +12,8 @@ export default class AssetsView extends Model{
             assetlocationid: this.uid(null),
             assettypeid: this.attr(''),
             deliverydate:this.attr(null),
-            allowdelete:this.boolean(null)
+            allowdelete:this.boolean(null),
+            additionalinfo:this.attr('')
         };
     }
 }

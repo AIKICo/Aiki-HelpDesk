@@ -49,7 +49,7 @@
                     @mouseover="selectItem(item)"
                 >
                   <td class="text-center">
-                    {{item.deliverydate | formatDate}}
+                    {{ item.deliverydate | formatDate }}
                   </td>
                   <td class="text-center">
                     <v-chip :color="$store.state.defaultColor + ' lighten-5'"
@@ -65,6 +65,9 @@
                   </td>
                   <td class="text-center">
                     {{ item.assetlocationid }}
+                  </td>
+                  <td>
+                    {{ item.additionalinfo }}
                   </td>
                   <td>
                     <div v-if="item === selectedItem">
@@ -128,8 +131,8 @@ export default {
     return {
       headers: [
         {
-          text:"تاریخ تحویل",
-          value:"deliverydate",
+          text: "تاریخ تحویل",
+          value: "deliverydate",
           width: 100,
           align: "center",
         },
@@ -156,6 +159,11 @@ export default {
           value: "assetlocationid",
           width: 200,
           align: "center",
+        },
+        {
+          text: 'اطلاعات تکمیلی',
+          value: 'additionalinfo',
+          width: 150,
         },
         {
           text: "",
