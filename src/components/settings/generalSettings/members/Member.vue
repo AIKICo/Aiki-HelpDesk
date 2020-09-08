@@ -31,6 +31,7 @@
                   <validation-provider
                       v-slot="{ errors }"
                       name="کلمه عبور"
+                      :rules="$route.params.formType === 'Insert' ? 'required':''"
                       immediate
                   >
                     <v-text-field
