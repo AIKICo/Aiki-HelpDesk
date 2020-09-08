@@ -23,7 +23,7 @@
                         <v-text-field
                                 v-model="searchKey"
                                 append-icon="mdi-magnify"
-                                label="جستجو بر اساس شماره درخواست"
+                                label="جستجو..."
                                 single-line
                                 hide-details
                                 clearable
