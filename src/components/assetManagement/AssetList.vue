@@ -143,7 +143,7 @@ export default {
           align: "center",
         },
         {
-          text: "تحویل گیرنده",
+          text: "صاحب جمع",
           value: "title",
           width: 150,
           align: "center",
