@@ -135,66 +135,66 @@
                     </v-col>
                   </v-row>
                   <v-row no-gutters>
-                   <v-col cols="12">
-                     <v-card>
-                       <v-card-title>
-                         خواص اموال
-                       </v-card-title>
-                       <v-card-text>
-                         <v-row no-gutters>
-                           <v-col cols="6" :class="'ml-2'">
-                             <v-select
-                                 :items="AppConstants"
-                                 item-text="value1"
-                                 item-value="value1"
-                                 v-model="label"
-                                 label="عنوان"
-                             >
-                             </v-select>
-                           </v-col>
-                           <v-col cols="4">
-                             <v-text-field
-                                 placeholder="مقدار"
-                                 v-model="valueLabel"
-                             ></v-text-field>
-                           </v-col>
-                           <v-col cols="1" :class="'mt-7'">
-                             <v-icon
-                                 x-large
-                                 :color="$store.state.defaultColor"
-                                 @click="addAdditionalInfo"
-                             >
-                               mdi-plus
-                             </v-icon>
-                           </v-col>
-                         </v-row>
-                         <v-row>
-                           <v-spacer></v-spacer>
-                         </v-row>
-                         <v-row>
-                           <v-col>
-                             <v-row
-                                 v-for="item in Asset.assetadditionalinfo"
-                                 :key="item.value"
-                             >
-                               <v-col>
-                                 <span :class="'text-bold ml-3'">{{ item.label }}</span>
-                                 <span v-text="item.value"></span>
-                                 <span>
+                    <v-col cols="12">
+                      <v-card>
+                        <v-card-title>
+                          خواص اموال
+                        </v-card-title>
+                        <v-card-text>
+                          <v-row no-gutters>
+                            <v-col cols="6" :class="'ml-2'">
+                              <v-select
+                                  :items="AppConstants"
+                                  item-text="value1"
+                                  item-value="value1"
+                                  v-model="label"
+                                  label="عنوان"
+                              >
+                              </v-select>
+                            </v-col>
+                            <v-col cols="4">
+                              <v-text-field
+                                  placeholder="مقدار"
+                                  v-model="valueLabel"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="1" :class="'mt-7'">
+                              <v-icon
+                                  x-large
+                                  :color="$store.state.defaultColor"
+                                  @click="addAdditionalInfo"
+                              >
+                                mdi-plus
+                              </v-icon>
+                            </v-col>
+                          </v-row>
+                          <v-row>
+                            <v-spacer></v-spacer>
+                          </v-row>
+                          <v-row>
+                            <v-col>
+                              <v-row
+                                  v-for="(item, index) in Asset.assetadditionalinfo"
+                                  :key="index"
+                              >
+                                <v-col>
+                                  <span :class="'text-bold ml-3'">{{ item.label }}</span>
+                                  <span v-text="item.value"></span>
+                                  <span>
                                                     <v-icon
                                                         color="red"
-                                                        @click="deleteAdditionalInfo(item)"
+                                                        @click="deleteAdditionalInfo(index)"
                                                     >
                                                       mdi-delete
                                                     </v-icon>
                                                   </span>
-                               </v-col>
-                             </v-row>
-                           </v-col>
-                         </v-row>
-                       </v-card-text>
-                     </v-card>
-                   </v-col>
+                                </v-col>
+                              </v-row>
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
                   </v-row>
 
                 </v-card-text>
@@ -300,13 +300,8 @@ export default {
         this.$router.push("/AssetList");
       }
     },
-    deleteAdditionalInfo(item) {
-      let newItems = this.Asset.assetadditionalinfo.filter(function (
-          el
-      ) {
-        return el.label !== item.label;
-      });
-      this.Asset.assetadditionalinfo = newItems;
+    deleteAdditionalInfo(index) {
+      this.Asset.assetadditionalinfo.splice(index,1);
     },
     addAdditionalInfo() {
       if (this.label === '' || this.valueLabel === '') {
