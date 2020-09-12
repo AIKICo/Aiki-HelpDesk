@@ -12,6 +12,8 @@
     "@hcaptcha/vue-hcaptcha": "^0.2.2",
     "@latelier/vue-signalr": "^1.1.9",
     "@microsoft/signalr": "^3.1.7",
+    "@sentry/browser": "^5.23.0",
+    "@sentry/integrations": "^5.23.0",
     "@vuex-orm/core": "^0.35.2",
     "@vuex-orm/plugin-axios": "^0.9.3",
     "@vuex-orm/plugin-search": "^0.24.1",
