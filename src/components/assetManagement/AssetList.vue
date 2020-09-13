@@ -61,6 +61,9 @@
                     {{ item.title }}
                   </td>
                   <td class="text-center">
+                    {{ item.employees }}
+                  </td>
+                  <td class="text-center">
                     {{ item.assettypeid }}
                   </td>
                   <td class="text-center">
@@ -149,6 +152,11 @@ export default {
           align: "center",
         },
         {
+          text: "تحویل گیرندگان",
+          value:"employees",
+          width: 150
+        },
+        {
           text: "نوع اموال",
           value: "assettypeid",
           width: 150,
@@ -163,6 +171,8 @@ export default {
         {
           text: 'اطلاعات تکمیلی',
           value: 'additionalinfo',
+          width: 150,
+          align: "center"
         },
         {
           text: "",
