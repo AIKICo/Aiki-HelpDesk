@@ -57,7 +57,7 @@
                       </validation-provider>
                       <validation-provider
                           v-slot="{ errors }"
-                          name="تحویل گیرنده"
+                          name="صاحب جمع"
                           rules="required"
                           immediate
                       >
@@ -66,7 +66,7 @@
                             item-text="title"
                             item-value="id"
                             v-model="Asset.employeeid"
-                            label="تحویل گیرنده"
+                            label="صاحب جمع"
                             shaped
                             outlined
                             chips
@@ -76,6 +76,19 @@
                         >
                         </v-autocomplete>
                       </validation-provider>
+                      <v-autocomplete
+                          :items="Employes"
+                          item-text="title"
+                          item-value="id"
+                          v-model="Asset.employees"
+                          label="تحویل گیرنده"
+                          shaped
+                          outlined
+                          chips
+                          clearable
+                          multiple
+                      >
+                      </v-autocomplete>
                       <validation-provider
                           v-slot="{ errors }"
                           name="نوع اموال"
@@ -250,7 +263,8 @@ export default {
         assetlocationid: null,
         assettypeid: null,
         assetnumber: null,
-        assetadditionalinfo: []
+        assetadditionalinfo: [],
+        employees:""
       },
       Employes: [],
       EmployeSearchKey: "",
@@ -272,6 +286,7 @@ export default {
   methods: {
     onSubmit() {
       if (this.$route.params.formType === "Edit") {
+        this.Asset.employees = JSON.stringify(this.Asset.employees);
         this.$store.dispatch("AssetService/editAsset", this.Asset).then(res => {
           if (res.status === 200) {
             this.closeDialog();
@@ -284,6 +299,7 @@ export default {
               assetnumber: ['شماره اموال وجود دارد']
             });
           } else {
+            this.Asset.employees = JSON.stringify(this.Asset.employees);
             this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
               if (res.status === 201) {
                 this.closeDialog();
@@ -301,7 +317,7 @@ export default {
       }
     },
     deleteAdditionalInfo(index) {
-      this.Asset.assetadditionalinfo.splice(index,1);
+      this.Asset.assetadditionalinfo.splice(index, 1);
     },
     addAdditionalInfo() {
       if (this.label === '' || this.valueLabel === '') {
@@ -351,11 +367,13 @@ export default {
     if (this.$route.params.formType === "Edit") {
       this.$store.dispatch("AssetService/loadAsset", this.$route.params.id).then((res) => {
         this.Asset = res.data;
+        this.Asset.employees = JSON.parse(this.Asset.employees);
         this.disableControl = true;
       });
     } else if (this.$route.params.formType === "Insert") {
       this.Asset = {
         employeeid: "",
+        employees:"",
         assetlocationid: "",
         assettypeid: "",
         assetnumber: "",

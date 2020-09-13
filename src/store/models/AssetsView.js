@@ -8,12 +8,13 @@ export default class AssetsView extends Model{
         return{
             id: this.uid(() => this.$uuid.v4()),
             assetnumber: this.uid(""),
-            title: this.uid(""),
+            title: this.attr(""),
             assetlocationid: this.uid(null),
             assettypeid: this.attr(''),
             deliverydate:this.attr(null),
             allowdelete:this.boolean(null),
-            additionalinfo:this.attr('')
+            additionalinfo:this.attr(''),
+            employees:this.attr('')
         };
     }
 }
