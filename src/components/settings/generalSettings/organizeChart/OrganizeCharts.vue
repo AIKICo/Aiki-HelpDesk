@@ -51,7 +51,7 @@
                   </template>
                   <span>افزودن</span>
                 </v-tooltip>
-                <v-tooltip top v-if="hover && item.children && item.children.length===0">
+                <v-tooltip top v-if="hover && item.parent_id!==null && item.children && item.children.length===0">
                   <template v-slot:activator="{on, attr}">
                     <v-btn v-if="hover" icon
                            @click="deleteChild(item)"
@@ -76,7 +76,7 @@
                   </template>
                   <span>ویرایش</span>
                 </v-tooltip>
-                <v-tooltip top v-if="hover && item.children && item.children.length===0">
+                <v-tooltip top v-if="hover && item.parent_id!==null && item.children && item.children.length===0">
                   <template v-slot:activator="{on, attr}">
                     <v-btn v-on="on" v-bind="attr" icon @click="showMoveTree(item)">
                       <v-icon :color="$store.state.defaultColor">
