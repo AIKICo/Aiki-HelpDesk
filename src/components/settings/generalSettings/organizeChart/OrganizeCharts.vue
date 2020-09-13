@@ -38,7 +38,7 @@
             <v-hover v-slot:default="{ hover }">
               <div>
                 <span>{{ item.title }}</span>
-                <v-tooltip top v-if="hover">
+                <v-tooltip top v-if="hover && item.titletype!=='5232ad99-404f-4d77-9698-9a9e3ff3dbbd'">
                   <template v-slot:activator="{on, attr}">
                     <v-btn
                         class="mr-5"
@@ -51,9 +51,9 @@
                   </template>
                   <span>افزودن</span>
                 </v-tooltip>
-                <v-tooltip top v-if="hover && item.allowdelete && item.children && item.children.length===0">
+                <v-tooltip top v-if="hover && item.children && item.children.length===0">
                   <template v-slot:activator="{on, attr}">
-                    <v-btn v-if="hover && item.allowdelete && item.children.length===0" icon
+                    <v-btn v-if="hover" icon
                            @click="deleteChild(item)"
                            v-on="on"
                            v-bind="attr">
@@ -64,7 +64,7 @@
                   </template>
                   <span>حذف</span>
                 </v-tooltip>
-                <v-tooltip top v-if="hover">
+                <v-tooltip top v-if="hover && item.parent_id!==null">
                   <template v-slot:activator="{on, attr}">
                     <v-btn v-if="hover" icon @click="editChild(item)"
                            v-on="on"
@@ -210,8 +210,17 @@ export default {
     },
     customerChanged(e) {
       this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
-        this.OrganizeChartItems = [];
-        this.OrganizeChartItems=JSON.parse(res.data.children);
+        this.OrganizeChartItems = [
+          {
+            "id":res.data.id,
+            "customerid":res.data.customerid,
+            "parent_id":res.data.parent_id,
+            "titletype":res.data.titletype,
+            "title":res.data.title,
+            children: JSON.parse(res.data.children)
+          }
+        ];
+        //this.OrganizeChartItems=;
         this.showSearchTextBox = true;
       });
     },
