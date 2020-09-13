@@ -60,14 +60,14 @@
                   <td class="text-center">
                     {{ item.title }}
                   </td>
-                  <td class="text-center">
+                  <td>
                     {{ item.employees }}
                   </td>
                   <td class="text-center">
                     {{ item.assettypeid }}
                   </td>
                   <td class="text-center">
-                    {{item.assetlocationid}}
+                    {{ item.assetlocationid }}
                   </td>
                   <td>
                     <span v-html="item.additionalinfo"></span>
@@ -153,7 +153,7 @@ export default {
         },
         {
           text: "تحویل گیرندگان",
-          value:"employees",
+          value: "employees",
           width: 150
         },
         {
