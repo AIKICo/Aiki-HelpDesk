@@ -63,14 +63,11 @@
                   <td>
                     {{ item.employees }}
                   </td>
-                  <td class="text-center">
+                  <td>
                     {{ item.assettypeid }}
                   </td>
                   <td class="text-center">
                     {{ item.assetlocationid }}
-                  </td>
-                  <td>
-                    <span v-html="item.additionalinfo"></span>
                   </td>
                   <td>
                     <div v-if="item === selectedItem">
@@ -136,7 +133,7 @@ export default {
         {
           text: "تاریخ تحویل",
           value: "deliverydate",
-          width: 100,
+          width: 120,
           align: "center",
         },
         {
@@ -154,25 +151,19 @@ export default {
         {
           text: "تحویل گیرندگان",
           value: "employees",
-          width: 150
+          width: 230
         },
         {
           text: "نوع اموال",
           value: "assettypeid",
-          width: 150,
+          width: 200,
           align: "center",
         },
         {
           text: "محل اموال",
           value: "assetlocationid",
-          width: 200,
-          align: "center",
-        },
-        {
-          text: 'اطلاعات تکمیلی',
-          value: 'additionalinfo',
           width: 150,
-          align: "center"
+          align: "center",
         },
         {
           text: "",
