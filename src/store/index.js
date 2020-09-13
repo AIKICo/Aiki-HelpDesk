@@ -34,7 +34,7 @@ import Member from "./models/Member";
 import Group from "./models/Group";
 import AppConstantItem from "./models/AppConstantItem";
 import OrganizeChart from "./models/OrganizeChart";
-import OrganizeCharts_JsonView from "./models/OrganizeCharts_JsonView";
+import OrganizeCharts_JsonView from "./models/OrganizeChartView";
 import Asset from "./models/Asset";
 import AssetsView from "./models/AssetsView";
 import Ticket from "./models/Ticket";

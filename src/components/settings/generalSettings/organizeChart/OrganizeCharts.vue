@@ -105,7 +105,6 @@
           :org-charts="OrganizeChartItems"
           :item="selectItemForMove"
           @close-moveSheet="closeMoveSheet">
-
       </move-sheet>
     </v-row>
   </v-container>
@@ -212,7 +211,7 @@ export default {
     customerChanged(e) {
       this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
         this.OrganizeChartItems = [];
-        this.OrganizeChartItems.push(JSON.parse(res.data[0].organizecharts));
+        this.OrganizeChartItems=JSON.parse(res.data.children);
         this.showSearchTextBox = true;
       });
     },
