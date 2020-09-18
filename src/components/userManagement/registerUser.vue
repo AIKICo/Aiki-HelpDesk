@@ -51,7 +51,7 @@
                       <ValidationProvider
                           v-slot="{ errors }"
                           name="عنوان دامنه"
-                          :rules="{  required,regex: /^([a-zA-Z0-9][a-zA-Z0-9-_]*\.)*[a-zA-Z0-9]*[a-zA-Z0-9-_]*[[a-zA-Z0-9]+$a/ }"
+                          :rules="{  required,regex: /^[a-zA-Z0-9]*$/ }"
                           vid="subdomain"
                           immediate
                       >
@@ -76,7 +76,7 @@
 
                     <v-card-actions>
                       <v-btn
-                          color="$store.state.defaultColor + ' darken-1'"
+                          :color="$store.state.defaultColor + ' darken-1'"
                           :disabled="invalid"
                           value="registerUser"
                           type="submit"

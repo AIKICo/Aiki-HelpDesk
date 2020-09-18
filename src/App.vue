@@ -26,7 +26,7 @@
     <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app v-if="!showSplash">
       <v-row no-gutters v-if="!$store.state.IsMobile">
         <v-col>
-          <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی</span>
+          <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی(AiKi)</span>
         </v-col>
         <v-col cols="2">
           <span><b>برنامه نویس:</b>محمد مهرنیا</span>
