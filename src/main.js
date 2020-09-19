@@ -24,13 +24,13 @@ import "vue-toastification/dist/index.css";
 import VueNativeNotification from 'vue-native-notification'
 import Splash from 'vue-splash';
 import * as Sentry from "@sentry/browser";
-import { Vue as VueIntegration } from "@sentry/integrations";
-import { VueMaskDirective } from 'v-mask'
+import {Vue as VueIntegration} from "@sentry/integrations";
+import {VueMaskDirective} from 'v-mask'
 
 
 Sentry.init({
     dsn: "https://84d02cd132bc4864a55eb5013815c656@o301489.ingest.sentry.io/5426684",
-    integrations: [new VueIntegration({ Vue, attachProps: true })],
+    integrations: [new VueIntegration({Vue, attachProps: true})],
 });
 
 //axois.defaults.baseURL = "https://localhost:5001/";
@@ -117,11 +117,11 @@ new Vue({
                 Vue.$toast.error('ارتباط با شیکه میسر نمی باشد');
                 return Promise.reject(error);
             }
+            if (error.response.status===500){
+                Vue.$toast.error(error.response.data.message);
+            }
             switch (error.response.status) {
                 case 400:
-                    Vue.$toast.error(error.response.data.message);
-                    break;
-                case 500:
                     Vue.$toast.error(error.response.data.message);
                     break;
                 case 401:
@@ -143,7 +143,7 @@ new Vue({
                         }
                     }
             }
-            if (error.response.data){
+            if (error.response.data) {
                 if (error.response.data.includes('was not found in the key ring')) {
                     await store.dispatch('UserService/logout');
                     store.state.isLoggedIn = false;
