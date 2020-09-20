@@ -49,6 +49,17 @@
                             @click:append="() => (showPassword = !showPassword)"
                         ></v-text-field>
                       </ValidationProvider>
+                      <v-select
+                          label="زبان"
+                          :items="lanuages"
+                          item-text="name"
+                          item-value="value"
+                          v-model="selectedlanguage"
+                          shaped
+                          rounded
+                          @change="changeLanguage"
+                          outlined>
+                      </v-select>
                       <div style="text-align: center" v-if="$store.state.isOnline && hCaptchaVerified===false">
                         <vue-hcaptcha
                             sitekey="e3605ee2-18a4-4e7c-9a8e-5885075be08e"
@@ -78,14 +89,13 @@
                   </v-card>
                 </form>
               </ValidationObserver>
-
             </v-col>
           </v-row>
           <v-row>
             <v-col>
               <v-btn x-large value="register" class="col-12 white--text" style="background-color: #c62828"
                      @click="$router.push('/registerUser')">
-                ثبت نام رایگان
+                {{ $t('register_button') }}
               </v-btn>
             </v-col>
           </v-row>
@@ -132,7 +142,12 @@ export default {
       },
       submitStatus: null,
       hCaptchaVerified: true,
-      showPassword: false
+      showPassword: false,
+      lanuages: [
+        {name: 'English', value: 'en'},
+        {name: 'فارسی', value: 'fa'}
+      ],
+      selectedlanguage: ''
     };
   },
   components: {
@@ -160,7 +175,16 @@ export default {
     captchaVerified(e) {
       if (e) this.hCaptchaVerified = true;
       else this.hCaptchaVerified = false;
+    },
+    changeLanguage() {
+      this.$i18n.locale = this.selectedlanguage;
+      this.$vuetify.lang.current = this.selectedlanguage;
+      this.$vuetify.rtl = this.selectedlanguage === 'fa';
     }
+  },
+  mounted() {
+    this.selectedlanguage = 'fa';
+    this.$i18n.locale = this.selectedlanguage;
   },
   metaInfo: {
     title: 'ورو به سامانه'

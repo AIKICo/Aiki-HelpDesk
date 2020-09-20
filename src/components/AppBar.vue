@@ -3,7 +3,8 @@
       app
       :color="$store.state.defaultColor"
       dark
-      :clipped-right="$vuetify.breakpoint.lgAndUp"
+      :clipped-right="$vuetify.rtl===true?$vuetify.breakpoint.lgAndUp:null"
+      :clipped-left="$vuetify.rtl!==true?$vuetify.breakpoint.lgAndUp:null"
   >
     <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"
                         v-if="$store.state.isLoggedIn"/>
@@ -45,6 +46,10 @@ export default {
   },
   methods: {
     logout() {
+      this.$i18n.locale = 'fa';
+      this.$vuetify.lang.current = 'fa';
+      this.$vuetify.rtl = true;
+
       this.$store.dispatch('UserService/logout').then(() => {
         this.$store.state.isLoggedIn = false;
         this.$router.push("/login");

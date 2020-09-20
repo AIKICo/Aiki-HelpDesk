@@ -1,9 +1,9 @@
 <template v-slot:items="props">
     <v-navigation-drawer
             app
-            :clipped="$vuetify.breakpoint.lgAndUp"
+            :clipped="$vuetify.rtl===true?$vuetify.breakpoint.lgAndDown:$vuetify.breakpoint.lgAndDown"
             :mini-variant.sync="mini"
-            right
+            :right="$vuetify.rtl===true"
             v-model="$store.state.drawer"
     >
         <template v-slot:prepend>

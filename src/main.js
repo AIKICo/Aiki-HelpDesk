@@ -26,6 +26,7 @@ import Splash from 'vue-splash';
 import * as Sentry from "@sentry/browser";
 import {Vue as VueIntegration} from "@sentry/integrations";
 import {VueMaskDirective} from 'v-mask'
+import i18n from './i18n'
 
 
 Sentry.init({
@@ -73,7 +74,7 @@ if (navigator.onLine) {
         measurementId: "G-8CY0SWQXMJ"
     };
     firebase.initializeApp(config);
-    //Vue.prototype.$analytics = firebase.analytics();
+    Vue.prototype.$analytics = firebase.analytics();
 }
 
 Vue.mixin({
@@ -92,6 +93,7 @@ new Vue({
     vuetify,
     store,
     router,
+
     beforeCreate() {
         this.$vuetify.lang.current = "fa";
         axois.interceptors.request.use(config => {
@@ -169,9 +171,11 @@ new Vue({
             return Promise.reject(error);
         });
     },
+
     create() {
         document.addEventListener('beforeunload', this.handlerClose);
     },
+
     methods: {
         handlerClose: function () {
             if (this.hasChanged) {
@@ -181,6 +185,8 @@ new Vue({
             }
         },
     },
+
+    i18n,
     render: h => h(App)
 }).$mount("#app");
 

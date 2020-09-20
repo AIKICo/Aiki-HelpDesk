@@ -4,6 +4,7 @@ module.exports = {
     "transpileDependencies": [
         "vuetify"
     ],
+
     devServer: {
         host:'localhost',
         hot:true,
@@ -20,9 +21,19 @@ module.exports = {
             }
         }
     },
+
     pwa: {
         workboxOptions: {
             skipWaiting: true
         }
+    },
+
+    pluginOptions: {
+      i18n: {
+        locale: 'en',
+        fallbackLocale: 'en',
+        localeDir: 'locales',
+        enableInSFC: true
+      }
     }
 }
