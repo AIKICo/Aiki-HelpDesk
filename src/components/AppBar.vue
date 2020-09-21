@@ -12,7 +12,7 @@
       mdi-handshake
     </v-icon>
     <v-toolbar-title>
-      <b>میزکار خدمات رایانه ای</b>
+      <b>{{$t('general.app_title')}}</b>
       <span v-if="$store.state.isLoggedIn">({{ this.companyName }})</span>
     </v-toolbar-title>
     <v-spacer/>

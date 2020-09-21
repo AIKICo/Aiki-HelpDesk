@@ -15,7 +15,7 @@
                     <v-card-text class="mt-5">
                       <ValidationProvider
                           v-slot="{ errors }"
-                          name="شناسه کاربری"
+                          name="userName"
                           rules="required|email"
                       >
                         <v-text-field
@@ -32,7 +32,7 @@
                       </ValidationProvider>
                       <ValidationProvider
                           v-slot="{ errors }"
-                          name="کلمه عبور"
+                          name="password"
                           rules="required"
                           immediate
                       >

@@ -27,14 +27,7 @@ import * as Sentry from "@sentry/browser";
 import {Vue as VueIntegration} from "@sentry/integrations";
 import {VueMaskDirective} from 'v-mask'
 import i18n from './i18n'
-import { localize } from 'vee-validate';
-import en from 'vee-validate/dist/locale/en.json';
-import fa from 'vee-validate/dist/locale/fa.json';
-
-localize({
-    en,
-    fa
-});
+import './vee-validate-localize'
 
 Sentry.init({
     dsn: "https://84d02cd132bc4864a55eb5013815c656@o301489.ingest.sentry.io/5426684",

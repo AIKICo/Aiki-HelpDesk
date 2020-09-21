@@ -2,7 +2,9 @@
   "general": {
     "ok_button": "تایید",
     "app_title": "میزکار خدمات رایانه‌ای",
-    "app_contactInfo": " نظرات و پیشنهادات خود را به آدرس moh.mehrnia@gmail.com ارسال نمایید"
+    "app_contactInfo": "نظرات و پیشنهادات خود را به آدرس moh.mehrnia@gmail.com ارسال نمایید",
+    "company_name": "شرکت ایده پردازان دانش هوش مصنوعی(AiKi)",
+    "Lecense_label": "تحت لایسنس:"
   },
   "login": {
     "register_button": "ثبت نام رایگان",
@@ -12,5 +14,11 @@
     "password_label": "کلمه عبور",
     "langauge_label": "زبان",
     "loginpanel_title": "ورود"
+  },
+  "footer": {
+    "deploy_by": "توسعه داده:",
+    "programmer_label": "برنامه‌نویس:",
+    "programmer_title": "محمد مهرنیا",
+    "emailAddress_label": "پست الکترونیک:"
   }
 }

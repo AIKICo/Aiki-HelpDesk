@@ -2,7 +2,9 @@
   "general": {
     "ok_button": "OK",
     "app_title": "Computer Service Desk",
-    "app_contactInfo": " Send your comments and suggestions to moh.mehrnia@gmail.com"
+    "app_contactInfo": " Send your comments and suggestions to moh.mehrnia@gmail.com",
+    "company_name": "Artifical Intelligense Khnowlege Idea(AiKi)",
+    "Lecense_label": "LICENSE:"
   },
   "login": {
     "register_button": "Free Register",
@@ -12,5 +14,11 @@
     "password_label": "Password",
     "langauge_label": "Language",
     "loginpanel_title": "Login"
+  },
+  "footer": {
+    "deploy_by": "Developed by:",
+    "programmer_label": "Programmer:",
+    "programmer_title": "Mohammad Mehrnia",
+    "emailAddress_label": "Email Address:"
   }
 }

@@ -26,17 +26,17 @@
     <v-footer :color="$store.state.defaultColor + ' white--text'" absolute inset app v-if="!showSplash">
       <v-row no-gutters v-if="!$store.state.IsMobile">
         <v-col>
-          <span><b>تدوین و توسعه:</b> شرکت ایده پردازان دانش هوش مصنوعی(AiKi)</span>
+          <span><b>{{ $t('footer.deploy_by') }}</b>{{ $t('general.company_name') }}</span>
         </v-col>
         <v-col cols="2">
-          <span><b>برنامه نویس:</b>محمد مهرنیا</span>
+          <span><b>{{ $t('footer.programmer_label') }}</b>{{ $t('footer.programmer_title') }}</span>
         </v-col>
         <v-col cols="3">
-          <span><b>پست الترونیک:</b>moh.mehrnia@gmail.com</span>
+          <span><b>{{ $t('footer.emailAddress_label') }}</b>moh.mehrnia@gmail.com</span>
         </v-col>
         <v-col cols="3">
-          <span><b>تحت لایسنس: </b><a style="color: white"
-                                      href="https://opensource.org/licenses/MIT">MIT LICENSE</a></span>
+          <span><b>{{ $t('general.Lecense_label') }}</b>
+            <a style="color: white" href="https://opensource.org/licenses/MIT">MIT LICENSE</a></span>
         </v-col>
       </v-row>
       <v-row no-gutters v-if="$store.state.IsMobile">
@@ -117,7 +117,7 @@ export default {
     snackWithBtnText: "",
     snackWithButtons: false,
     timeout: -1,
-    showSplash:true
+    showSplash: true
   }),
   methods: {
     showRefreshUI(e) {
@@ -170,9 +170,9 @@ export default {
       this.$store.isLoggedIn = true;
       this.$store.dispatch("UserService/notificationStart");
     }
-    setTimeout(()=>{
-      this.showSplash=false;
-    },3000)
+    setTimeout(() => {
+      this.showSplash = false;
+    }, 3000)
   },
   computed: {
     logo() {
