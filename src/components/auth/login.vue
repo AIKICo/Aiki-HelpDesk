@@ -10,7 +10,7 @@
                   <v-card class="mx-auto" outlined>
                     <v-card-title :class="$store.state.defaultColor + ' white--text'">
                       <v-icon large color="white">mdi-login-variant</v-icon>
-                      <span class="ml-2">ورود</span>
+                      <span class="ml-2">{{ $t('login.loginpanel_title') }}</span>
                     </v-card-title>
                     <v-card-text class="mt-5">
                       <ValidationProvider
@@ -20,7 +20,7 @@
                       >
                         <v-text-field
                             v-model="loginDetails.userName"
-                            label="شناسه کاربری"
+                            :label="$t('login.username_label')"
                             clearable
                             :error-messages="errors"
                             outlined
@@ -38,7 +38,7 @@
                       >
                         <v-text-field
                             v-model="loginDetails.password"
-                            label="کلمه عبور"
+                            :label="$t('login.password_label')"
                             clearable
                             :type="showPassword?'text':'password'"
                             :error-messages="errors"
@@ -50,7 +50,7 @@
                         ></v-text-field>
                       </ValidationProvider>
                       <v-select
-                          label="زبان"
+                          :label="$t('login.langauge_label')"
                           :items="lanuages"
                           item-text="name"
                           item-value="value"
@@ -76,14 +76,14 @@
                           value="login"
                           type="submit"
                           text>
-                        ورود به سامانه
+                        {{ $t('login.login_button') }}
                       </v-btn>
                       <v-btn
                           :color="$store.state.defaultColor + ' darken-1'"
                           value="resendPassword"
                           text
                           to="/resetPassword">
-                        ارسال مجدد کلمه عبور
+                        {{ $t('login.resend_password') }}
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -95,14 +95,14 @@
             <v-col>
               <v-btn x-large value="register" class="col-12 white--text" style="background-color: #c62828"
                      @click="$router.push('/registerUser')">
-                {{ $t('register_button') }}
+                {{ $t('login.register_button') }}
               </v-btn>
             </v-col>
           </v-row>
           <v-row justify="center" align="center">
             <v-col>
               <v-alert class="primary white--text">
-                نظرات و پیشنهادات خود را به آدرس moh.mehrnia@gmail.com ارسال نمایید
+                {{$t('general.app_contactInfo')}}
               </v-alert>
             </v-col>
           </v-row>
@@ -113,8 +113,10 @@
 </template>
 
 <script>
-import {required, email} from "vee-validate/dist/rules";
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
+import { localize } from 'vee-validate';
+import {required, email} from "vee-validate/dist/rules";
+
 
 import {
   extend,
@@ -126,11 +128,9 @@ import {
 setInteractionMode("eager");
 extend("required", {
   ...required,
-  message: "{_field_} نمی تواند خالی باشد"
 });
 extend("email", {
   ...email,
-  message: "{_field_} معتبر نمی باشد"
 });
 export default {
   name: "login",
@@ -180,10 +180,12 @@ export default {
       this.$i18n.locale = this.selectedlanguage;
       this.$vuetify.lang.current = this.selectedlanguage;
       this.$vuetify.rtl = this.selectedlanguage === 'fa';
+      localize(this.selectedlanguage);
     }
   },
   mounted() {
     this.selectedlanguage = 'fa';
+    localize(this.selectedlanguage);
     this.$i18n.locale = this.selectedlanguage;
   },
   metaInfo: {

@@ -194,7 +194,6 @@ import {
 setInteractionMode("eager");
 extend("required", {
   ...required,
-  message: "{_field_} نمی تواند خالی باشد"
 });
 export default {
   name: "Ticket",

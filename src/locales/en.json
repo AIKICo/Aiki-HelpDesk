@@ -1,3 +1,16 @@
 {
-  "register_button": "Free Register"
+  "general": {
+    "ok_button": "OK",
+    "app_title": "Computer Service Desk",
+    "app_contactInfo": " Send your comments and suggestions to moh.mehrnia@gmail.com"
+  },
+  "login": {
+    "register_button": "Free Register",
+    "login_button": "OK",
+    "resend_password": "Resend me password",
+    "username_label": "Username",
+    "password_label": "Password",
+    "langauge_label": "Language",
+    "loginpanel_title": "Login"
+  }
 }

@@ -124,15 +124,12 @@ import {
 setInteractionMode("eager");
 extend("required", {
   ...required,
-  message: "{_field_} نمی تواند خالی باشد"
 });
 extend("email", {
   ...email,
-  message: "{_field_} معتبر نمی باشد"
 });
 extend("regex", {
   ...regex,
-  message: "{_field_} کلمه عبور نانعتیر می باشد"
 });
 export default {
   name: "Member",

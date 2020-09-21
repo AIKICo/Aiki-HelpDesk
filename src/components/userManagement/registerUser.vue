@@ -116,15 +116,12 @@ import {
 setInteractionMode("eager");
 extend("regex", {
   ...regex,
-  message: "{_field_} نامعتیر می باشد"
 });
 extend("required", {
   ...required,
-  message: "{_field_} نمی تواند خالی باشد"
 });
 extend("email", {
   ...email,
-  message: "{_field_} آدرس معتبری نمی باشد"
 });
 
 export default {

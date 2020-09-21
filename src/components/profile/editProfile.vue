@@ -159,14 +159,12 @@
     setInteractionMode("eager");
     extend("required", {
         ...required,
-        message: "{_field_} نمی تواند خالی باشد"
     });
     extend("password", {
         params: ["target"],
         validate(value, { target }) {
             return value === target;
         },
-        message: "تأیید رمز عبور مطابقت ندارد"
     });
     export default {
         name: "editProfile",

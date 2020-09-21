@@ -74,12 +74,10 @@ import {
 setInteractionMode("eager");
 extend("required", {
   ...required,
-  message: "{_field_} نمی تواند خالی باشد"
 });
 
 extend("email", {
   ...email,
-  message: "{_field_} معتبر نمی باشد"
 });
 
 export default {
