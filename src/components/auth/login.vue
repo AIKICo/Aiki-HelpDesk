@@ -116,7 +116,7 @@
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 import { localize } from 'vee-validate';
 import {required, email} from "vee-validate/dist/rules";
-
+import {mapState} from 'vuex';
 
 import {
   extend,
@@ -147,7 +147,6 @@ export default {
         {name: 'English', value: 'en'},
         {name: 'فارسی', value: 'fa'}
       ],
-      selectedlanguage: ''
     };
   },
   components: {
@@ -156,6 +155,9 @@ export default {
     VueHcaptcha
   },
   methods: {
+    ...mapState({
+      selectedlanguage:'selectedlanguage'
+    }),
     onSubmit: function () {
       if (this.hCaptchaVerified !== true && this.$store.state.isOnline) return;
       this.$store
@@ -181,10 +183,11 @@ export default {
       this.$vuetify.lang.current = this.selectedlanguage;
       this.$vuetify.rtl = this.selectedlanguage === 'fa';
       localize(this.selectedlanguage);
+      window.localStorage.setItem("selectedlanguage", this.selectedlanguage);
     }
   },
   mounted() {
-    this.selectedlanguage = 'fa';
+    this.selectedlanguage = localStorage.getItem("selectedlanguage") != null ? localStorage.getItem("selectedlanguage") : 'fa';
     localize(this.selectedlanguage);
     this.$i18n.locale = this.selectedlanguage;
   },
