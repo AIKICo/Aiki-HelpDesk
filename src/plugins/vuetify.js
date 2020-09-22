@@ -7,11 +7,10 @@ import en from 'vuetify/es5/locale/en'
 Vue.use(Vuetify);
 
 export default new Vuetify({
-    rtl: true,
     silent: false,
     lang: {
         locales: {en, fa},
-        current: fa
+        current: en
     },
     theme: {
         dark: false

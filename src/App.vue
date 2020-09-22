@@ -91,6 +91,7 @@
 import AppBar from "./components/AppBar";
 import AppDrawer from "./components/AppDrawer";
 import * as firebase from "firebase/app";
+import {localize} from "vee-validate";
 
 export default {
   name: "App",
@@ -163,6 +164,12 @@ export default {
   },
   created() {
     this.$Progress.start();
+    this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
+    this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
+    this.$i18n.locale = this.$store.state.selectedlanguage;
+    this.$vuetify.lang.current = this.$store.state.selectedlanguage;
+    localize(this.$store.state.selectedlanguage);
+
     document.addEventListener("swUpdated", this.showRefreshUI, {once: true});
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (this.refreshing) return;
@@ -174,7 +181,7 @@ export default {
     }
     setTimeout(() => {
       this.showSplash = false;
-    }, 3000)
+    }, 3000);
   },
   computed: {
     logo() {

@@ -54,7 +54,7 @@
                           :items="lanuages"
                           item-text="name"
                           item-value="value"
-                          v-model="selectedlanguage"
+                          v-model="$store.state.selectedlanguage"
                           shaped
                           rounded
                           @change="changeLanguage"
@@ -114,15 +114,13 @@
 
 <script>
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
-import { localize } from 'vee-validate';
 import {required, email} from "vee-validate/dist/rules";
-import {mapState} from 'vuex';
 
 import {
   extend,
   ValidationObserver,
   ValidationProvider,
-  setInteractionMode
+  setInteractionMode, localize
 } from "vee-validate";
 
 setInteractionMode("eager");
@@ -155,9 +153,6 @@ export default {
     VueHcaptcha
   },
   methods: {
-    ...mapState({
-      selectedlanguage:'selectedlanguage'
-    }),
     onSubmit: function () {
       if (this.hCaptchaVerified !== true && this.$store.state.isOnline) return;
       this.$store
@@ -179,17 +174,14 @@ export default {
       else this.hCaptchaVerified = false;
     },
     changeLanguage() {
-      this.$i18n.locale = this.selectedlanguage;
-      this.$vuetify.lang.current = this.selectedlanguage;
-      this.$vuetify.rtl = this.selectedlanguage === 'fa';
-      localize(this.selectedlanguage);
-      window.localStorage.setItem("selectedlanguage", this.selectedlanguage);
+      this.$i18n.locale = this.$store.state.selectedlanguage;
+      this.$vuetify.lang.current = this.$store.state.selectedlanguage;
+      this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
+      localize(this.$store.state.selectedlanguage);
+      window.localStorage.setItem("selectedlanguage", this.$store.state.selectedlanguage);
     }
   },
   mounted() {
-    this.selectedlanguage = localStorage.getItem("selectedlanguage") != null ? localStorage.getItem("selectedlanguage") : 'fa';
-    localize(this.selectedlanguage);
-    this.$i18n.locale = this.selectedlanguage;
   },
   metaInfo: {
     title: 'ورو به سامانه'

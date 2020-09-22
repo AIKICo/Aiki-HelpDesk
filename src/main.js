@@ -95,7 +95,6 @@ new Vue({
     router,
 
     beforeCreate() {
-        this.$vuetify.lang.current = "fa";
         axois.interceptors.request.use(config => {
             if (!navigator.onLine) return;
             this.$Progress.start();
