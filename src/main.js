@@ -74,7 +74,6 @@ if (navigator.onLine) {
         measurementId: "G-8CY0SWQXMJ"
     };
     firebase.initializeApp(config);
-    Vue.prototype.$analytics = firebase.analytics();
 }
 
 Vue.mixin({

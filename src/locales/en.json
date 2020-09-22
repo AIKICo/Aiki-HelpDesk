@@ -6,6 +6,9 @@
     "company_name": "Artificial Intelligence Knowledge Idea(AiKi)",
     "Lecense_label": "LICENSE:"
   },
+  "formName": {
+    "login": "Aiki Help Desk"
+  },
   "login": {
     "register_button": "Free Register",
     "login_button": "OK",

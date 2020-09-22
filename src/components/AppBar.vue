@@ -46,9 +46,6 @@ export default {
   },
   methods: {
     logout() {
-      this.$i18n.locale = 'fa';
-      this.$vuetify.lang.current = 'fa';
-
       this.$store.dispatch('UserService/logout').then(() => {
         this.$store.state.isLoggedIn = false;
         this.$router.push("/login");

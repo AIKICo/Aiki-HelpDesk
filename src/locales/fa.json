@@ -6,6 +6,9 @@
     "company_name": "شرکت ایده پردازان دانش هوش مصنوعی(AiKi)",
     "Lecense_label": "تحت لایسنس:"
   },
+  "formName": {
+    "login": "میز کارخدمات رایانه ای Aiki"
+  },
   "login": {
     "register_button": "ثبت نام رایگان",
     "login_button": "ورود به سامانه",

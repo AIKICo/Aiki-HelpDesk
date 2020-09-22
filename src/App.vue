@@ -157,19 +157,35 @@ export default {
       } else if (this.$router.currentRoute.name === "root") {
         this.$router.push("/Ticket/Insert/undefined");
       }
-    }
+    },
+    initializeApp() {
+      this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
+      this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
+      this.$i18n.locale = this.$store.state.selectedlanguage;
+      this.$vuetify.lang.current = this.$store.state.selectedlanguage;
+      localize(this.$store.state.selectedlanguage);
+      this.$store.state.companyId = localStorage.getItem("companyid");
+      this.$store.state.memberName = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).membername : null;
+      this.$store.state.memberRole = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).roles : null;
+      this.$store.state.memberid = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).id : null;
+      this.$store.state.companyName = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).companyName : null;
+      this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
+      if (localStorage.getItem("selectedlanguage") !== null) {
+        this.$i18n.locale = this.$store.state.selectedlanguage;
+        this.$vuetify.lang.current = this.$store.state.selectedlanguage;
+        this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
+        localize(this.$store.state.selectedlanguage);
+      }
+      this.$store.state.isLoggedIn = !!localStorage.getItem("userInfo");
+      this.$store.state.accessToken = localStorage.getItem("access_token") || "";
+    },
   },
   mounted() {
     this.$Progress.finish();
   },
   created() {
     this.$Progress.start();
-    this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
-    this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
-    this.$i18n.locale = this.$store.state.selectedlanguage;
-    this.$vuetify.lang.current = this.$store.state.selectedlanguage;
-    localize(this.$store.state.selectedlanguage);
-
+    this.initializeApp();
     document.addEventListener("swUpdated", this.showRefreshUI, {once: true});
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (this.refreshing) return;

@@ -54,7 +54,7 @@
                           :items="lanuages"
                           item-text="name"
                           item-value="value"
-                          v-model="$store.state.selectedlanguage"
+                          v-model="lang"
                           shaped
                           rounded
                           @change="changeLanguage"
@@ -115,7 +115,6 @@
 <script>
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 import {required, email} from "vee-validate/dist/rules";
-
 import {
   extend,
   ValidationObserver,
@@ -145,6 +144,7 @@ export default {
         {name: 'English', value: 'en'},
         {name: 'فارسی', value: 'fa'}
       ],
+      lang:null,
     };
   },
   components: {
@@ -173,18 +173,25 @@ export default {
       if (e) this.hCaptchaVerified = true;
       else this.hCaptchaVerified = false;
     },
+    inializeLanguage(lang){
+      this.$store.state.selectedlanguage=lang;
+      this.$i18n.locale = lang;
+      this.$vuetify.lang.current = lang;
+      this.$vuetify.rtl = lang === 'fa';
+      localize(lang);
+      localStorage.setItem("selectedlanguage", this.$store.state.selectedlanguage);
+    },
     changeLanguage() {
-      this.$i18n.locale = this.$store.state.selectedlanguage;
-      this.$vuetify.lang.current = this.$store.state.selectedlanguage;
-      this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
-      localize(this.$store.state.selectedlanguage);
-      window.localStorage.setItem("selectedlanguage", this.$store.state.selectedlanguage);
+      this.inializeLanguage(this.lang);
     }
   },
   mounted() {
+    this.lang = localStorage.getItem("selectedlanguage");
   },
-  metaInfo: {
-    title: 'ورو به سامانه'
+  metaInfo() {
+    return{
+      title: this.$t('formName.login')
+    }
   }
 };
 </script>

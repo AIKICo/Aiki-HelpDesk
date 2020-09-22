@@ -76,7 +76,9 @@ const userService = {
                 .catch(err => console.log(err));
         },
         logout({commit}) {
+            let langTemp = localStorage.getItem("selectedlanguage")
             localStorage.clear();
+            localStorage.setItem("selectedlanguage", langTemp);
             commit("OFF_CONNECTION");
         },
         async IsEmailExists(context, payload) {
