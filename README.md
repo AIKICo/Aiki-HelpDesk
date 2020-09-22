@@ -5,6 +5,14 @@
 #### [Demo Help Desk](https://aiki-helpdesk-v1.firebaseapp.com/)
 #### [Demo Help Desk Web API](http://aiki-co-helpdesk-webapi.herokuapp.com/)
 #### [Help Desk Web API Source Code](https://github.com/AIKICo/AIKI.CO.HelpDesk.WebAPI)
+
+## Developer Teams
+#### [Mohammd Mehrnia (Scrum Master, FullStack Developer)](mailto:qermezkon@gmail.com)
+##### [Freshteh Ghanabri (Analysit)](mailto:ghanbari.feereshteh@yahoo.com)
+##### [Mona jadidian (Frontend Developer)](mailto:mona.jadidian@gmail.com)
+##### [Mehdi Solimanian (UX/UI Developer)](mailto:mehdisolimanian@gmail.com)
+##### [Nahid Monjezi (Backend Developer)](mailto:nahidmonjezi@gmail.com)
+
 ## Project setup
 ```
 npm install

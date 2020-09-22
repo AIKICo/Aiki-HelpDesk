@@ -29,7 +29,9 @@
           <span><b>{{ $t('footer.deploy_by') }}</b>{{ $t('general.company_name') }}</span>
         </v-col>
         <v-col cols="2">
-          <span><b>{{ $t('footer.programmer_label') }}</b>{{ $t('footer.programmer_title') }}</span>
+          <a href="https://github.com/AIKICo/Aiki-HelpDesk" class="support_link"><b>{{
+              $t('footer.programmer_label')
+            }}</b>{{ $t('footer.programmer_title') }}</a>
         </v-col>
         <v-col cols="3">
           <span><b>{{ $t('footer.emailAddress_label') }}</b>moh.mehrnia@gmail.com</span>
@@ -43,7 +45,7 @@
         <v-col>
           <v-row no-gutters>
             <v-col>
-              <span> شرکت ایده پردازان دانش هوش مصنوعی</span>
+              <span> {{ $t('general.company_name') }}</span>
             </v-col>
           </v-row>
           <v-row no-gutters>
@@ -214,5 +216,10 @@ export default {
   background-image: url("assets/support-bg-polygon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.support_link {
+  color: white;
+  text-decoration: none
 }
 </style>
