@@ -4,7 +4,12 @@
     "app_title": "میزکار خدمات رایانه‌ای",
     "app_contactInfo": "نظرات و پیشنهادات خود را به آدرس moh.mehrnia@gmail.com ارسال نمایید",
     "company_name": "شرکت ایده پردازان دانش هوش مصنوعی(AiKi)",
-    "Lecense_label": "تحت لایسنس:"
+    "Lecense_label": "تحت لایسنس:",
+    "insert_button": "درج"
+  },
+  "snackbar": {
+    "snack_btn_text": "به روز رسانی",
+    "snack_title": "نسخه جدید در دسترس است!"
   },
   "formName": {
     "login": "میز کارخدمات رایانه ای Aiki"

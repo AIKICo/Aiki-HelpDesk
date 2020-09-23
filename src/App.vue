@@ -74,7 +74,7 @@
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </template>
-      <span>درج</span>
+      <span>{{ $t('general.insert_button') }}</span>
     </v-tooltip>
     <vue-progress-bar v-if="!showSplash"></vue-progress-bar>
     <vue-splash
@@ -125,8 +125,8 @@ export default {
   methods: {
     showRefreshUI(e) {
       this.registration = e.detail;
-      this.snackBtnText = "بروز رسانی";
-      this.snackWithBtnText = "نسخه جدید در دسترس است!";
+      this.snackBtnText = this.$t('snackbar.snack_btn_text');
+      this.snackWithBtnText = this.$t('snackbar.snack_title');
       this.snackWithButtons = true;
     },
     refreshApp() {

@@ -4,7 +4,12 @@
     "app_title": "Computer Service Desk",
     "app_contactInfo": " Send your comments and suggestions to moh.mehrnia@gmail.com",
     "company_name": "Artificial Intelligence Knowledge Idea(AiKi)",
-    "Lecense_label": "LICENSE:"
+    "Lecense_label": "LICENSE:",
+    "insert_button": "Insert"
+  },
+  "snackbar": {
+    "snack_btn_text": "Upgrade",
+    "snack_title": "New version is Available!"
   },
   "formName": {
     "login": "Aiki Help Desk"
