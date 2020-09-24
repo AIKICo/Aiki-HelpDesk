@@ -81,7 +81,7 @@
         :show="showSplash"
         :logo="logo"
         color="#00bfa5"
-        :size="800"
+        :size="250"
         :fixed="true"
     />
   </v-app>
@@ -159,6 +159,10 @@ export default {
       }
     },
     initializeApp() {
+      if (this.$store.state.selectedlanguage === null) {
+        localStorage.setItem("selectedlanguage",'en');
+        this.$store.state.selectedlanguage = 'en';
+      }
       this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
       this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
       this.$i18n.locale = this.$store.state.selectedlanguage;

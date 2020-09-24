@@ -10,7 +10,7 @@ module.exports = {
         hot:true,
         disableHostCheck: true,
         https: false,
-        port:5002,
+        port:5003,
         proxy: {
             '/api': {
                 target: 'https://aiki-ticket-app.herokuapp.com',
@@ -27,7 +27,6 @@ module.exports = {
             skipWaiting: true
         }
     },
-
     pluginOptions: {
       i18n: {
         locale: 'en',
