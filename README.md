@@ -9,9 +9,6 @@
 ## Developer Teams
 #### [Mohammd Mehrnia (Scrum Master, FullStack Developer)](mailto:qermezkon@gmail.com)
 ##### [Freshteh Ghanabri (Analysit)](mailto:ghanbari.feereshteh@yahoo.com)
-##### [Mona jadidian (Frontend Developer)](mailto:mona.jadidian@gmail.com)
-##### [Mehdi Solimanian (UX/UI Developer)](mailto:mehdisolimanian@gmail.com)
-##### [Nahid Monjezi (Backend Developer)](mailto:nahidmonjezi@gmail.com)
 
 ## Project setup
 ```
