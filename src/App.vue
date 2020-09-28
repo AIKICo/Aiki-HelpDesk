@@ -159,7 +159,7 @@ export default {
       }
     },
     initializeApp() {
-      if (this.$store.state.selectedlanguage === null) {
+      if (localStorage.getItem('selectedlanguage') === null) {
         localStorage.setItem("selectedlanguage",'en');
         this.$store.state.selectedlanguage = 'en';
       }
