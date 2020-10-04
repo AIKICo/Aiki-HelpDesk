@@ -102,16 +102,16 @@
                   <v-row>
                     <v-col>
                       <v-row
-                          v-for="(item, index) in item.additionalinfo"
+                          v-for="(itemProp, index) in item.additionalinfo"
                           :key="index"
                       >
                         <v-col class="text-right">
-                          <span class="text-bold ml-3">{{ item.label }}</span>
-                          <span v-text="item.value"></span>
+                          <span class="text-bold ml-3">{{ itemProp.label }}</span>
+                          <span v-text="itemProp.value"></span>
                           <span>
                             <v-icon
                                 color="red"
-                                @click="deleteAdditionalInfo(item)">
+                                @click="deleteAdditionalInfo(index)">
                               mdi-delete
                             </v-icon>
                            </span>
@@ -193,26 +193,27 @@ export default {
     closeDialog() {
       this.$emit("close-sheet", {'sheet': false});
     },
-    deleteAdditionalInfo(item) {
-      let newItems = this.item.additionalinfo.filter(function (
-          el
-      ) {
-        return el.label != item.label;
-      });
-      this.item.additionalinfo = newItems;
+    deleteAdditionalInfo(index) {
+      this.item.additionalinfo.splice(index, 1);
     },
     addAdditionalInfo() {
-      console.log(this.item);
-      if (!this.item.additionalinfo){
+      if (!('additionalinfo' in this.item)){
         this.item.additionalinfo=[];
       }
       this.item.additionalinfo.push({label: this.label, value: this.valueLabel});
-      this.label = "";
-      this.valueLabel = "";
+      this.label='';
+      this.valueLabel='';
     },
     ...mapActions({
       loadAppConstantItems: "AppConstantItemsService/loadAppConstantItems"
     })
+  },
+  watch: {
+    sheet: function(newValue){
+      if (newValue){
+        console.log(this.item);
+      }
+    }
   },
   created() {
     this.loadAppConstantItems("416e2a28-cfc4-49f9-9bf1-6ef0451a5b7b").then((res) => {
@@ -221,7 +222,7 @@ export default {
     this.loadAppConstantItems("0e5aa3a0-f7c5-4960-8fb2-a6e58b1f663b").then((res) => {
       this.titletypes = res.data;
     });
-  }
+  },
 }
 </script>
 
