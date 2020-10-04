@@ -5,14 +5,16 @@
     "app_contactInfo": " Send your comments and suggestions to moh.mehrnia@gmail.com",
     "company_name": "Artificial Intelligence Knowledge Idea(AiKi)",
     "Lecense_label": "LICENSE:",
-    "insert_button": "Insert"
+    "insert_button": "Insert",
+    "back_button": "back"
   },
   "snackbar": {
     "snack_btn_text": "Upgrade",
     "snack_title": "New version is Available!"
   },
   "formName": {
-    "login": "Aiki Help Desk"
+    "login": "Aiki Help Desk",
+    "register": "Register"
   },
   "login": {
     "register_button": "Free Register",
@@ -22,6 +24,13 @@
     "password_label": "Password",
     "langauge_label": "Language",
     "loginpanel_title": "Login"
+  },
+  "register": {
+    "companyTitle": "Company Title",
+    "emailAddress": "Email Address",
+    "subdomain": "Subdomain Name",
+    "register_btn": "Register",
+    "dublicate_emailAddressMessage": "Email Address is exist"
   },
   "footer": {
     "deploy_by": "Developed by:",

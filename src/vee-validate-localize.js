@@ -10,13 +10,19 @@ localize({
     en: {
         names: {
             userName: 'UserName',
-            password: 'Password'
+            password: 'Password',
+            companyTitle:'Company Title',
+            emailAddress:'Email Address',
+            subdomainTitle:'Subdomain Title'
         }
     },
     fa: {
         names: {
             userName: 'شناسه کاربری',
-            password: 'کلمه عبور'
+            password: 'کلمه عبور',
+            companyTitle:'عنوان شرکت',
+            emailAddress:'پست الکترونیک',
+            subdomainTitle:'عنوان زیر دامنه'
         }
     }
 });

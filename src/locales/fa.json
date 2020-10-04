@@ -5,14 +5,16 @@
     "app_contactInfo": "نظرات و پیشنهادات خود را به آدرس moh.mehrnia@gmail.com ارسال نمایید",
     "company_name": "شرکت ایده پردازان دانش هوش مصنوعی(AiKi)",
     "Lecense_label": "تحت لایسنس:",
-    "insert_button": "درج"
+    "insert_button": "درج",
+    "back_button": "برگشت"
   },
   "snackbar": {
     "snack_btn_text": "به روز رسانی",
     "snack_title": "نسخه جدید در دسترس است!"
   },
   "formName": {
-    "login": "میز کارخدمات رایانه ای Aiki"
+    "login": "میز کارخدمات رایانه ای Aiki",
+    "register": "ثبت نام"
   },
   "login": {
     "register_button": "ثبت نام رایگان",
@@ -22,6 +24,13 @@
     "password_label": "کلمه عبور",
     "langauge_label": "زبان",
     "loginpanel_title": "ورود"
+  },
+  "register": {
+    "companyTitle": "عنوان شرکت",
+    "emailAddress": "پست الکترونیک",
+    "subdomain": "عنوان زیردامنه",
+    "register_btn": "ثیت نام",
+    "dublicate_emailAddressMessage": "آدرس ایمیل قبلا به ثبت رسیده است"
   },
   "footer": {
     "deploy_by": "توسعه داده:",

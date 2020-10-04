@@ -10,20 +10,18 @@
                   <v-card class="mx-auto" outlined>
                     <v-card-title :class="$store.state.defaultColor + ' white--text'">
                       <v-icon large color="white">mdi-account-plus</v-icon>
-                      <span class="mr-2">
-                                                ثبت نام
-                                            </span>
+                      <span class="mr-2">{{$t('formName.register')}}</span>
                     </v-card-title>
                     <v-card-text class="mt-5">
                       <ValidationProvider
                           v-slot="{ errors }"
-                          name="عنوان شرکت"
+                          name="companyTitle"
                           rules="required"
                           immediate
                       >
                         <v-text-field
                             v-model="company.title"
-                            label="عنوان شرکت"
+                            :label="$t('register.companyTitle')"
                             clearable
                             :error-messages="errors"
                             outlined
@@ -32,14 +30,14 @@
                       </ValidationProvider>
                       <ValidationProvider
                           v-slot="{ errors }"
-                          name="آدرس ایمیل"
+                          name="emailAddress"
                           rules="required|email"
                           vid="email"
                           immediate
                       >
                         <v-text-field
                             v-model="company.email"
-                            label="آدرس ایمیل"
+                            :label="$t('register.emailAddress')"
                             clearable
                             :type="'email'"
                             :error-messages="errors"
@@ -50,14 +48,14 @@
                       </ValidationProvider>
                       <ValidationProvider
                           v-slot="{ errors }"
-                          name="عنوان دامنه"
+                          name="subdomainTitle"
                           :rules="{  required,regex: /^[a-zA-Z0-9]*$/ }"
                           vid="subdomain"
                           immediate
                       >
                         <v-text-field
                             v-model="company.subdomain"
-                            label="آدرس زیردامنه"
+                            :label="$t('register.subdomain')"
                             clearable
                             :error-messages="errors"
                             outlined
@@ -81,14 +79,14 @@
                           value="registerUser"
                           type="submit"
                           text>
-                        ثبت نام
+                        {{ $t('register.register_btn') }}
                       </v-btn>
                       <v-btn
                           :color="$store.state.defaultColor + ' darken-1'"
                           text
                           @click="$router.push('/login')"
                       >
-                        برگشت
+                        {{ $t('general.back_button') }}
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -151,7 +149,7 @@ export default {
       this.IsEmailExists(this.company.email).then((res) => {
         if (res.data === true) {
           this.$refs.observer.setErrors({
-            email: ['آدرس ایمیل قبلا به ثبت رسیده است']
+            email: [this.$t('register.dublicate_emailAddressMessage')]
           });
         } else {
           this.registerUser(this.company).then(() => {
@@ -165,8 +163,10 @@ export default {
       else this.hCaptchaVerified = false;
     }
   },
-  metaInfo: {
-    title: 'ثبت نام'
+  metaInfo() {
+    return{
+      title: this.$t('formName.register')
+    }
   }
 };
 </script>
