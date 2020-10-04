@@ -22,7 +22,7 @@
                           immediate
                       >
                         <v-text-field
-                            v-model="item.email"
+                            v-model="orgItem.email"
                             label="آدرس ایمیل"
                             clearable
                             :type="'email'"
@@ -39,7 +39,7 @@
                           immediate
                       >
                         <v-text-field
-                            v-model="item.title"
+                            v-model="orgItem.title"
                             label="عنوان"
                             clearable
                             :error-messages="errors"
@@ -57,7 +57,7 @@
                             :items="titletypes"
                             item-text="value1"
                             item-value="id"
-                            v-model="item.titletype"
+                            v-model="orgItem.titletype"
                             label="نوع"
                             shaped
                             outlined
@@ -102,7 +102,7 @@
                   <v-row>
                     <v-col>
                       <v-row
-                          v-for="(itemProp, index) in item.additionalinfo"
+                          v-for="(itemProp, index) in orgItem.additionalinfo"
                           :key="index"
                       >
                         <v-col class="text-right">
@@ -179,39 +179,45 @@ export default {
       valueLabel: "",
       AppConstants: [],
       titletypes: [],
+      orgItem:''
     }
   },
 
   methods: {
     onSubmit() {
       if (this.operation === "insert") {
-        this.$emit("item-added", {'sheet': false, "itemAdded": this.item});
+        this.$emit("item-added", {'sheet': false, "itemAdded": this.orgItem});
       } else {
-        this.$emit("item-updated", {'sheet': false, "itemUpdated": this.item});
+        this.$emit("item-updated", {'sheet': false, "itemUpdated": this.orgItem});
       }
     },
     closeDialog() {
       this.$emit("close-sheet", {'sheet': false});
     },
     deleteAdditionalInfo(index) {
-      this.item.additionalinfo.splice(index, 1);
+      this.orgItem.additionalinfo.splice(index, 1);
     },
     addAdditionalInfo() {
       if (!('additionalinfo' in this.item)){
-        this.item.additionalinfo=[];
+        this.orgItem.additionalinfo=[];
       }
-      this.item.additionalinfo.push({label: this.label, value: this.valueLabel});
+      this.orgItem.additionalinfo.push({label: this.label, value: this.valueLabel});
       this.label='';
       this.valueLabel='';
     },
     ...mapActions({
-      loadAppConstantItems: "AppConstantItemsService/loadAppConstantItems"
+      loadAppConstantItems: "AppConstantItemsService/loadAppConstantItems",
+      loadSingleOrganizeChart:"OrganizeChartService/loadSingleOrganizeChart"
     })
   },
   watch: {
     sheet: function(newValue){
       if (newValue){
-        console.log(this.item);
+        if ('id' in this.item){
+          this.loadSingleOrganizeChart(this.item.id).then((res)=>{
+            this.orgItem = res.data;
+          });
+        }
       }
     }
   },
