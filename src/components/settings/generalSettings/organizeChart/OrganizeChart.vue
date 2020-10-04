@@ -102,10 +102,10 @@
                   <v-row>
                     <v-col>
                       <v-row
-                          v-for="item in item.additionalinfo"
-                          :key="item.value"
+                          v-for="(item, index) in item.additionalinfo"
+                          :key="index"
                       >
-                        <v-col>
+                        <v-col class="text-right">
                           <span class="text-bold ml-3">{{ item.label }}</span>
                           <span v-text="item.value"></span>
                           <span>
@@ -194,7 +194,7 @@ export default {
       this.$emit("close-sheet", {'sheet': false});
     },
     deleteAdditionalInfo(item) {
-      var newItems = this.item.additionalinfo.filter(function (
+      let newItems = this.item.additionalinfo.filter(function (
           el
       ) {
         return el.label != item.label;
@@ -202,6 +202,10 @@ export default {
       this.item.additionalinfo = newItems;
     },
     addAdditionalInfo() {
+      console.log(this.item);
+      if (!this.item.additionalinfo){
+        this.item.additionalinfo=[];
+      }
       this.item.additionalinfo.push({label: this.label, value: this.valueLabel});
       this.label = "";
       this.valueLabel = "";
