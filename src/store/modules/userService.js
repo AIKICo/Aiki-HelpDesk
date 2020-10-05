@@ -53,7 +53,7 @@ const userService = {
         },
         async notificationStart({commit}){
             const connection = new HubConnectionBuilder()
-                .withUrl(`${axois.defaults.baseURL}ticketalarmhub?CompanyID=${store.state.companyId}&MemberID=${store.state.memberid}`,
+                .withUrl(`https://aiki-co-helpdesk-webapi.herokuapp.com/ticketalarmhub?CompanyID=${store.state.companyId}&MemberID=${store.state.memberid}`,
                     {
                         accessTokenFactory: () => store.state.accessToken,
                     })
