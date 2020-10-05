@@ -125,7 +125,7 @@ new Vue({
                     Vue.$toast.error(error.response.data.message);
                     break;
                 case 404:
-                    Vue.$toast.error('اطلاعات درخواست به ثبت نرسیده است');
+                    Vue.$toast.error(error.response.data.message);
                     break;
                 case 400:
                     Vue.$toast.error(error.response.data.message);

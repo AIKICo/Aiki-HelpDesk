@@ -214,6 +214,7 @@ export default {
     sheet: function(newValue){
       if (newValue){
         if ('id' in this.item){
+          this.orgItem=null;
           this.loadSingleOrganizeChart(this.item.id).then((res)=>{
             this.orgItem = res.data;
           });
