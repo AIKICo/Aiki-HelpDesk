@@ -34,7 +34,7 @@ Sentry.init({
     integrations: [new VueIntegration({Vue, attachProps: true})],
 });
 
-//axois.defaults.baseURL = "https://localhost:5001/";
+//axois.defaults.baseURL = "https://localhost:5001/fa-IR/";
 axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/";
 axois.defaults.headers.common["Content-Type"] = "application/json";
 axois.defaults.headers.common.Authorization = "Bearer " + store.state.accessToken;
