@@ -219,6 +219,9 @@ export default {
             this.orgItem = res.data;
           });
         }
+        else{
+          this.orgItem = this.item;
+        }
       }
     }
   },
