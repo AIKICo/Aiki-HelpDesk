@@ -90,6 +90,7 @@ export default new Vuex.Store({
         memberid: null,
         companyName: null,
         selectedlanguage: null,
+        localizeLanguage:null,
         isUserActive: null,
         activeTickets: 0,
         connection: null

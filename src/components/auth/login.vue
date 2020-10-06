@@ -102,7 +102,7 @@
           <v-row justify="center" align="center">
             <v-col>
               <v-alert class="primary white--text">
-                {{$t('general.app_contactInfo')}}
+                {{ $t('general.app_contactInfo') }}
               </v-alert>
             </v-col>
           </v-row>
@@ -121,6 +121,7 @@ import {
   ValidationProvider,
   setInteractionMode, localize
 } from "vee-validate";
+import axois from "axios";
 
 setInteractionMode("eager");
 extend("required", {
@@ -141,10 +142,10 @@ export default {
       hCaptchaVerified: true,
       showPassword: false,
       lanuages: [
-        {name: 'English', value: 'en'},
-        {name: 'فارسی', value: 'fa'}
+        {name: 'English', value: 'en', localizeValue: 'en-US'},
+        {name: 'فارسی', value: 'fa', localizeValue: 'fa-IR'}
       ],
-      lang:null,
+      lang: null,
     };
   },
   components: {
@@ -173,13 +174,21 @@ export default {
       if (e) this.hCaptchaVerified = true;
       else this.hCaptchaVerified = false;
     },
-    inializeLanguage(lang){
-      this.$store.state.selectedlanguage=lang;
+    inializeLanguage(lang) {
+      if (lang === 'en') {
+        this.$store.state.localizeLanguage = 'en-US'
+      } else {
+        this.$store.state.localizeLanguage = 'fa-IR'
+      }
+      this.$store.state.selectedlanguage = lang;
       this.$i18n.locale = lang;
       this.$vuetify.lang.current = lang;
       this.$vuetify.rtl = lang === 'fa';
       localize(lang);
       localStorage.setItem("selectedlanguage", this.$store.state.selectedlanguage);
+      localStorage.setItem("localizeLanguage", this.$store.state.localizeLanguage);
+      axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/" + this.$store.state.localizeLanguage + '/';
+      console.log(axois.defaults.baseURL);
     },
     changeLanguage() {
       this.inializeLanguage(this.lang);
@@ -189,7 +198,7 @@ export default {
     this.lang = localStorage.getItem("selectedlanguage");
   },
   metaInfo() {
-    return{
+    return {
       title: this.$t('formName.login')
     }
   }

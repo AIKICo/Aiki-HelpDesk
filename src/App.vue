@@ -92,6 +92,7 @@ import AppBar from "./components/AppBar";
 import AppDrawer from "./components/AppDrawer";
 import * as firebase from "firebase/app";
 import {localize} from "vee-validate";
+import axois from "axios";
 
 export default {
   name: "App",
@@ -174,11 +175,13 @@ export default {
       this.$store.state.memberid = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).id : null;
       this.$store.state.companyName = localStorage.getItem("userInfo") !== null ? JSON.parse(localStorage.getItem("userInfo")).companyName : null;
       this.$store.state.selectedlanguage = localStorage.getItem("selectedlanguage") !== null ? localStorage.getItem("selectedlanguage") : 'en';
+      this.$store.state.localizeLanguage = localStorage.getItem("localizeLanguage") !== null ? localStorage.getItem("localizeLanguage") : 'en-US';
       if (localStorage.getItem("selectedlanguage") !== null) {
         this.$i18n.locale = this.$store.state.selectedlanguage;
         this.$vuetify.lang.current = this.$store.state.selectedlanguage;
         this.$vuetify.rtl = this.$store.state.selectedlanguage === 'fa';
         localize(this.$store.state.selectedlanguage);
+        axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/" + this.$store.state.localizeLanguage + '/';
       }
       this.$store.state.isLoggedIn = !!localStorage.getItem("userInfo");
       this.$store.state.accessToken = localStorage.getItem("access_token") || "";
