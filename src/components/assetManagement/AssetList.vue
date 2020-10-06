@@ -37,17 +37,28 @@
                 :headers="headers"
                 :items="items"
                 :items-per-page="itemPerPage"
+                :expanded.sync="expanded"
+                :single-expand="singleExpand"
                 class="elevation-1"
                 item-key="id"
                 multi-sort
                 :search="searchKey"
             >
-              <template v-slot:item="{ item }">
+              <template v-slot:item="{ item, expand, isExpanded }">
                 <tr
                     :key="item.id"
                     @mouseleave="unSelectItem()"
                     @mouseover="selectItem(item)"
                 >
+                  <td class="text-center">
+                    <v-icon
+                        :color="$store.state.defaultColor"
+                        @click="expand(!isExpanded)"
+                        class="ml-1"
+                    >
+                      {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
+                    </v-icon>
+                  </td>
                   <td class="text-center">
                     {{ item.deliverydate | formatDate }}
                   </td>
@@ -87,6 +98,20 @@
                     </div>
                   </td>
                 </tr>
+              </template>
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  <v-alert
+                      :color="$store.state.defaultColor"
+                      border="left"
+                      class="mt-1"
+                      dense
+                      icon="mdi-fire"
+                      text
+                  >
+                    {{ item.additionalinfo.trim()!==":"?item.additionalinfo:"" }}
+                  </v-alert>
+                </td>
               </template>
             </v-data-table>
           </v-col>
@@ -130,6 +155,7 @@ export default {
   data() {
     return {
       headers: [
+        {text: "", value: "", align: "center"},
         {
           text: "تاریخ تحویل",
           value: "deliverydate",
@@ -160,7 +186,7 @@ export default {
           align: "center",
         },
         {
-          text: "محل اموال",
+          text: "موقعیت اموال",
           value: "assetlocationid",
           width: 150,
           align: "center",
