@@ -188,7 +188,6 @@ export default {
       localStorage.setItem("selectedlanguage", this.$store.state.selectedlanguage);
       localStorage.setItem("localizeLanguage", this.$store.state.localizeLanguage);
       axois.defaults.baseURL = "https://aiki-co-helpdesk-webapi.herokuapp.com/" + this.$store.state.localizeLanguage + '/';
-      console.log(axois.defaults.baseURL);
     },
     changeLanguage() {
       this.inializeLanguage(this.lang);
