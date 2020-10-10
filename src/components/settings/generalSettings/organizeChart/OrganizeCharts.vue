@@ -212,11 +212,11 @@ export default {
       this.loadOrganizeCharts_JsonView_ByCustomerId(e).then((res) => {
         this.OrganizeChartItems = [
           {
-            "id":res.data.id,
-            "customerid":res.data.customerid,
-            "parent_id":res.data.parent_id,
-            "titletype":res.data.titletype,
-            "title":res.data.title,
+            "id": res.data.id,
+            "customerid": res.data.customerid,
+            "parent_id": res.data.parent_id,
+            "titletype": res.data.titletype,
+            "title": res.data.title,
             children: JSON.parse(res.data.children)
           }
         ];
@@ -251,6 +251,7 @@ export default {
           }
         });
       } else {
+        console.log(e);
         this.moveSheet = e.moveSheet;
       }
     }

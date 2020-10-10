@@ -1,10 +1,10 @@
 <template v-slot:items="props">
-  <v-bottom-sheet v-model="sheet" inset :max-width="700">
+  <v-bottom-sheet v-model="show" inset :max-width="900" scrollable persistent>
     <v-sheet>
       <v-row no-gutters>
         <v-col>
-          <v-card outlined height="100%" style="overflow-y: scroll">
-            <v-card-actions>
+          <v-card outlined class="overflow-y-auto" max-height="600px">
+            <v-card-actions >
               <v-spacer></v-spacer>
               <v-btn
                   :color="$store.state.defaultColor + ' darken-1'"
@@ -40,8 +40,10 @@
                   item-text="title"
                   activatable
                   dense
+                  v-scroll
                   rounded
-                  transition>
+                  transition
+                  v-click-outside="onClickOutside">
                 <template slot="label" slot-scope="{ item }">
                   <a @click="selectItem(item)">{{ item.title }}</a>
                 </template>
@@ -73,8 +75,19 @@ export default {
           ? (item, search, textKey) => item[textKey].indexOf(search) > -1
           : undefined
     },
+    show: {
+      get: function () {
+        return this.sheet;
+      },
+      set: function (value) {
+        this.$emit("input", value);
+      }
+    }
   },
   methods: {
+    onClickOutside() {
+      //this.closeDialog('cancel');
+    },
     selectItem(item) {
       this.selectedItem = item;
     },
