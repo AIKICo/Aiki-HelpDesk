@@ -3,8 +3,8 @@
       app
       :color="$store.state.defaultColor"
       dark
-      :clipped-right="$vuetify.rtl===true?$vuetify.breakpoint.lgAndUp:null"
-      :clipped-left="$vuetify.rtl!==true?$vuetify.breakpoint.lgAndUp:null"
+      :clipped-right="$vuetify.breakpoint.lgAndUp"
+      :clipped-left="$vuetify.breakpoint.lgAndUp"
   >
     <v-app-bar-nav-icon @click.stop="$store.state.drawer = !$store.state.drawer"
                         v-if="$store.state.isLoggedIn"/>

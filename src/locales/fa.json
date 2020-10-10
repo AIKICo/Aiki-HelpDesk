@@ -32,6 +32,16 @@
     "register_btn": "ثیت نام",
     "dublicate_emailAddressMessage": "آدرس ایمیل قبلا به ثبت رسیده است"
   },
+  "main_menu": {
+    "dashboard": "داشبورد",
+    "cartabl": "کارتابل",
+    "ticket_acrhive": "آرشیو درخواست ها",
+    "asset_management": "کنترل اموال",
+    "settings": "تنظیمات",
+    "profile_settings": "نمظیمات پروفایل",
+    "rolename_admin": "مدیریت",
+    "rolename_agent": "کارشناس"
+  },
   "footer": {
     "deploy_by": "توسعه داده:",
     "programmer_label": "پشتیبان:",

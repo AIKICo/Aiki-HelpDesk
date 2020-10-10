@@ -32,6 +32,16 @@
     "register_btn": "Register",
     "dublicate_emailAddressMessage": "Email Address is exist"
   },
+  "main_menu": {
+    "dashboard": "Dashboard",
+    "cartabl": "Cartabl",
+    "ticket_acrhive": "Tickets Archive",
+    "asset_management": "Asset Management",
+    "settings": "Settings",
+    "profile_settings": "Profile Settings",
+    "rolename_admin": "Administrator",
+    "rolename_agent": "Agent"
+  },
   "footer": {
     "deploy_by": "Developed by:",
     "programmer_label": "Support:",

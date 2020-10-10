@@ -4,10 +4,7 @@ import Vuex from "vuex";
 import VuexORM from "@vuex-orm/core";
 import VuexORMAxios from "@vuex-orm/plugin-axios";
 import VuexORMSearch from '@vuex-orm/plugin-search'
-
 import isMobile from "mobile-device-detect";
-
-import menuService from "./modules/menuService";
 import userService from "./modules/userService";
 import settingsService from "./modules/settingsService";
 import companyService from "./modules/companyService";
@@ -98,7 +95,6 @@ export default new Vuex.Store({
     mutations: {},
     actions: {},
     modules: {
-        MenuService: menuService,
         UserService: userService,
         SettingsService: settingsService,
         CompanyService: companyService,
