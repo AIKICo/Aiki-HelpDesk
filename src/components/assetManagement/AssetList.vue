@@ -39,6 +39,7 @@
                 :items-per-page="itemPerPage"
                 :expanded.sync="expanded"
                 :single-expand="singleExpand"
+                :custom-filter="customFilter"
                 class="elevation-1"
                 item-key="id"
                 multi-sort
@@ -177,7 +178,7 @@ export default {
         {
           text: "تحویل گیرندگان",
           value: "employees",
-          width: 230
+          width: 200
         },
         {
           text: "نوع اموال",
@@ -243,6 +244,9 @@ export default {
       } else {
         this.$router.push("/Asset/Insert/undefined/");
       }
+    },
+    customFilter(value, search, item){
+      return JSON.stringify(item).indexOf(search)!==-1;
     }
   },
   watch: {
