@@ -85,8 +85,7 @@ export default {
     }
   },
   methods: {
-    onClickOutside() {
-      //this.closeDialog('cancel');
+    onClickOutside() {this.closeDialog('cancel');
     },
     selectItem(item) {
       this.selectedItem = item;
