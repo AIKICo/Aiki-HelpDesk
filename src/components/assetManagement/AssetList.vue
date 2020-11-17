@@ -55,12 +55,10 @@
                     <v-icon
                         :color="$store.state.defaultColor"
                         @click="expand(!isExpanded)"
-                        class="ml-1"
+                        class="ml-2"
                     >
                       {{ isExpanded ? "mdi-chevron-up" : "mdi-chevron-down" }}
                     </v-icon>
-                  </td>
-                  <td class="text-center">
                     {{ item.deliverydate | formatDate }}
                   </td>
                   <td class="text-center">
@@ -94,7 +92,7 @@
                         <v-icon>mdi-content-save-edit-outline</v-icon>
                       </v-btn>
                     </div>
-                    <div v-if="item!=selectedItem">
+                    <div v-if="item!==selectedItem">
                       {{ item.lastStatus }}
                     </div>
                   </td>
@@ -156,7 +154,6 @@ export default {
   data() {
     return {
       headers: [
-        {text: "", value: "", align: "center"},
         {
           text: "تاریخ تحویل",
           value: "deliverydate",
