@@ -157,7 +157,7 @@ export default {
         {
           text: "تاریخ تحویل",
           value: "deliverydate",
-          width: 120,
+          width: 140,
           align: "center",
         },
         {
