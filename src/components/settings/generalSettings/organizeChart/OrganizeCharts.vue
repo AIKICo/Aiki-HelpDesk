@@ -7,7 +7,7 @@
             item-text="title"
             item-value="id"
             v-model="selectedCustomer"
-            label="مشتری"
+            label="صاحب جمع"
             @change="customerChanged"
         >
         </v-select>

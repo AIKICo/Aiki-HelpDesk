@@ -9,7 +9,7 @@
                 item-text="title"
                 item-value="id"
                 v-model="customerid"
-                label="مشتری"
+                label="صاحب جمع"
                 chips
                 clearable
                 @change="customerChanged"
@@ -68,7 +68,7 @@
                     </v-chip>
                   </td>
                   <td class="text-center">
-                    {{ item.title }}
+                    {{ item.serial }}
                   </td>
                   <td>
                     {{ item.employees }}
@@ -167,7 +167,7 @@ export default {
           align: "center",
         },
         {
-          text: "صاحب جمع",
+          text: "شماره سریال",
           value: "title",
           width: 150,
           align: "center",

@@ -21,7 +21,7 @@
                   >
                     <v-text-field
                       v-model="Customer.title"
-                      label="عنوان مشتری"
+                      label="عنوان صاحب جمع"
                       clearable
                       :error-messages="errors"
                       immediate

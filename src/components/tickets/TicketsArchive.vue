@@ -9,7 +9,7 @@
                                 item-text="title"
                                 item-value="id"
                                 v-model="customerid"
-                                label="مشتری"
+                                label="صاحب جمع"
                                 chips
                                 clearable
                                 @change="customerChanged"

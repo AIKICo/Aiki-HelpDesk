@@ -15,7 +15,7 @@
                 <v-card-text class="mt-3">
                   <validation-provider
                       v-slot="{ errors }"
-                      name="مشتری"
+                      name="صاحب جمع"
                       rules="required"
                       immediate
                   >
@@ -24,7 +24,7 @@
                         item-text="title"
                         item-value="id"
                         v-model="Ticket.customerid"
-                        label="مشتری"
+                        label="صاحب جمع"
                         shaped
                         outlined
                         chips

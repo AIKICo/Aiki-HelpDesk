@@ -17,7 +17,7 @@
                     <v-col>
                       <validation-provider
                           v-slot="{ errors }"
-                          name="مشتری"
+                          name="صاحب جمع"
                           rules="required"
                           immediate
                       >
@@ -26,7 +26,7 @@
                             item-text="title"
                             item-value="id"
                             v-model="Asset.customerid"
-                            label="مشتری"
+                            label="صاحب جمع"
                             shaped
                             outlined
                             chips
@@ -50,32 +50,21 @@
                             :error-messages="errors"
                             outlined
                             shaped
+                            v-mask="'##########'"
                             dir="ltr"
                             :type="'number'"
                             :disabled="disableControl"
                         ></v-text-field>
                       </validation-provider>
-                      <validation-provider
-                          v-slot="{ errors }"
-                          name="صاحب جمع"
-                          rules="required"
-                          immediate
+                      <v-text-field
+                          v-model="Asset.serial"
+                          label="شماره سریال"
+                          shaped
+                          outlined
+                          chips
+                          clearable
                       >
-                        <v-autocomplete
-                            :items="Employes"
-                            item-text="title"
-                            item-value="id"
-                            v-model="Asset.employeeid"
-                            label="صاحب جمع"
-                            shaped
-                            outlined
-                            chips
-                            clearable
-                            :error-messages="errors"
-                            :search-input.sync="EmployeSearchKey"
-                        >
-                        </v-autocomplete>
-                      </validation-provider>
+                      </v-text-field>
                       <v-autocomplete
                           :items="Employes"
                           item-text="title"
@@ -151,7 +140,7 @@
                     <v-col cols="12">
                       <v-card>
                         <v-card-title>
-                          خواص اموال
+                          مشخصات تکمیلی اموال
                         </v-card-title>
                         <v-card-text>
                           <v-row no-gutters>
@@ -263,7 +252,7 @@ export default {
         assettypeid: null,
         assetnumber: null,
         assetadditionalinfo: [],
-        employees:""
+        employees: ""
       },
       Employes: [],
       EmployeSearchKey: "",
@@ -284,28 +273,34 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (this.$route.params.formType === "Edit") {
-        this.Asset.employees = JSON.stringify(this.Asset.employees);
-        this.$store.dispatch("AssetService/editAsset", this.Asset).then(res => {
-          if (res.status === 200) {
-            this.closeDialog();
-          }
+      if (this.Asset.assetnumber.length < 10) {
+        this.$refs.observer.setErrors({
+          assetnumber: ['شماره اموال یک عدد ده رقمی است']
         });
-      } else if (this.$route.params.formType === "Insert") {
-        this.isAssetExists(this.Asset.assetnumber).then((res) => {
-          if (res.data === true) {
-            this.$refs.observer.setErrors({
-              assetnumber: ['شماره اموال وجود دارد']
-            });
-          } else {
-            this.Asset.employees = JSON.stringify(this.Asset.employees);
-            this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
-              if (res.status === 201) {
-                this.closeDialog();
-              }
-            });
-          }
-        });
+      } else {
+        if (this.$route.params.formType === "Edit") {
+          this.Asset.employees = JSON.stringify(this.Asset.employees);
+          this.$store.dispatch("AssetService/editAsset", this.Asset).then(res => {
+            if (res.status === 200) {
+              this.closeDialog();
+            }
+          });
+        } else if (this.$route.params.formType === "Insert") {
+          this.isAssetExists(this.Asset.assetnumber).then((res) => {
+            if (res.data === true) {
+              this.$refs.observer.setErrors({
+                assetnumber: ['شماره اموال وجود دارد']
+              });
+            } else {
+              this.Asset.employees = JSON.stringify(this.Asset.employees);
+              this.$store.dispatch("AssetService/addAsset", this.Asset).then(res => {
+                if (res.status === 201) {
+                  this.closeDialog();
+                }
+              });
+            }
+          });
+        }
       }
     },
     closeDialog() {
@@ -372,7 +367,7 @@ export default {
     } else if (this.$route.params.formType === "Insert") {
       this.Asset = {
         employeeid: "",
-        employees:"",
+        employees: "",
         assetlocationid: "",
         assettypeid: "",
         assetnumber: "",

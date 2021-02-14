@@ -33,7 +33,7 @@ export default {
       this.items=[];
       this.items.push({
         name: "Total",
-        title: "تعداد کل مشتریان",
+        title: "تعداد کل صاحبان جمع",
         valueCount: this.customerCounts,
         icon: "mdi-human",
         iconColor: "black"
@@ -57,7 +57,7 @@ export default {
   created() {
     this.items.push({
       name: "Total",
-      title: "تعداد کل مشتریان",
+      title: "تعداد کل صاجبان جمع",
       valueCount: this.customerCounts,
       icon: "mdi-human",
       iconColor: "black"

@@ -12,7 +12,7 @@ const settingsService = {
           { name: "OperatingHours",label:"ساعات کاری", path: "/OperationHoursList", image: "OperatingHours.svg", imageType:'svg', roles:"admin" },
           { name: "SLA Policies",label:"قرارداد سطح سرویس", path: "/SLASettings", image: "SLA.svg", imageType:'svg', roles:"admin" },
           { name: "Members",label:"کاربران", path: "/Members", image: "UsersManagement.svg", imageType:'svg', roles:"admin" },
-          { name: "customer",label:"مشتریان", path: "/CustomerList", image: "customer.svg", imageType:'svg', roles:"admin" },
+          { name: "customer",label:"صاحبان جمع", path: "/CustomerList", image: "customer.svg", imageType:'svg', roles:"admin" },
           { name: "Groups",label:"گروه ها", path: "/Groups", image: "Groups.svg", imageType:'svg', roles:"admin" }
         ]
       },
