@@ -9,7 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.12",
+    "@amcharts/amcharts4": "^4.10.28",
     "@hcaptcha/vue-hcaptcha": "^0.2.3",
     "@latelier/vue-signalr": "^1.1.9",
     "@microsoft/signalr": "^3.1.10",
